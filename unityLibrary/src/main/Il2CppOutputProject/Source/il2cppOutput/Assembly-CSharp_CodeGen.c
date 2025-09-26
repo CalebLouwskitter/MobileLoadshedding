@@ -1,0 +1,99 @@
+﻿#include "pch-c.h"
+
+
+#include "codegen/il2cpp-codegen-metadata.h"
+
+
+
+
+
+extern void CameraController_Awake_mA329C09A8A267A4FABDFE7E67EBA83B1706B04B7 (void);
+extern void CameraController_Start_m8EAAC188934ECCBD009EC00751280DCFF4D96C71 (void);
+extern void CameraController_Update_mBCB871B23DBA60444D43AB56D780478BA3D355E6 (void);
+extern void CameraController_FixedUpdate_m761C4930B57DFF182AE42820F172DEE05818717C (void);
+extern void CameraController_HandleInput_mC70F6B585838D494D57C751796C26F4023B4C551 (void);
+extern void CameraController_HandleTouchInput_m07A719105AFEFAB7C4F5F03191FD1145ABC6BE38 (void);
+extern void CameraController_HandleDesktopInput_m905E8EAC0071BA1BF63CF191CC9E49BB67A680B3 (void);
+extern void CameraController_HandleEdgePanning_mBDA62B272F91CB6AC3FCBB003A6299F29A55FE4E (void);
+extern void CameraController_ApplyCameraMovement_m6B054B74DC840478BEFAF81084532822E4B6B5B9 (void);
+extern void CameraController_ApplyCameraZoom_mEB4C980A95AA916F77DCDAC542AE30FB7F2F98FC (void);
+extern void CameraController_SetPosition_mAAC20BF8AB57E3384EBA43B4367D51BF62B19124 (void);
+extern void CameraController_SetZoom_mB55706CC3D61028EA8E11F54356493FB113EB230 (void);
+extern void CameraController_FocusOnPoint_mB201F4B62A0842C74B6F43976EA6130509C2188F (void);
+extern void CameraController_GetCameraBounds_mC4C9D676AC06E6F552D8A08BBD13384AF71F38B2 (void);
+extern void CameraController_OnDestroy_mB871454797AA7B2E5F985ABB572514CF03A19E10 (void);
+extern void CameraController_OnDrawGizmosSelected_mA21C74797044B717FFC8CC7823D1D22505BD58A5 (void);
+extern void CameraController__ctor_mE196A6332BDDED632D6F9DB6260E424594598950 (void);
+extern void Readme__ctor_m69C325C4C171DCB0312B646A9034AA91EA8C39C6 (void);
+extern void Section__ctor_m5F732533E4DFC0167D965E5F5DB332E46055399B (void);
+extern void UnitySourceGeneratedAssemblyMonoScriptTypes_v1_Get_mBEB95BEB954BB63E9710BBC7AD5E78C4CB0A0033 (void);
+extern void UnitySourceGeneratedAssemblyMonoScriptTypes_v1__ctor_mE70FB23ACC1EA12ABC948AA22C2E78B2D0AA39B1 (void);
+static Il2CppMethodPointer s_methodPointers[21] = 
+{
+	CameraController_Awake_mA329C09A8A267A4FABDFE7E67EBA83B1706B04B7,
+	CameraController_Start_m8EAAC188934ECCBD009EC00751280DCFF4D96C71,
+	CameraController_Update_mBCB871B23DBA60444D43AB56D780478BA3D355E6,
+	CameraController_FixedUpdate_m761C4930B57DFF182AE42820F172DEE05818717C,
+	CameraController_HandleInput_mC70F6B585838D494D57C751796C26F4023B4C551,
+	CameraController_HandleTouchInput_m07A719105AFEFAB7C4F5F03191FD1145ABC6BE38,
+	CameraController_HandleDesktopInput_m905E8EAC0071BA1BF63CF191CC9E49BB67A680B3,
+	CameraController_HandleEdgePanning_mBDA62B272F91CB6AC3FCBB003A6299F29A55FE4E,
+	CameraController_ApplyCameraMovement_m6B054B74DC840478BEFAF81084532822E4B6B5B9,
+	CameraController_ApplyCameraZoom_mEB4C980A95AA916F77DCDAC542AE30FB7F2F98FC,
+	CameraController_SetPosition_mAAC20BF8AB57E3384EBA43B4367D51BF62B19124,
+	CameraController_SetZoom_mB55706CC3D61028EA8E11F54356493FB113EB230,
+	CameraController_FocusOnPoint_mB201F4B62A0842C74B6F43976EA6130509C2188F,
+	CameraController_GetCameraBounds_mC4C9D676AC06E6F552D8A08BBD13384AF71F38B2,
+	CameraController_OnDestroy_mB871454797AA7B2E5F985ABB572514CF03A19E10,
+	CameraController_OnDrawGizmosSelected_mA21C74797044B717FFC8CC7823D1D22505BD58A5,
+	CameraController__ctor_mE196A6332BDDED632D6F9DB6260E424594598950,
+	Readme__ctor_m69C325C4C171DCB0312B646A9034AA91EA8C39C6,
+	Section__ctor_m5F732533E4DFC0167D965E5F5DB332E46055399B,
+	UnitySourceGeneratedAssemblyMonoScriptTypes_v1_Get_mBEB95BEB954BB63E9710BBC7AD5E78C4CB0A0033,
+	UnitySourceGeneratedAssemblyMonoScriptTypes_v1__ctor_mE70FB23ACC1EA12ABC948AA22C2E78B2D0AA39B1,
+};
+static const int32_t s_InvokerIndices[21] = 
+{
+	13333,
+	13333,
+	13333,
+	13333,
+	13333,
+	13333,
+	13333,
+	13333,
+	13333,
+	13333,
+	10327,
+	10244,
+	5316,
+	12959,
+	13333,
+	13333,
+	13333,
+	13333,
+	13333,
+	22819,
+	13333,
+};
+IL2CPP_EXTERN_C const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule;
+const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule = 
+{
+	"Assembly-CSharp.dll",
+	21,
+	s_methodPointers,
+	0,
+	NULL,
+	s_InvokerIndices,
+	0,
+	NULL,
+	0,
+	NULL,
+	0,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+};
