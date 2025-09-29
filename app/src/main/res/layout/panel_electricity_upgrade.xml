@@ -50,24 +50,110 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/text_production_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Storage Upgrades"
+            android:text="Grid Production"
             android:textAllCaps="false"
             android:textColor="#0E3D57"
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/text_current_energy_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Current energy: --"
+            android:textColor="#0E3D57" />
+
+        <TextView
+            android:id="@+id/text_current_production_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Production: --"
+            android:textColor="#0E3D57" />
+
+        <TextView
+            android:id="@+id/text_generators_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Generators: --"
+            android:textColor="#0E3D57" />
+
+        <TextView
+            android:id="@+id/text_currency_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Energy credits: --"
+            android:textColor="#0E3D57" />
+
+        <TextView
+            android:id="@+id/text_offline_time_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Offline progress: --"
+            android:textColor="#0E3D57" />
+
+        <TextView
+            android:id="@+id/text_safe_idle_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Safe idle: --"
+            android:textColor="#0E3D57" />
+
+        <TextView
+            android:id="@+id/text_core_charge_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Core charge: --"
+            android:textColor="#0E3D57" />
+
+        <TextView
+            android:id="@+id/text_last_event_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Last event: --"
+            android:textColor="#0E3D57" />
+
+        <TextView
+            android:id="@+id/text_last_save_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Last save sync: --"
+            android:textColor="#0E3D57" />
+
+        <TextView
+            android:id="@+id/text_districts_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="District Overview"
+            android:textColor="#0E3D57"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
         <LinearLayout
+            android:id="@+id/list_districts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:orientation="vertical">
+            android:orientation="vertical" />
 
-            <include layout="@layout/view_upgrade_item" />
-            <include layout="@layout/view_upgrade_item" />
-            <include layout="@layout/view_upgrade_item" />
-            <include layout="@layout/view_upgrade_item" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/btn_refresh_production"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Refresh" />
     </LinearLayout>
 </LinearLayout>

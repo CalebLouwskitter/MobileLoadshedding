@@ -35,8 +35,19 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <include layout="@layout/view_task_item" />
-        <include layout="@layout/view_task_item" />
-        <include layout="@layout/view_task_item" />
+        <TextView
+            android:id="@+id/text_tasks_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="No events yet"
+            android:textColor="#0E3D57" />
+
+        <LinearLayout
+            android:id="@+id/tasks_list_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical" />
     </LinearLayout>
 </LinearLayout>

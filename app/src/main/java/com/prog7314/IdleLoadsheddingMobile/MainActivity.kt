@@ -4,16 +4,104 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isVisible
+import com.google.gson.Gson
+import com.prog7314.IdleLoadsheddingMobile.unity.Events
+import com.prog7314.IdleLoadsheddingMobile.unity.FriendsList
+import com.prog7314.IdleLoadsheddingMobile.unity.Leaderboard
+import com.prog7314.IdleLoadsheddingMobile.unity.SaveSync
+import com.prog7314.IdleLoadsheddingMobile.unity.Stats
 import com.prog7314.IdleLoadsheddingMobile.unity.UnityBridge
 import com.unity3d.player.UnityPlayerGameActivity
+import java.text.DecimalFormat
+import java.time.Instant
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
+import kotlin.math.roundToInt
 
-class MainActivity : UnityPlayerGameActivity(), UnityBridge.Listener {
+class MainActivity : UnityPlayerGameActivity() {
 
     private lateinit var modalContainer: FrameLayout
     private lateinit var modalScrim: View
+
+    private lateinit var textEnergyAmount: TextView
+    private lateinit var textEnergyPerSecond: TextView
+    private lateinit var textActiveGenerators: TextView
+    private lateinit var textEventStatus: TextView
+    private lateinit var textSafeIdleHours: TextView
+
+    private var currentPanelLayoutId: Int? = null
+    private var currentPanelView: View? = null
+
+    private var latestStats: Stats.UnityStatsSnapshot? = null
+    private var latestLeaderboard: Leaderboard.UnityLeaderboardPayload? = null
+    private var latestFriends: FriendsList.FriendsPayload? = null
+    private var latestSave: SaveSync.UnitySavePayload? = null
+    private var currentActiveEvent: Events.UnityEventPayload? = null
+    private var eventHistory: List<Events.UnityEventPayload> = emptyList()
+
+    private val numberFormatter = DecimalFormat("#,##0.##")
+    private val timestampFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss")
+        .withZone(ZoneId.systemDefault())
+    private val gson = Gson()
+
+    private val statsObserver = object : Stats.Observer {
+        override fun onStatsUpdated(snapshot: Stats.UnityStatsSnapshot) {
+            runOnUiThread {
+                latestStats = snapshot
+                updateHud(snapshot)
+                syncStatsPanels(snapshot)
+            }
+        }
+    }
+
+    private val leaderboardObserver = object : Leaderboard.Observer {
+        override fun onLeaderboardUpdated(payload: Leaderboard.UnityLeaderboardPayload) {
+            runOnUiThread {
+                latestLeaderboard = payload
+                updateLeaderboardPanel()
+            }
+        }
+    }
+
+    private val friendsObserver = object : FriendsList.Observer {
+        override fun onFriendsUpdated(payload: FriendsList.FriendsPayload) {
+            runOnUiThread {
+                latestFriends = payload
+                updateFriendsPanel()
+            }
+        }
+    }
+
+    private val eventsObserver = object : Events.Observer {
+        override fun onEventsUpdated(activeEvent: Events.UnityEventPayload?, history: List<Events.UnityEventPayload>) {
+            runOnUiThread {
+                currentActiveEvent = activeEvent
+                eventHistory = history
+                updateEventBanner()
+                updateTasksPanel()
+                syncStatsPanels(latestStats)
+            }
+        }
+    }
+
+    private val saveListener = object : SaveSync.Listener {
+        override fun onSaveUpdated(payload: SaveSync.UnitySavePayload) {
+            runOnUiThread {
+                latestSave = payload
+                syncStatsPanels(latestStats)
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,24 +110,28 @@ class MainActivity : UnityPlayerGameActivity(), UnityBridge.Listener {
         modalContainer = overlay.findViewById(R.id.modal_container)
         modalScrim = overlay.findViewById(R.id.modal_scrim)
 
+        textEnergyAmount = overlay.findViewById(R.id.text_currency_amount)
+        textEnergyPerSecond = overlay.findViewById(R.id.text_energy_per_second)
+        textActiveGenerators = overlay.findViewById(R.id.text_active_generators)
+        textEventStatus = overlay.findViewById(R.id.text_event_status)
+        textEventStatus.isVisible = false
+    textSafeIdleHours = overlay.findViewById(R.id.text_safe_idle_hours)
+
         val layoutParams = FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.MATCH_PARENT,
             FrameLayout.LayoutParams.MATCH_PARENT
         )
 
-        addContentView(overlay, layoutParams)
-
-        // Register for callbacks from Unity
-        UnityBridge.registerListener(this)
-
         modalScrim.setOnClickListener { hidePanel() }
 
-        overlay.findViewById<Button>(R.id.btn_show_toast).setOnClickListener {
-            UnityBridge.showToast(this, "Hello from Kotlin!")
+        overlay.findViewById<Button>(R.id.btn_refresh_stats).setOnClickListener {
+            Stats.requestUnitySnapshot()
+            Leaderboard.requestUnityLeaderboard()
+            FriendsList.requestUnityFriends()
         }
 
-        overlay.findViewById<Button>(R.id.btn_send_message).setOnClickListener {
-            UnityBridge.sendMessageToUnity("MyGameObject", "MyUnityFunction", "Hello from a button!")
+        overlay.findViewById<Button>(R.id.btn_sync_save).setOnClickListener {
+            SaveSync.requestUnitySave()
         }
 
         overlay.findViewById<ImageButton>(R.id.btn_hud_upgrades).setOnClickListener {
@@ -61,24 +153,30 @@ class MainActivity : UnityPlayerGameActivity(), UnityBridge.Listener {
         overlay.findViewById<Button>(R.id.btn_nav_tasks).setOnClickListener {
             showPanel(R.layout.panel_tasks_board)
         }
+
+        addContentView(overlay, layoutParams)
+
+        SaveSync.initialize(this)
+
+        Stats.addObserver(statsObserver)
+        Leaderboard.addObserver(leaderboardObserver)
+        FriendsList.addObserver(friendsObserver)
+        Events.addObserver(eventsObserver)
+        SaveSync.addListener(saveListener)
+
+        Stats.requestUnitySnapshot()
+        Leaderboard.requestUnityLeaderboard()
+        FriendsList.requestUnityFriends()
+        SaveSync.requestUnitySave()
     }
 
     override fun onDestroy() {
-        if (this::modalContainer.isInitialized) {
-            // no-op; just ensuring proper lifecycle
-        }
-        UnityBridge.unregisterListener(this)
+        Stats.removeObserver(statsObserver)
+        Leaderboard.removeObserver(leaderboardObserver)
+        FriendsList.removeObserver(friendsObserver)
+        Events.removeObserver(eventsObserver)
+        SaveSync.removeListener(saveListener)
         super.onDestroy()
-    }
-
-    // Unity -> Android UI callbacks
-    override fun onScoreUpdated(score: Int) {
-        // Update your UI here (e.g., a TextView) or keep it simple with a toast for now
-        Toast.makeText(this, "Score: $score", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onGameEvent(event: String) {
-        Toast.makeText(this, "Game event: $event", Toast.LENGTH_SHORT).show()
     }
 
     private fun showPanel(layoutResId: Int) {
@@ -87,6 +185,9 @@ class MainActivity : UnityPlayerGameActivity(), UnityBridge.Listener {
         modalContainer.addView(panelView)
         modalContainer.visibility = View.VISIBLE
         modalScrim.visibility = View.VISIBLE
+
+        currentPanelLayoutId = layoutResId
+        currentPanelView = panelView
 
         panelView.findViewById<View?>(R.id.close_button)?.setOnClickListener { hidePanel() }
 
@@ -97,6 +198,7 @@ class MainActivity : UnityPlayerGameActivity(), UnityBridge.Listener {
             R.layout.panel_profile_edit -> configureProfileEditPanel(panelView)
             R.layout.panel_leaderboard -> configureLeaderboardPanel(panelView)
             R.layout.panel_friends_leaderboard -> configureFriendsLeaderboardPanel(panelView)
+            R.layout.panel_tasks_board -> configureTasksPanel(panelView)
         }
     }
 
@@ -104,12 +206,21 @@ class MainActivity : UnityPlayerGameActivity(), UnityBridge.Listener {
         modalContainer.removeAllViews()
         modalContainer.visibility = View.GONE
         modalScrim.visibility = View.GONE
+        currentPanelLayoutId = null
+        currentPanelView = null
     }
 
     private fun configureElectricityPanel(panel: View) {
         panel.findViewById<View?>(R.id.tab_building)?.setOnClickListener {
             showPanel(R.layout.panel_building_upgrade)
         }
+
+        panel.findViewById<Button?>(R.id.btn_refresh_production)?.setOnClickListener {
+            Stats.requestUnitySnapshot()
+            SaveSync.requestUnitySave()
+        }
+
+        bindElectricityPanel(panel, latestStats, latestSave, currentActiveEvent)
     }
 
     private fun configureBuildingPanel(panel: View) {
@@ -136,13 +247,15 @@ class MainActivity : UnityPlayerGameActivity(), UnityBridge.Listener {
         }
 
         panel.findViewById<Button?>(R.id.btn_profile_logout)?.setOnClickListener {
-            UnityBridge.showToast(this, "Logging out (placeholder)")
+            Toast.makeText(this, getString(R.string.toast_logout_placeholder), Toast.LENGTH_SHORT).show()
             hidePanel()
         }
 
         panel.findViewById<Button?>(R.id.btn_profile_details)?.setOnClickListener {
-            UnityBridge.showToast(this, "Profile details placeholder")
+            Toast.makeText(this, "Profile details placeholder", Toast.LENGTH_SHORT).show()
         }
+
+        bindProfilePanel(panel, latestStats, latestSave)
     }
 
     private fun configureProfileEditPanel(panel: View) {
@@ -151,7 +264,7 @@ class MainActivity : UnityPlayerGameActivity(), UnityBridge.Listener {
         }
 
         panel.findViewById<Button?>(R.id.btn_save_profile)?.setOnClickListener {
-            UnityBridge.showToast(this, "Profile saved (placeholder)")
+            Toast.makeText(this, "Profile saved (placeholder)", Toast.LENGTH_SHORT).show()
             showPanel(R.layout.panel_profile)
         }
     }
@@ -162,7 +275,12 @@ class MainActivity : UnityPlayerGameActivity(), UnityBridge.Listener {
         }
 
         panel.findViewById<Button?>(R.id.btn_tab_global)?.setOnClickListener {
-            UnityBridge.showToast(this, "Showing global leaderboard")
+            Leaderboard.requestUnityLeaderboard()
+        }
+
+        bindLeaderboardPanel(panel, latestLeaderboard)
+        if (latestLeaderboard == null) {
+            Leaderboard.requestUnityLeaderboard()
         }
     }
 
@@ -172,11 +290,408 @@ class MainActivity : UnityPlayerGameActivity(), UnityBridge.Listener {
         }
 
         panel.findViewById<Button?>(R.id.btn_show_friends)?.setOnClickListener {
-            UnityBridge.showToast(this, "Showing friends leaderboard")
+            FriendsList.requestUnityFriends()
         }
 
         panel.findViewById<Button?>(R.id.btn_add_friend)?.setOnClickListener {
-            UnityBridge.showToast(this, "Friend invite sent (placeholder)")
+            val codeInput = panel.findViewById<EditText?>(R.id.input_friend_code)
+            val friendCode = codeInput?.text?.toString()?.trim().orEmpty()
+            if (friendCode.isEmpty()) {
+                Toast.makeText(this, getString(R.string.toast_friend_code_empty), Toast.LENGTH_SHORT).show()
+            } else {
+                FriendsList.updateFriend(
+                    friendCode,
+                    getString(R.string.friend_placeholder_name, friendCode),
+                    15.0,
+                    true
+                )
+                Toast.makeText(this, getString(R.string.toast_friend_invite_sent), Toast.LENGTH_SHORT).show()
+                codeInput?.text?.clear()
+            }
+        }
+
+        bindFriendsPanel(panel, latestFriends)
+        if (latestFriends == null) {
+            FriendsList.requestUnityFriends()
         }
     }
+
+    private fun configureTasksPanel(panel: View) {
+        updateTasksPanel()
+    }
+
+    private fun updateHud(snapshot: Stats.UnityStatsSnapshot) {
+        textEnergyAmount.text = formatEnergy(snapshot.currentMoney)
+        textEnergyPerSecond.text = getString(
+            R.string.hud_energy_per_second_format,
+            formatEnergy(snapshot.energyPerSecond)
+        )
+        textActiveGenerators.text = getString(
+            R.string.hud_generators_format,
+            snapshot.activeGenerators,
+            snapshot.generatorLevelSum
+        )
+        val safeSeconds = (snapshot.hoursUntilMaintenance * 3600).coerceAtLeast(0.0)
+        val safeIdle = if (safeSeconds <= 0.0) getString(R.string.timestamp_unknown) else formatDuration(safeSeconds)
+        textSafeIdleHours.text = getString(R.string.hud_safe_idle_format, safeIdle)
+        updateEventBanner()
+    }
+
+    private fun updateEventBanner() {
+        val event = currentActiveEvent
+        if (event != null) {
+            textEventStatus.isVisible = true
+            textEventStatus.text = getString(R.string.hud_event_active, event.title, event.productionMultiplier)
+        } else {
+            textEventStatus.isVisible = false
+            textEventStatus.text = getString(R.string.hud_event_inactive)
+        }
+    }
+
+    private fun syncStatsPanels(snapshot: Stats.UnityStatsSnapshot?) {
+        val panelView = currentPanelView ?: return
+        when (currentPanelLayoutId) {
+            R.layout.panel_electricity_upgrade -> bindElectricityPanel(panelView, snapshot, latestSave, currentActiveEvent)
+            R.layout.panel_profile -> bindProfilePanel(panelView, snapshot, latestSave)
+        }
+    }
+
+    private fun bindElectricityPanel(
+        panel: View,
+        stats: Stats.UnityStatsSnapshot?,
+        save: SaveSync.UnitySavePayload?,
+        event: Events.UnityEventPayload?
+    ) {
+        val currentEnergy = stats?.let { getString(R.string.electricity_current_energy, formatEnergy(it.currentEnergy)) }
+            ?: getString(R.string.electricity_current_energy, getString(R.string.timestamp_unknown))
+        val production = stats?.let {
+            getString(R.string.electricity_production, formatEnergy(it.energyPerSecond))
+        } ?: getString(R.string.electricity_production, getString(R.string.timestamp_unknown))
+        val generators = stats?.let {
+            getString(R.string.electricity_generators, it.activeGenerators, it.generatorLevelSum)
+        } ?: getString(R.string.electricity_generators, 0, 0)
+        val currency = stats?.let {
+            getString(R.string.electricity_currency, formatEnergy(it.currentMoney))
+        } ?: getString(R.string.electricity_currency, getString(R.string.timestamp_unknown))
+        val offline = stats?.let {
+            getString(R.string.electricity_offline, formatDuration(it.offlineSeconds))
+        } ?: getString(R.string.electricity_offline, getString(R.string.timestamp_unknown))
+        val safeIdle = stats?.let {
+            val seconds = (it.hoursUntilMaintenance * 3600).coerceAtLeast(0.0)
+            getString(R.string.electricity_safe_idle, if (seconds <= 0.0) getString(R.string.timestamp_unknown) else formatDuration(seconds))
+        } ?: getString(R.string.electricity_safe_idle, getString(R.string.timestamp_unknown))
+        val coreCharge = stats?.let {
+            val percent = (it.coreChargePercent * 100).roundToInt().coerceIn(0, 100)
+            getString(R.string.electricity_core_charge, percent)
+        } ?: getString(R.string.electricity_core_charge, 0)
+        val lastEvent = eventHistory.firstOrNull()?.let {
+            getString(R.string.electricity_last_event, formatEventDescription(it))
+        } ?: getString(R.string.electricity_last_event, getString(R.string.hud_event_inactive))
+        val lastSave = save?.let {
+            getString(R.string.electricity_last_save, formatTimestamp(it.timestampUtc))
+        } ?: getString(R.string.electricity_last_save, getString(R.string.timestamp_unknown))
+
+        panel.findViewById<TextView?>(R.id.text_current_energy_value)?.text = currentEnergy
+        panel.findViewById<TextView?>(R.id.text_current_production_value)?.text = production
+        panel.findViewById<TextView?>(R.id.text_generators_value)?.text = generators
+        panel.findViewById<TextView?>(R.id.text_currency_value)?.text = currency
+        panel.findViewById<TextView?>(R.id.text_offline_time_value)?.text = offline
+        panel.findViewById<TextView?>(R.id.text_safe_idle_value)?.text = safeIdle
+        panel.findViewById<TextView?>(R.id.text_core_charge_value)?.text = coreCharge
+        panel.findViewById<TextView?>(R.id.text_last_event_value)?.text = lastEvent
+        panel.findViewById<TextView?>(R.id.text_last_save_value)?.text = lastSave
+
+        renderDistrictsPanel(panel, stats)
+    }
+
+    private fun bindProfilePanel(
+        panel: View,
+        stats: Stats.UnityStatsSnapshot?,
+        save: SaveSync.UnitySavePayload?
+    ) {
+        panel.findViewById<TextView?>(R.id.text_profile_energy_total)?.text = stats?.let {
+            getString(R.string.profile_energy_total, formatEnergy(it.totalEnergyGenerated))
+        } ?: getString(R.string.profile_energy_total, getString(R.string.timestamp_unknown))
+
+        panel.findViewById<TextView?>(R.id.text_profile_energy_per_second)?.text = stats?.let {
+            getString(R.string.profile_energy_per_second, formatEnergy(it.energyPerSecond))
+        } ?: getString(R.string.profile_energy_per_second, getString(R.string.timestamp_unknown))
+
+        panel.findViewById<TextView?>(R.id.text_profile_generators)?.text = stats?.let {
+            getString(R.string.profile_generators_count, it.activeGenerators)
+        } ?: getString(R.string.profile_generators_count, 0)
+
+        panel.findViewById<TextView?>(R.id.text_profile_offline)?.text = stats?.let {
+            getString(R.string.profile_offline_time, formatDuration(it.offlineSeconds))
+        } ?: getString(R.string.profile_offline_time, getString(R.string.timestamp_unknown))
+
+        panel.findViewById<TextView?>(R.id.text_profile_last_sync)?.text = save?.let {
+            getString(R.string.profile_last_sync, formatTimestamp(it.timestampUtc))
+        } ?: getString(R.string.profile_last_sync, getString(R.string.timestamp_unknown))
+    }
+
+    private fun renderDistrictsPanel(panel: View, stats: Stats.UnityStatsSnapshot?) {
+        val container = panel.findViewById<LinearLayout?>(R.id.list_districts) ?: return
+        container.removeAllViews()
+
+        val districts = stats?.districts.orEmpty()
+        if (districts.isEmpty()) {
+            val padding = (panel.resources.displayMetrics.density * 12).toInt()
+            val emptyView = TextView(panel.context).apply {
+                setText(R.string.districts_empty)
+                textAlignment = View.TEXT_ALIGNMENT_CENTER
+                setPadding(0, padding, 0, padding)
+            }
+            container.addView(emptyView)
+            return
+        }
+
+        val inflater = LayoutInflater.from(panel.context)
+        districts.forEach { district ->
+            val row = inflater.inflate(R.layout.item_district_status, container, false)
+            row.findViewById<TextView?>(R.id.text_district_name)?.text = district.name
+            row.findViewById<TextView?>(R.id.text_district_level)?.text =
+                getString(R.string.district_level_format, district.level)
+
+            val powerText = getString(
+                R.string.district_output_format,
+                formatEnergy(district.powerPerSecond),
+                formatEnergy(district.moneyPerSecond)
+            )
+            row.findViewById<TextView?>(R.id.text_district_output)?.text = powerText
+
+            val efficiencyPercent = (district.efficiency * 100).roundToInt().coerceIn(0, 100)
+            row.findViewById<TextView?>(R.id.text_district_efficiency)?.text =
+                getString(R.string.district_efficiency_format, efficiencyPercent)
+
+            val idleSeconds = (district.hoursUntilMaintenance * 3600).coerceAtLeast(0.0)
+            val idleText = if (idleSeconds <= 0.0) {
+                getString(R.string.timestamp_unknown)
+            } else {
+                formatDuration(idleSeconds)
+            }
+            row.findViewById<TextView?>(R.id.text_district_idle_time)?.text =
+                getString(R.string.district_idle_time_format, idleText)
+
+            row.findViewById<Button?>(R.id.btn_district_service)?.setOnClickListener {
+                sendDistrictAction("ServiceDistrict", district.id)
+            }
+
+            val upgradeButton = row.findViewById<Button?>(R.id.btn_district_upgrade)
+            if (district.nextUpgradeCost <= 0.0) {
+                upgradeButton?.isEnabled = false
+                upgradeButton?.text = getString(R.string.district_upgrade_maxed)
+            } else {
+                upgradeButton?.isEnabled = true
+                upgradeButton?.text = getString(
+                    R.string.district_upgrade_cost_format,
+                    formatEnergy(district.nextUpgradeCost)
+                )
+                upgradeButton?.setOnClickListener {
+                    sendDistrictAction("UpgradeDistrict", district.id)
+                }
+            }
+
+            container.addView(row)
+        }
+    }
+
+    private fun bindLeaderboardPanel(panel: View, payload: Leaderboard.UnityLeaderboardPayload?) {
+        val loading = panel.findViewById<ProgressBar?>(R.id.leaderboard_loading)
+        val empty = panel.findViewById<TextView?>(R.id.text_leaderboard_empty)
+        val listContainer = panel.findViewById<LinearLayout?>(R.id.leaderboard_list_container)
+        val lastUpdated = panel.findViewById<TextView?>(R.id.text_leaderboard_last_updated)
+
+        if (payload == null) {
+            loading?.isVisible = true
+            empty?.isVisible = false
+            listContainer?.isVisible = false
+            return
+        }
+
+        loading?.isVisible = false
+        lastUpdated?.text = getString(R.string.leaderboard_last_updated, formatTimestamp(payload.timestampUtc))
+
+        val entries = payload.entries
+        if (entries.isEmpty()) {
+            empty?.isVisible = true
+            listContainer?.isVisible = false
+        } else {
+            empty?.isVisible = false
+            listContainer?.isVisible = true
+            listContainer?.let { renderLeaderboardEntries(it, entries) }
+        }
+    }
+
+    private fun updateLeaderboardPanel() {
+        if (currentPanelLayoutId == R.layout.panel_leaderboard) {
+            currentPanelView?.let { bindLeaderboardPanel(it, latestLeaderboard) }
+        }
+    }
+
+    private fun bindFriendsPanel(panel: View, payload: FriendsList.FriendsPayload?) {
+        val loading = panel.findViewById<ProgressBar?>(R.id.friends_loading)
+        val empty = panel.findViewById<TextView?>(R.id.text_friends_empty)
+        val listContainer = panel.findViewById<LinearLayout?>(R.id.friends_list_container)
+        val lastUpdated = panel.findViewById<TextView?>(R.id.text_friends_last_updated)
+
+        if (payload == null) {
+            loading?.isVisible = true
+            empty?.isVisible = false
+            listContainer?.isVisible = false
+            return
+        }
+
+        loading?.isVisible = false
+        lastUpdated?.text = getString(R.string.friends_last_updated, formatTimestamp(payload.timestampUtc))
+
+        val entries = payload.friends
+        if (entries.isEmpty()) {
+            empty?.isVisible = true
+            listContainer?.isVisible = false
+        } else {
+            empty?.isVisible = false
+            listContainer?.isVisible = true
+            listContainer?.let { renderFriendsEntries(it, entries) }
+        }
+    }
+
+    private fun updateFriendsPanel() {
+        if (currentPanelLayoutId == R.layout.panel_friends_leaderboard) {
+            currentPanelView?.let { bindFriendsPanel(it, latestFriends) }
+        }
+    }
+
+    private fun updateTasksPanel() {
+        if (currentPanelLayoutId != R.layout.panel_tasks_board) return
+        val panel = currentPanelView ?: return
+        val empty = panel.findViewById<TextView?>(R.id.text_tasks_empty)
+        val container = panel.findViewById<LinearLayout?>(R.id.tasks_list_container)
+        val history = eventHistory
+
+        if (container == null) return
+
+        if (history.isEmpty()) {
+            empty?.isVisible = true
+            container.isVisible = false
+            container.removeAllViews()
+        } else {
+            empty?.isVisible = false
+            container.isVisible = true
+            renderEventHistory(container, history)
+        }
+    }
+
+    private fun renderLeaderboardEntries(
+        container: LinearLayout,
+        entries: List<Leaderboard.UnityLeaderboardPayload.Entry>
+    ) {
+        container.removeAllViews()
+        entries.forEachIndexed { index, entry ->
+            val row = LayoutInflater.from(this).inflate(R.layout.view_leaderboard_row, container, false)
+            row.findViewById<TextView?>(R.id.text_rank)?.text = "#${index + 1}"
+            row.findViewById<TextView?>(R.id.text_entry_title)?.text = entry.displayName
+            row.findViewById<TextView?>(R.id.text_entry_detail)?.text = formatEnergy(entry.score)
+            val icon = row.findViewById<ImageView?>(R.id.image_entry_status)
+            val iconRes = when (index) {
+                0 -> android.R.drawable.star_big_on
+                in 1..2 -> android.R.drawable.btn_star_big_on
+                else -> android.R.drawable.btn_star_big_off
+            }
+            icon?.setImageResource(iconRes)
+            container.addView(row)
+        }
+    }
+
+    private fun renderFriendsEntries(
+        container: LinearLayout,
+        entries: List<FriendsList.FriendProfile>
+    ) {
+        container.removeAllViews()
+        entries.forEachIndexed { index, friend ->
+            val row = LayoutInflater.from(this).inflate(R.layout.view_leaderboard_row, container, false)
+            row.findViewById<TextView?>(R.id.text_rank)?.text = "#${index + 1}"
+            row.findViewById<TextView?>(R.id.text_entry_title)?.text = friend.displayName
+            row.findViewById<TextView?>(R.id.text_entry_detail)?.text =
+                "${formatEnergy(friend.contributionPerHour)} /hr • ${formatTimestamp(friend.lastInteractionUtc)}"
+            val icon = row.findViewById<ImageView?>(R.id.image_entry_status)
+            icon?.setImageResource(
+                if (friend.isOnline) android.R.drawable.presence_online else android.R.drawable.presence_invisible
+            )
+            container.addView(row)
+        }
+    }
+
+    private fun renderEventHistory(container: LinearLayout, history: List<Events.UnityEventPayload>) {
+        container.removeAllViews()
+        history.take(10).forEach { event ->
+            val row = LayoutInflater.from(this).inflate(R.layout.view_task_item, container, false)
+            row.findViewById<TextView?>(R.id.text_task_title)?.text = when {
+                event.isStarting && currentActiveEvent?.id == event.id ->
+                    getString(R.string.tasks_event_active, event.title)
+                event.isStarting ->
+                    getString(R.string.tasks_event_active, event.title)
+                else ->
+                    getString(R.string.tasks_event_inactive, event.title)
+            }
+
+            val detail = buildString {
+                append(event.description)
+                append(" • ")
+                append(getString(R.string.tasks_event_multiplier, event.productionMultiplier))
+                append(" • ")
+                append(getString(R.string.tasks_event_duration, formatDuration(event.durationSeconds.toDouble())))
+            }
+            row.findViewById<TextView?>(R.id.text_task_detail)?.text = detail
+            row.findViewById<TextView?>(R.id.text_task_badge)?.text = formatTimestamp(event.timestampUtc)
+            val icon = row.findViewById<ImageView?>(R.id.image_task_state)
+            icon?.setImageResource(
+                if (event.isStarting) android.R.drawable.checkbox_on_background else android.R.drawable.checkbox_off_background
+            )
+            container.addView(row)
+        }
+    }
+
+    private fun formatEnergy(value: Double): String = numberFormatter.format(value)
+
+    private fun formatDuration(seconds: Double): String {
+        if (seconds <= 0.0) return "0s"
+        var remaining = seconds.toLong()
+        val hours = remaining / 3600
+        remaining %= 3600
+        val minutes = remaining / 60
+        val secs = remaining % 60
+        val parts = mutableListOf<String>()
+        if (hours > 0) parts.add("${hours}h")
+        if (minutes > 0 || hours > 0) parts.add("${minutes}m")
+        if (secs > 0 || parts.isEmpty()) parts.add("${secs}s")
+        return parts.joinToString(" ")
+    }
+
+    private fun formatTimestamp(isoString: String?): String {
+        if (isoString.isNullOrBlank()) return getString(R.string.timestamp_unknown)
+        return try {
+            val instant = Instant.parse(isoString)
+            timestampFormatter.format(instant)
+        } catch (ex: DateTimeParseException) {
+            getString(R.string.timestamp_unknown)
+        }
+    }
+
+    private fun formatEventDescription(event: Events.UnityEventPayload): String {
+        val state = if (event.isStarting) getString(R.string.tasks_event_active, event.title) else getString(
+            R.string.tasks_event_inactive,
+            event.title
+        )
+        val multiplier = getString(R.string.tasks_event_multiplier, event.productionMultiplier)
+        return "$state • $multiplier"
+    }
+
+    private fun sendDistrictAction(methodName: String, districtId: String) {
+        if (districtId.isBlank()) return
+        val payload = gson.toJson(DistrictAction(districtId))
+        UnityBridge.sendJsonToUnity("UnityMessageRouter", methodName, payload)
+    }
+
+    private data class DistrictAction(val districtId: String)
 }

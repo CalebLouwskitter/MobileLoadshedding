@@ -9,6 +9,7 @@
     android:padding="12dp">
 
     <ImageView
+        android:id="@+id/image_task_state"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:contentDescription="Task complete"
@@ -22,6 +23,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/text_task_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Upgrade Storage to level 6"
@@ -29,6 +31,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/text_task_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Reward: 20,000"
@@ -37,6 +40,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/text_task_badge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#A5D6A7"

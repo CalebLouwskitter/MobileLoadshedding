@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "41587024325",
+    "project_id": "mobile-loadshedding",
+    "storage_bucket": "mobile-loadshedding.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:41587024325:android:136f5f0ac9ba9af984ebac",
+        "android_client_info": {
+          "package_name": "com.prog7314.IdleLoadsheddingMobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzjTvbLkeubUGzkxrukunDY-ymyUcR9Yg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

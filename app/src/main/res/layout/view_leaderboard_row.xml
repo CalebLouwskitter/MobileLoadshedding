@@ -9,6 +9,7 @@
     android:padding="12dp">
 
     <TextView
+        android:id="@+id/text_rank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="#1"
@@ -23,6 +24,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/text_entry_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Player Name"
@@ -30,6 +32,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/text_entry_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="R 120 343"
@@ -38,6 +41,7 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/image_entry_status"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:contentDescription="Rank icon"

@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.prog7314.IdleLoadsheddingMobile" />
+                  <option name="mobileSdkAppId" value="1:41587024325:android:136f5f0ac9ba9af984ebac" />
+                  <option name="projectId" value="mobile-loadshedding" />
+                  <option name="projectNumber" value="41587024325" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

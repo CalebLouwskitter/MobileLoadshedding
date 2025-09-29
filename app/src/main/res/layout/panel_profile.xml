@@ -57,6 +57,7 @@
             android:padding="16dp">
 
             <TextView
+                android:id="@+id/text_profile_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Your Name"
@@ -65,11 +66,59 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/text_profile_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="myName@gmail.com"
                 android:textColor="#FFEBEE" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_profile_energy_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total generated: --"
+                android:textColor="#0E3D57"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_profile_energy_per_second"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Production: --"
+                android:textColor="#0E3D57" />
+
+            <TextView
+                android:id="@+id/text_profile_generators"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Active generators: --"
+                android:textColor="#0E3D57" />
+
+            <TextView
+                android:id="@+id/text_profile_offline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Offline progress: --"
+                android:textColor="#0E3D57" />
+
+            <TextView
+                android:id="@+id/text_profile_last_sync"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Last synced: --"
+                android:textColor="#0E3D57" />
         </LinearLayout>
 
         <Button

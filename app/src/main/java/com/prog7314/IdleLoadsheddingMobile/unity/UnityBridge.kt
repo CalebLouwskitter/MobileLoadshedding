@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
 import com.unity3d.player.UnityPlayer
+import java.util.concurrent.CopyOnWriteArraySet
 
 object UnityBridge {
 
@@ -12,31 +13,66 @@ object UnityBridge {
     interface Listener {
         fun onScoreUpdated(score: Int) {}
         fun onGameEvent(event: String) {}
+        fun onStatsUpdated(json: String) {}
+        fun onSaveSynced(json: String) {}
+        fun onLeaderboardUpdated(json: String) {}
+        fun onFriendsUpdated(json: String) {}
     }
 
-    @Volatile
-    private var listener: Listener? = null
+    private val listeners = CopyOnWriteArraySet<Listener>()
     private val mainHandler = Handler(Looper.getMainLooper())
 
     fun registerListener(l: Listener) {
-        listener = l
+        listeners.add(l)
     }
 
     fun unregisterListener(l: Listener) {
-        if (listener === l) listener = null
+        listeners.remove(l)
     }
 
     // Called by Unity C# via: new AndroidJavaClass("com.prog7314.IdleLoadsheddingMobile.unity.UnityBridge").CallStatic("updateScore", scoreString)
     @JvmStatic
     fun updateScore(score: String) {
         val value = score.toIntOrNull() ?: return
-        mainHandler.post { listener?.onScoreUpdated(value) }
+        mainHandler.post {
+            listeners.forEach { it.onScoreUpdated(value) }
+        }
     }
 
     // Called by Unity C# via: new AndroidJavaClass("com.prog7314.IdleLoadsheddingMobile.unity.UnityBridge").CallStatic("notifyGameEvent", evt)
     @JvmStatic
     fun notifyGameEvent(event: String) {
-        mainHandler.post { listener?.onGameEvent(event) }
+        mainHandler.post {
+            listeners.forEach { it.onGameEvent(event) }
+        }
+    }
+
+    @JvmStatic
+    fun updateStats(statsJson: String) {
+        mainHandler.post {
+            listeners.forEach { it.onStatsUpdated(statsJson) }
+        }
+    }
+
+    @JvmStatic
+    fun syncSaveData(saveJson: String) {
+        mainHandler.post {
+            listeners.forEach { it.onSaveSynced(saveJson) }
+        }
+    }
+
+    @JvmStatic
+    fun updateLeaderboard(json: String) {
+        mainHandler.post {
+            listeners.forEach { it.onLeaderboardUpdated(json) }
+        }
+    }
+
+    @JvmStatic
+    fun updateFriends(json: String) {
+        mainHandler.post {
+            listeners.forEach { it.onFriendsUpdated(json) }
+        }
     }
 
     // Utility for local UI toast

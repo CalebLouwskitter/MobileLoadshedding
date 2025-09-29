@@ -91,15 +91,37 @@
                 android:textColor="#FFFFFF" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/text_friends_last_updated"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:orientation="vertical">
+            android:text="Synced --"
+            android:textColor="#0E3D57" />
 
-            <include layout="@layout/view_leaderboard_row" />
-            <include layout="@layout/view_leaderboard_row" />
-            <include layout="@layout/view_leaderboard_row" />
-        </LinearLayout>
+        <ProgressBar
+            android:id="@+id/friends_loading"
+            style="@android:style/Widget.ProgressBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/text_friends_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="No friends yet"
+            android:textColor="#0E3D57"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/friends_list_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical" />
     </LinearLayout>
 </LinearLayout>
