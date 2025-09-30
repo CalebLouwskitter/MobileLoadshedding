@@ -7,108 +7,127 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_panel_blue"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="vertical">
 
-        <!-- Tabs Section -->
+        <!-- Spacer for tabs -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <!-- Main Blue Panel -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tab_electricity"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/tab_electricity_selected"
-                android:drawableStart="@drawable/ic_lightning_white"
-                android:drawablePadding="8dp"
-                android:gravity="center"
-                android:paddingTop="14dp"
-                android:paddingBottom="14dp"
-                android:text="Electricity"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tab_building"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_weight="1"
-                android:background="@drawable/tab_building"
-                android:drawableStart="@drawable/ic_building_white"
-                android:drawablePadding="8dp"
-                android:gravity="center"
-                android:paddingTop="14dp"
-                android:paddingBottom="14dp"
-                android:text="Building"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <!-- Upgrade Items Container -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_panel_blue"
             android:orientation="vertical"
-            android:padding="14dp">
+            android:paddingStart="12dp"
+            android:paddingTop="25dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="12dp">
 
-            <include layout="@layout/view_upgrade_item" />
-
-            <include
-                layout="@layout/view_upgrade_item"
+            <!-- Upgrade Items Container -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" />
+                android:orientation="vertical"
+                android:paddingStart="8dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="8dp">
 
-            <include
-                layout="@layout/view_upgrade_item"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" />
+                <include layout="@layout/view_upgrade_item" />
 
-            <include
-                layout="@layout/view_upgrade_item"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" />
+                <include
+                    layout="@layout/view_upgrade_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp" />
 
-            <include
-                layout="@layout/view_upgrade_item"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" />
+                <include
+                    layout="@layout/view_upgrade_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp" />
+
+                <include
+                    layout="@layout/view_upgrade_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp" />
+
+                <include
+                    layout="@layout/view_upgrade_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Close Button -->
-    <FrameLayout
+    <!-- Tabs Section (Overlapping) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tab_electricity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/tab_electricity_selected"
+            android:drawableStart="@drawable/ic_lightning_white"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="Electricity"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="6dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tab_building"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/tab_building"
+            android:drawableStart="@drawable/ic_building_white"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="Building"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Close Button overlaying Building tab -->
+    <View
         android:layout_width="44dp"
         android:layout_height="44dp"
         android:layout_gravity="top|end"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="4dp">
+        android:layout_marginTop="-8dp"
+        android:layout_marginEnd="-8dp"
+        android:background="@drawable/circle_red"
+        android:elevation="10dp" />
 
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:background="@drawable/circle_red" />
-
-        <ImageButton
-            android:id="@+id/close_button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:contentDescription="Close"
-            android:src="@drawable/ic_close_white"
-            app:tint="#FFFFFF" />
-    </FrameLayout>
+    <ImageButton
+        android:id="@+id/close_button"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="-8dp"
+        android:layout_marginEnd="-8dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Close"
+        android:elevation="10dp"
+        android:src="@drawable/ic_close_white"
+        app:tint="#FFFFFF" />
 </FrameLayout>
