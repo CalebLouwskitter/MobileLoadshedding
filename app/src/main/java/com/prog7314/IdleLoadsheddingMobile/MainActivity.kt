@@ -34,14 +34,6 @@ class MainActivity : UnityPlayerGameActivity(), UnityBridge.Listener {
 
         modalScrim.setOnClickListener { hidePanel() }
 
-        overlay.findViewById<Button>(R.id.btn_show_toast).setOnClickListener {
-            UnityBridge.showToast(this, "Hello from Kotlin!")
-        }
-
-        overlay.findViewById<Button>(R.id.btn_send_message).setOnClickListener {
-            UnityBridge.sendMessageToUnity("MyGameObject", "MyUnityFunction", "Hello from a button!")
-        }
-
         overlay.findViewById<ImageButton>(R.id.btn_hud_upgrades).setOnClickListener {
             showPanel(R.layout.panel_electricity_upgrade)
         }

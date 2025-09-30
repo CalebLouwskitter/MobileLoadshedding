@@ -76,23 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/btn_show_toast"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Show Toast" />
-
-                <Button
-                    android:id="@+id/btn_send_message"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Send Message" />
-            </LinearLayout>
+                android:orientation="vertical"/>
 
             <Space
                 android:layout_width="match_parent"
