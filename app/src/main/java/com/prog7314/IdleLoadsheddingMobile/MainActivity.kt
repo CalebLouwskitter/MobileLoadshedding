@@ -115,24 +115,16 @@ class MainActivity : UnityPlayerGameActivity(), UnityBridge.Listener {
             showPanel(R.layout.panel_leaderboard)
         }
 
-        panel.findViewById<Button?>(R.id.btn_profile_edit)?.setOnClickListener {
-            showPanel(R.layout.panel_profile_edit)
-        }
-
-        panel.findViewById<Button?>(R.id.btn_profile_settings)?.setOnClickListener {
+        panel.findViewById<View?>(R.id.btn_profile_settings)?.setOnClickListener {
             showPanel(R.layout.panel_settings)
         }
 
-        panel.findViewById<Button?>(R.id.btn_profile_friends)?.setOnClickListener {
-            showPanel(R.layout.panel_friends_leaderboard)
-        }
-
-        panel.findViewById<Button?>(R.id.btn_profile_logout)?.setOnClickListener {
+        panel.findViewById<View?>(R.id.btn_profile_logout)?.setOnClickListener {
             UnityBridge.showToast(this, "Logging out (placeholder)")
             hidePanel()
         }
 
-        panel.findViewById<Button?>(R.id.btn_profile_details)?.setOnClickListener {
+        panel.findViewById<View?>(R.id.btn_profile_details)?.setOnClickListener {
             UnityBridge.showToast(this, "Profile details placeholder")
         }
     }
