@@ -2,46 +2,66 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:background="#E0F7FA"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_task_item"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:padding="12dp">
 
-    <ImageView
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:contentDescription="Task complete"
-        android:src="@android:drawable/checkbox_on_background" />
+    <!-- Check Icon -->
+    <FrameLayout
+        android:layout_width="36dp"
+        android:layout_height="36dp">
 
-    <LinearLayout
+        <View
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/circle_white" />
+
+        <ImageView
+            android:id="@+id/task_check_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:contentDescription="Check"
+            android:src="@drawable/ic_check_green"
+            app:tint="#4CAF50" />
+    </FrameLayout>
+
+    <!-- Task Text -->
+    <TextView
+        android:id="@+id/task_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:text="Upgrade Storage to level 6"
+        android:textColor="#000000"
+        android:textSize="13sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Upgrade Storage to level 6"
-            android:textColor="#0E3D57"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Reward: 20,000"
-            android:textColor="#0E3D57"
-            android:textSize="12sp" />
-    </LinearLayout>
-
-    <TextView
+    <!-- Reward Section -->
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#A5D6A7"
-        android:padding="6dp"
-        android:text="R 20,000"
-        android:textColor="#1B5E20"
-        android:textStyle="bold" />
+        android:layout_marginStart="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:contentDescription="Currency"
+            android:src="@drawable/ic_currency_bag"
+            app:tint="#4CAF50" />
+
+        <TextView
+            android:id="@+id/task_reward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="R 20,000"
+            android:textColor="#000000"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 </LinearLayout>
