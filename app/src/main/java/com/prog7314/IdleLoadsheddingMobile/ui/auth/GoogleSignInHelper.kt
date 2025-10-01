@@ -1,42 +1,42 @@
 package com.prog7314.IdleLoadsheddingMobile.ui.auth
 
-import android.app.Activity
-import android.content.ContentValues.TAG
-import android.content.Context
-import android.util.Log
-import androidx.credentials.Credential
-import androidx.credentials.CredentialManager
-import androidx.credentials.CustomCredential
-import androidx.credentials.GetCredentialRequest
-import androidx.credentials.exceptions.GetCredentialException
+import android.app.Activity //Android, 2025.
+import android.content.ContentValues.TAG //Android, 2025.
+import android.content.Context //Android, 2025.
+import android.util.Log //Android, 2025.
+import androidx.credentials.Credential //AndroidX, 2025.
+import androidx.credentials.CredentialManager //AndroidX, 2025.
+import androidx.credentials.CustomCredential //AndroidX, 2025.
+import androidx.credentials.GetCredentialRequest //AndroidX, 2025.
+import androidx.credentials.exceptions.GetCredentialException //AndroidX, 2025.
 import com.prog7314.IdleLoadsheddingMobile.R
-import com.google.android.libraries.identity.googleid.GetGoogleIdOption
-import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.GoogleAuthProvider
+import com.google.android.libraries.identity.googleid.GetGoogleIdOption //Google, 2025.
+import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential //Google, 2025.
+import com.google.firebase.auth.FirebaseAuth //Firebase, 2025.
+import com.google.firebase.auth.FirebaseUser //Firebase, 2025.
+import com.google.firebase.auth.GoogleAuthProvider //Firebase, 2025.
 import com.prog7314.IdleLoadsheddingMobile.networking.FirebaseIdTokenProvider
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.CoroutineScope //Kotlin Coroutines, 2025.
+import kotlinx.coroutines.Dispatchers //Kotlin Coroutines, 2025.
+import kotlinx.coroutines.launch //Kotlin Coroutines, 2025.
 
 /**
  * GoogleSignInHelper handles the process of initiating and authenticating users using Google Sign-In,
  * integrating with Firebase Authentication.
  */
 
-class GoogleSignInHelper(private val context: Context) {
+class GoogleSignInHelper(private val context: Context) { //Android, 2025.
     // CredentialManager is part of the Android Identity Services API
-    private val credentialManager = CredentialManager.create(context)
+    private val credentialManager = CredentialManager.create(context) //AndroidX, 2025.
     // Firebase Authentication instance
     private val auth = FirebaseAuth.getInstance() //Firebase, 2025.
 
 
     // Builds the Google ID token option using the server client ID
-    private val googleIdOption: GetGoogleIdOption by lazy {
-        GetGoogleIdOption.Builder()
-            .setServerClientId(context.getString(R.string.default_web_client_id))
-            .setFilterByAuthorizedAccounts(false)
+    private val googleIdOption: GetGoogleIdOption by lazy { //Google, 2025.
+        GetGoogleIdOption.Builder() //Google, 2025.
+            .setServerClientId(context.getString(R.string.default_web_client_id)) //Google, 2025.
+            .setFilterByAuthorizedAccounts(false) //Google, 2025.
             .build()
     }
     // Credential request configuration for Google Sign-In
@@ -138,9 +138,15 @@ class GoogleSignInHelper(private val context: Context) {
 }
 
 /**
- *  * Reference List:
- *  * - Google, 2025. Authenticate with Firebase using ID tokens. [online] Available at:
- *  *   https://developers.google.com/identity/gsi/web/guides/firebase-auth [Accessed 25 Apr. 2025].
- *  * - Firebase, 2025. Firebase Authentication with Identity Services. [online] Available at:
- *  *   https://firebase.google.com/docs/auth/android/google-signin [Accessed 25 Apr. 2025].
- *  */
+ * Reference List:
+ * - Google, 2025. Authenticate with Firebase using ID tokens. [online] Available at:
+ *   https://developers.google.com/identity/gsi/web/guides/firebase-auth [Accessed 25 September. 2025].
+ * - Firebase, 2025. Authenticate with Google on Android. [online] Available at:
+ *   https://firebase.google.com/docs/auth/android/google-signin [Accessed 1 Oct. 2025].
+ * - Google, 2025. Sign in with Google for Android - Credential Manager. [online] Available at:
+ *   https://developers.google.com/identity/android-credential-manager [Accessed 1 Oct. 2025].
+ * - Android, 2025. Credential Manager. [online] Available at:
+ *   https://developer.android.com/jetpack/androidx/releases/credentials [Accessed 1 Oct. 2025].
+ * - Kotlin Coroutines, 2025. Kotlin Coroutines Guide. [online] Available at:
+ *   https://kotlinlang.org/docs/coroutines-guide.html [Accessed 1 Oct. 2025].
+ */

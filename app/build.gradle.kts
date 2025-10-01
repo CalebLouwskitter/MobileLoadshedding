@@ -20,7 +20,7 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField("String", "BACKEND_BASE_URL", "\"http://10.0.2.2:5181/\"")
+            buildConfigField("String", "BACKEND_BASE_URL", "\"http://10.0.2.2:5001/api/\"")
         }
         release {
             isMinifyEnabled = false
@@ -41,6 +41,7 @@ android {
 
     buildFeatures {
         buildConfig = true
+        viewBinding = true
     }
 }
 
@@ -70,6 +71,9 @@ dependencies {
 
     implementation("androidx.games:games-activity:3.0.5")
     implementation(libs.firebase.auth)
+    implementation("androidx.navigation:navigation-fragment-ktx:2.8.0")
+    implementation("androidx.navigation:navigation-ui-ktx:2.8.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

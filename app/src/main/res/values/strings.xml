@@ -39,4 +39,24 @@
     <string name="toast_friend_invite_sent">Friend invite sent</string>
     <string name="toast_friend_code_empty">Enter a friend code</string>
     <string name="toast_logout_placeholder">Logging out (placeholder)</string>
+
+    <!-- Auth -->
+    <string name="auth_header_title">Idle Loadshedding</string>
+    <string name="auth_header_subtitle">Create an account or log in to continue playing..</string>
+    <string name="auth_login_title">Log In</string>
+    <string name="auth_login_subtitle">Get started now</string>
+    <string name="auth_signup_title">Sign Up</string>
+    <string name="auth_signup_subtitle">Create your account</string>
+    <string name="auth_toggle_login">Log In</string>
+    <string name="auth_toggle_signup">Sign Up</string>
+    <string name="auth_email_hint">Email</string>
+    <string name="auth_password_hint">Password</string>
+    <string name="auth_confirm_password_hint">Confirm Password</string>
+    <string name="auth_remember_me">Remember me</string>
+    <string name="auth_forgot_password">Forgot Password ?</string>
+    <string name="auth_primary_cta_login">Log In</string>
+    <string name="auth_primary_cta_signup">Sign Up</string>
+    <string name="auth_google_cta">Continue with Google</string>
+    <string name="auth_or_label">Or</string>
+    <string name="auth_already_signed">Already Signed Up ?</string>
 </resources>

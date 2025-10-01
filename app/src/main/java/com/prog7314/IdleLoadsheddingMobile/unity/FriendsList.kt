@@ -4,13 +4,14 @@ import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
+import com.prog7314.IdleLoadsheddingMobile.core.BackendClient
+import com.prog7314.IdleLoadsheddingMobile.core.UnityBridge
+import com.prog7314.IdleLoadsheddingMobile.data.api.FriendsApi
+import com.prog7314.IdleLoadsheddingMobile.data.models.FriendSubmission
+import com.prog7314.IdleLoadsheddingMobile.data.models.FriendsPayload
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
 import java.util.concurrent.CopyOnWriteArraySet
 
 object FriendsList : UnityBridge.Listener {
@@ -110,33 +111,4 @@ object FriendsList : UnityBridge.Listener {
     }
 
     private fun currentPlayerId(): String? = auth.currentUser?.uid
-
-    interface FriendsApi {
-        @POST("friends")
-        fun postFriends(@Query("playerId") playerId: String?, @Body payload: FriendsPayload): Call<Void>
-
-        @GET("friends")
-        fun fetchFriends(@Query("playerId") playerId: String?): Call<FriendsPayload>
-    }
-
-    data class FriendsPayload(
-        val friends: List<FriendProfile>,
-        val timestampUtc: String
-    )
-
-    data class FriendProfile(
-        val id: String,
-        val displayName: String,
-        val isOnline: Boolean,
-        val contributionPerHour: Double,
-        val lastInteractionUtc: String
-    )
-
-    data class FriendSubmission(
-        val id: String,
-        val displayName: String,
-        val contributionPerHour: Double,
-        val isOnline: Boolean,
-        val remove: Boolean
-    )
 }

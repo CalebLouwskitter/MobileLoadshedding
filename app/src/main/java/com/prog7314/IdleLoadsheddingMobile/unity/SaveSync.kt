@@ -7,11 +7,13 @@ import androidx.core.content.edit
 import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
+import com.prog7314.IdleLoadsheddingMobile.core.BackendClient
+import com.prog7314.IdleLoadsheddingMobile.core.UnityBridge
+import com.prog7314.IdleLoadsheddingMobile.data.api.SaveApi
+import com.prog7314.IdleLoadsheddingMobile.data.models.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.POST
 import java.util.concurrent.CopyOnWriteArraySet
 
 object SaveSync : UnityBridge.Listener {
@@ -125,56 +127,4 @@ object SaveSync : UnityBridge.Listener {
 	}
 
 	private fun currentPlayerId(): String? = auth.currentUser?.uid
-
-	interface SaveApi {
-		@POST("save")
-		fun syncSave(@Body payload: BackendSavePayload): Call<Void>
-	}
-
-	data class UnitySavePayload(
-		val stats: String,
-		val generators: List<GeneratorState>,
-		val timestampUtc: String,
-		val districts: List<DistrictState> = emptyList(),
-		val central: CentralState? = null
-	) {
-		data class GeneratorState(
-			val id: String,
-			val level: Int
-		)
-
-		data class DistrictState(
-			val id: String,
-			val level: Int,
-			val efficiency: Float
-		)
-
-		data class CentralState(
-			val charge: Double
-		)
-	}
-
-	data class BackendSavePayload(
-		val playerId: String,
-		val stats: String,
-		val generators: List<BackendGeneratorState>,
-		val districts: List<BackendDistrictState> = emptyList(),
-		val central: BackendCentralState? = null,
-		val timestampUtc: String
-	)
-
-	data class BackendGeneratorState(
-		val id: String,
-		val level: Int
-	)
-
-	data class BackendDistrictState(
-		val id: String,
-		val level: Int,
-		val efficiency: Float
-	)
-
-	data class BackendCentralState(
-		val charge: Double
-	)
 }

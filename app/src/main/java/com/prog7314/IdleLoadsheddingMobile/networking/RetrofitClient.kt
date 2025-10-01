@@ -1,9 +1,21 @@
 package com.prog7314.IdleLoadsheddingMobile.networking
 
-import com.prog7314.IdleLoadsheddingMobile.unity.BackendClient
+import com.prog7314.IdleLoadsheddingMobile.core.BackendClient
 
-object RetrofitClient {
-    val instance: ApiService by lazy {
-        BackendClient.retrofit.create(ApiService::class.java)
+/**
+ * RetrofitClient provides a singleton instance of the API service
+ * using Retrofit for HTTP communication.
+ */
+object RetrofitClient { //Square, 2025.
+    val instance: ApiService by lazy { //Kotlin, 2025.
+        BackendClient.retrofit.create(ApiService::class.java) //Square, 2025.
     }
 }
+
+/**
+ * Reference List:
+ * - Square, 2025. Retrofit - Type-safe HTTP client for Android and Java. [online] Available at:
+ *   https://square.github.io/retrofit/ [Accessed 1 Oct. 2025].
+ * - Kotlin, 2025. Kotlin Language Documentation - Delegated Properties. [online] Available at:
+ *   https://kotlinlang.org/docs/delegated-properties.html [Accessed 1 Oct. 2025].
+ */

@@ -4,13 +4,15 @@ import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
-import com.google.gson.annotations.SerializedName
+import com.prog7314.IdleLoadsheddingMobile.core.BackendClient
+import com.prog7314.IdleLoadsheddingMobile.core.UnityBridge
+import com.prog7314.IdleLoadsheddingMobile.data.api.StatsApi
+import com.prog7314.IdleLoadsheddingMobile.data.models.BackendStatsSnapshot
+import com.prog7314.IdleLoadsheddingMobile.data.models.BackendStatsSummary
+import com.prog7314.IdleLoadsheddingMobile.data.models.UnityStatsSnapshot
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
 import java.util.concurrent.CopyOnWriteArraySet
 
 object Stats : UnityBridge.Listener {
@@ -128,68 +130,4 @@ object Stats : UnityBridge.Listener {
 	}
 
 	private fun currentPlayerId(): String? = auth.currentUser?.uid
-
-	interface StatsApi {
-		@POST("stats")
-		fun postSnapshot(@Body snapshot: BackendStatsSnapshot): Call<Void>
-
-		@GET("stats/summary")
-		fun fetchSummary(): Call<BackendStatsSummary>
-	}
-
-	data class UnityStatsSnapshot(
-		@SerializedName("totalEnergyGenerated") val totalEnergyGenerated: Double,
-		@SerializedName("currentEnergy") val currentEnergy: Double,
-		@SerializedName("energyPerSecond") val energyPerSecond: Double,
-		@SerializedName("activeGenerators") val activeGenerators: Int,
-		@SerializedName("generatorLevelSum") val generatorLevelSum: Int,
-		@SerializedName("offlineSeconds") val offlineSeconds: Double,
-		@SerializedName("lastEventId") val lastEventId: String?,
-		@SerializedName("timestampUtc") val timestampUtc: String,
-		@SerializedName("currentMoney") val currentMoney: Double = 0.0,
-		@SerializedName("totalMoneyEarned") val totalMoneyEarned: Double = 0.0,
-		@SerializedName("hoursUntilMaintenance") val hoursUntilMaintenance: Double = 0.0,
-		@SerializedName("coreChargePercent") val coreChargePercent: Double = 0.0,
-		@SerializedName("districts") val districts: List<DistrictSnapshot> = emptyList()
-	) {
-		data class DistrictSnapshot(
-			@SerializedName("id") val id: String,
-			@SerializedName("name") val name: String,
-			@SerializedName("level") val level: Int,
-			@SerializedName("efficiency") val efficiency: Double,
-			@SerializedName("powerPerSecond") val powerPerSecond: Double,
-			@SerializedName("moneyPerSecond") val moneyPerSecond: Double,
-			@SerializedName("hoursUntilMaintenance") val hoursUntilMaintenance: Double,
-			@SerializedName("nextUpgradeCost") val nextUpgradeCost: Double
-		)
-	}
-
-	data class BackendStatsSnapshot(
-		@SerializedName("playerId") val playerId: String,
-		@SerializedName("totalEnergyGenerated") val totalEnergyGenerated: Double,
-		@SerializedName("currentEnergy") val currentEnergy: Double,
-		@SerializedName("energyPerSecond") val energyPerSecond: Double,
-		@SerializedName("activeGenerators") val activeGenerators: Int,
-		@SerializedName("generatorLevelSum") val generatorLevelSum: Int,
-		@SerializedName("offlineSeconds") val offlineSeconds: Double,
-		@SerializedName("lastEventId") val lastEventId: String?,
-		@SerializedName("timestampUtc") val timestampUtc: String,
-		@SerializedName("currentMoney") val currentMoney: Double = 0.0,
-		@SerializedName("totalMoneyEarned") val totalMoneyEarned: Double = 0.0,
-		@SerializedName("hoursUntilMaintenance") val hoursUntilMaintenance: Double = 0.0,
-		@SerializedName("coreChargePercent") val coreChargePercent: Double = 0.0,
-		@SerializedName("districts") val districts: List<UnityStatsSnapshot.DistrictSnapshot> = emptyList()
-	)
-
-	data class BackendStatsSummary(
-		val totalPlayers: Int,
-		val averageEnergyPerSecond: Double,
-		val topPerformers: List<Performer> = emptyList()
-	) {
-		data class Performer(
-			val playerId: String,
-			val displayName: String,
-			val score: Double
-		)
-	}
 }

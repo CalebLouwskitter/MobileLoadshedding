@@ -3,12 +3,16 @@ package com.prog7314.IdleLoadsheddingMobile.unity
 import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
+import com.prog7314.IdleLoadsheddingMobile.core.BackendClient
+import com.prog7314.IdleLoadsheddingMobile.core.UnityBridge
+import com.prog7314.IdleLoadsheddingMobile.data.api.LeaderboardApi
+import com.prog7314.IdleLoadsheddingMobile.data.models.LeaderboardEntryResponse
+import com.prog7314.IdleLoadsheddingMobile.data.models.LeaderboardSubmission
+import com.prog7314.IdleLoadsheddingMobile.data.models.UnityLeaderboardPayload
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import java.time.Instant
 import java.util.concurrent.CopyOnWriteArraySet
 
 object Leaderboard : UnityBridge.Listener {
@@ -58,22 +62,41 @@ object Leaderboard : UnityBridge.Listener {
 	}
 
 	fun fetchBackendLeaderboard(callback: (Result<UnityLeaderboardPayload>) -> Unit) {
-		api.fetchLeaderboard().enqueue(object : Callback<UnityLeaderboardPayload> {
+		Log.d(TAG, "fetchBackendLeaderboard() - Starting API request")
+		api.fetchLeaderboard().enqueue(object : Callback<List<LeaderboardEntryResponse>> {
 			override fun onResponse(
-				call: Call<UnityLeaderboardPayload>,
-				response: Response<UnityLeaderboardPayload>
+				call: Call<List<LeaderboardEntryResponse>>,
+				response: Response<List<LeaderboardEntryResponse>>
 			) {
+				Log.d(TAG, "API Response: ${response.code()}")
 				val body = response.body()
 				if (response.isSuccessful && body != null) {
-					latest = body
-					notifyObservers(body)
-					callback(Result.success(body))
+					Log.d(TAG, "SUCCESS: Leaderboard data received with ${body.size} entries")
+					
+					// Convert backend response to Unity format
+					val unityPayload = UnityLeaderboardPayload(
+						entries = body.map { entry ->
+							UnityLeaderboardPayload.Entry(
+								playerId = entry.rank.toString(), // Using rank as playerId for now
+								displayName = entry.username,
+								score = entry.score,
+								lastUpdatedUtc = entry.recordedAt
+							)
+						},
+						timestampUtc = Instant.now().toString()
+					)
+					
+					latest = unityPayload
+					notifyObservers(unityPayload)
+					callback(Result.success(unityPayload))
 				} else {
+					Log.e(TAG, "FAILED: API response code ${response.code()}")
 					callback(Result.failure(Exception("Failed to fetch leaderboard: ${response.code()}")))
 				}
 			}
 
-			override fun onFailure(call: Call<UnityLeaderboardPayload>, t: Throwable) {
+			override fun onFailure(call: Call<List<LeaderboardEntryResponse>>, t: Throwable) {
+				Log.e(TAG, "FAILED: Network request exception", t)
 				callback(Result.failure(t))
 			}
 		})
@@ -105,30 +128,4 @@ object Leaderboard : UnityBridge.Listener {
 			}
 		})
 	}
-
-	interface LeaderboardApi {
-		@POST("leaderboard")
-		fun postLeaderboard(@Body payload: UnityLeaderboardPayload): Call<Void>
-
-		@GET("leaderboard")
-		fun fetchLeaderboard(): Call<UnityLeaderboardPayload>
-	}
-
-	data class UnityLeaderboardPayload(
-		val entries: List<Entry>,
-		val timestampUtc: String
-	) {
-		data class Entry(
-			val playerId: String,
-			val displayName: String,
-			val score: Double,
-			val lastUpdatedUtc: String
-		)
-	}
-
-	data class LeaderboardSubmission(
-		val playerId: String,
-		val displayName: String,
-		val score: Double
-	)
 }

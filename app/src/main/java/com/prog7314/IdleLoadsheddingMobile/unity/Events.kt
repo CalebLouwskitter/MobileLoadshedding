@@ -3,11 +3,13 @@ package com.prog7314.IdleLoadsheddingMobile.unity
 import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
+import com.prog7314.IdleLoadsheddingMobile.core.BackendClient
+import com.prog7314.IdleLoadsheddingMobile.core.UnityBridge
+import com.prog7314.IdleLoadsheddingMobile.data.api.EventsApi
+import com.prog7314.IdleLoadsheddingMobile.data.models.UnityEventPayload
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.POST
 import java.util.ArrayDeque
 import java.util.concurrent.CopyOnWriteArraySet
 
@@ -105,19 +107,4 @@ object Events : UnityBridge.Listener {
             }
         })
     }
-
-    interface EventsApi {
-        @POST("events")
-        fun recordEvent(@Body payload: UnityEventPayload): Call<Void>
-    }
-
-    data class UnityEventPayload(
-        val id: String,
-        val title: String,
-        val description: String,
-        val isStarting: Boolean,
-        val durationSeconds: Float,
-        val productionMultiplier: Float,
-        val timestampUtc: String
-    )
 }

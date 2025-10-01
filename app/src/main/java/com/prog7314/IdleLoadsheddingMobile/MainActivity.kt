@@ -1,34 +1,36 @@
 package com.prog7314.IdleLoadsheddingMobile
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.FrameLayout
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.TextView
-import android.widget.Toast
-import androidx.core.view.isVisible
-import com.google.gson.Gson
+import android.os.Bundle //Android, 2025.
+import android.util.Log //Android, 2025.
+import android.view.LayoutInflater //Android, 2025.
+import android.view.View //Android, 2025.
+import android.widget.Button //Android, 2025.
+import android.widget.EditText //Android, 2025.
+import android.widget.FrameLayout //Android, 2025.
+import android.widget.ImageButton //Android, 2025.
+import android.widget.ImageView //Android, 2025.
+import android.widget.LinearLayout //Android, 2025.
+import android.widget.ProgressBar //Android, 2025.
+import android.widget.TextView //Android, 2025.
+import android.widget.Toast //Android, 2025.
+import androidx.core.view.isVisible //AndroidX, 2025.
+import com.google.gson.Gson //Google, 2025.
+import com.prog7314.IdleLoadsheddingMobile.core.UnityBridge
+import com.prog7314.IdleLoadsheddingMobile.data.models.*
 import com.prog7314.IdleLoadsheddingMobile.unity.Events
 import com.prog7314.IdleLoadsheddingMobile.unity.FriendsList
 import com.prog7314.IdleLoadsheddingMobile.unity.Leaderboard
 import com.prog7314.IdleLoadsheddingMobile.unity.SaveSync
 import com.prog7314.IdleLoadsheddingMobile.unity.Stats
-import com.prog7314.IdleLoadsheddingMobile.unity.UnityBridge
-import com.unity3d.player.UnityPlayerGameActivity
-import java.text.DecimalFormat
-import java.time.Instant
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
-import java.time.format.DateTimeParseException
-import kotlin.math.roundToInt
+import com.unity3d.player.UnityPlayerGameActivity //Unity Technologies, 2025.
+import java.text.DecimalFormat //Oracle, 2025.
+import java.time.Instant //Oracle, 2025.
+import java.time.ZoneId //Oracle, 2025.
+import java.time.format.DateTimeFormatter //Oracle, 2025.
+import java.time.format.DateTimeParseException //Oracle, 2025.
+import kotlin.math.roundToInt //Kotlin, 2025.
 
-class MainActivity : UnityPlayerGameActivity() {
+class MainActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
 
     private lateinit var modalContainer: FrameLayout
     private lateinit var modalScrim: View
@@ -42,12 +44,12 @@ class MainActivity : UnityPlayerGameActivity() {
     private var currentPanelLayoutId: Int? = null
     private var currentPanelView: View? = null
 
-    private var latestStats: Stats.UnityStatsSnapshot? = null
-    private var latestLeaderboard: Leaderboard.UnityLeaderboardPayload? = null
-    private var latestFriends: FriendsList.FriendsPayload? = null
-    private var latestSave: SaveSync.UnitySavePayload? = null
-    private var currentActiveEvent: Events.UnityEventPayload? = null
-    private var eventHistory: List<Events.UnityEventPayload> = emptyList()
+    private var latestStats: UnityStatsSnapshot? = null
+    private var latestLeaderboard: UnityLeaderboardPayload? = null
+    private var latestFriends: FriendsPayload? = null
+    private var latestSave: UnitySavePayload? = null
+    private var currentActiveEvent: UnityEventPayload? = null
+    private var eventHistory: List<UnityEventPayload> = emptyList()
 
     private val numberFormatter = DecimalFormat("#,##0.##")
     private val timestampFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss")
@@ -55,7 +57,7 @@ class MainActivity : UnityPlayerGameActivity() {
     private val gson = Gson()
 
     private val statsObserver = object : Stats.Observer {
-        override fun onStatsUpdated(snapshot: Stats.UnityStatsSnapshot) {
+        override fun onStatsUpdated(snapshot: UnityStatsSnapshot) {
             runOnUiThread {
                 latestStats = snapshot
                 updateHud(snapshot)
@@ -65,7 +67,8 @@ class MainActivity : UnityPlayerGameActivity() {
     }
 
     private val leaderboardObserver = object : Leaderboard.Observer {
-        override fun onLeaderboardUpdated(payload: Leaderboard.UnityLeaderboardPayload) {
+        override fun onLeaderboardUpdated(payload: UnityLeaderboardPayload) {
+            Log.d("MainActivity", "Leaderboard observer notified with ${payload.entries.size} entries")
             runOnUiThread {
                 latestLeaderboard = payload
                 updateLeaderboardPanel()
@@ -74,7 +77,7 @@ class MainActivity : UnityPlayerGameActivity() {
     }
 
     private val friendsObserver = object : FriendsList.Observer {
-        override fun onFriendsUpdated(payload: FriendsList.FriendsPayload) {
+        override fun onFriendsUpdated(payload: FriendsPayload) {
             runOnUiThread {
                 latestFriends = payload
                 updateFriendsPanel()
@@ -83,7 +86,7 @@ class MainActivity : UnityPlayerGameActivity() {
     }
 
     private val eventsObserver = object : Events.Observer {
-        override fun onEventsUpdated(activeEvent: Events.UnityEventPayload?, history: List<Events.UnityEventPayload>) {
+        override fun onEventsUpdated(activeEvent: UnityEventPayload?, history: List<UnityEventPayload>) {
             runOnUiThread {
                 currentActiveEvent = activeEvent
                 eventHistory = history
@@ -95,7 +98,7 @@ class MainActivity : UnityPlayerGameActivity() {
     }
 
     private val saveListener = object : SaveSync.Listener {
-        override fun onSaveUpdated(payload: SaveSync.UnitySavePayload) {
+        override fun onSaveUpdated(payload: UnitySavePayload) {
             runOnUiThread {
                 latestSave = payload
                 syncStatsPanels(latestStats)
@@ -105,7 +108,8 @@ class MainActivity : UnityPlayerGameActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        Log.d("MainActivity", "onCreate() started")
+        
         val overlay = LayoutInflater.from(this).inflate(R.layout.activity_main, null)
         modalContainer = overlay.findViewById(R.id.modal_container)
         modalScrim = overlay.findViewById(R.id.modal_scrim)
@@ -164,10 +168,24 @@ class MainActivity : UnityPlayerGameActivity() {
         Events.addObserver(eventsObserver)
         SaveSync.addListener(saveListener)
 
+        Log.d("MainActivity", "About to fetch leaderboard from API")
         Stats.requestUnitySnapshot()
-        Leaderboard.requestUnityLeaderboard()
+        
+        // Fetch leaderboard directly from API instead of waiting for Unity
+        Leaderboard.fetchBackendLeaderboard { result ->
+            result.onSuccess { payload ->
+                Log.d("MainActivity", "SUCCESS: Leaderboard fetched with ${payload.entries.size} entries")
+            }.onFailure { error ->
+                Log.e("MainActivity", "FAILED: Leaderboard fetch error: ${error.message}", error)
+                // Fallback to Unity request if API fails
+                Leaderboard.requestUnityLeaderboard()
+            }
+        }
+        
         FriendsList.requestUnityFriends()
         SaveSync.requestUnitySave()
+        
+        Log.d("MainActivity", "onCreate() completed")
     }
 
     override fun onDestroy() {
@@ -270,17 +288,31 @@ class MainActivity : UnityPlayerGameActivity() {
     }
 
     private fun configureLeaderboardPanel(panel: View) {
+        Log.d("MainActivity", "Configuring leaderboard panel")
+        
         panel.findViewById<Button?>(R.id.btn_tab_friends)?.setOnClickListener {
             showPanel(R.layout.panel_friends_leaderboard)
         }
 
         panel.findViewById<Button?>(R.id.btn_tab_global)?.setOnClickListener {
-            Leaderboard.requestUnityLeaderboard()
+            Log.d("MainActivity", "Global tab clicked - fetching from API")
+            Leaderboard.fetchBackendLeaderboard { result ->
+                result.onFailure { error ->
+                    Log.e("MainActivity", "Failed to refresh leaderboard: ${error.message}", error)
+                }
+            }
         }
 
         bindLeaderboardPanel(panel, latestLeaderboard)
         if (latestLeaderboard == null) {
-            Leaderboard.requestUnityLeaderboard()
+            Log.d("MainActivity", "No cached leaderboard data, fetching from API")
+            Leaderboard.fetchBackendLeaderboard { result ->
+                result.onFailure { error ->
+                    Log.e("MainActivity", "Failed to fetch initial leaderboard: ${error.message}", error)
+                }
+            }
+        } else {
+            Log.d("MainActivity", "Using cached leaderboard data with ${latestLeaderboard?.entries?.size} entries")
         }
     }
 
@@ -320,7 +352,7 @@ class MainActivity : UnityPlayerGameActivity() {
         updateTasksPanel()
     }
 
-    private fun updateHud(snapshot: Stats.UnityStatsSnapshot) {
+    private fun updateHud(snapshot: UnityStatsSnapshot) {
         textEnergyAmount.text = formatEnergy(snapshot.currentMoney)
         textEnergyPerSecond.text = getString(
             R.string.hud_energy_per_second_format,
@@ -348,7 +380,7 @@ class MainActivity : UnityPlayerGameActivity() {
         }
     }
 
-    private fun syncStatsPanels(snapshot: Stats.UnityStatsSnapshot?) {
+    private fun syncStatsPanels(snapshot: UnityStatsSnapshot?) {
         val panelView = currentPanelView ?: return
         when (currentPanelLayoutId) {
             R.layout.panel_electricity_upgrade -> bindElectricityPanel(panelView, snapshot, latestSave, currentActiveEvent)
@@ -358,9 +390,9 @@ class MainActivity : UnityPlayerGameActivity() {
 
     private fun bindElectricityPanel(
         panel: View,
-        stats: Stats.UnityStatsSnapshot?,
-        save: SaveSync.UnitySavePayload?,
-        event: Events.UnityEventPayload?
+        stats: UnityStatsSnapshot?,
+        save: UnitySavePayload?,
+        event: UnityEventPayload?
     ) {
         val currentEnergy = stats?.let { getString(R.string.electricity_current_energy, formatEnergy(it.currentEnergy)) }
             ?: getString(R.string.electricity_current_energy, getString(R.string.timestamp_unknown))
@@ -406,8 +438,8 @@ class MainActivity : UnityPlayerGameActivity() {
 
     private fun bindProfilePanel(
         panel: View,
-        stats: Stats.UnityStatsSnapshot?,
-        save: SaveSync.UnitySavePayload?
+        stats: UnityStatsSnapshot?,
+        save: UnitySavePayload?
     ) {
         panel.findViewById<TextView?>(R.id.text_profile_energy_total)?.text = stats?.let {
             getString(R.string.profile_energy_total, formatEnergy(it.totalEnergyGenerated))
@@ -430,7 +462,7 @@ class MainActivity : UnityPlayerGameActivity() {
         } ?: getString(R.string.profile_last_sync, getString(R.string.timestamp_unknown))
     }
 
-    private fun renderDistrictsPanel(panel: View, stats: Stats.UnityStatsSnapshot?) {
+    private fun renderDistrictsPanel(panel: View, stats: UnityStatsSnapshot?) {
         val container = panel.findViewById<LinearLayout?>(R.id.list_districts) ?: return
         container.removeAllViews()
 
@@ -496,7 +528,7 @@ class MainActivity : UnityPlayerGameActivity() {
         }
     }
 
-    private fun bindLeaderboardPanel(panel: View, payload: Leaderboard.UnityLeaderboardPayload?) {
+    private fun bindLeaderboardPanel(panel: View, payload: UnityLeaderboardPayload?) {
         val loading = panel.findViewById<ProgressBar?>(R.id.leaderboard_loading)
         val empty = panel.findViewById<TextView?>(R.id.text_leaderboard_empty)
         val listContainer = panel.findViewById<LinearLayout?>(R.id.leaderboard_list_container)
@@ -529,7 +561,7 @@ class MainActivity : UnityPlayerGameActivity() {
         }
     }
 
-    private fun bindFriendsPanel(panel: View, payload: FriendsList.FriendsPayload?) {
+    private fun bindFriendsPanel(panel: View, payload: FriendsPayload?) {
         val loading = panel.findViewById<ProgressBar?>(R.id.friends_loading)
         val empty = panel.findViewById<TextView?>(R.id.text_friends_empty)
         val listContainer = panel.findViewById<LinearLayout?>(R.id.friends_list_container)
@@ -584,7 +616,7 @@ class MainActivity : UnityPlayerGameActivity() {
 
     private fun renderLeaderboardEntries(
         container: LinearLayout,
-        entries: List<Leaderboard.UnityLeaderboardPayload.Entry>
+        entries: List<UnityLeaderboardPayload.Entry>
     ) {
         container.removeAllViews()
         entries.forEachIndexed { index, entry ->
@@ -605,7 +637,7 @@ class MainActivity : UnityPlayerGameActivity() {
 
     private fun renderFriendsEntries(
         container: LinearLayout,
-        entries: List<FriendsList.FriendProfile>
+        entries: List<FriendProfile>
     ) {
         container.removeAllViews()
         entries.forEachIndexed { index, friend ->
@@ -622,7 +654,7 @@ class MainActivity : UnityPlayerGameActivity() {
         }
     }
 
-    private fun renderEventHistory(container: LinearLayout, history: List<Events.UnityEventPayload>) {
+    private fun renderEventHistory(container: LinearLayout, history: List<UnityEventPayload>) {
         container.removeAllViews()
         history.take(10).forEach { event ->
             val row = LayoutInflater.from(this).inflate(R.layout.view_task_item, container, false)
@@ -678,7 +710,7 @@ class MainActivity : UnityPlayerGameActivity() {
         }
     }
 
-    private fun formatEventDescription(event: Events.UnityEventPayload): String {
+    private fun formatEventDescription(event: UnityEventPayload): String {
         val state = if (event.isStarting) getString(R.string.tasks_event_active, event.title) else getString(
             R.string.tasks_event_inactive,
             event.title
@@ -689,9 +721,25 @@ class MainActivity : UnityPlayerGameActivity() {
 
     private fun sendDistrictAction(methodName: String, districtId: String) {
         if (districtId.isBlank()) return
-        val payload = gson.toJson(DistrictAction(districtId))
+        val payload = gson.toJson(DistrictAction(districtId)) //Google, 2025.
         UnityBridge.sendJsonToUnity("UnityMessageRouter", methodName, payload)
     }
 
     private data class DistrictAction(val districtId: String)
 }
+
+/**
+ * Reference List:
+ * - Android, 2025. Android Developers Documentation. [online] Available at:
+ *   https://developer.android.com/ [Accessed 1 Oct. 2025].
+ * - AndroidX, 2025. AndroidX Core Library. [online] Available at:
+ *   https://developer.android.com/jetpack/androidx/releases/core [Accessed 1 Oct. 2025].
+ * - Google, 2025. Gson - A Java serialization library. [online] Available at:
+ *   https://github.com/google/gson [Accessed 1 Oct. 2025].
+ * - Unity Technologies, 2025. Unity for Android. [online] Available at:
+ *   https://docs.unity3d.com/Manual/android.html [Accessed 1 Oct. 2025].
+ * - Oracle, 2025. Java Platform Standard Edition Documentation. [online] Available at:
+ *   https://docs.oracle.com/en/java/javase/ [Accessed 1 Oct. 2025].
+ * - Kotlin, 2025. Kotlin Standard Library. [online] Available at:
+ *   https://kotlinlang.org/api/latest/jvm/stdlib/ [Accessed 1 Oct. 2025].
+ */
