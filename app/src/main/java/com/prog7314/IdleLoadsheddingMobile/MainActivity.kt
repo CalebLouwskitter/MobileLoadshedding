@@ -118,11 +118,16 @@ class MainActivity : UnityPlayerGameActivity(), UnityBridge.Listener {
         }
 
         panel.findViewById<View?>(R.id.btn_profile_details)?.setOnClickListener {
-            UnityBridge.showToast(this, "Profile details placeholder")
+            showPanel(R.layout.panel_profile_edit)
         }
     }
 
     private fun configureProfileEditPanel(panel: View) {
+
+        panel.findViewById<View?>(R.id.btn_back)?.setOnClickListener {
+            showPanel(R.layout.panel_profile)
+        }
+
         panel.findViewById<View?>(R.id.btn_cancel_profile)?.setOnClickListener {
             showPanel(R.layout.panel_profile)
         }
