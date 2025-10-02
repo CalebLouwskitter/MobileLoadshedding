@@ -1,15 +1,35 @@
 package com.prog7314.IdleLoadsheddingMobile
 
 import android.os.Bundle //Android, 2025.
-import androidx.appcompat.app.AppCompatActivity //AndroidX, 2025.
+import com.prog7314.IdleLoadsheddingMobile.GameUI.GameStatsFragment
+import com.prog7314.IdleLoadsheddingMobile.core.UnityBridge
+import com.prog7314.IdleLoadsheddingMobile.unity.Stats
+import com.unity3d.player.UnityPlayerGameActivity //Unity Technologies, 2025.
 
 /**
- * GameActivity serves as the container for the game interface.
+ * GameActivity extends UnityPlayerGameActivity to embed the Unity game
+ * and display native UI overlays for stats and other features.
  */
-class GameActivity : AppCompatActivity() { //AndroidX, 2025.
+class GameActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
+    
     override fun onCreate(savedInstanceState: Bundle?) { //Android, 2025.
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_game) //Android, 2025.
+        
+        // UnityPlayerGameActivity already sets up the Unity view
+        // We just need to add our stats overlay on top
+        
+        // Add stats overlay fragment on top of Unity
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .add(android.R.id.content, GameStatsFragment.newInstance())
+                .commit()
+        }
+
+        // Ensure Unity HUD is hidden and trigger an initial stats sync once the Unity view is ready
+        window.decorView.post {
+            UnityBridge.hideUnityHud()
+            Stats.requestUnitySnapshot()
+        }
     }
 }
 
@@ -17,7 +37,9 @@ class GameActivity : AppCompatActivity() { //AndroidX, 2025.
  * Reference List:
  * - Android, 2025. Android Developers - Activity. [online] Available at:
  *   https://developer.android.com/reference/android/app/Activity [Accessed 1 Oct. 2025].
- * - AndroidX, 2025. AndroidX AppCompat Library. [online] Available at:
- *   https://developer.android.com/jetpack/androidx/releases/appcompat [Accessed 1 Oct. 2025].
+ * - Unity Technologies, 2025. Unity for Android - UnityPlayerGameActivity. [online] Available at:
+ *   https://docs.unity3d.com/Manual/android-plugins.html [Accessed 1 Oct. 2025].
  */
+
+
 

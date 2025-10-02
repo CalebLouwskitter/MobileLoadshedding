@@ -15,7 +15,7 @@ data class UnityStatsSnapshot(
     @SerializedName("totalMoneyEarned") val totalMoneyEarned: Double = 0.0,
     @SerializedName("hoursUntilMaintenance") val hoursUntilMaintenance: Double = 0.0,
     @SerializedName("coreChargePercent") val coreChargePercent: Double = 0.0,
-    @SerializedName("districts") val districts: List<DistrictSnapshot> = emptyList()
+    @SerializedName("districts") val districts: List<DistrictSnapshot>? = emptyList()
 ) {
     data class DistrictSnapshot(
         @SerializedName("id") val id: String,
@@ -43,7 +43,7 @@ data class BackendStatsSnapshot(
     @SerializedName("totalMoneyEarned") val totalMoneyEarned: Double = 0.0,
     @SerializedName("hoursUntilMaintenance") val hoursUntilMaintenance: Double = 0.0,
     @SerializedName("coreChargePercent") val coreChargePercent: Double = 0.0,
-    @SerializedName("districts") val districts: List<UnityStatsSnapshot.DistrictSnapshot> = emptyList()
+    @SerializedName("districts") val districts: List<UnityStatsSnapshot.DistrictSnapshot>? = emptyList()
 )
 
 data class BackendStatsSummary(

@@ -1,5 +1,8 @@
 package com.prog7314.IdleLoadsheddingMobile
 
+import android.content.ClipData //Android, 2025.
+import android.content.ClipboardManager //Android, 2025.
+import android.content.Context //Android, 2025.
 import android.os.Bundle //Android, 2025.
 import android.util.Log //Android, 2025.
 import android.view.LayoutInflater //Android, 2025.
@@ -14,12 +17,14 @@ import android.widget.ProgressBar //Android, 2025.
 import android.widget.TextView //Android, 2025.
 import android.widget.Toast //Android, 2025.
 import androidx.core.view.isVisible //AndroidX, 2025.
+import com.google.firebase.auth.FirebaseAuth //Firebase, 2025.
 import com.google.gson.Gson //Google, 2025.
 import com.prog7314.IdleLoadsheddingMobile.core.UnityBridge
 import com.prog7314.IdleLoadsheddingMobile.data.models.*
 import com.prog7314.IdleLoadsheddingMobile.unity.Events
 import com.prog7314.IdleLoadsheddingMobile.unity.FriendsList
 import com.prog7314.IdleLoadsheddingMobile.unity.Leaderboard
+import com.prog7314.IdleLoadsheddingMobile.unity.PowerManager
 import com.prog7314.IdleLoadsheddingMobile.unity.SaveSync
 import com.prog7314.IdleLoadsheddingMobile.unity.Stats
 import com.unity3d.player.UnityPlayerGameActivity //Unity Technologies, 2025.
@@ -55,6 +60,7 @@ class MainActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
     private val timestampFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss")
         .withZone(ZoneId.systemDefault())
     private val gson = Gson()
+    private val auth = FirebaseAuth.getInstance()
 
     private val statsObserver = object : Stats.Observer {
         override fun onStatsUpdated(snapshot: UnityStatsSnapshot) {
@@ -102,6 +108,7 @@ class MainActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
             runOnUiThread {
                 latestSave = payload
                 syncStatsPanels(latestStats)
+                updateSettingsPanel()
             }
         }
     }
@@ -128,16 +135,6 @@ class MainActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
 
         modalScrim.setOnClickListener { hidePanel() }
 
-        overlay.findViewById<Button>(R.id.btn_refresh_stats).setOnClickListener {
-            Stats.requestUnitySnapshot()
-            Leaderboard.requestUnityLeaderboard()
-            FriendsList.requestUnityFriends()
-        }
-
-        overlay.findViewById<Button>(R.id.btn_sync_save).setOnClickListener {
-            SaveSync.requestUnitySave()
-        }
-
         overlay.findViewById<ImageButton>(R.id.btn_hud_upgrades).setOnClickListener {
             showPanel(R.layout.panel_electricity_upgrade)
         }
@@ -151,7 +148,14 @@ class MainActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
         }
 
         overlay.findViewById<Button>(R.id.btn_nav_power).setOnClickListener {
+            // Quick tap for burst energy from active generators
+            PowerManager.clickGenerator("generator_1")
+            Stats.requestUnitySnapshot()
+        }
+        
+        overlay.findViewById<Button>(R.id.btn_nav_power).setOnLongClickListener {
             showPanel(R.layout.panel_electricity_upgrade)
+            true
         }
 
         overlay.findViewById<Button>(R.id.btn_nav_tasks).setOnClickListener {
@@ -162,14 +166,18 @@ class MainActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
 
         SaveSync.initialize(this)
 
+        window.decorView.post {
+            UnityBridge.hideUnityHud()
+            Stats.requestUnitySnapshot()
+        }
+
         Stats.addObserver(statsObserver)
         Leaderboard.addObserver(leaderboardObserver)
         FriendsList.addObserver(friendsObserver)
         Events.addObserver(eventsObserver)
         SaveSync.addListener(saveListener)
 
-        Log.d("MainActivity", "About to fetch leaderboard from API")
-        Stats.requestUnitySnapshot()
+    Log.d("MainActivity", "About to fetch leaderboard from API")
         
         // Fetch leaderboard directly from API instead of waiting for Unity
         Leaderboard.fetchBackendLeaderboard { result ->
@@ -182,7 +190,18 @@ class MainActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
             }
         }
         
-        FriendsList.requestUnityFriends()
+        // Fetch friends directly from API instead of waiting for Unity
+        Log.d("MainActivity", "About to fetch friends from API")
+        FriendsList.fetchBackendFriends { result ->
+            result.onSuccess { payload ->
+                Log.d("MainActivity", "SUCCESS: Friends fetched with ${payload.friends.size} friends")
+            }.onFailure { error ->
+                Log.e("MainActivity", "FAILED: Friends fetch error: ${error.message}", error)
+                // Fallback to Unity request if API fails
+                FriendsList.requestUnityFriends()
+            }
+        }
+        
         SaveSync.requestUnitySave()
         
         Log.d("MainActivity", "onCreate() completed")
@@ -215,6 +234,7 @@ class MainActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
             R.layout.panel_profile -> configureProfilePanel(panelView)
             R.layout.panel_profile_edit -> configureProfileEditPanel(panelView)
             R.layout.panel_leaderboard -> configureLeaderboardPanel(panelView)
+            R.layout.panel_settings -> configureSettingsPanel(panelView)
             R.layout.panel_friends_leaderboard -> configureFriendsLeaderboardPanel(panelView)
             R.layout.panel_tasks_board -> configureTasksPanel(panelView)
         }
@@ -245,6 +265,8 @@ class MainActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
         panel.findViewById<View?>(R.id.tab_electricity)?.setOnClickListener {
             showPanel(R.layout.panel_electricity_upgrade)
         }
+        
+        bindBuildingPanel(panel, latestStats)
     }
 
     private fun configureProfilePanel(panel: View) {
@@ -273,6 +295,42 @@ class MainActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
             Toast.makeText(this, "Profile details placeholder", Toast.LENGTH_SHORT).show()
         }
 
+        // Display friend code
+        val friendCode = auth.currentUser?.uid ?: "Not logged in"
+        panel.findViewById<TextView?>(R.id.text_profile_friend_code)?.text = friendCode
+
+        // Display user info
+        val user = auth.currentUser
+        panel.findViewById<TextView?>(R.id.text_profile_name)?.text = user?.displayName ?: "Player"
+        panel.findViewById<TextView?>(R.id.text_profile_email)?.text = user?.email ?: "Not logged in"
+
+        // Copy friend code button
+        panel.findViewById<Button?>(R.id.btn_copy_friend_code)?.setOnClickListener {
+            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText("Friend Code", friendCode)
+            clipboard.setPrimaryClip(clip)
+            Toast.makeText(this, getString(R.string.toast_friend_code_copied), Toast.LENGTH_SHORT).show()
+        }
+
+        // Set cosmetic tag based on stats
+        val tag = panel.findViewById<TextView?>(R.id.text_profile_tag)
+        latestStats?.let { stats ->
+            when {
+                stats.totalEnergyGenerated > 1000000.0 -> {
+                    tag?.text = "🏆 VETERAN"
+                    tag?.setBackgroundColor(0xFFFFD700.toInt())
+                }
+                stats.totalEnergyGenerated > 10000.0 -> {
+                    tag?.text = "⚡ ACTIVE"
+                    tag?.setBackgroundColor(0xFFFFC107.toInt())
+                }
+                else -> {
+                    tag?.text = "🌟 NEWBIE"
+                    tag?.setBackgroundColor(0xFF4CAF50.toInt())
+                }
+            }
+        }
+
         bindProfilePanel(panel, latestStats, latestSave)
     }
 
@@ -284,6 +342,27 @@ class MainActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
         panel.findViewById<Button?>(R.id.btn_save_profile)?.setOnClickListener {
             Toast.makeText(this, "Profile saved (placeholder)", Toast.LENGTH_SHORT).show()
             showPanel(R.layout.panel_profile)
+        }
+    }
+
+    private fun configureSettingsPanel(panel: View) {
+        // Upload save button
+        panel.findViewById<Button?>(R.id.btn_upload_save)?.setOnClickListener {
+            SaveSync.requestUnitySave()
+            Toast.makeText(this, getString(R.string.toast_save_uploaded), Toast.LENGTH_SHORT).show()
+        }
+
+        // Sync save button
+        panel.findViewById<Button?>(R.id.btn_sync_save)?.setOnClickListener {
+            Stats.requestUnitySnapshot()
+            SaveSync.requestUnitySave()
+            Toast.makeText(this, getString(R.string.toast_save_synced), Toast.LENGTH_SHORT).show()
+        }
+
+        // Display last sync time
+        val lastSyncText = panel.findViewById<TextView?>(R.id.text_last_save_sync)
+        latestSave?.let { save ->
+            lastSyncText?.text = "Last synced: ${formatTimestamp(save.timestampUtc)}"
         }
     }
 
@@ -317,12 +396,22 @@ class MainActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
     }
 
     private fun configureFriendsLeaderboardPanel(panel: View) {
+        Log.d("MainActivity", "Configuring friends leaderboard panel")
+        
         panel.findViewById<Button?>(R.id.btn_show_global)?.setOnClickListener {
             showPanel(R.layout.panel_leaderboard)
         }
 
         panel.findViewById<Button?>(R.id.btn_show_friends)?.setOnClickListener {
-            FriendsList.requestUnityFriends()
+            Log.d("MainActivity", "Refreshing friends list from backend")
+            FriendsList.fetchBackendFriends { result ->
+                result.onSuccess { payload ->
+                    Log.d("MainActivity", "SUCCESS: Friends fetched with ${payload.friends.size} entries")
+                }.onFailure { error ->
+                    Log.e("MainActivity", "FAILED: Friends fetch error: ${error.message}", error)
+                    Toast.makeText(this, "Failed to refresh friends list", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         panel.findViewById<Button?>(R.id.btn_add_friend)?.setOnClickListener {
@@ -339,12 +428,32 @@ class MainActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
                 )
                 Toast.makeText(this, getString(R.string.toast_friend_invite_sent), Toast.LENGTH_SHORT).show()
                 codeInput?.text?.clear()
+                
+                // Refresh friends list after adding
+                FriendsList.fetchBackendFriends { result ->
+                    result.onFailure { error ->
+                        Log.e("MainActivity", "Failed to refresh after adding friend: ${error.message}", error)
+                    }
+                }
             }
         }
 
         bindFriendsPanel(panel, latestFriends)
+        
+        // Fetch from backend on initial load
         if (latestFriends == null) {
-            FriendsList.requestUnityFriends()
+            Log.d("MainActivity", "No cached friends data, fetching from backend API")
+            FriendsList.fetchBackendFriends { result ->
+                result.onSuccess { payload ->
+                    Log.d("MainActivity", "Initial friends fetch successful: ${payload.friends.size} friends")
+                }.onFailure { error ->
+                    Log.e("MainActivity", "Failed to fetch initial friends: ${error.message}", error)
+                    // Fallback to Unity request if API fails
+                    FriendsList.requestUnityFriends()
+                }
+            }
+        } else {
+            Log.d("MainActivity", "Using cached friends data with ${latestFriends?.friends?.size} entries")
         }
     }
 
@@ -353,19 +462,32 @@ class MainActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
     }
 
     private fun updateHud(snapshot: UnityStatsSnapshot) {
-        textEnergyAmount.text = formatEnergy(snapshot.currentMoney)
+        val credits = when {
+            snapshot.currentMoney > 0.0 -> snapshot.currentMoney
+            snapshot.currentEnergy > 0.0 -> snapshot.currentEnergy
+            else -> snapshot.totalEnergyGenerated
+        }
+        textEnergyAmount.text = formatEnergy(credits)
+
         textEnergyPerSecond.text = getString(
             R.string.hud_energy_per_second_format,
             formatEnergy(snapshot.energyPerSecond)
         )
+
         textActiveGenerators.text = getString(
             R.string.hud_generators_format,
             snapshot.activeGenerators,
             snapshot.generatorLevelSum
         )
-        val safeSeconds = (snapshot.hoursUntilMaintenance * 3600).coerceAtLeast(0.0)
-        val safeIdle = if (safeSeconds <= 0.0) getString(R.string.timestamp_unknown) else formatDuration(safeSeconds)
+
+        val safeSeconds = when {
+            snapshot.hoursUntilMaintenance > 0.0 -> snapshot.hoursUntilMaintenance * 3600.0
+            snapshot.offlineSeconds > 0.0 -> snapshot.offlineSeconds
+            else -> 0.0
+        }
+        val safeIdle = if (safeSeconds > 0.0) formatDuration(safeSeconds) else getString(R.string.timestamp_unknown)
         textSafeIdleHours.text = getString(R.string.hud_safe_idle_format, safeIdle)
+
         updateEventBanner()
     }
 
@@ -385,6 +507,7 @@ class MainActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
         when (currentPanelLayoutId) {
             R.layout.panel_electricity_upgrade -> bindElectricityPanel(panelView, snapshot, latestSave, currentActiveEvent)
             R.layout.panel_profile -> bindProfilePanel(panelView, snapshot, latestSave)
+            R.layout.panel_building_upgrade -> bindBuildingPanel(panelView, snapshot)
         }
     }
 
@@ -462,6 +585,51 @@ class MainActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
         } ?: getString(R.string.profile_last_sync, getString(R.string.timestamp_unknown))
     }
 
+    private fun bindBuildingPanel(panel: View, stats: UnityStatsSnapshot?) {
+        val container = panel.findViewById<LinearLayout?>(R.id.list_building_upgrades)
+        container?.removeAllViews()
+
+        if (stats == null) {
+            val emptyText = TextView(this)
+            emptyText.text = "Loading generator data..."
+            emptyText.setTextColor(0xFF052E45.toInt())
+            emptyText.textSize = 14f
+            emptyText.setPadding(16, 16, 16, 16)
+            container?.addView(emptyText)
+            return
+        }
+
+        // Create upgrade rows for each potential generator (up to 4 generators in the scene)
+        val generatorIds = listOf("generator_1", "generator_2", "generator_3", "generator_4")
+        val avgLevel = if (stats.activeGenerators > 0) stats.generatorLevelSum / stats.activeGenerators else 1
+        
+        generatorIds.forEachIndexed { index, genId ->
+            val generatorView = LayoutInflater.from(this).inflate(R.layout.view_upgrade_item, container, false)
+            generatorView.findViewById<TextView?>(R.id.text_upgrade_name)?.text = "Generator ${index + 1}"
+            generatorView.findViewById<TextView?>(R.id.text_upgrade_level)?.text = "Level: ~$avgLevel"
+            
+            val estimatedOutput = (stats.energyPerSecond / stats.activeGenerators.coerceAtLeast(1)).coerceAtLeast(0.0)
+            generatorView.findViewById<TextView?>(R.id.text_upgrade_output)?.text = "~${formatEnergy(estimatedOutput)}/s"
+            
+            generatorView.findViewById<Button?>(R.id.btn_upgrade)?.apply {
+                text = "Tap to Upgrade"
+                setOnClickListener {
+                    PowerManager.upgradeGenerator(genId)
+                    Stats.requestUnitySnapshot()
+                    Toast.makeText(this@MainActivity, "Upgrading $genId", Toast.LENGTH_SHORT).show()
+                }
+            }
+            
+            // Add click listener to entire row for burst energy
+            generatorView.setOnClickListener {
+                PowerManager.clickGenerator(genId)
+                Stats.requestUnitySnapshot()
+            }
+            
+            container?.addView(generatorView)
+        }
+    }
+
     private fun renderDistrictsPanel(panel: View, stats: UnityStatsSnapshot?) {
         val container = panel.findViewById<LinearLayout?>(R.id.list_districts) ?: return
         container.removeAllViews()
@@ -506,7 +674,8 @@ class MainActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
                 getString(R.string.district_idle_time_format, idleText)
 
             row.findViewById<Button?>(R.id.btn_district_service)?.setOnClickListener {
-                sendDistrictAction("ServiceDistrict", district.id)
+                UnityBridge.sendMessageToUnity("DistrictManager", "ServiceDistrict", district.id)
+                Stats.requestUnitySnapshot()
             }
 
             val upgradeButton = row.findViewById<Button?>(R.id.btn_district_upgrade)
@@ -520,7 +689,8 @@ class MainActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
                     formatEnergy(district.nextUpgradeCost)
                 )
                 upgradeButton?.setOnClickListener {
-                    sendDistrictAction("UpgradeDistrict", district.id)
+                    UnityBridge.sendMessageToUnity("DistrictManager", "UpgradeDistrict", district.id)
+                    Stats.requestUnitySnapshot()
                 }
             }
 
@@ -563,14 +733,16 @@ class MainActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
 
     private fun bindFriendsPanel(panel: View, payload: FriendsPayload?) {
         val loading = panel.findViewById<ProgressBar?>(R.id.friends_loading)
-        val empty = panel.findViewById<TextView?>(R.id.text_friends_empty)
+        val empty = panel.findViewById<View?>(R.id.text_friends_empty)
         val listContainer = panel.findViewById<LinearLayout?>(R.id.friends_list_container)
         val lastUpdated = panel.findViewById<TextView?>(R.id.text_friends_last_updated)
 
         if (payload == null) {
+            // Show loading state while fetching
             loading?.isVisible = true
             empty?.isVisible = false
             listContainer?.isVisible = false
+            lastUpdated?.text = "Loading friends..."
             return
         }
 
@@ -579,18 +751,33 @@ class MainActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
 
         val entries = payload.friends
         if (entries.isEmpty()) {
+            // Show empty state with helpful message
             empty?.isVisible = true
             listContainer?.isVisible = false
+            Log.d("MainActivity", "Friends list is empty - showing empty state")
         } else {
+            // Show friends list
             empty?.isVisible = false
             listContainer?.isVisible = true
             listContainer?.let { renderFriendsEntries(it, entries) }
+            Log.d("MainActivity", "Displaying ${entries.size} friends")
         }
     }
 
     private fun updateFriendsPanel() {
         if (currentPanelLayoutId == R.layout.panel_friends_leaderboard) {
             currentPanelView?.let { bindFriendsPanel(it, latestFriends) }
+        }
+    }
+
+    private fun updateSettingsPanel() {
+        if (currentPanelLayoutId == R.layout.panel_settings) {
+            currentPanelView?.let { panel ->
+                val lastSyncText = panel.findViewById<TextView?>(R.id.text_last_save_sync)
+                latestSave?.let { save ->
+                    lastSyncText?.text = "Last synced: ${formatTimestamp(save.timestampUtc)}"
+                }
+            }
         }
     }
 
@@ -622,7 +809,19 @@ class MainActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
         entries.forEachIndexed { index, entry ->
             val row = LayoutInflater.from(this).inflate(R.layout.view_leaderboard_row, container, false)
             row.findViewById<TextView?>(R.id.text_rank)?.text = "#${index + 1}"
-            row.findViewById<TextView?>(R.id.text_entry_title)?.text = entry.displayName
+            
+            // Add cosmetic tag to display name based on score
+            val displayNameWithTag = buildString {
+                append(entry.displayName)
+                append(" ")
+                when {
+                    entry.score > 1000000.0 -> append("🏆")
+                    entry.score > 100000.0 -> append("⚡")
+                    else -> append("🌟")
+                }
+            }
+            
+            row.findViewById<TextView?>(R.id.text_entry_title)?.text = displayNameWithTag
             row.findViewById<TextView?>(R.id.text_entry_detail)?.text = formatEnergy(entry.score)
             val icon = row.findViewById<ImageView?>(R.id.image_entry_status)
             val iconRes = when (index) {
@@ -643,7 +842,19 @@ class MainActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
         entries.forEachIndexed { index, friend ->
             val row = LayoutInflater.from(this).inflate(R.layout.view_leaderboard_row, container, false)
             row.findViewById<TextView?>(R.id.text_rank)?.text = "#${index + 1}"
-            row.findViewById<TextView?>(R.id.text_entry_title)?.text = friend.displayName
+            
+            // Add cosmetic tag to display name based on contribution
+            val displayNameWithTag = buildString {
+                append(friend.displayName)
+                append(" ")
+                when {
+                    friend.contributionPerHour > 1000.0 -> append("🏆")
+                    friend.contributionPerHour > 100.0 -> append("⚡")
+                    else -> append("🌟")
+                }
+            }
+            
+            row.findViewById<TextView?>(R.id.text_entry_title)?.text = displayNameWithTag
             row.findViewById<TextView?>(R.id.text_entry_detail)?.text =
                 "${formatEnergy(friend.contributionPerHour)} /hr • ${formatTimestamp(friend.lastInteractionUtc)}"
             val icon = row.findViewById<ImageView?>(R.id.image_entry_status)

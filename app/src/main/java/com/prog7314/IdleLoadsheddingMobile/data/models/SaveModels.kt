@@ -2,9 +2,9 @@ package com.prog7314.IdleLoadsheddingMobile.data.models
 
 data class UnitySavePayload(
     val stats: String,
-    val generators: List<GeneratorState>,
+    val generators: List<GeneratorState>? = emptyList(),
     val timestampUtc: String,
-    val districts: List<DistrictState> = emptyList(),
+    val districts: List<DistrictState>? = emptyList(),
     val central: CentralState? = null
 ) {
     data class GeneratorState(

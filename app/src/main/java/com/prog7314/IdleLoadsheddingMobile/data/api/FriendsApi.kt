@@ -1,5 +1,6 @@
 package com.prog7314.IdleLoadsheddingMobile.data.api
 
+import com.prog7314.IdleLoadsheddingMobile.data.models.FriendResponseDto
 import com.prog7314.IdleLoadsheddingMobile.data.models.FriendsPayload
 import retrofit2.Call
 import retrofit2.http.Body
@@ -12,5 +13,5 @@ interface FriendsApi {
     fun postFriends(@Query("playerId") playerId: String?, @Body payload: FriendsPayload): Call<Void>
 
     @GET("social/friends")
-    fun fetchFriends(@Query("playerId") playerId: String?): Call<FriendsPayload>
+    fun fetchFriends(@Query("playerId") playerId: String?): Call<List<FriendResponseDto>>
 }

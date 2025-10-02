@@ -7,8 +7,11 @@ import com.google.gson.JsonSyntaxException
 import com.prog7314.IdleLoadsheddingMobile.core.BackendClient
 import com.prog7314.IdleLoadsheddingMobile.core.UnityBridge
 import com.prog7314.IdleLoadsheddingMobile.data.api.FriendsApi
+import com.prog7314.IdleLoadsheddingMobile.data.models.FriendProfile
+import com.prog7314.IdleLoadsheddingMobile.data.models.FriendResponseDto
 import com.prog7314.IdleLoadsheddingMobile.data.models.FriendSubmission
 import com.prog7314.IdleLoadsheddingMobile.data.models.FriendsPayload
+import java.time.Instant
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -74,19 +77,27 @@ object FriendsList : UnityBridge.Listener {
     }
 
     fun fetchBackendFriends(callback: (Result<FriendsPayload>) -> Unit) {
-        api.fetchFriends(currentPlayerId()).enqueue(object : Callback<FriendsPayload> {
-            override fun onResponse(call: Call<FriendsPayload>, response: Response<FriendsPayload>) {
-                val body = response.body()
-                if (response.isSuccessful && body != null) {
-                    latest = body
-                    notifyObservers(body)
-                    callback(Result.success(body))
+        api.fetchFriends(currentPlayerId()).enqueue(object : Callback<List<FriendResponseDto>> {
+            override fun onResponse(
+                call: Call<List<FriendResponseDto>>,
+                response: Response<List<FriendResponseDto>>
+            ) {
+                if (response.isSuccessful) {
+                    val friends = response.body().orEmpty().map { it.toFriendProfile() }
+                    val payload = FriendsPayload(
+                        friends = friends,
+                        timestampUtc = Instant.now().toString()
+                    )
+
+                    latest = payload
+                    notifyObservers(payload)
+                    callback(Result.success(payload))
                 } else {
                     callback(Result.failure(Exception("Failed to fetch friends: ${response.code()}")))
                 }
             }
 
-            override fun onFailure(call: Call<FriendsPayload>, t: Throwable) {
+            override fun onFailure(call: Call<List<FriendResponseDto>>, t: Throwable) {
                 callback(Result.failure(t))
             }
         })
@@ -109,6 +120,14 @@ object FriendsList : UnityBridge.Listener {
     private fun notifyObservers(payload: FriendsPayload) {
         observers.forEach { it.onFriendsUpdated(payload) }
     }
+
+    private fun FriendResponseDto.toFriendProfile(): FriendProfile = FriendProfile(
+        id = userId.toString(),
+        displayName = username,
+        isOnline = false,
+        contributionPerHour = 0.0,
+        lastInteractionUtc = addedAt
+    )
 
     private fun currentPlayerId(): String? = auth.currentUser?.uid
 }

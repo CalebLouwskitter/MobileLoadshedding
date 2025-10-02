@@ -21,4 +21,21 @@
 #-renamesourcefileattribute SourceFile
 
 # Keep the Unity bridge class and its members (called from Unity via reflection)
--keep class com.prog7314.IdleLoadsheddingMobile.unity.UnityBridge { *; }
+-keep class com.prog7314.IdleLoadsheddingMobile.core.UnityBridge { *; }
+-keep class com.prog7314.IdleLoadsheddingMobile.core.UnityBridge$Listener { *; }
+
+# Keep Unity integration classes
+-keep class com.prog7314.IdleLoadsheddingMobile.unity.** { *; }
+
+# Keep data models used for JSON serialization
+-keep class com.prog7314.IdleLoadsheddingMobile.data.models.** { *; }
+
+# Gson specific rules
+-keepattributes Signature
+-keepattributes *Annotation*
+-dontwarn sun.misc.**
+-keep class com.google.gson.** { *; }
+-keep class * implements com.google.gson.TypeAdapter
+-keep class * implements com.google.gson.TypeAdapterFactory
+-keep class * implements com.google.gson.JsonSerializer
+-keep class * implements com.google.gson.JsonDeserializer

@@ -113,7 +113,7 @@ object Stats : UnityBridge.Listener {
 			totalMoneyEarned = snapshot.totalMoneyEarned,
 			hoursUntilMaintenance = snapshot.hoursUntilMaintenance,
 			coreChargePercent = snapshot.coreChargePercent,
-			districts = snapshot.districts
+			districts = snapshot.districts.orEmpty()
 		)
 
 		api.postSnapshot(request).enqueue(object : Callback<Void> {

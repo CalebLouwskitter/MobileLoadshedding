@@ -107,8 +107,8 @@ object SaveSync : UnityBridge.Listener {
 		val request = BackendSavePayload(
 			playerId = playerId,
 			stats = payload.stats,
-			generators = payload.generators.map { BackendGeneratorState(it.id, it.level) },
-			districts = payload.districts.map { BackendDistrictState(it.id, it.level, it.efficiency) },
+			generators = payload.generators?.map { BackendGeneratorState(it.id, it.level) } ?: emptyList(),
+			districts = payload.districts?.map { BackendDistrictState(it.id, it.level, it.efficiency) } ?: emptyList(),
 			central = payload.central?.let { BackendCentralState(it.charge) },
 			timestampUtc = payload.timestampUtc
 		)

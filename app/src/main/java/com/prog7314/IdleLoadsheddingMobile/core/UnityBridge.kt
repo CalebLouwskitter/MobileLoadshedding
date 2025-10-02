@@ -24,6 +24,7 @@ object UnityBridge {
 
     private val listeners = CopyOnWriteArraySet<Listener>() //Java, 2025.
     private val mainHandler = Handler(Looper.getMainLooper()) //Android, 2025.
+    @Volatile private var unityHudVisible = true
 
     fun registerListener(l: Listener) {
         listeners.add(l)
@@ -91,6 +92,25 @@ object UnityBridge {
     // Convenience for sending JSON payloads as strings
     fun sendJsonToUnity(gameObject: String, methodName: String, json: String) {
         UnityPlayer.UnitySendMessage(gameObject, methodName, json) //Unity Technologies, 2025.
+    }
+
+    // Convenience helpers to control Unity-side HUD visibility from Android UI layer
+    fun hideUnityHud() {
+        unityHudVisible = false
+        sendMessageToUnity("AndroidUIManager", "HideDebugUIManually", "")
+    }
+
+    fun showUnityHud() {
+        unityHudVisible = true
+        sendMessageToUnity("AndroidUIManager", "ShowDebugUI", "")
+    }
+
+    fun toggleUnityHud() {
+        if (unityHudVisible) {
+            hideUnityHud()
+        } else {
+            showUnityHud()
+        }
     }
 }
 

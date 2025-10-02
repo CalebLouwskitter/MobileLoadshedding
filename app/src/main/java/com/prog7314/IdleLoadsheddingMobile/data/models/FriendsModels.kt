@@ -20,3 +20,9 @@ data class FriendSubmission(
     val isOnline: Boolean,
     val remove: Boolean
 )
+
+data class FriendResponseDto(
+    @com.google.gson.annotations.SerializedName("userId") val userId: Int,
+    @com.google.gson.annotations.SerializedName("username") val username: String,
+    @com.google.gson.annotations.SerializedName("addedAt") val addedAt: String
+)
