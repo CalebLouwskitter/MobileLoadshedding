@@ -48,34 +48,9 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/text_energy_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Energy Credits"
-                    android:textColor="#052E45"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/text_energy_per_second"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="+0.00 /s"
-                    android:textColor="#052E45"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/text_active_generators"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0 generators"
-                    android:textColor="#052E45"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/text_safe_idle_hours"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Safe idle: --"
                     android:textColor="#052E45"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -90,23 +65,18 @@
                 android:src="@drawable/ic_hud_profile" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/text_event_status"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="#260E3D57"
-            android:padding="8dp"
-            android:text="No active grid events"
-            android:textColor="#052E45"
-            android:visibility="gone" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:gravity="end|bottom"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:orientation="vertical"/>
 
             <Space
                 android:layout_width="match_parent"

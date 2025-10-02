@@ -2,83 +2,109 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:background="#F0F4FF"
+    android:background="@drawable/bg_upgrade_item"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:padding="12dp">
 
+    <!-- Icon on the left -->
+    <ImageView
+        android:id="@+id/upgrade_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:contentDescription="Storage Icon"
+        android:src="@drawable/ic_storage" />
+
+    <!-- Storage Text and Level -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
         android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/text_upgrade_name"
+            android:id="@+id/upgrade_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Storage"
-            android:textColor="#0E3D57"
+            android:textColor="#000000"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/text_upgrade_level"
+            android:id="@+id/upgrade_level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lvl. 8"
-            android:textColor="#B71C1C"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/text_upgrade_output"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="#0E3D57"
-            android:textSize="12sp" />
+            android:background="@drawable/bg_level_red"
+            android:paddingStart="8dp"
+            android:paddingTop="2dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="2dp"
+            android:text="Lvl 0"
+            android:textColor="#FFFFFF"
+            android:textSize="10sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
+    <!-- Level Counter -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/bg_level_counter"
+        android:gravity="center"
         android:orientation="horizontal"
-        android:paddingEnd="12dp">
+        android:paddingStart="4dp"
+        android:paddingTop="6dp"
+        android:paddingEnd="4dp"
+        android:paddingBottom="6dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#FFEB3B"
-            android:padding="6dp"
             android:text="x1"
-            android:textColor="#212121"
-            android:textStyle="bold" />
+            android:textColor="#000000"
+            android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/current_level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:background="#FFEB3B"
-            android:padding="6dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/bg_level_yellow"
+            android:paddingStart="8dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="4dp"
             android:text="x10"
-            android:textColor="#212121"
+            android:textColor="#000000"
+            android:textSize="12sp"
             android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:background="#FFEB3B"
-            android:padding="6dp"
-            android:text="MAX"
-            android:textColor="#212121"
-            android:textStyle="bold" />
+            android:text="Max"
+            android:textColor="#000000"
+            android:textSize="12sp" />
     </LinearLayout>
 
+    <!-- Upgrade Button -->
     <Button
-        android:id="@+id/btn_upgrade"
+        android:id="@+id/upgrade_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="R 15" />
-
+        android:layout_marginStart="8dp"
+        android:background="@drawable/bg_upgrade_button"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="10dp"
+        android:text="R 15"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 </LinearLayout>
