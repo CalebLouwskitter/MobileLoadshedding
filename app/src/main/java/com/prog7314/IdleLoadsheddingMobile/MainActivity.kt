@@ -82,6 +82,7 @@ class MainActivity : UnityPlayerGameActivity(), UnityBridge.Listener {
             R.layout.panel_profile_edit -> configureProfileEditPanel(panelView)
             R.layout.panel_leaderboard -> configureLeaderboardPanel(panelView)
             R.layout.panel_friends_leaderboard -> configureFriendsLeaderboardPanel(panelView)
+            R.layout.panel_settings -> configureSettingsPanel(panelView)
         }
     }
 
@@ -164,5 +165,11 @@ class MainActivity : UnityPlayerGameActivity(), UnityBridge.Listener {
             showPanel(R.layout.panel_leaderboard)
         }
 
+    }
+
+    private fun configureSettingsPanel(panel: View) {
+        panel.findViewById<View?>(R.id.btn_back)?.setOnClickListener {
+            showPanel(R.layout.panel_profile)
+        }
     }
 }
