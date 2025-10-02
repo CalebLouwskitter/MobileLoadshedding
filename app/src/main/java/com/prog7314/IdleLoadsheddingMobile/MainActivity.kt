@@ -3,7 +3,6 @@ package com.prog7314.IdleLoadsheddingMobile
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.TextView
@@ -23,47 +22,42 @@ class MainActivity : UnityPlayerGameActivity(), UnityBridge.Listener {
         modalContainer = overlay.findViewById(R.id.modal_container)
         modalScrim = overlay.findViewById(R.id.modal_scrim)
 
-        val layoutParams = FrameLayout.LayoutParams(
-            FrameLayout.LayoutParams.MATCH_PARENT,
-            FrameLayout.LayoutParams.MATCH_PARENT
+        addContentView(
+            overlay,
+            FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.MATCH_PARENT
+            )
         )
 
-        addContentView(overlay, layoutParams)
-
-        // Register for callbacks from Unity
         UnityBridge.registerListener(this)
-
         modalScrim.setOnClickListener { hidePanel() }
 
+        // HUD Buttons
         overlay.findViewById<ImageButton>(R.id.btn_hud_upgrades).setOnClickListener {
             showPanel(R.layout.panel_electricity_upgrade)
         }
-
         overlay.findViewById<ImageButton>(R.id.btn_hud_profile).setOnClickListener {
             showPanel(R.layout.panel_profile)
         }
 
-        overlay.findViewById<Button>(R.id.btn_nav_level_up).setOnClickListener {
+        // Bottom navigation buttons
+        overlay.findViewById<View>(R.id.btn_nav_level_up).setOnClickListener {
             showPanel(R.layout.panel_building_upgrade)
         }
-
-        overlay.findViewById<Button>(R.id.btn_nav_power).setOnClickListener {
+        overlay.findViewById<View>(R.id.btn_nav_power).setOnClickListener {
             showPanel(R.layout.panel_electricity_upgrade)
         }
-
-        overlay.findViewById<Button>(R.id.btn_nav_tasks).setOnClickListener {
+        overlay.findViewById<View>(R.id.btn_nav_tasks).setOnClickListener {
             showPanel(R.layout.panel_tasks_board)
         }
     }
 
     override fun onDestroy() {
-        if (this::modalContainer.isInitialized) {
-        }
         UnityBridge.unregisterListener(this)
         super.onDestroy()
     }
 
-    // Unity -> Android UI callbacks
     override fun onScoreUpdated(score: Int) {
         Toast.makeText(this, "Score: $score", Toast.LENGTH_SHORT).show()
     }
@@ -129,55 +123,41 @@ class MainActivity : UnityPlayerGameActivity(), UnityBridge.Listener {
     }
 
     private fun configureProfileEditPanel(panel: View) {
-        panel.findViewById<Button?>(R.id.btn_cancel_profile)?.setOnClickListener {
+        panel.findViewById<View?>(R.id.btn_cancel_profile)?.setOnClickListener {
             showPanel(R.layout.panel_profile)
         }
 
-        panel.findViewById<Button?>(R.id.btn_save_profile)?.setOnClickListener {
+        panel.findViewById<View?>(R.id.btn_save_profile)?.setOnClickListener {
             UnityBridge.showToast(this, "Profile saved (placeholder)")
             showPanel(R.layout.panel_profile)
         }
     }
 
     private fun configureLeaderboardPanel(panel: View) {
-        // Friends / Global tabs
         panel.findViewById<TextView?>(R.id.btn_tab_friends)?.setOnClickListener {
-            showPanel(R.layout.panel_friends_leaderboard) // Switch to Friends leaderboard
+            showPanel(R.layout.panel_friends_leaderboard)
         }
-
         panel.findViewById<TextView?>(R.id.btn_tab_global)?.setOnClickListener {
-            UnityBridge.showToast(this, "Showing global leaderboard") // Already on global
+            UnityBridge.showToast(this, "Showing global leaderboard")
         }
 
-        // Top tabs (Profile / Leaderboard)
         panel.findViewById<TextView?>(R.id.tab_profile)?.setOnClickListener {
             showPanel(R.layout.panel_profile)
         }
 
         panel.findViewById<TextView?>(R.id.tab_leaderboard)?.setOnClickListener {
-            // Already on leaderboard, optional toast
             UnityBridge.showToast(this, "Already on Leaderboard")
-        }
-
-        // Close button
-        panel.findViewById<View?>(R.id.close_button)?.setOnClickListener {
-            hidePanel()
         }
     }
 
-
-
     private fun configureFriendsLeaderboardPanel(panel: View) {
-        panel.findViewById<Button?>(R.id.btn_show_global)?.setOnClickListener {
+        // Friends/Global toggle
+        panel.findViewById<TextView?>(R.id.btn_tab_friends)?.setOnClickListener {
+            UnityBridge.showToast(this, "Already on Friends")
+        }
+        panel.findViewById<TextView?>(R.id.btn_tab_global)?.setOnClickListener {
             showPanel(R.layout.panel_leaderboard)
         }
 
-        panel.findViewById<Button?>(R.id.btn_show_friends)?.setOnClickListener {
-            UnityBridge.showToast(this, "Showing friends leaderboard")
-        }
-
-        panel.findViewById<Button?>(R.id.btn_add_friend)?.setOnClickListener {
-            UnityBridge.showToast(this, "Friend invite sent (placeholder)")
-        }
     }
 }
