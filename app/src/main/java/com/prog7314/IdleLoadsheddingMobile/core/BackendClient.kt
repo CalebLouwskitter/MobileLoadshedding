@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory //Square, 2025.
  * BackendClient configures and provides the Retrofit instance for API communication.
  */
 internal object BackendClient { //Square, 2025.
-    private const val DEFAULT_BASE_URL = "http://10.0.2.2:5001/"
+    private const val DEFAULT_BASE_URL = "http://idle-loadshedding-api-7711.southafricanorth.azurecontainer.io:8080/api/"
 
     private val baseUrl: String
         get() = BuildConfig.BACKEND_BASE_URL.takeIf { it.isNotBlank() } ?: DEFAULT_BASE_URL //Android, 2025.
