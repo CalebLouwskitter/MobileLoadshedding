@@ -5,5 +5,7 @@
         <domain includeSubdomains="true">10.0.2.2</domain>
         <domain includeSubdomains="true">localhost</domain>
         <domain includeSubdomains="true">127.0.0.1</domain>
+        <!-- Allow cleartext HTTP for Azure Container Instance (temporary - upgrade to HTTPS in production) -->
+        <domain includeSubdomains="true">azurecontainer.io</domain>
     </domain-config>
 </network-security-config>
