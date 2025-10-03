@@ -20,7 +20,7 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField("String", "BACKEND_BASE_URL", "\"http://10.0.2.2:5001/api/\"")
+            buildConfigField("String", "BACKEND_BASE_URL", "\"http://idle-loadshedding-api-7711.southafricanorth.azurecontainer.io:8080/api/\"")
         }
         release {
             isMinifyEnabled = false
@@ -28,7 +28,8 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "BACKEND_BASE_URL", "\"https://api.idleloadshed.example/\"")
+            // Azure hosted backend in South Africa
+            buildConfigField("String", "BACKEND_BASE_URL", "\"http://idle-loadshedding-api-7711.southafricanorth.azurecontainer.io:8080/api/\"")
         }
     }
     compileOptions {
