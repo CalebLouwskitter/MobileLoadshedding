@@ -274,24 +274,24 @@ class MainActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
             showPanel(R.layout.panel_leaderboard)
         }
 
-        panel.findViewById<Button?>(R.id.btn_profile_edit)?.setOnClickListener {
+        panel.findViewById<View?>(R.id.btn_profile_edit)?.setOnClickListener {
             showPanel(R.layout.panel_profile_edit)
         }
 
-        panel.findViewById<Button?>(R.id.btn_profile_settings)?.setOnClickListener {
+        panel.findViewById<View?>(R.id.btn_profile_settings)?.setOnClickListener {
             showPanel(R.layout.panel_settings)
         }
 
-        panel.findViewById<Button?>(R.id.btn_profile_friends)?.setOnClickListener {
+        panel.findViewById<View?>(R.id.btn_profile_friends)?.setOnClickListener {
             showPanel(R.layout.panel_friends_leaderboard)
         }
 
-        panel.findViewById<Button?>(R.id.btn_profile_logout)?.setOnClickListener {
+        panel.findViewById<View?>(R.id.btn_profile_logout)?.setOnClickListener {
             Toast.makeText(this, getString(R.string.toast_logout_placeholder), Toast.LENGTH_SHORT).show()
             hidePanel()
         }
 
-        panel.findViewById<Button?>(R.id.btn_profile_details)?.setOnClickListener {
+        panel.findViewById<View?>(R.id.btn_profile_details)?.setOnClickListener {
             Toast.makeText(this, "Profile details placeholder", Toast.LENGTH_SHORT).show()
         }
 
@@ -369,11 +369,11 @@ class MainActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
     private fun configureLeaderboardPanel(panel: View) {
         Log.d("MainActivity", "Configuring leaderboard panel")
         
-        panel.findViewById<Button?>(R.id.btn_tab_friends)?.setOnClickListener {
+        panel.findViewById<View?>(R.id.btn_tab_friends)?.setOnClickListener {
             showPanel(R.layout.panel_friends_leaderboard)
         }
 
-        panel.findViewById<Button?>(R.id.btn_tab_global)?.setOnClickListener {
+        panel.findViewById<View?>(R.id.btn_tab_global)?.setOnClickListener {
             Log.d("MainActivity", "Global tab clicked - fetching from API")
             Leaderboard.fetchBackendLeaderboard { result ->
                 result.onFailure { error ->

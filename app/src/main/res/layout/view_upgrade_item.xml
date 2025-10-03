@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:background="#F0F4FF"
+    android:background="@drawable/bg_upgrade_item"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:padding="12dp">
 
+    <!-- Left side: Name, Level, Output -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -18,67 +18,45 @@
             android:id="@+id/text_upgrade_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Storage"
-            android:textColor="#0E3D57"
+            android:text="Generator 1"
+            android:textColor="#000000"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/text_upgrade_level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lvl. 8"
-            android:textColor="#B71C1C"
+            android:layout_marginTop="2dp"
+            android:text="Level: 1"
+            android:textColor="#666666"
             android:textSize="12sp" />
 
         <TextView
             android:id="@+id/text_upgrade_output"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             android:text=""
-            android:textColor="#0E3D57"
-            android:textSize="12sp" />
+            android:textColor="#666666"
+            android:textSize="11sp" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingEnd="12dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#FFEB3B"
-            android:padding="6dp"
-            android:text="x1"
-            android:textColor="#212121"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:background="#FFEB3B"
-            android:padding="6dp"
-            android:text="x10"
-            android:textColor="#212121"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:background="#FFEB3B"
-            android:padding="6dp"
-            android:text="MAX"
-            android:textColor="#212121"
-            android:textStyle="bold" />
-    </LinearLayout>
-
+    <!-- Right side: Upgrade Button -->
     <Button
         android:id="@+id/btn_upgrade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="R 15" />
-
+        android:layout_marginStart="12dp"
+        android:background="@drawable/bg_upgrade_button"
+        android:minWidth="100dp"
+        android:paddingStart="16dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="10dp"
+        android:text="Tap to Upgrade"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        android:textStyle="bold" />
 </LinearLayout>
