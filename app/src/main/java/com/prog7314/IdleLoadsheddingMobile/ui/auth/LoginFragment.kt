@@ -5,7 +5,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.prog7314.IdleLoadsheddingMobile.R
 import com.prog7314.IdleLoadsheddingMobile.databinding.FragmentLoginBinding
 import kotlinx.coroutines.launch
@@ -27,7 +29,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         binding.buttonLogin.setOnClickListener { onLoginClicked() }
         binding.buttonContinueGoogle.setOnClickListener { onGoogleSignInClicked() }
         binding.textForgotPassword.setOnClickListener { onForgotPasswordClicked() }
-        binding.checkboxRememberMe.setOnCheckedChangeListener { _, isChecked -> onRememberMeChanged(isChecked) }
+        binding.checkboxRememberMe.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (buttonView.isPressed) {
+                onRememberMeChanged(isChecked)
+            }
+        }
 
         observeViewModel()
     }
@@ -39,19 +45,39 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private fun observeViewModel() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.authenticationState.collect { state ->
-                when (state) {
-                    is AuthenticationState.Success -> {
-                        Toast.makeText(context, "Login successful!", Toast.LENGTH_SHORT).show()
-                        (activity as? AuthActivity)?.onAuthenticationSuccess()
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.authenticationState.collect { state ->
+                        when (state) {
+                            is AuthenticationState.Success -> {
+                                Toast.makeText(context, "Login successful!", Toast.LENGTH_SHORT).show()
+                                (activity as? AuthActivity)?.onAuthenticationSuccess()
+                            }
+                            is AuthenticationState.Error -> {
+                                Toast.makeText(context, state.message, Toast.LENGTH_LONG).show()
+                            }
+                            is AuthenticationState.Loading -> {
+                                // TODO: Show a loading indicator
+                            }
+                            else -> {}
+                        }
                     }
-                    is AuthenticationState.Error -> {
-                        Toast.makeText(context, state.message, Toast.LENGTH_LONG).show()
+                }
+                launch {
+                    viewModel.rememberMe.collect { remember ->
+                        if (binding.checkboxRememberMe.isChecked != remember) {
+                            binding.checkboxRememberMe.isChecked = remember
+                        }
                     }
-                    is AuthenticationState.Loading -> {
-                        // TODO: Show a loading indicator
+                }
+                launch {
+                    viewModel.rememberedEmail.collect { savedEmail ->
+                        val currentEmail = binding.editEmail.text?.toString().orEmpty()
+                        if (savedEmail.isNotEmpty() && currentEmail.isEmpty()) {
+                            binding.editEmail.setText(savedEmail)
+                            binding.editEmail.setSelection(savedEmail.length)
+                        }
                     }
-                    else -> {}
                 }
             }
         }
@@ -67,9 +93,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private fun onGoogleSignInClicked() {
         googleSignInHelper.initiateSignIn(
             activity = requireActivity(),
-            onSuccess = {
-                Toast.makeText(context, "Google Sign-In Successful!", Toast.LENGTH_SHORT).show()
-                (activity as? AuthActivity)?.onAuthenticationSuccess()
+            onSuccess = { user ->
+                viewModel.onExternalSignInSuccess(user.email)
             },
             onFailure = { errorMessage ->
                 Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()

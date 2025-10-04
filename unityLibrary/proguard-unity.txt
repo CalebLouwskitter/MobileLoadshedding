@@ -2,8 +2,6 @@
 -keep class com.unity3d.player.* { *; }
 -keep interface com.unity3d.player.IUnityPlayerLifecycleEvents { *; }
 -keep class org.fmod.* { *; }
--keep class com.google.androidgamesdk.ChoreographerCallback { *; }
--keep class com.google.androidgamesdk.SwappyDisplayManager { *; }
 -keep class androidx.core.graphics.Insets** { *; }
 -keep class androidx.core.view.WindowInsetsCompat** { *; }
 -keep class com.google.android.games.paddleboat.** { *; }

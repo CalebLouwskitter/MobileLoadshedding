@@ -1,10 +1,10 @@
 {
   "runtimeOptions": {
-    "tfm": "net7.0",
+    "tfm": "net8.0",
     "includedFrameworks": [
       {
         "name": "Microsoft.NETCore.App",
-        "version": "7.0.13"
+        "version": "8.0.4"
       }
     ],
     "configProperties": {
@@ -12,6 +12,7 @@
       "System.Globalization.Invariant": true,
       "System.Globalization.PredefinedCulturesOnly": true,
       "System.Reflection.Metadata.MetadataUpdater.IsSupported": false,
+      "System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization": false,
       "System.Runtime.TieredCompilation.QuickJit": false
     }
   }

@@ -35,6 +35,20 @@ class UnityBridge private constructor() {
         @JvmStatic
         fun sendJsonToUnity(gameObject: String, methodName: String, json: String) =
             CoreUnityBridge.sendJsonToUnity(gameObject, methodName, json)
+
+        @JvmStatic
+        fun notifyEnergyTap(amountString: String) = CoreUnityBridge.notifyEnergyTap(amountString)
+
+        @JvmStatic
+        fun notifyEnergyBurst(amountString: String) = CoreUnityBridge.notifyEnergyBurst(amountString)
+
+        @JvmStatic
+        fun registerListener(listener: CoreUnityBridge.Listener) =
+            CoreUnityBridge.registerListener(listener)
+
+        @JvmStatic
+        fun unregisterListener(listener: CoreUnityBridge.Listener) =
+            CoreUnityBridge.unregisterListener(listener)
     }
 }
 

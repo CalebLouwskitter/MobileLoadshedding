@@ -10,20 +10,24 @@ import com.prog7314.IdleLoadsheddingMobile.data.api.StatsApi
 import com.prog7314.IdleLoadsheddingMobile.data.models.BackendStatsSnapshot
 import com.prog7314.IdleLoadsheddingMobile.data.models.BackendStatsSummary
 import com.prog7314.IdleLoadsheddingMobile.data.models.UnityStatsSnapshot
+import com.prog7314.IdleLoadsheddingMobile.utils.TapTracker
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.concurrent.CopyOnWriteArraySet
 
-object Stats : UnityBridge.Listener {
+object Stats : UnityBridge.Listener, TapTracker.TapDetectionListener {
 
 	private const val TAG = "Stats"
 	private val api: StatsApi = BackendClient.create()
 	private val gson = Gson()
 	private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+	private val tapTracker = TapTracker()
 
 	interface Observer {
 		fun onStatsUpdated(snapshot: UnityStatsSnapshot)
+		fun onEnergyTapped(amount: Double) {}
+		fun onEnergyBurst(amount: Double) {}
 	}
 
 	private val observers = CopyOnWriteArraySet<Observer>()
@@ -34,9 +38,13 @@ object Stats : UnityBridge.Listener {
 
 	init {
 		UnityBridge.registerListener(this)
+		tapTracker.addListener(this)
 	}
 
 	override fun onStatsUpdated(json: String) {
+		Log.d(TAG, "=== STATS UPDATE RECEIVED ===")
+		Log.d(TAG, "JSON: $json")
+		
 		val snapshot = try {
 			gson.fromJson(json, UnityStatsSnapshot::class.java)
 		} catch (ex: JsonSyntaxException) {
@@ -45,10 +53,45 @@ object Stats : UnityBridge.Listener {
 		}
 
 		if (snapshot != null) {
+			Log.d(TAG, "Parsed snapshot: currentEnergy=${snapshot.currentEnergy}, totalEnergy=${snapshot.totalEnergyGenerated}")
+			
+			// Analyze for tap detection before updating
+			tapTracker.analyzeStatsUpdate(snapshot)
+			
 			latestSnapshot = snapshot
 			notifyObservers(snapshot)
 			postSnapshot(snapshot)
 		}
+	}
+
+	override fun onEnergyTapped(amount: Double) {
+		Log.d(TAG, "Energy tapped: $amount")
+		observers.forEach { it.onEnergyTapped(amount) }
+		// Request immediate stats update from Unity after tap
+		requestUnitySnapshot()
+	}
+
+	override fun onEnergyBurst(amount: Double) {
+		Log.d(TAG, "Energy burst: $amount")
+		observers.forEach { it.onEnergyBurst(amount) }
+		// Request immediate stats update from Unity after burst
+		requestUnitySnapshot()
+	}
+
+	// TapTracker.TapDetectionListener implementations
+	override fun onTapDetected(amount: Double, totalTaps: Int) {
+		Log.d(TAG, "Tap detected by tracker: amount=$amount, total=$totalTaps")
+		observers.forEach { it.onEnergyTapped(amount) }
+	}
+
+	override fun onBurstDetected(amount: Double) {
+		Log.d(TAG, "Burst detected by tracker: $amount")
+		observers.forEach { it.onEnergyBurst(amount) }
+	}
+
+	override fun onRapidEnergyIncrease(increase: Double) {
+		Log.d(TAG, "Rapid energy increase detected: $increase")
+		// Could be used for additional UI feedback if needed
 	}
 
 	fun addObserver(observer: Observer) {
@@ -90,7 +133,13 @@ object Stats : UnityBridge.Listener {
 
 	fun shutdown() {
 		UnityBridge.unregisterListener(this)
+		tapTracker.removeListener(this)
 	}
+
+	// Helper methods to access tap tracking data
+	fun getTotalTapCount(): Int = tapTracker.getTotalTapCount()
+	
+	fun resetTapCounter() = tapTracker.reset()
 
 	private fun postSnapshot(snapshot: UnityStatsSnapshot) {
 		val playerId = currentPlayerId()

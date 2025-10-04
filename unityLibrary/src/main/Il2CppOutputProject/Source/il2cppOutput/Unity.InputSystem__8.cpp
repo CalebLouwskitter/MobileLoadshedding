@@ -27080,7 +27080,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t InputEventPtr_GetHashCode_m97B532D8E6
 {
 	{
 		InputEvent_t10F727342D1A79DCFC06529C203BB61C194AEBC5* L_0 = __this->___m_EventPtr;
-		return ((int32_t)((int64_t)(uint64_t)(intptr_t)L_0));
+		return ((int32_t)((int64_t)(uint64_t)((uintptr_t)(intptr_t)L_0)));
 	}
 }
 IL2CPP_EXTERN_C  int32_t InputEventPtr_GetHashCode_m97B532D8E6CD524F78323A2F079F1267DB296D1E_AdjustorThunk (RuntimeObject* __this, const RuntimeMethod* method)
@@ -29766,7 +29766,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void InputEventTrace_set_m_EventBuffer_m9E277
 {
 	{
 		uint8_t* L_0 = ___0_value;
-		__this->___m_EventBufferStorage = ((int64_t)(uint64_t)(intptr_t)L_0);
+		__this->___m_EventBufferStorage = ((int64_t)(uint64_t)((uintptr_t)(intptr_t)L_0));
 		return;
 	}
 }
@@ -29781,7 +29781,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void InputEventTrace_set_m_EventBufferHead_m1
 {
 	{
 		uint8_t* L_0 = ___0_value;
-		__this->___m_EventBufferHeadStorage = ((int64_t)(uint64_t)(intptr_t)L_0);
+		__this->___m_EventBufferHeadStorage = ((int64_t)(uint64_t)((uintptr_t)(intptr_t)L_0));
 		return;
 	}
 }
@@ -29796,7 +29796,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void InputEventTrace_set_m_EventBufferTail_mB
 {
 	{
 		uint8_t* L_0 = ___0_value;
-		__this->___m_EventBufferTailStorage = ((int64_t)(uint64_t)(intptr_t)L_0);
+		__this->___m_EventBufferTailStorage = ((int64_t)(uint64_t)((uintptr_t)(intptr_t)L_0));
 		return;
 	}
 }

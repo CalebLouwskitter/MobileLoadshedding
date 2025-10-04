@@ -3,6 +3,7 @@ package com.prog7314.IdleLoadsheddingMobile.core
 import android.content.Context //Android, 2025.
 import android.os.Handler //Android, 2025.
 import android.os.Looper //Android, 2025.
+import android.util.Log //Android, 2025.
 import android.widget.Toast //Android, 2025.
 import com.unity3d.player.UnityPlayer //Unity Technologies, 2025.
 import java.util.concurrent.CopyOnWriteArraySet //Java, 2025.
@@ -12,6 +13,8 @@ import java.util.concurrent.CopyOnWriteArraySet //Java, 2025.
  */
 object UnityBridge {
 
+    private const val TAG = "UnityBridge"
+
     // Listener for events coming from Unity (C# -> Android UI)
     interface Listener {
         fun onScoreUpdated(score: Int) {}
@@ -20,6 +23,8 @@ object UnityBridge {
         fun onSaveSynced(json: String) {}
         fun onLeaderboardUpdated(json: String) {}
         fun onFriendsUpdated(json: String) {}
+        fun onEnergyTapped(amount: Double) {}
+        fun onEnergyBurst(amount: Double) {}
     }
 
     private val listeners = CopyOnWriteArraySet<Listener>() //Java, 2025.
@@ -37,6 +42,7 @@ object UnityBridge {
     // Called by Unity C# via: new AndroidJavaClass("com.prog7314.IdleLoadsheddingMobile.core.UnityBridge").CallStatic("updateScore", scoreString)
     @JvmStatic //Kotlin, 2025.
     fun updateScore(score: String) {
+        markUnityReady()
         val value = score.toIntOrNull() ?: return
         mainHandler.post { //Android, 2025.
             listeners.forEach { it.onScoreUpdated(value) }
@@ -46,6 +52,7 @@ object UnityBridge {
     // Called by Unity C# via: new AndroidJavaClass("com.prog7314.IdleLoadsheddingMobile.core.UnityBridge").CallStatic("notifyGameEvent", evt)
     @JvmStatic //Kotlin, 2025.
     fun notifyGameEvent(event: String) {
+        markUnityReady()
         mainHandler.post { //Android, 2025.
             listeners.forEach { it.onGameEvent(event) }
         }
@@ -53,6 +60,7 @@ object UnityBridge {
 
     @JvmStatic //Kotlin, 2025.
     fun updateStats(statsJson: String) {
+        markUnityReady()
         mainHandler.post { //Android, 2025.
             listeners.forEach { it.onStatsUpdated(statsJson) }
         }
@@ -60,6 +68,7 @@ object UnityBridge {
 
     @JvmStatic //Kotlin, 2025.
     fun syncSaveData(saveJson: String) {
+        markUnityReady()
         mainHandler.post { //Android, 2025.
             listeners.forEach { it.onSaveSynced(saveJson) }
         }
@@ -67,6 +76,7 @@ object UnityBridge {
 
     @JvmStatic //Kotlin, 2025.
     fun updateLeaderboard(json: String) {
+        markUnityReady()
         mainHandler.post { //Android, 2025.
             listeners.forEach { it.onLeaderboardUpdated(json) }
         }
@@ -74,8 +84,29 @@ object UnityBridge {
 
     @JvmStatic //Kotlin, 2025.
     fun updateFriends(json: String) {
+        markUnityReady()
         mainHandler.post { //Android, 2025.
             listeners.forEach { it.onFriendsUpdated(json) }
+        }
+    }
+
+    // Called by Unity C# when energy tap occurs
+    @JvmStatic //Kotlin, 2025.
+    fun notifyEnergyTap(amountString: String) {
+        markUnityReady()
+        val amount = amountString.toDoubleOrNull() ?: return
+        mainHandler.post { //Android, 2025.
+            listeners.forEach { it.onEnergyTapped(amount) }
+        }
+    }
+
+    // Called by Unity C# when burst energy is added
+    @JvmStatic //Kotlin, 2025.
+    fun notifyEnergyBurst(amountString: String) {
+        markUnityReady()
+        val amount = amountString.toDoubleOrNull() ?: return
+        mainHandler.post { //Android, 2025.
+            listeners.forEach { it.onEnergyBurst(amount) }
         }
     }
 
@@ -86,12 +117,12 @@ object UnityBridge {
 
     // Android UI -> Unity (Kotlin -> C# MonoBehaviour method with one string parameter)
     fun sendMessageToUnity(gameObject: String, methodName: String, message: String) {
-        UnityPlayer.UnitySendMessage(gameObject, methodName, message) //Unity Technologies, 2025.
+        dispatchUnityMessage(gameObject, methodName, message)
     }
 
     // Convenience for sending JSON payloads as strings
     fun sendJsonToUnity(gameObject: String, methodName: String, json: String) {
-        UnityPlayer.UnitySendMessage(gameObject, methodName, json) //Unity Technologies, 2025.
+        dispatchUnityMessage(gameObject, methodName, json)
     }
 
     // Convenience helpers to control Unity-side HUD visibility from Android UI layer
@@ -111,6 +142,53 @@ object UnityBridge {
         } else {
             showUnityHud()
         }
+    }
+
+    private fun dispatchUnityMessage(gameObject: String, methodName: String, payload: String) {
+        val activity = UnityPlayer.currentActivity
+        val runnable = Runnable {
+            val targets = buildTargetList(gameObject)
+            var delivered = false
+            var lastError: Throwable? = null
+
+            for (target in targets) {
+                try {
+                    UnityPlayer.UnitySendMessage(target, methodName, payload)
+                    if (target != gameObject) {
+                        Log.d(TAG, "Routed Unity message to fallback target '$target' for method '$methodName'")
+                    }
+                    delivered = true
+                    break
+                } catch (ex: Throwable) {
+                    lastError = ex
+                }
+            }
+
+            if (!delivered) {
+                Log.w(TAG, "Failed to send message to Unity object '$gameObject.$methodName'", lastError)
+            }
+        }
+
+        if (activity != null) {
+            activity.runOnUiThread(runnable)
+        } else {
+            mainHandler.post(runnable)
+        }
+    }
+
+    private fun buildTargetList(primary: String): List<String> {
+        // Unity clones instantiated prefabs with "(Clone)" suffix; try both names automatically.
+        return if (primary.endsWith("(Clone)")) {
+            listOf(primary)
+        } else {
+            listOf(primary, "$primary(Clone)")
+        }
+    }
+
+    @Synchronized
+    private fun markUnityReady() {
+        // Receiving a callback from Unity confirms the player is live. Future enhancements
+        // can hook into this if we need to defer Android->Unity messages until ready.
     }
 }
 

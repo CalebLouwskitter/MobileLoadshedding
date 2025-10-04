@@ -6192,7 +6192,7 @@ IL_004a:
 		uint8_t* L_9 = ___0_pointer;
 		int64_t L_10 = ___2_capacity;
 		uint8_t* L_11 = ___0_pointer;
-		if ((!(((uintptr_t)((uintptr_t)((int64_t)il2cpp_codegen_add(((int64_t)(uint64_t)(intptr_t)L_9), L_10)))) < ((uintptr_t)L_11))))
+		if ((!(((uintptr_t)((uintptr_t)((int64_t)il2cpp_codegen_add(((int64_t)(uint64_t)((uintptr_t)(intptr_t)L_9)), L_10)))) < ((uintptr_t)L_11))))
 		{
 			goto IL_0062;
 		}

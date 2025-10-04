@@ -4,6 +4,26 @@
         <name>Unity.IL2CPP.Api.Output</name>
     </assembly>
     <members>
+        <member name="T:Unity.IL2CPP.Api.Output.Analytics.Constants">
+            <summary>
+            Constants related to il2cpp analytics output
+            </summary>
+        </member>
+        <member name="F:Unity.IL2CPP.Api.Output.Analytics.Constants.DataTableName">
+            <summary>
+            The name of the table
+            </summary>
+        </member>
+        <member name="T:Unity.IL2CPP.Api.Output.Analytics.Il2CppAnalyticsOutput">
+            <summary>
+            The type of the serialized il2cpp analytics output.
+            </summary>
+        </member>
+        <member name="P:Unity.IL2CPP.Api.Output.Analytics.Il2CppAnalyticsOutput.DataTable">
+            <summary>
+            The table that will be uploaded to the analytics server
+            </summary>
+        </member>
         <member name="T:Unity.IL2CPP.Api.Output.Analytics.Il2CppDataTable">
             <summary>
             Analytics data from il2cpp.exe

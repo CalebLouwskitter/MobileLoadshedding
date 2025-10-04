@@ -139,5 +139,6 @@ namespace Unity
         size_t _GetKeyEventSizeImpl() const;
 
         bool _GetWindowInsetsImpl(Unity::InsetsType insetsType, ARect* outRect) const;
+        void _ProcessApplicationCommandsForErrorDialogImpl();
     };
 }

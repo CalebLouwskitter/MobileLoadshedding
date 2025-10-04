@@ -1,6 +1,7 @@
 package com.prog7314.IdleLoadsheddingMobile.unity
 
 import android.util.Log
+import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import com.prog7314.IdleLoadsheddingMobile.core.BackendClient
@@ -21,12 +22,16 @@ object Leaderboard : UnityBridge.Listener {
 
 	private val gson = Gson()
 	private val api: LeaderboardApi = BackendClient.create()
+	private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
 	interface Observer {
 		fun onLeaderboardUpdated(payload: UnityLeaderboardPayload)
 	}
 
 	private val observers = CopyOnWriteArraySet<Observer>()
+
+	@Volatile
+	private var lastSubmittedScore: Double? = null
 
 	@Volatile
 	var latest: UnityLeaderboardPayload? = null
@@ -116,15 +121,53 @@ object Leaderboard : UnityBridge.Listener {
 	}
 
 	private fun postLeaderboard(payload: UnityLeaderboardPayload) {
-		api.postLeaderboard(payload).enqueue(object : Callback<Void> {
+		val user = auth.currentUser ?: run {
+			Log.d(TAG, "Skipping backend leaderboard sync - no authenticated user")
+			return
+		}
+
+		val playerEntry = payload.entries.firstOrNull { it.playerId == user.uid }
+			?: payload.entries.firstOrNull { entry ->
+				val displayName = user.displayName
+				!displayName.isNullOrBlank() && entry.displayName.equals(displayName, ignoreCase = true)
+			}
+
+		if (playerEntry == null) {
+			Log.d(TAG, "No leaderboard entry found for user ${user.uid}")
+			return
+		}
+
+		val previousScore = lastSubmittedScore
+		if (previousScore != null && previousScore >= playerEntry.score) {
+			Log.d(TAG, "Skipping leaderboard submission - score ${playerEntry.score} not higher than $previousScore")
+			return
+		}
+
+		val preferredDisplayName = when {
+			playerEntry.displayName.isNotBlank() -> playerEntry.displayName
+			!user.displayName.isNullOrBlank() -> user.displayName!!
+			!user.email.isNullOrBlank() -> user.email!!
+			else -> "Player"
+		}
+
+		val submission = LeaderboardSubmission(
+			playerId = user.uid,
+			displayName = preferredDisplayName,
+			score = playerEntry.score
+		)
+
+		api.submitScore(submission).enqueue(object : Callback<Void> {
 			override fun onResponse(call: Call<Void>, response: Response<Void>) {
-				if (!response.isSuccessful) {
-					Log.w(TAG, "Failed to sync leaderboard: ${response.code()}")
+				if (response.isSuccessful) {
+					lastSubmittedScore = playerEntry.score
+					Log.d(TAG, "Leaderboard score submitted successfully")
+				} else {
+					Log.w(TAG, "Failed to submit leaderboard score: ${response.code()}")
 				}
 			}
 
 			override fun onFailure(call: Call<Void>, t: Throwable) {
-				Log.e(TAG, "Network error syncing leaderboard", t)
+				Log.e(TAG, "Network error submitting leaderboard score", t)
 			}
 		})
 	}

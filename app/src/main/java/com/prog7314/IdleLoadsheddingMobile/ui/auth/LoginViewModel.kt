@@ -1,18 +1,35 @@
 package com.prog7314.IdleLoadsheddingMobile.ui.auth
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
+import com.prog7314.IdleLoadsheddingMobile.auth.AuthPreferences
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val authPreferences = AuthPreferences(application)
 
     private val _authenticationState = MutableStateFlow<AuthenticationState>(AuthenticationState.Idle)
     val authenticationState = _authenticationState.asStateFlow()
+
+    val rememberMe = authPreferences.rememberMe.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.Eagerly,
+        initialValue = false
+    )
+
+    val rememberedEmail = authPreferences.rememberedEmail.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.Eagerly,
+        initialValue = ""
+    )
 
     fun signIn(email: String, password: String) {
         if (email.isEmpty() || password.isEmpty()) {
@@ -25,6 +42,13 @@ class LoginViewModel : ViewModel() {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
+                        viewModelScope.launch {
+                            if (rememberMe.value) {
+                                authPreferences.setRememberedEmail(email)
+                            } else {
+                                authPreferences.clearRememberedEmail()
+                            }
+                        }
                         _authenticationState.value = AuthenticationState.Success
                     } else {
                         _authenticationState.value = AuthenticationState.Error(
@@ -59,7 +83,20 @@ class LoginViewModel : ViewModel() {
     }
 
     fun setRememberMe(remember: Boolean) {
-        // TODO: Persist remember-me preference when local storage layer is available.
+        viewModelScope.launch {
+            authPreferences.setRememberMe(remember)
+        }
+    }
+
+    fun onExternalSignInSuccess(email: String?) {
+        viewModelScope.launch {
+            if (rememberMe.value && !email.isNullOrBlank()) {
+                authPreferences.setRememberedEmail(email)
+            } else if (!rememberMe.value) {
+                authPreferences.clearRememberedEmail()
+            }
+        }
+        _authenticationState.value = AuthenticationState.Success
     }
 }
 

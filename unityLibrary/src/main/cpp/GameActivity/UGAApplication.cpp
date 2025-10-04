@@ -13,6 +13,7 @@ static Unity::UnityApplication* s_Instance;
 
 Unity::UnityInitializePtr Unity::UnityApplication::UnityInitialize = nullptr;
 Unity::UnityShutdownPtr Unity::UnityApplication::UnityShutdown = nullptr;
+void ErrorLoop(struct android_app* app);
 
 Unity::UnityApplication::UnityApplication(android_app* instance)
     : m_AndroidAppInstance(instance)
@@ -211,6 +212,11 @@ bool Unity::UnityApplication::_GetWindowInsetsImpl(Unity::InsetsType insetType, 
 
      GameActivity_getWindowInsets(m_AndroidAppInstance->activity, type, outRect);
      return true;
+}
+
+void Unity::UnityApplication::_ProcessApplicationCommandsForErrorDialogImpl()
+{
+    ErrorLoop(m_AndroidAppInstance);
 }
 
 bool Unity::UnityApplication::IsAnimating()  const

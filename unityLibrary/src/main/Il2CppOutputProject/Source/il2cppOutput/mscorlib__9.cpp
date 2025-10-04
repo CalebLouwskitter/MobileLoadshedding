@@ -15405,7 +15405,7 @@ IL_0094:
 	}
 	{
 		Il2CppChar* L_31 = ___0_chars;
-		if (((int64_t)(((int64_t)(uint64_t)(intptr_t)L_31)&((int64_t)7))))
+		if (((int64_t)(((int64_t)(uint64_t)((uintptr_t)(intptr_t)L_31))&((int64_t)7))))
 		{
 			goto IL_0147;
 		}
@@ -16035,14 +16035,14 @@ IL_0086:
 	}
 	{
 		Il2CppChar* L_29 = ___0_chars;
-		if (((int64_t)(((int64_t)(uint64_t)(intptr_t)L_29)&((int64_t)7))))
+		if (((int64_t)(((int64_t)(uint64_t)((uintptr_t)(intptr_t)L_29))&((int64_t)7))))
 		{
 			goto IL_0190;
 		}
 	}
 	{
 		uint8_t* L_30 = ___2_bytes;
-		if (((int64_t)(((int64_t)(uint64_t)(intptr_t)L_30)&((int64_t)7))))
+		if (((int64_t)(((int64_t)(uint64_t)((uintptr_t)(intptr_t)L_30))&((int64_t)7))))
 		{
 			goto IL_0190;
 		}
@@ -16203,7 +16203,7 @@ IL_0190:
 	{
 		Il2CppChar* L_67 = ___0_chars;
 		uint8_t* L_68 = ___2_bytes;
-		if ((((int64_t)((int64_t)(((int64_t)(uint64_t)(intptr_t)L_67)&((int64_t)7)))) == ((int64_t)((int64_t)(((int64_t)(uint64_t)(intptr_t)L_68)&((int64_t)7))))))
+		if ((((int64_t)((int64_t)(((int64_t)(uint64_t)((uintptr_t)(intptr_t)L_67))&((int64_t)7)))) == ((int64_t)((int64_t)(((int64_t)(uint64_t)((uintptr_t)(intptr_t)L_68))&((int64_t)7))))))
 		{
 			goto IL_027f;
 		}
@@ -17044,7 +17044,7 @@ IL_005a:
 	}
 	{
 		uint8_t* L_17 = ___0_bytes;
-		if (((int64_t)(((int64_t)(uint64_t)(intptr_t)L_17)&((int64_t)7))))
+		if (((int64_t)(((int64_t)(uint64_t)((uintptr_t)(intptr_t)L_17))&((int64_t)7))))
 		{
 			goto IL_010e;
 		}
@@ -17827,14 +17827,14 @@ IL_0038:
 	}
 	{
 		Il2CppChar* L_13 = ___2_chars;
-		if (((int64_t)(((int64_t)(uint64_t)(intptr_t)L_13)&((int64_t)7))))
+		if (((int64_t)(((int64_t)(uint64_t)((uintptr_t)(intptr_t)L_13))&((int64_t)7))))
 		{
 			goto IL_013a;
 		}
 	}
 	{
 		uint8_t* L_14 = ___0_bytes;
-		if (((int64_t)(((int64_t)(uint64_t)(intptr_t)L_14)&((int64_t)7))))
+		if (((int64_t)(((int64_t)(uint64_t)((uintptr_t)(intptr_t)L_14))&((int64_t)7))))
 		{
 			goto IL_013a;
 		}

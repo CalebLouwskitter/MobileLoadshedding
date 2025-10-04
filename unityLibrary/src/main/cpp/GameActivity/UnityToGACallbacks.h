@@ -65,3 +65,5 @@ DECLARE_INSTANCE_METHOD(UnityApplication, Unity::UnityKeyEventCallbacks*, GetKey
 DECLARE_INSTANCE_METHOD(UnityApplication, size_t, GetKeyEventSize, () const, ())
 
 DECLARE_INSTANCE_METHOD(UnityApplication, bool, GetWindowInsets, (Unity::InsetsType insetsType, ARect* outRect) const, (insetsType, outRect))
+
+DECLARE_INSTANCE_METHOD(UnityApplication, void, ProcessApplicationCommandsForErrorDialog, (), ())

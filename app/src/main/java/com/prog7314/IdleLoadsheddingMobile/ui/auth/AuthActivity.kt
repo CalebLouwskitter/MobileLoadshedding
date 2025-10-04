@@ -6,12 +6,17 @@ import androidx.activity.enableEdgeToEdge //AndroidX, 2025.
 import androidx.appcompat.app.AppCompatActivity //AndroidX, 2025.
 import androidx.core.view.ViewCompat //AndroidX, 2025.
 import androidx.core.view.WindowInsetsCompat //AndroidX, 2025.
+import androidx.lifecycle.lifecycleScope //AndroidX, 2025.
 import androidx.navigation.NavController //AndroidX, 2025.
 import androidx.navigation.fragment.NavHostFragment //AndroidX, 2025.
 import com.google.android.material.button.MaterialButtonToggleGroup //Material Design, 2025.
+import com.google.firebase.auth.FirebaseAuth //Firebase, 2025.
 import com.prog7314.IdleLoadsheddingMobile.MainActivity
 import com.prog7314.IdleLoadsheddingMobile.R
+import com.prog7314.IdleLoadsheddingMobile.auth.AuthPreferences
 import com.prog7314.IdleLoadsheddingMobile.databinding.ActivityAuthBinding
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 /**
  * AuthActivity manages the authentication flow, including login and signup screens.
@@ -26,6 +31,8 @@ class AuthActivity : AppCompatActivity() { //AndroidX, 2025.
 
     private lateinit var binding: ActivityAuthBinding //AndroidX, 2025.
     private lateinit var navController: NavController //AndroidX, 2025.
+    private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance() //Firebase, 2025.
+    private val authPreferences by lazy { AuthPreferences(applicationContext) }
 
     private val destinationListener = NavController.OnDestinationChangedListener { _, destination, _ -> //AndroidX, 2025.
         when (destination.id) {
@@ -74,6 +81,8 @@ class AuthActivity : AppCompatActivity() { //AndroidX, 2025.
                 }
             )
         }
+
+        maybeHandleRememberedSession()
     }
 
     override fun onDestroy() { //Android, 2025.
@@ -96,6 +105,19 @@ class AuthActivity : AppCompatActivity() { //AndroidX, 2025.
         val intent = Intent(this, MainActivity::class.java) //Android, 2025.
         startActivity(intent) //Android, 2025.
         finish() //Android, 2025.
+    }
+
+    private fun maybeHandleRememberedSession() {
+        lifecycleScope.launch {
+            val rememberMeEnabled = authPreferences.rememberMe.first()
+            val currentUser = firebaseAuth.currentUser
+
+            if (rememberMeEnabled && currentUser != null) {
+                onAuthenticationSuccess()
+            } else if (!rememberMeEnabled && currentUser != null) {
+                firebaseAuth.signOut()
+            }
+        }
     }
 }
 

@@ -1,4 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Legacy -->
     <dimen name="overlay_margin">16dp</dimen>
+    
+    <!-- Spacing System -->
+    <dimen name="spacing_tiny">4dp</dimen>
+    <dimen name="spacing_small">8dp</dimen>
+    <dimen name="spacing_medium">12dp</dimen>
+    <dimen name="spacing_normal">16dp</dimen>
+    <dimen name="spacing_large">20dp</dimen>
+    <dimen name="spacing_xlarge">24dp</dimen>
+    <dimen name="spacing_xxlarge">32dp</dimen>
+    
+    <!-- Panel Padding -->
+    <dimen name="panel_padding_horizontal">16dp</dimen>
+    <dimen name="panel_padding_vertical">16dp</dimen>
+    <dimen name="panel_padding_top">28dp</dimen>
+    <dimen name="panel_content_padding">12dp</dimen>
+    
+    <!-- Card/Item Spacing -->
+    <dimen name="card_padding">16dp</dimen>
+    <dimen name="card_margin">12dp</dimen>
+    <dimen name="item_padding">14dp</dimen>
+    <dimen name="item_spacing">10dp</dimen>
+    
+    <!-- Text Spacing -->
+    <dimen name="text_line_spacing">6dp</dimen>
+    <dimen name="section_spacing">20dp</dimen>
+    <dimen name="section_title_margin_top">18dp</dimen>
+    
+    <!-- Button Dimensions -->
+    <dimen name="button_padding_horizontal">20dp</dimen>
+    <dimen name="button_padding_vertical">12dp</dimen>
+    <dimen name="button_min_width">100dp</dimen>
+    
+    <!-- Stats Section -->
+    <dimen name="stats_card_padding">16dp</dimen>
+    <dimen name="stats_item_spacing">8dp</dimen>
 </resources>

@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#B71C1C"
-            android:padding="12dp"
+            android:padding="@dimen/spacing_normal"
             android:text="Settings"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
@@ -36,7 +36,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="16dp">
+        android:paddingStart="@dimen/panel_padding_horizontal"
+        android:paddingTop="@dimen/section_spacing"
+        android:paddingEnd="@dimen/panel_padding_horizontal"
+        android:paddingBottom="@dimen/panel_padding_vertical">
 
         <TextView
             android:layout_width="wrap_content"
@@ -51,62 +54,75 @@
             style="@style/Widget.MaterialComponents.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/spacing_medium"
             android:backgroundTint="#4CAF50"
-            android:text="Upload Save to Cloud"
-            android:textColor="#FFFFFF" />
+            android:paddingTop="@dimen/button_padding_vertical"
+            android:paddingBottom="@dimen/button_padding_vertical"
+            android:text="UPLOAD SAVE TO CLOUD"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/btn_sync_save"
             style="@style/Widget.MaterialComponents.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/spacing_medium"
             android:backgroundTint="#2196F3"
-            android:text="Sync Save with Cloud"
-            android:textColor="#FFFFFF" />
+            android:paddingTop="@dimen/button_padding_vertical"
+            android:paddingBottom="@dimen/button_padding_vertical"
+            android:text="SYNC SAVE WITH CLOUD"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/text_last_save_sync"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/spacing_medium"
             android:text="Last synced: --"
             android:textColor="#757575"
-            android:textSize="12sp" />
+            android:textSize="13sp" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/section_spacing"
+            android:layout_marginBottom="@dimen/spacing_small"
             android:background="#E0E0E0" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/spacing_normal"
             android:text="Language"
             android:textColor="#0E3D57"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/spinner_language"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:minHeight="48dp"
             android:entries="@array/settings_languages" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="@dimen/spacing_normal"
             android:text="Theme"
             android:textColor="#0E3D57"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/spinner_theme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:minHeight="48dp"
             android:entries="@array/settings_themes" />
     </LinearLayout>
 </LinearLayout>

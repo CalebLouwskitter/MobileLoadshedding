@@ -135,6 +135,21 @@
             The Build Analytics Build Summary failed with non-zero exit code.
             </summary>
         </member>
+        <member name="F:Analytics.Api.Output.Constants.BuildAnalyticsCollectionInfoTableName">
+            <summary>
+            The name of the table containing information about the analytics collection
+            </summary>
+        </member>
+        <member name="F:Analytics.Api.Output.Constants.PlayerBuildTimingDataTableName">
+            <summary>
+            The name of the table containing information about the timing of stages in the player build
+            </summary>
+        </member>
+        <member name="F:Analytics.Api.Output.Constants.Il2CppCppDataTableName">
+            <summary>
+            The name of the table containing information about il2cpp compilation
+            </summary>
+        </member>
         <member name="P:Analytics.Api.Output.NodeTimingData.name">
             <summary>
             The name of the tool node
