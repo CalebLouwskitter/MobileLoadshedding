@@ -5,43 +5,60 @@
     android:background="@drawable/bg_panel_rounded"
     android:orientation="vertical">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tab_profile"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#B71C1C"
-            android:padding="@dimen/spacing_medium"
-            android:text="Profile"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tab_leaderboard"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#212121"
-            android:padding="@dimen/spacing_medium"
-            android:text="Leader board"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tab_profile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#B71C1C"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:minHeight="48dp"
+                android:padding="@dimen/spacing_medium"
+                android:text="Profile"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tab_leaderboard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#212121"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:minHeight="48dp"
+                android:padding="@dimen/spacing_medium"
+                android:text="Leader board"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <ImageButton
             android:id="@+id/close_button"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@android:color/transparent"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="end"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Close"
-            android:src="@android:drawable/ic_menu_close_clear_cancel" />
-    </LinearLayout>
+            android:padding="@dimen/spacing_medium"
+            android:src="@drawable/ic_close_white" />
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -75,15 +92,24 @@
                 android:background="@android:drawable/edit_text"
                 android:hint="Enter Friend Code"
                 android:inputType="text"
-                android:padding="@dimen/spacing_medium" />
+                android:minHeight="48dp"
+                android:paddingStart="@dimen/spacing_medium"
+                android:paddingTop="@dimen/spacing_medium"
+                android:paddingEnd="@dimen/spacing_medium"
+                android:paddingBottom="@dimen/spacing_medium"
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/btn_add_friend"
                 style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_small"
-                android:text="Add" />
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:paddingStart="@dimen/button_padding_horizontal"
+                android:paddingTop="@dimen/button_padding_vertical"
+                android:paddingEnd="@dimen/button_padding_horizontal"
+                android:paddingBottom="@dimen/button_padding_vertical"
+                android:text="ADD" />
         </LinearLayout>
 
         <TextView
@@ -97,7 +123,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_large"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -108,16 +134,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/spacing_small"
                 android:layout_weight="1"
-                android:text="Global" />
+                android:paddingTop="@dimen/button_padding_vertical"
+                android:paddingBottom="@dimen/button_padding_vertical"
+                android:text="GLOBAL" />
 
             <Button
                 android:id="@+id/btn_show_friends"
                 style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_small"
                 android:layout_weight="1"
                 android:backgroundTint="#212121"
-                android:text="Refresh Friends"
+                android:paddingTop="@dimen/button_padding_vertical"
+                android:paddingBottom="@dimen/button_padding_vertical"
+                android:text="REFRESH FRIENDS"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
 
@@ -146,19 +177,23 @@
             android:layout_marginTop="@dimen/spacing_xlarge"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="@dimen/panel_padding_horizontal"
+            android:paddingStart="@dimen/panel_padding_horizontal"
+            android:paddingTop="@dimen/spacing_large"
+            android:paddingEnd="@dimen/panel_padding_horizontal"
+            android:paddingBottom="@dimen/spacing_large"
             android:visibility="gone">
 
             <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:alpha="0.5"
                 android:src="@android:drawable/ic_dialog_email"
                 android:tint="#BDBDBD" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_normal"
                 android:gravity="center"
                 android:text="@string/friends_empty_message"
                 android:textColor="#757575"
@@ -179,6 +214,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_medium"
+            android:animateLayoutChanges="true"
             android:orientation="vertical" />
     </LinearLayout>
 </LinearLayout>

@@ -8,9 +8,9 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface StatsApi {
-    @POST("game/sync")  // Changed from "stats" to match backend route
+    @POST("game/stats")
     fun postSnapshot(@Body snapshot: BackendStatsSnapshot): Call<Void>
 
-    @GET("game/leaderboard")  // Changed from "stats/summary" to match backend route
+    @GET("game/leaderboard")
     fun fetchSummary(): Call<BackendStatsSummary>
 }

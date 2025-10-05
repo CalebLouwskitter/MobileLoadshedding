@@ -674,7 +674,7 @@ class MainActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
                 getString(R.string.district_idle_time_format, idleText)
 
             row.findViewById<Button?>(R.id.btn_district_service)?.setOnClickListener {
-                UnityBridge.sendMessageToUnity("DistrictManager", "ServiceDistrict", district.id)
+                PowerManager.serviceDistrict(district.id)
                 Stats.requestUnitySnapshot()
             }
 
@@ -689,7 +689,7 @@ class MainActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
                     formatEnergy(district.nextUpgradeCost)
                 )
                 upgradeButton?.setOnClickListener {
-                    UnityBridge.sendMessageToUnity("DistrictManager", "UpgradeDistrict", district.id)
+                    PowerManager.upgradeDistrict(district.id)
                     Stats.requestUnitySnapshot()
                 }
             }

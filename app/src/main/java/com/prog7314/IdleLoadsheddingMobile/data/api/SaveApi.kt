@@ -6,6 +6,6 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface SaveApi {
-    @POST("game/sync")
+    @POST("game/save")
     fun syncSave(@Body payload: BackendSavePayload): Call<Void>
 }

@@ -47,6 +47,15 @@ object PowerManager {
         val payload = gson.toJson(mapOf("districtId" to districtId))
         UnityBridge.sendMessageToUnity("UnityMessageRouter", "UpgradeDistrict", payload)
     }
+
+    /**
+     * Request Unity to service a district (reset efficiency/maintenance)
+     */
+    fun serviceDistrict(districtId: String) {
+        Log.d(TAG, "Requesting district service: $districtId")
+        val payload = gson.toJson(mapOf("districtId" to districtId))
+        UnityBridge.sendMessageToUnity("UnityMessageRouter", "ServiceDistrict", payload)
+    }
 }
 
 /**

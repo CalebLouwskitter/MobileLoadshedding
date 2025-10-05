@@ -2,23 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:background="#E0F7FA"
+    android:layout_marginTop="@dimen/spacing_small"
+    android:background="@drawable/bg_task_item"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:padding="12dp">
+    android:padding="@dimen/spacing_medium"
+    android:animateLayoutChanges="true">
 
     <ImageView
         android:id="@+id/image_task_state"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
         android:contentDescription="Task complete"
-        android:src="@android:drawable/checkbox_on_background" />
+        android:src="@drawable/ic_check_green" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="@dimen/spacing_medium"
         android:layout_weight="1"
         android:orientation="vertical">
 
@@ -28,24 +29,31 @@
             android:layout_height="wrap_content"
             android:text="Upgrade Storage to level 6"
             android:textColor="#0E3D57"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/text_task_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_tiny"
             android:text="Reward: 20,000"
-            android:textColor="#0E3D57"
-            android:textSize="12sp" />
+            android:textColor="#616161"
+            android:textSize="13sp" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/text_task_badge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_small"
         android:background="#A5D6A7"
-        android:padding="6dp"
+        android:paddingLeft="@dimen/spacing_small"
+        android:paddingTop="@dimen/spacing_tiny"
+        android:paddingRight="@dimen/spacing_small"
+        android:paddingBottom="@dimen/spacing_tiny"
         android:text="R 20,000"
         android:textColor="#1B5E20"
+        android:textSize="13sp"
         android:textStyle="bold" />
 </LinearLayout>

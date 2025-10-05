@@ -11,6 +11,7 @@ import com.prog7314.IdleLoadsheddingMobile.data.models.FriendProfile
 import com.prog7314.IdleLoadsheddingMobile.data.models.FriendResponseDto
 import com.prog7314.IdleLoadsheddingMobile.data.models.FriendSubmission
 import com.prog7314.IdleLoadsheddingMobile.data.models.FriendsPayload
+import com.prog7314.IdleLoadsheddingMobile.data.models.FriendsSyncRequest
 import java.time.Instant
 import retrofit2.Call
 import retrofit2.Callback
@@ -77,7 +78,7 @@ object FriendsList : UnityBridge.Listener {
     }
 
     fun fetchBackendFriends(callback: (Result<FriendsPayload>) -> Unit) {
-        api.fetchFriends(currentPlayerId()).enqueue(object : Callback<List<FriendResponseDto>> {
+    api.fetchFriends().enqueue(object : Callback<List<FriendResponseDto>> {
             override fun onResponse(
                 call: Call<List<FriendResponseDto>>,
                 response: Response<List<FriendResponseDto>>
@@ -104,7 +105,18 @@ object FriendsList : UnityBridge.Listener {
     }
 
     private fun postFriends(payload: FriendsPayload) {
-        api.postFriends(currentPlayerId(), payload).enqueue(object : Callback<Void> {
+        val playerId = currentPlayerId()
+        if (playerId.isNullOrBlank()) {
+            Log.w(TAG, "Skipping friends sync - no authenticated user")
+            return
+        }
+
+        val request = FriendsSyncRequest(
+            playerId = playerId,
+            friends = payload.friends
+        )
+
+        api.syncFriends(request).enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (!response.isSuccessful) {
                     Log.w(TAG, "Failed to sync friends: ${response.code()}")

@@ -26,3 +26,8 @@ data class FriendResponseDto(
     @com.google.gson.annotations.SerializedName("username") val username: String,
     @com.google.gson.annotations.SerializedName("addedAt") val addedAt: String
 )
+
+data class FriendsSyncRequest(
+    val playerId: String,
+    val friends: List<FriendProfile>
+)

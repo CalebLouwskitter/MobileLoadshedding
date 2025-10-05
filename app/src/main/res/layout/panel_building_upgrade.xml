@@ -35,6 +35,7 @@
                     android:id="@+id/list_building_upgrades"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
                     android:orientation="vertical"
                     android:paddingStart="@dimen/panel_content_padding"
                     android:paddingTop="@dimen/panel_content_padding"
