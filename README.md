@@ -1,4 +1,4 @@
-<img width="1122" height="94" alt="image" src="https://github.com/user-attachments/assets/230746e0-f037-4ab1-95b0-165414089989" /># Idle Loadshedding
+# Idle Loadshedding
 
 This document provides a comprehensive overview of the Idle Loadshedding project, a mobile game developed with Unity and supported by a .NET backend and Azure SQL for data persistence.
 
