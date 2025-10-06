@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="eec4b198-36c7-4cf1-a6d6-078b5dd8e858" name="Caleb@DESKTOP-NNMTR9L 2025-10-05 18:05:21" runUser="DESKTOP-NNMTR9L\Caleb" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2025-10-05T18:05:21.7902608+02:00" queuing="2025-10-05T18:05:21.7902612+02:00" start="2025-10-05T18:05:19.8734298+02:00" finish="2025-10-05T18:05:23.4008758+02:00" />
+  <TestSettings name="default" id="5edd5ff3-7e9a-46b1-917e-cb768c58066b">
+    <Deployment runDeploymentRoot="Caleb_DESKTOP-NNMTR9L_2025-10-05_18_05_21" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="44707817-94dc-48cd-9b33-0406b5c28c65" testId="941ba4d5-6b19-9964-658b-7a265be19c1b" testName="IdleLoadsheddingAPI.Tests.DtoSerializationTests.SyncRequest_DeserializesFromAndroidCamelCase" computerName="DESKTOP-NNMTR9L" duration="00:00:00.0001702" startTime="2025-10-05T18:05:21.7518110+02:00" endTime="2025-10-05T18:05:21.7518111+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="44707817-94dc-48cd-9b33-0406b5c28c65" />
+    <UnitTestResult executionId="a67cf5f0-6a23-47a3-9e38-12b4f603e7b7" testId="9bdd9196-7c92-e833-0681-7301b9d3d4f4" testName="IdleLoadsheddingAPI.Tests.DatabaseConsistencyTests.Crud_UserEntity_RoundTrip_Succeeds" computerName="DESKTOP-NNMTR9L" duration="00:00:00.2860663" startTime="2025-10-05T18:05:22.9250275+02:00" endTime="2025-10-05T18:05:22.9250276+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a67cf5f0-6a23-47a3-9e38-12b4f603e7b7" />
+    <UnitTestResult executionId="03564c7f-1725-4c22-8232-6f65f46cda46" testId="b295c02b-71f5-e7d3-8a2f-834ca13c5f51" testName="IdleLoadsheddingAPI.Tests.DtoSerializationTests.UpgradeRequest_DeserializesFromAndroidCamelCase" computerName="DESKTOP-NNMTR9L" duration="00:00:00.0031368" startTime="2025-10-05T18:05:21.7470690+02:00" endTime="2025-10-05T18:05:21.7470691+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="03564c7f-1725-4c22-8232-6f65f46cda46" />
+    <UnitTestResult executionId="73c13491-2504-44f8-be18-819b30f173a7" testId="e40bdaf5-aa3e-1e42-bae3-421875941e6d" testName="IdleLoadsheddingAPI.Tests.DtoSerializationTests.FriendsSyncRequest_DeserializesFromAndroidPayload" computerName="DESKTOP-NNMTR9L" duration="00:00:00.0014101" startTime="2025-10-05T18:05:21.7705592+02:00" endTime="2025-10-05T18:05:21.7705592+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="73c13491-2504-44f8-be18-819b30f173a7" />
+    <UnitTestResult executionId="52ed650b-1321-4312-88ad-d95ad6a29b0b" testId="67bee283-d18b-5798-2fd9-049c1f9a117e" testName="IdleLoadsheddingAPI.Tests.DtoSerializationTests.StatsSnapshotRequest_DeserializesFromAndroidPayload" computerName="DESKTOP-NNMTR9L" duration="00:00:00.3938177" startTime="2025-10-05T18:05:21.5863660+02:00" endTime="2025-10-05T18:05:21.5863766+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="52ed650b-1321-4312-88ad-d95ad6a29b0b" />
+    <UnitTestResult executionId="ff44043d-fca9-47d6-b268-8abdedc6f991" testId="cd08329c-1712-3256-e138-4ecb9458ae93" testName="IdleLoadsheddingAPI.Tests.DtoSerializationTests.UpgradeResponse_SerializesWithCorrectCasing" computerName="DESKTOP-NNMTR9L" duration="00:00:00.0007623" startTime="2025-10-05T18:05:21.7515972+02:00" endTime="2025-10-05T18:05:21.7515974+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ff44043d-fca9-47d6-b268-8abdedc6f991" />
+    <UnitTestResult executionId="037a9f5d-41eb-4293-bcad-2f59f875cf35" testId="deb49cc1-d1b3-0e78-891c-d480a4cd3335" testName="IdleLoadsheddingAPI.Tests.GameControllerIntegrationTests.PostUpgrade_WithValidPayload_ReturnsUpgradeResponse" computerName="DESKTOP-NNMTR9L" duration="00:00:00.6312827" startTime="2025-10-05T18:05:23.2362583+02:00" endTime="2025-10-05T18:05:23.2362585+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="037a9f5d-41eb-4293-bcad-2f59f875cf35" />
+    <UnitTestResult executionId="a5515d69-c36f-4b39-be5a-f7dc9e485186" testId="4447fb62-9bf3-0b0f-e14c-806174c434a3" testName="IdleLoadsheddingAPI.Tests.DatabaseConsistencyTests.SqlServerConnection_OpenClose_Succeeds" computerName="DESKTOP-NNMTR9L" duration="00:00:00.0001503" startTime="2025-10-05T18:05:22.6385249+02:00" endTime="2025-10-05T18:05:22.6385249+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a5515d69-c36f-4b39-be5a-f7dc9e485186" />
+    <UnitTestResult executionId="15a10325-54e5-43e8-9901-110fc672482f" testId="84dc55c6-f54f-9d32-0edd-22aa700c3bb8" testName="IdleLoadsheddingAPI.Tests.DtoSerializationTests.SyncResponse_SerializesWithCorrectCasing" computerName="DESKTOP-NNMTR9L" duration="00:00:00.1579029" startTime="2025-10-05T18:05:21.7438938+02:00" endTime="2025-10-05T18:05:21.7438941+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="15a10325-54e5-43e8-9901-110fc672482f" />
+    <UnitTestResult executionId="7b00c2f6-91c3-416d-a946-99b96417f623" testId="843544a5-635f-7a89-c5f1-d98da6c63881" testName="IdleLoadsheddingAPI.Tests.DtoSerializationTests.SyncRequest_LargeNumbers_DeserializesCorrectly" computerName="DESKTOP-NNMTR9L" duration="00:00:00.0019565" startTime="2025-10-05T18:05:21.7491166+02:00" endTime="2025-10-05T18:05:21.7491171+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7b00c2f6-91c3-416d-a946-99b96417f623" />
+    <UnitTestResult executionId="68f85aa9-0d7f-4ae8-902a-4f30b132e1f0" testId="ebdcac6a-b4d1-0520-1461-97a938015261" testName="IdleLoadsheddingAPI.Tests.GameControllerIntegrationTests.PostStatsSnapshot_WithoutAuth_ReturnsUnauthorized" computerName="DESKTOP-NNMTR9L" duration="00:00:00.0329699" startTime="2025-10-05T18:05:23.2695751+02:00" endTime="2025-10-05T18:05:23.2695753+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="68f85aa9-0d7f-4ae8-902a-4f30b132e1f0" />
+    <UnitTestResult executionId="3adaf53e-4aaf-4158-94da-5acef4772c50" testId="0c07c9aa-cd3c-49de-bb87-1232095d0b36" testName="IdleLoadsheddingAPI.Tests.GameControllerIntegrationTests.SyncResponse_SerializesWithCorrectCasing" computerName="DESKTOP-NNMTR9L" duration="00:00:00.0134605" startTime="2025-10-05T18:05:23.3357752+02:00" endTime="2025-10-05T18:05:23.3357753+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3adaf53e-4aaf-4158-94da-5acef4772c50" />
+    <UnitTestResult executionId="24216bb8-ae09-43f0-b46e-e2559ab45e56" testId="921cd4f9-04dc-305c-1156-b8bdb57484bf" testName="IdleLoadsheddingAPI.Tests.DtoSerializationTests.UpgradeRequest_MissingRequiredName_DeserializesToDefault" computerName="DESKTOP-NNMTR9L" duration="00:00:00.0001143" startTime="2025-10-05T18:05:21.7706987+02:00" endTime="2025-10-05T18:05:21.7706988+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="24216bb8-ae09-43f0-b46e-e2559ab45e56" />
+    <UnitTestResult executionId="351a8f5a-6ee0-4416-bf37-6d614e28438c" testId="9bf1864f-5f0b-4a74-b9bf-3372d6fca7f7" testName="IdleLoadsheddingAPI.Tests.GameControllerIntegrationTests.ApplyUpgrade_OnException_RollsBackTransaction" computerName="DESKTOP-NNMTR9L" duration="00:00:01.4153896" startTime="2025-10-05T18:05:22.6044931+02:00" endTime="2025-10-05T18:05:22.6044932+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="351a8f5a-6ee0-4416-bf37-6d614e28438c" />
+    <UnitTestResult executionId="c28c50da-e513-4fc4-879e-94509bd7d32a" testId="d8417465-b7d1-f8b0-49ba-c49ef2c351f7" testName="IdleLoadsheddingAPI.Tests.GameControllerIntegrationTests.PostUpgrade_WithMalformedPayload_ReturnsBadRequest" computerName="DESKTOP-NNMTR9L" duration="00:00:00.0181279" startTime="2025-10-05T18:05:23.2880867+02:00" endTime="2025-10-05T18:05:23.2880868+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c28c50da-e513-4fc4-879e-94509bd7d32a" />
+    <UnitTestResult executionId="50343430-9dc5-45eb-a328-5f7918fea336" testId="7b1ba198-94a6-d953-cac6-98c2a199019d" testName="IdleLoadsheddingAPI.Tests.DatabaseConsistencyTests.SeedData_IsPresent_And_Conforms" computerName="DESKTOP-NNMTR9L" duration="00:00:01.4455369" startTime="2025-10-05T18:05:22.6376641+02:00" endTime="2025-10-05T18:05:22.6376642+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="50343430-9dc5-45eb-a328-5f7918fea336" />
+    <UnitTestResult executionId="23999185-f518-4a48-a910-6c66395365d4" testId="21ecc5b5-0597-5f9b-d45a-e227907f8dda" testName="IdleLoadsheddingAPI.Tests.GameControllerIntegrationTests.PostSaveSnapshot_WithoutAuth_ReturnsUnauthorized" computerName="DESKTOP-NNMTR9L" duration="00:00:00.0164419" startTime="2025-10-05T18:05:23.3222072+02:00" endTime="2025-10-05T18:05:23.3222073+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="23999185-f518-4a48-a910-6c66395365d4" />
+    <UnitTestResult executionId="1b0b2b84-c26f-4a9b-9e33-109511787458" testId="cc0511b4-b35f-ab53-9d19-5440999e5842" testName="IdleLoadsheddingAPI.Tests.DtoSerializationTests.SaveSyncRequest_SerializesWithCamelCase" computerName="DESKTOP-NNMTR9L" duration="00:00:00.0016045" startTime="2025-10-05T18:05:21.7507812+02:00" endTime="2025-10-05T18:05:21.7507813+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1b0b2b84-c26f-4a9b-9e33-109511787458" />
+    <UnitTestResult executionId="4992b110-eb44-4284-bab6-345c04c24ced" testId="b7ab292d-729f-9875-a3a6-b62ddbfe8f52" testName="IdleLoadsheddingAPI.Tests.GameControllerIntegrationTests.SyncRequest_DeserializesFromAndroidCamelCase" computerName="DESKTOP-NNMTR9L" duration="00:00:00.0124302" startTime="2025-10-05T18:05:23.3483012+02:00" endTime="2025-10-05T18:05:23.3483013+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4992b110-eb44-4284-bab6-345c04c24ced" />
+    <UnitTestResult executionId="65a7d9ae-58a4-4656-8545-77624dfb033e" testId="b1f0c8b6-0ddc-a8bc-85ac-c4b526fdbdc7" testName="IdleLoadsheddingAPI.Tests.GameControllerIntegrationTests.PostSync_WithValidPayload_ReturnsSyncResponse" computerName="DESKTOP-NNMTR9L" duration="00:00:00.0170059" startTime="2025-10-05T18:05:23.3054813+02:00" endTime="2025-10-05T18:05:23.3054815+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="65a7d9ae-58a4-4656-8545-77624dfb033e" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="IdleLoadsheddingAPI.Tests.DtoSerializationTests.SaveSyncRequest_SerializesWithCamelCase" storage="h:\c drive from intel bullshit\new folder (2)\idleloadsheddingapi.tests\bin\debug\net9.0\idleloadsheddingapi.tests.dll" id="cc0511b4-b35f-ab53-9d19-5440999e5842">
+      <Execution id="1b0b2b84-c26f-4a9b-9e33-109511787458" />
+      <TestMethod codeBase="H:\C Drive From intel bullshit\New folder (2)\IdleLoadsheddingAPI.Tests\bin\Debug\net9.0\IdleLoadsheddingAPI.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="IdleLoadsheddingAPI.Tests.DtoSerializationTests" name="SaveSyncRequest_SerializesWithCamelCase" />
+    </UnitTest>
+    <UnitTest name="IdleLoadsheddingAPI.Tests.DtoSerializationTests.SyncRequest_LargeNumbers_DeserializesCorrectly" storage="h:\c drive from intel bullshit\new folder (2)\idleloadsheddingapi.tests\bin\debug\net9.0\idleloadsheddingapi.tests.dll" id="843544a5-635f-7a89-c5f1-d98da6c63881">
+      <Execution id="7b00c2f6-91c3-416d-a946-99b96417f623" />
+      <TestMethod codeBase="H:\C Drive From intel bullshit\New folder (2)\IdleLoadsheddingAPI.Tests\bin\Debug\net9.0\IdleLoadsheddingAPI.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="IdleLoadsheddingAPI.Tests.DtoSerializationTests" name="SyncRequest_LargeNumbers_DeserializesCorrectly" />
+    </UnitTest>
+    <UnitTest name="IdleLoadsheddingAPI.Tests.GameControllerIntegrationTests.PostStatsSnapshot_WithoutAuth_ReturnsUnauthorized" storage="h:\c drive from intel bullshit\new folder (2)\idleloadsheddingapi.tests\bin\debug\net9.0\idleloadsheddingapi.tests.dll" id="ebdcac6a-b4d1-0520-1461-97a938015261">
+      <Execution id="68f85aa9-0d7f-4ae8-902a-4f30b132e1f0" />
+      <TestMethod codeBase="H:\C Drive From intel bullshit\New folder (2)\IdleLoadsheddingAPI.Tests\bin\Debug\net9.0\IdleLoadsheddingAPI.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="IdleLoadsheddingAPI.Tests.GameControllerIntegrationTests" name="PostStatsSnapshot_WithoutAuth_ReturnsUnauthorized" />
+    </UnitTest>
+    <UnitTest name="IdleLoadsheddingAPI.Tests.DtoSerializationTests.SyncResponse_SerializesWithCorrectCasing" storage="h:\c drive from intel bullshit\new folder (2)\idleloadsheddingapi.tests\bin\debug\net9.0\idleloadsheddingapi.tests.dll" id="84dc55c6-f54f-9d32-0edd-22aa700c3bb8">
+      <Execution id="15a10325-54e5-43e8-9901-110fc672482f" />
+      <TestMethod codeBase="H:\C Drive From intel bullshit\New folder (2)\IdleLoadsheddingAPI.Tests\bin\Debug\net9.0\IdleLoadsheddingAPI.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="IdleLoadsheddingAPI.Tests.DtoSerializationTests" name="SyncResponse_SerializesWithCorrectCasing" />
+    </UnitTest>
+    <UnitTest name="IdleLoadsheddingAPI.Tests.DtoSerializationTests.UpgradeResponse_SerializesWithCorrectCasing" storage="h:\c drive from intel bullshit\new folder (2)\idleloadsheddingapi.tests\bin\debug\net9.0\idleloadsheddingapi.tests.dll" id="cd08329c-1712-3256-e138-4ecb9458ae93">
+      <Execution id="ff44043d-fca9-47d6-b268-8abdedc6f991" />
+      <TestMethod codeBase="H:\C Drive From intel bullshit\New folder (2)\IdleLoadsheddingAPI.Tests\bin\Debug\net9.0\IdleLoadsheddingAPI.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="IdleLoadsheddingAPI.Tests.DtoSerializationTests" name="UpgradeResponse_SerializesWithCorrectCasing" />
+    </UnitTest>
+    <UnitTest name="IdleLoadsheddingAPI.Tests.DtoSerializationTests.FriendsSyncRequest_DeserializesFromAndroidPayload" storage="h:\c drive from intel bullshit\new folder (2)\idleloadsheddingapi.tests\bin\debug\net9.0\idleloadsheddingapi.tests.dll" id="e40bdaf5-aa3e-1e42-bae3-421875941e6d">
+      <Execution id="73c13491-2504-44f8-be18-819b30f173a7" />
+      <TestMethod codeBase="H:\C Drive From intel bullshit\New folder (2)\IdleLoadsheddingAPI.Tests\bin\Debug\net9.0\IdleLoadsheddingAPI.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="IdleLoadsheddingAPI.Tests.DtoSerializationTests" name="FriendsSyncRequest_DeserializesFromAndroidPayload" />
+    </UnitTest>
+    <UnitTest name="IdleLoadsheddingAPI.Tests.DatabaseConsistencyTests.SqlServerConnection_OpenClose_Succeeds" storage="h:\c drive from intel bullshit\new folder (2)\idleloadsheddingapi.tests\bin\debug\net9.0\idleloadsheddingapi.tests.dll" id="4447fb62-9bf3-0b0f-e14c-806174c434a3">
+      <Execution id="a5515d69-c36f-4b39-be5a-f7dc9e485186" />
+      <TestMethod codeBase="H:\C Drive From intel bullshit\New folder (2)\IdleLoadsheddingAPI.Tests\bin\Debug\net9.0\IdleLoadsheddingAPI.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="IdleLoadsheddingAPI.Tests.DatabaseConsistencyTests" name="SqlServerConnection_OpenClose_Succeeds" />
+    </UnitTest>
+    <UnitTest name="IdleLoadsheddingAPI.Tests.DtoSerializationTests.UpgradeRequest_MissingRequiredName_DeserializesToDefault" storage="h:\c drive from intel bullshit\new folder (2)\idleloadsheddingapi.tests\bin\debug\net9.0\idleloadsheddingapi.tests.dll" id="921cd4f9-04dc-305c-1156-b8bdb57484bf">
+      <Execution id="24216bb8-ae09-43f0-b46e-e2559ab45e56" />
+      <TestMethod codeBase="H:\C Drive From intel bullshit\New folder (2)\IdleLoadsheddingAPI.Tests\bin\Debug\net9.0\IdleLoadsheddingAPI.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="IdleLoadsheddingAPI.Tests.DtoSerializationTests" name="UpgradeRequest_MissingRequiredName_DeserializesToDefault" />
+    </UnitTest>
+    <UnitTest name="IdleLoadsheddingAPI.Tests.GameControllerIntegrationTests.ApplyUpgrade_OnException_RollsBackTransaction" storage="h:\c drive from intel bullshit\new folder (2)\idleloadsheddingapi.tests\bin\debug\net9.0\idleloadsheddingapi.tests.dll" id="9bf1864f-5f0b-4a74-b9bf-3372d6fca7f7">
+      <Execution id="351a8f5a-6ee0-4416-bf37-6d614e28438c" />
+      <TestMethod codeBase="H:\C Drive From intel bullshit\New folder (2)\IdleLoadsheddingAPI.Tests\bin\Debug\net9.0\IdleLoadsheddingAPI.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="IdleLoadsheddingAPI.Tests.GameControllerIntegrationTests" name="ApplyUpgrade_OnException_RollsBackTransaction" />
+    </UnitTest>
+    <UnitTest name="IdleLoadsheddingAPI.Tests.DtoSerializationTests.UpgradeRequest_DeserializesFromAndroidCamelCase" storage="h:\c drive from intel bullshit\new folder (2)\idleloadsheddingapi.tests\bin\debug\net9.0\idleloadsheddingapi.tests.dll" id="b295c02b-71f5-e7d3-8a2f-834ca13c5f51">
+      <Execution id="03564c7f-1725-4c22-8232-6f65f46cda46" />
+      <TestMethod codeBase="H:\C Drive From intel bullshit\New folder (2)\IdleLoadsheddingAPI.Tests\bin\Debug\net9.0\IdleLoadsheddingAPI.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="IdleLoadsheddingAPI.Tests.DtoSerializationTests" name="UpgradeRequest_DeserializesFromAndroidCamelCase" />
+    </UnitTest>
+    <UnitTest name="IdleLoadsheddingAPI.Tests.GameControllerIntegrationTests.PostSaveSnapshot_WithoutAuth_ReturnsUnauthorized" storage="h:\c drive from intel bullshit\new folder (2)\idleloadsheddingapi.tests\bin\debug\net9.0\idleloadsheddingapi.tests.dll" id="21ecc5b5-0597-5f9b-d45a-e227907f8dda">
+      <Execution id="23999185-f518-4a48-a910-6c66395365d4" />
+      <TestMethod codeBase="H:\C Drive From intel bullshit\New folder (2)\IdleLoadsheddingAPI.Tests\bin\Debug\net9.0\IdleLoadsheddingAPI.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="IdleLoadsheddingAPI.Tests.GameControllerIntegrationTests" name="PostSaveSnapshot_WithoutAuth_ReturnsUnauthorized" />
+    </UnitTest>
+    <UnitTest name="IdleLoadsheddingAPI.Tests.DatabaseConsistencyTests.SeedData_IsPresent_And_Conforms" storage="h:\c drive from intel bullshit\new folder (2)\idleloadsheddingapi.tests\bin\debug\net9.0\idleloadsheddingapi.tests.dll" id="7b1ba198-94a6-d953-cac6-98c2a199019d">
+      <Execution id="50343430-9dc5-45eb-a328-5f7918fea336" />
+      <TestMethod codeBase="H:\C Drive From intel bullshit\New folder (2)\IdleLoadsheddingAPI.Tests\bin\Debug\net9.0\IdleLoadsheddingAPI.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="IdleLoadsheddingAPI.Tests.DatabaseConsistencyTests" name="SeedData_IsPresent_And_Conforms" />
+    </UnitTest>
+    <UnitTest name="IdleLoadsheddingAPI.Tests.GameControllerIntegrationTests.PostUpgrade_WithMalformedPayload_ReturnsBadRequest" storage="h:\c drive from intel bullshit\new folder (2)\idleloadsheddingapi.tests\bin\debug\net9.0\idleloadsheddingapi.tests.dll" id="d8417465-b7d1-f8b0-49ba-c49ef2c351f7">
+      <Execution id="c28c50da-e513-4fc4-879e-94509bd7d32a" />
+      <TestMethod codeBase="H:\C Drive From intel bullshit\New folder (2)\IdleLoadsheddingAPI.Tests\bin\Debug\net9.0\IdleLoadsheddingAPI.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="IdleLoadsheddingAPI.Tests.GameControllerIntegrationTests" name="PostUpgrade_WithMalformedPayload_ReturnsBadRequest" />
+    </UnitTest>
+    <UnitTest name="IdleLoadsheddingAPI.Tests.DtoSerializationTests.SyncRequest_DeserializesFromAndroidCamelCase" storage="h:\c drive from intel bullshit\new folder (2)\idleloadsheddingapi.tests\bin\debug\net9.0\idleloadsheddingapi.tests.dll" id="941ba4d5-6b19-9964-658b-7a265be19c1b">
+      <Execution id="44707817-94dc-48cd-9b33-0406b5c28c65" />
+      <TestMethod codeBase="H:\C Drive From intel bullshit\New folder (2)\IdleLoadsheddingAPI.Tests\bin\Debug\net9.0\IdleLoadsheddingAPI.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="IdleLoadsheddingAPI.Tests.DtoSerializationTests" name="SyncRequest_DeserializesFromAndroidCamelCase" />
+    </UnitTest>
+    <UnitTest name="IdleLoadsheddingAPI.Tests.GameControllerIntegrationTests.SyncRequest_DeserializesFromAndroidCamelCase" storage="h:\c drive from intel bullshit\new folder (2)\idleloadsheddingapi.tests\bin\debug\net9.0\idleloadsheddingapi.tests.dll" id="b7ab292d-729f-9875-a3a6-b62ddbfe8f52">
+      <Execution id="4992b110-eb44-4284-bab6-345c04c24ced" />
+      <TestMethod codeBase="H:\C Drive From intel bullshit\New folder (2)\IdleLoadsheddingAPI.Tests\bin\Debug\net9.0\IdleLoadsheddingAPI.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="IdleLoadsheddingAPI.Tests.GameControllerIntegrationTests" name="SyncRequest_DeserializesFromAndroidCamelCase" />
+    </UnitTest>
+    <UnitTest name="IdleLoadsheddingAPI.Tests.DtoSerializationTests.StatsSnapshotRequest_DeserializesFromAndroidPayload" storage="h:\c drive from intel bullshit\new folder (2)\idleloadsheddingapi.tests\bin\debug\net9.0\idleloadsheddingapi.tests.dll" id="67bee283-d18b-5798-2fd9-049c1f9a117e">
+      <Execution id="52ed650b-1321-4312-88ad-d95ad6a29b0b" />
+      <TestMethod codeBase="H:\C Drive From intel bullshit\New folder (2)\IdleLoadsheddingAPI.Tests\bin\Debug\net9.0\IdleLoadsheddingAPI.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="IdleLoadsheddingAPI.Tests.DtoSerializationTests" name="StatsSnapshotRequest_DeserializesFromAndroidPayload" />
+    </UnitTest>
+    <UnitTest name="IdleLoadsheddingAPI.Tests.DatabaseConsistencyTests.Crud_UserEntity_RoundTrip_Succeeds" storage="h:\c drive from intel bullshit\new folder (2)\idleloadsheddingapi.tests\bin\debug\net9.0\idleloadsheddingapi.tests.dll" id="9bdd9196-7c92-e833-0681-7301b9d3d4f4">
+      <Execution id="a67cf5f0-6a23-47a3-9e38-12b4f603e7b7" />
+      <TestMethod codeBase="H:\C Drive From intel bullshit\New folder (2)\IdleLoadsheddingAPI.Tests\bin\Debug\net9.0\IdleLoadsheddingAPI.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="IdleLoadsheddingAPI.Tests.DatabaseConsistencyTests" name="Crud_UserEntity_RoundTrip_Succeeds" />
+    </UnitTest>
+    <UnitTest name="IdleLoadsheddingAPI.Tests.GameControllerIntegrationTests.PostUpgrade_WithValidPayload_ReturnsUpgradeResponse" storage="h:\c drive from intel bullshit\new folder (2)\idleloadsheddingapi.tests\bin\debug\net9.0\idleloadsheddingapi.tests.dll" id="deb49cc1-d1b3-0e78-891c-d480a4cd3335">
+      <Execution id="037a9f5d-41eb-4293-bcad-2f59f875cf35" />
+      <TestMethod codeBase="H:\C Drive From intel bullshit\New folder (2)\IdleLoadsheddingAPI.Tests\bin\Debug\net9.0\IdleLoadsheddingAPI.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="IdleLoadsheddingAPI.Tests.GameControllerIntegrationTests" name="PostUpgrade_WithValidPayload_ReturnsUpgradeResponse" />
+    </UnitTest>
+    <UnitTest name="IdleLoadsheddingAPI.Tests.GameControllerIntegrationTests.PostSync_WithValidPayload_ReturnsSyncResponse" storage="h:\c drive from intel bullshit\new folder (2)\idleloadsheddingapi.tests\bin\debug\net9.0\idleloadsheddingapi.tests.dll" id="b1f0c8b6-0ddc-a8bc-85ac-c4b526fdbdc7">
+      <Execution id="65a7d9ae-58a4-4656-8545-77624dfb033e" />
+      <TestMethod codeBase="H:\C Drive From intel bullshit\New folder (2)\IdleLoadsheddingAPI.Tests\bin\Debug\net9.0\IdleLoadsheddingAPI.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="IdleLoadsheddingAPI.Tests.GameControllerIntegrationTests" name="PostSync_WithValidPayload_ReturnsSyncResponse" />
+    </UnitTest>
+    <UnitTest name="IdleLoadsheddingAPI.Tests.GameControllerIntegrationTests.SyncResponse_SerializesWithCorrectCasing" storage="h:\c drive from intel bullshit\new folder (2)\idleloadsheddingapi.tests\bin\debug\net9.0\idleloadsheddingapi.tests.dll" id="0c07c9aa-cd3c-49de-bb87-1232095d0b36">
+      <Execution id="3adaf53e-4aaf-4158-94da-5acef4772c50" />
+      <TestMethod codeBase="H:\C Drive From intel bullshit\New folder (2)\IdleLoadsheddingAPI.Tests\bin\Debug\net9.0\IdleLoadsheddingAPI.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="IdleLoadsheddingAPI.Tests.GameControllerIntegrationTests" name="SyncResponse_SerializesWithCorrectCasing" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="941ba4d5-6b19-9964-658b-7a265be19c1b" executionId="44707817-94dc-48cd-9b33-0406b5c28c65" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9bdd9196-7c92-e833-0681-7301b9d3d4f4" executionId="a67cf5f0-6a23-47a3-9e38-12b4f603e7b7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b295c02b-71f5-e7d3-8a2f-834ca13c5f51" executionId="03564c7f-1725-4c22-8232-6f65f46cda46" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e40bdaf5-aa3e-1e42-bae3-421875941e6d" executionId="73c13491-2504-44f8-be18-819b30f173a7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="67bee283-d18b-5798-2fd9-049c1f9a117e" executionId="52ed650b-1321-4312-88ad-d95ad6a29b0b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cd08329c-1712-3256-e138-4ecb9458ae93" executionId="ff44043d-fca9-47d6-b268-8abdedc6f991" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="deb49cc1-d1b3-0e78-891c-d480a4cd3335" executionId="037a9f5d-41eb-4293-bcad-2f59f875cf35" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4447fb62-9bf3-0b0f-e14c-806174c434a3" executionId="a5515d69-c36f-4b39-be5a-f7dc9e485186" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="84dc55c6-f54f-9d32-0edd-22aa700c3bb8" executionId="15a10325-54e5-43e8-9901-110fc672482f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="843544a5-635f-7a89-c5f1-d98da6c63881" executionId="7b00c2f6-91c3-416d-a946-99b96417f623" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ebdcac6a-b4d1-0520-1461-97a938015261" executionId="68f85aa9-0d7f-4ae8-902a-4f30b132e1f0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0c07c9aa-cd3c-49de-bb87-1232095d0b36" executionId="3adaf53e-4aaf-4158-94da-5acef4772c50" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="921cd4f9-04dc-305c-1156-b8bdb57484bf" executionId="24216bb8-ae09-43f0-b46e-e2559ab45e56" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9bf1864f-5f0b-4a74-b9bf-3372d6fca7f7" executionId="351a8f5a-6ee0-4416-bf37-6d614e28438c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d8417465-b7d1-f8b0-49ba-c49ef2c351f7" executionId="c28c50da-e513-4fc4-879e-94509bd7d32a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7b1ba198-94a6-d953-cac6-98c2a199019d" executionId="50343430-9dc5-45eb-a328-5f7918fea336" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="21ecc5b5-0597-5f9b-d45a-e227907f8dda" executionId="23999185-f518-4a48-a910-6c66395365d4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cc0511b4-b35f-ab53-9d19-5440999e5842" executionId="1b0b2b84-c26f-4a9b-9e33-109511787458" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b7ab292d-729f-9875-a3a6-b62ddbfe8f52" executionId="4992b110-eb44-4284-bab6-345c04c24ced" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b1f0c8b6-0ddc-a8bc-85ac-c4b526fdbdc7" executionId="65a7d9ae-58a4-4656-8545-77624dfb033e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="20" executed="20" passed="20" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 9.0.9)&#xD;
+[xUnit.net 00:00:00.29]   Discovering: IdleLoadsheddingAPI.Tests&#xD;
+[xUnit.net 00:00:00.32]   Discovered:  IdleLoadsheddingAPI.Tests&#xD;
+[xUnit.net 00:00:00.32]   Starting:    IdleLoadsheddingAPI.Tests&#xD;
+Firebase Project ID: mobile-loadshedding&#xD;
+Using in-memory database 'TestDatabase_8e51a79b-92aa-4957-907d-2c58a00e2d19' as configured.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+Using in-memory database 'TestDatabase_8e51a79b-92aa-4957-907d-2c58a00e2d19' as configured.&#xD;
+Testing database connection...&#xD;
+Database connection successful!&#xD;
+Current user count: 0&#xD;
+Starting server on: http://+:8080&#xD;
+Firebase Project ID: mobile-loadshedding&#xD;
+Using in-memory database 'TestDatabase_3884cdde-cd9c-4b27-8e2c-afe0493eb44f' as configured.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+Using in-memory database 'TestDatabase_3884cdde-cd9c-4b27-8e2c-afe0493eb44f' as configured.&#xD;
+Testing database connection...&#xD;
+Database connection successful!&#xD;
+Current user count: 0&#xD;
+Starting server on: http://+:8080&#xD;
+Firebase Project ID: mobile-loadshedding&#xD;
+Using in-memory database 'TestDatabase_4440bbcf-a1bc-4163-a201-969714de6de1' as configured.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+Using in-memory database 'TestDatabase_4440bbcf-a1bc-4163-a201-969714de6de1' as configured.&#xD;
+Testing database connection...&#xD;
+Database connection successful!&#xD;
+Current user count: 0&#xD;
+Starting server on: http://+:8080&#xD;
+Firebase Project ID: mobile-loadshedding&#xD;
+Using in-memory database 'TestDatabase_de5e3f8a-5d3e-4250-aeb6-4b4d080c508a' as configured.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+Using in-memory database 'TestDatabase_de5e3f8a-5d3e-4250-aeb6-4b4d080c508a' as configured.&#xD;
+Testing database connection...&#xD;
+Database connection successful!&#xD;
+Current user count: 0&#xD;
+Starting server on: http://+:8080&#xD;
+Firebase Project ID: mobile-loadshedding&#xD;
+Using in-memory database 'TestDatabase_d5d61e87-1d2f-4d16-84b8-b542af732388' as configured.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+Using in-memory database 'TestDatabase_d5d61e87-1d2f-4d16-84b8-b542af732388' as configured.&#xD;
+Testing database connection...&#xD;
+Database connection successful!&#xD;
+Current user count: 0&#xD;
+Starting server on: http://+:8080&#xD;
+Firebase Project ID: mobile-loadshedding&#xD;
+Using in-memory database 'TestDatabase_ce212da6-e334-4c9c-b622-5c329e1ae85c' as configured.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+Using in-memory database 'TestDatabase_ce212da6-e334-4c9c-b622-5c329e1ae85c' as configured.&#xD;
+Testing database connection...&#xD;
+Database connection successful!&#xD;
+Current user count: 0&#xD;
+Starting server on: http://+:8080&#xD;
+Firebase Project ID: mobile-loadshedding&#xD;
+Using in-memory database 'TestDatabase_d19ada2d-cea8-4ab7-9903-93bee9fc7bdc' as configured.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+Using in-memory database 'TestDatabase_d19ada2d-cea8-4ab7-9903-93bee9fc7bdc' as configured.&#xD;
+Testing database connection...&#xD;
+Database connection successful!&#xD;
+Current user count: 0&#xD;
+Starting server on: http://+:8080&#xD;
+Firebase Project ID: mobile-loadshedding&#xD;
+Using in-memory database 'TestDatabase_7ff7e6de-95a6-410f-b933-6f4bcbd0ac90' as configured.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+Using in-memory database 'TestDatabase_7ff7e6de-95a6-410f-b933-6f4bcbd0ac90' as configured.&#xD;
+Testing database connection...&#xD;
+Database connection successful!&#xD;
+Current user count: 0&#xD;
+Starting server on: http://+:8080&#xD;
+[xUnit.net 00:00:02.50]   Finished:    IdleLoadsheddingAPI.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

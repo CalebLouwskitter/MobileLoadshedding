@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Data",
+    "\\Entities",
+    "\\Logic",
+    "\\Middleware",
+    "\\Models",
+    "\\Models\\Responses",
+    "\\Properties",
+    "\\Services",
+    "\\Services\\Implementations"
+  ],
+  "SelectedNode": "\\IdleLoadsheddingAPI.sln",
+  "PreviewInSolutionExplorer": false
+}
