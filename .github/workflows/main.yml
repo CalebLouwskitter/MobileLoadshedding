@@ -1,1 +1,139 @@
-BUILD YML IS IN THE ANDROID FOLDER NOT HERE
+name: Build Mobile Loadshedding APK/AAB
+
+env:
+  # The name of the main module repository
+  main_project_module: app
+
+  # The name of the Play Store/App Name
+  playstore_name: MobileLoadshedding
+
+on:
+  # Trigger on push to master branch
+  push:
+    branches:
+      - 'master'
+
+  # Trigger on pull requests to master
+  pull_request:
+    branches:
+      - 'master'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive  # For Unity library if needed
+
+      # Set Current Date As Env Variable
+      - name: Set current date as env variable
+        run: echo "date_today=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
+      # Set Repository Name As Env Variable
+      - name: Set repository name as env variable
+        run: echo "repository_name=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')" >> $GITHUB_ENV
+
+      # Set Up JDK 11 (matching your project's Java version)
+      - name: Set Up JDK 11
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+          cache: 'gradle'
+
+      # Setup Android SDK
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      # Grant execute permission for gradlew
+      - name: Change wrapper permissions
+        run: chmod +x ./MobileLoadshedding/gradlew
+
+      # Create local.properties for Android SDK
+      - name: Create local.properties
+        run: |
+          cd MobileLoadshedding
+          echo "sdk.dir=$ANDROID_HOME" > local.properties
+
+      # Decode and create google-services.json (if you have it as a secret)
+      # Uncomment these lines if you store google-services.json as a GitHub secret
+      # - name: Create google-services.json
+      #   run: |
+      #     cd MobileLoadshedding/app
+      #     echo "${{ secrets.GOOGLE_SERVICES_JSON }}" | base64 -d > google-services.json
+
+      # Run Tests Build
+      - name: Run gradle tests
+        run: |
+          cd MobileLoadshedding
+          ./gradlew test --stacktrace
+        continue-on-error: true  # Continue even if tests fail
+
+      # Run Build Project
+      - name: Build gradle project
+        run: |
+          cd MobileLoadshedding
+          ./gradlew build --stacktrace
+
+      # Create APK Debug
+      - name: Build APK debug (APK) - ${{ env.main_project_module }} module
+        run: |
+          cd MobileLoadshedding
+          ./gradlew assembleDebug --stacktrace
+
+      # Create APK Release (unsigned)
+      - name: Build APK release (APK) - ${{ env.main_project_module }} module
+        run: |
+          cd MobileLoadshedding
+          ./gradlew assembleRelease --stacktrace
+        continue-on-error: true  # May fail without signing config
+
+      # Create Bundle AAB Release (unsigned)
+      - name: Build app bundle release (AAB) - ${{ env.main_project_module }} module
+        run: |
+          cd MobileLoadshedding
+          ./gradlew ${{ env.main_project_module }}:bundleRelease --stacktrace
+        continue-on-error: true  # May fail without signing config
+
+      # Upload APK Debug Artifact
+      - name: Upload APK Debug - ${{ env.repository_name }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.date_today }} - ${{ env.playstore_name }} - APK-debug
+          path: MobileLoadshedding/${{ env.main_project_module }}/build/outputs/apk/debug/*.apk
+          if-no-files-found: warn
+
+      # Upload APK Release Artifact
+      - name: Upload APK Release - ${{ env.repository_name }}
+        uses: actions/upload-artifact@v4
+        if: success() || failure()  # Upload even if signing failed
+        with:
+          name: ${{ env.date_today }} - ${{ env.playstore_name }} - APK-release
+          path: MobileLoadshedding/${{ env.main_project_module }}/build/outputs/apk/release/*.apk
+          if-no-files-found: warn
+
+      # Upload AAB Release Artifact
+      - name: Upload AAB (App Bundle) Release - ${{ env.repository_name }}
+        uses: actions/upload-artifact@v4
+        if: success() || failure()  # Upload even if signing failed
+        with:
+          name: ${{ env.date_today }} - ${{ env.playstore_name }} - AAB-release
+          path: MobileLoadshedding/${{ env.main_project_module }}/build/outputs/bundle/release/*.aab
+          if-no-files-found: warn
+
+      # Upload build reports on failure
+      - name: Upload build reports
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-reports
+          path: |
+            MobileLoadshedding/**/build/reports/
+            MobileLoadshedding/**/build/test-results/
+
