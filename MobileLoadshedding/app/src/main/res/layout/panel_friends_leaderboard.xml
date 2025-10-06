@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_panel_rounded"
-    android:orientation="vertical">
+    android:animateLayoutChanges="true">
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:id="@+id/header_tabs_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,161 +65,167 @@
             android:src="@drawable/ic_close_white" />
     </FrameLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/label_add_friend"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:layout_marginStart="@dimen/panel_padding_horizontal"
+        android:text="Add Friend"
+        android:textColor="#0E3D57"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/header_tabs_container"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/input_friend_code"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:layout_marginStart="@dimen/panel_padding_horizontal"
+        android:layout_marginEnd="8dp"
+        android:background="@android:drawable/edit_text"
+        android:hint="Enter Friend Code"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:paddingStart="@dimen/spacing_medium"
+        android:paddingTop="@dimen/spacing_medium"
+        android:paddingEnd="@dimen/spacing_medium"
+        android:paddingBottom="@dimen/spacing_medium"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/label_add_friend"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_add_friend" />
+
+    <Button
+        android:id="@+id/btn_add_friend"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/panel_padding_horizontal"
+        android:backgroundTint="#4CAF50"
+        android:minWidth="0dp"
+        android:paddingStart="@dimen/button_padding_horizontal"
+        android:paddingTop="@dimen/button_padding_vertical"
+        android:paddingEnd="@dimen/button_padding_horizontal"
+        android:paddingBottom="@dimen/button_padding_vertical"
+        android:text="ADD"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintTop_toTopOf="@id/input_friend_code"
+        app:layout_constraintBottom_toBottomOf="@id/input_friend_code"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/text_add_friend_status"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:layout_marginStart="@dimen/panel_padding_horizontal"
+        android:layout_marginEnd="@dimen/panel_padding_horizontal"
+        android:text=""
+        android:textColor="#757575"
+        android:textSize="13sp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/input_friend_code"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Friends/Global Toggle Buttons -->
+    <TextView
+        android:id="@+id/btn_show_friends"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:layout_marginStart="@dimen/panel_padding_horizontal"
+        android:layout_marginEnd="@dimen/spacing_small"
+        android:background="@drawable/bg_toggle_friends"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:paddingTop="@dimen/spacing_medium"
+        android:paddingBottom="@dimen/spacing_medium"
+        android:text="Friends"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/text_add_friend_status"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_show_global" />
+
+    <TextView
+        android:id="@+id/btn_show_global"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_small"
+        android:layout_marginEnd="@dimen/panel_padding_horizontal"
+        android:background="@drawable/bg_toggle_global"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:paddingTop="@dimen/spacing_medium"
+        android:paddingBottom="@dimen/spacing_medium"
+        android:text="Global"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/btn_show_friends"
+        app:layout_constraintStart_toEndOf="@id/btn_show_friends"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/text_friends_last_updated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:layout_marginStart="@dimen/panel_padding_horizontal"
+        android:text="Updated --"
+        android:textColor="#424242"
+        android:textSize="13sp"
+        app:layout_constraintTop_toBottomOf="@id/btn_show_friends"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/friends_loading"
+        style="@android:style/Widget.ProgressBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/text_friends_last_updated"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/text_friends_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_xlarge"
+        android:text="No friends yet"
+        android:textColor="#757575"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/text_friends_last_updated"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/friends_list_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:layout_marginStart="@dimen/panel_padding_horizontal"
+        android:layout_marginEnd="@dimen/panel_padding_horizontal"
+        android:layout_marginBottom="@dimen/panel_padding_vertical"
+        android:animateLayoutChanges="true"
         android:orientation="vertical"
-        android:paddingStart="@dimen/panel_padding_horizontal"
-        android:paddingTop="@dimen/spacing_normal"
-        android:paddingEnd="@dimen/panel_padding_horizontal"
-        android:paddingBottom="@dimen/panel_padding_vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add Friend"
-            android:textColor="#0E3D57"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_medium"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/input_friend_code"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@android:drawable/edit_text"
-                android:hint="Enter Friend Code"
-                android:inputType="text"
-                android:minHeight="48dp"
-                android:paddingStart="@dimen/spacing_medium"
-                android:paddingTop="@dimen/spacing_medium"
-                android:paddingEnd="@dimen/spacing_medium"
-                android:paddingBottom="@dimen/spacing_medium"
-                android:textSize="14sp" />
-
-            <Button
-                android:id="@+id/btn_add_friend"
-                style="@style/Widget.MaterialComponents.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_medium"
-                android:paddingStart="@dimen/button_padding_horizontal"
-                android:paddingTop="@dimen/button_padding_vertical"
-                android:paddingEnd="@dimen/button_padding_horizontal"
-                android:paddingBottom="@dimen/button_padding_vertical"
-                android:text="ADD" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:text="Share your friend code from your Profile"
-            android:textColor="#757575"
-            android:textSize="12sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_large"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btn_show_global"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/spacing_small"
-                android:layout_weight="1"
-                android:paddingTop="@dimen/button_padding_vertical"
-                android:paddingBottom="@dimen/button_padding_vertical"
-                android:text="GLOBAL" />
-
-            <Button
-                android:id="@+id/btn_show_friends"
-                style="@style/Widget.MaterialComponents.Button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_small"
-                android:layout_weight="1"
-                android:backgroundTint="#212121"
-                android:paddingTop="@dimen/button_padding_vertical"
-                android:paddingBottom="@dimen/button_padding_vertical"
-                android:text="REFRESH FRIENDS"
-                android:textColor="#FFFFFF" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/text_friends_last_updated"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_normal"
-            android:text="Synced --"
-            android:textColor="#0E3D57"
-            android:textSize="14sp" />
-
-        <ProgressBar
-            android:id="@+id/friends_loading"
-            style="@android:style/Widget.ProgressBar.Small"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/spacing_medium"
-            android:visibility="gone" />
-
-        <LinearLayout
-            android:id="@+id/text_friends_empty"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_xlarge"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingStart="@dimen/panel_padding_horizontal"
-            android:paddingTop="@dimen/spacing_large"
-            android:paddingEnd="@dimen/panel_padding_horizontal"
-            android:paddingBottom="@dimen/spacing_large"
-            android:visibility="gone">
-
-            <ImageView
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:alpha="0.5"
-                android:src="@android:drawable/ic_dialog_email"
-                android:tint="#BDBDBD" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_normal"
-                android:gravity="center"
-                android:text="@string/friends_empty_message"
-                android:textColor="#757575"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_small"
-                android:gravity="center"
-                android:text="Tap the Profile button to find your Friend Code"
-                android:textColor="#BDBDBD"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/friends_list_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_medium"
-            android:animateLayoutChanges="true"
-            android:orientation="vertical" />
-    </LinearLayout>
-</LinearLayout>
+        app:layout_constraintTop_toBottomOf="@id/text_friends_last_updated"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
