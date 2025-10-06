@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_panel_rounded"
-    android:orientation="vertical"
     android:animateLayoutChanges="true">
 
     <FrameLayout
-        android:layout_width="match_parent"
+        android:id="@+id/header_container"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_tasks_panel"
-        android:padding="@dimen/spacing_medium">
+        android:padding="@dimen/spacing_medium"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
@@ -33,27 +36,30 @@
             app:tint="#0E3D57" />
     </FrameLayout>
 
+    <TextView
+        android:id="@+id/text_tasks_empty"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_xxlarge"
+        android:layout_marginBottom="@dimen/spacing_xxlarge"
+        android:gravity="center"
+        android:text="No events yet"
+        android:textColor="#757575"
+        android:textSize="15sp"
+        android:paddingStart="@dimen/panel_padding_horizontal"
+        android:paddingEnd="@dimen/panel_padding_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/header_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/tasks_list_container"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="@dimen/panel_padding_horizontal">
-
-        <TextView
-            android:id="@+id/text_tasks_empty"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_xxlarge"
-            android:layout_marginBottom="@dimen/spacing_xxlarge"
-            android:gravity="center"
-            android:text="No events yet"
-            android:textColor="#757575"
-            android:textSize="15sp" />
-
-        <LinearLayout
-            android:id="@+id/tasks_list_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </LinearLayout>
-</LinearLayout>
+        android:padding="@dimen/panel_padding_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/header_container"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

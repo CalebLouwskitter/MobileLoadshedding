@@ -1,4 +1,3 @@
-
 package com.prog7314.IdleLoadsheddingMobile
 
 import android.content.ClipData //Android, 2025.
@@ -576,12 +575,12 @@ class MainActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
     private fun configureFriendsLeaderboardPanel(panel: View) {
         Log.d("MainActivity", "Configuring friends leaderboard panel")
         
-        panel.findViewById<Button?>(R.id.btn_show_global)?.setOnClickListener {
+        panel.findViewById<TextView?>(R.id.btn_show_global)?.setOnClickListener {
             // Bounce users back to the global leaderboard without reconstructing adapters.
             showPanel(R.layout.panel_leaderboard)
         }
 
-        panel.findViewById<Button?>(R.id.btn_show_friends)?.setOnClickListener {
+        panel.findViewById<TextView?>(R.id.btn_show_friends)?.setOnClickListener {
             Log.d("MainActivity", "Refreshing friends list from backend")
             FriendsList.fetchBackendFriends { result ->
                 result.onSuccess { payload ->
