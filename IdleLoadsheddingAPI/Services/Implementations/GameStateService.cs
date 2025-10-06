@@ -1,4 +1,4 @@
-// File intentionally left blank after simplification.
+
 using System.Text.Json;
 using IdleLoadsheddingAPI.Data;
 using IdleLoadsheddingAPI.Models.DTOs;

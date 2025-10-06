@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using IdleLoadsheddingAPI.Data;
-using IdleLoadsheddingAPI.Entities;
+using IdleLoadsheddingAPI.Models.AppEntities;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Xunit;

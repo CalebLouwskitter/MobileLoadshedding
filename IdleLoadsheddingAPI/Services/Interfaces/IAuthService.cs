@@ -1,4 +1,3 @@
-// File intentionally left blank after simplification.
 using IdleLoadsheddingAPI.Models.Entities;
 
 namespace IdleLoadsheddingAPI.Services.Interfaces;

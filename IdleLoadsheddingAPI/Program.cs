@@ -1,5 +1,4 @@
-
-
+using IdleLoadsheddingAPI.Controllers;
 using IdleLoadsheddingAPI.Data;
 using IdleLoadsheddingAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -147,6 +146,10 @@ app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
 
+// API Controllers (Microsoft, 2025)
+// - AuthController: Handles user authentication and registration with Firebase JWT tokens
+// - GameController: Manages game state synchronization, upgrades, and leaderboard operations
+// - SocialController: Provides friend management and social features
 app.MapControllers();
 
 var urls = Environment.GetEnvironmentVariable("ASPNETCORE_URLS") ?? "http://+:8080";
@@ -157,12 +160,18 @@ app.Run();
 public partial class Program { }
 
 
+// References:
+//
 // - Microsoft, 2025. .NET 9 Documentation. [online] Microsoft Learn. Available at:
 //   https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-9/overview
 //   [Accessed 5 Oct. 2025].
 //
 // - Microsoft, 2025. ASP.NET Core Documentation. [online] Microsoft Learn.
 //   Available at: https://learn.microsoft.com/en-us/aspnet/core/ [Accessed 5 Oct. 2025].
+//
+// - Microsoft, 2025. ASP.NET Core Web API Controllers. [online] Microsoft Learn.
+//   Available at: https://learn.microsoft.com/en-us/aspnet/core/web-api/
+//   [Accessed 6 Oct. 2025].
 //
 // - Microsoft, 2025. C# Language Documentation. [online] Microsoft Learn. Available at:
 //   https://learn.microsoft.com/en-us/dotnet/csharp/ [Accessed 5 Oct. 2025].

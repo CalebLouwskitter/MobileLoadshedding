@@ -1,6 +1,6 @@
 // Entity Framework Core implementation for database access (Microsoft, 2025)
 // DbContext pattern for managing database connections and entities (Microsoft, 2025)
-using IdleLoadsheddingAPI.Entities;
+using IdleLoadsheddingAPI.Models.AppEntities;
 using Microsoft.EntityFrameworkCore;
 
 namespace IdleLoadsheddingAPI.Data;

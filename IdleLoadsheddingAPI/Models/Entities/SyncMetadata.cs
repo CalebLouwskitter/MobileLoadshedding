@@ -1,4 +1,3 @@
-// File intentionally left blank after schema simplification.
 using System.ComponentModel.DataAnnotations;
 
 namespace IdleLoadsheddingAPI.Models.Entities;
