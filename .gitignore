@@ -1,0 +1,28 @@
+# Gradle build artifacts
+.gradle/
+build/
+local.properties
+
+# C# / .NET build artifacts
+bin/
+obj/
+*.user
+*.suo
+*.cache
+.vs/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
