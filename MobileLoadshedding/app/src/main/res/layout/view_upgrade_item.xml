@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    WHY FRAMELAYOUT WRAPPER:
+    - Need overlay layer for visual feedback (highlight, +1 indicator)
+    - FrameLayout allows stacking: base content + temporary overlays
+    - This architecture enables non-intrusive animations that don't reflow layout
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- Base LinearLayout (original structure) -->
+    <LinearLayout
+        android:id="@+id/upgrade_item_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_upgrade_item"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/item_padding">
+
+        <!-- Left side: Name, Level, Output -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_upgrade_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Generator 1"
+                android:textColor="#212121"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- 
+                WHY WRAP LEVEL IN FRAMELAYOUT:
+                - Need to overlay +1 indicator on top of level text
+                - FrameLayout allows layering without affecting text layout
+                - Indicator can float/fade independently of base text
+            -->
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small">
+
+                <TextView
+                    android:id="@+id/text_upgrade_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Level: 1"
+                    android:textColor="#616161"
+                    android:textSize="13sp" />
+
+                <!-- 
+                    +1 LEVEL INDICATOR:
+                    - Starts invisible (alpha=0)
+                    - Animated programmatically when level increases
+                    - Floats up and fades out to show upgrade happened
+                    - Positioned to right of level text so it doesn't overlap
+                -->
+                <TextView
+                    android:id="@+id/text_level_delta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:alpha="0"
+                    android:text="+1"
+                    android:textColor="#4CAF50"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/text_upgrade_output"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text=""
+                android:textColor="#757575"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Right side: Upgrade Button -->
+        <Button
+            android:id="@+id/btn_upgrade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:background="@drawable/bg_upgrade_button"
+            android:minWidth="@dimen/button_min_width"
+            android:paddingStart="@dimen/button_padding_horizontal"
+            android:paddingTop="@dimen/button_padding_vertical"
+            android:paddingEnd="@dimen/button_padding_horizontal"
+            android:paddingBottom="@dimen/button_padding_vertical"
+            android:stateListAnimator="@null"
+            android:text="Tap to Upgrade"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- 
+        HIGHLIGHT OVERLAY:
+        - Sits on top of entire item via FrameLayout stacking
+        - Starts invisible (alpha=0)
+        - Flashes green briefly when stats update to draw user's attention
+        - Fades out automatically so it doesn't stay highlighted forever
+        - Clickthrough enabled (not focusable/clickable) so doesn't block button
+    -->
+    <View
+        android:id="@+id/view_update_highlight"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:background="@drawable/bg_upgrade_highlight"
+        android:clickable="false"
+        android:focusable="false" />
+
+</FrameLayout>

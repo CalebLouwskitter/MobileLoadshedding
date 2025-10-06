@@ -1,0 +1,51 @@
+
+
+services:
+  idle-loadshedding-sql:
+    build:
+      context: ./SQL
+      dockerfile: Dockerfile
+    container_name: idle-loadshedding-sql
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "Password1!"
+      MSSQL_PID: "Express"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql_data:/var/opt/mssql
+    restart: unless-stopped
+    networks:
+      - idle-loadshedding-network
+    healthcheck:
+      test: ["CMD", "/opt/mssql-tools/bin/sqlcmd", "-S", "localhost", "-U", "sa", "-P", "Password1!", "-Q", "SELECT 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  idle-loadshedding-webapi:
+    build:
+      context: ./IdleLoadsheddingAPI
+      dockerfile: Dockerfile
+    container_name: idle-loadshedding-webapi
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__Default: Server=idle-loadshedding-sql;Database=IdleLoadshedding;User ID=sa;Password=Password1!;TrustServerCertificate=True;
+      Firebase__ProjectId: "mobile-loadshedding"
+    ports:
+      - "5001:8080"
+    depends_on:
+      idle-loadshedding-sql:
+        condition: service_healthy
+    networks:
+      - idle-loadshedding-network
+    restart: unless-stopped
+
+networks:
+  idle-loadshedding-network:
+    driver: bridge
+
+volumes:
+  sql_data:
