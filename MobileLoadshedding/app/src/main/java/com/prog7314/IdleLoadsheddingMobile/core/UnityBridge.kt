@@ -42,6 +42,7 @@ object UnityBridge {
     // Called by Unity C# via: new AndroidJavaClass("com.prog7314.IdleLoadsheddingMobile.core.UnityBridge").CallStatic("updateScore", scoreString)
     @JvmStatic //Kotlin, 2025.
     fun updateScore(score: String) {
+        Log.d(TAG, "updateScore called with: $score")
         markUnityReady()
         val value = score.toIntOrNull() ?: return
         mainHandler.post { //Android, 2025.
@@ -52,6 +53,7 @@ object UnityBridge {
     // Called by Unity C# via: new AndroidJavaClass("com.prog7314.IdleLoadsheddingMobile.core.UnityBridge").CallStatic("notifyGameEvent", evt)
     @JvmStatic //Kotlin, 2025.
     fun notifyGameEvent(event: String) {
+        Log.d(TAG, "notifyGameEvent called with: $event")
         markUnityReady()
         mainHandler.post { //Android, 2025.
             listeners.forEach { it.onGameEvent(event) }
@@ -60,6 +62,7 @@ object UnityBridge {
 
     @JvmStatic //Kotlin, 2025.
     fun updateStats(statsJson: String) {
+        Log.d(TAG, "updateStats called with: $statsJson")
         markUnityReady()
         mainHandler.post { //Android, 2025.
             listeners.forEach { it.onStatsUpdated(statsJson) }
@@ -68,6 +71,7 @@ object UnityBridge {
 
     @JvmStatic //Kotlin, 2025.
     fun syncSaveData(saveJson: String) {
+        Log.d(TAG, "syncSaveData called with: $saveJson")
         markUnityReady()
         mainHandler.post { //Android, 2025.
             listeners.forEach { it.onSaveSynced(saveJson) }
@@ -76,6 +80,7 @@ object UnityBridge {
 
     @JvmStatic //Kotlin, 2025.
     fun updateLeaderboard(json: String) {
+        Log.d(TAG, "updateLeaderboard called with: $json")
         markUnityReady()
         mainHandler.post { //Android, 2025.
             listeners.forEach { it.onLeaderboardUpdated(json) }
@@ -84,6 +89,7 @@ object UnityBridge {
 
     @JvmStatic //Kotlin, 2025.
     fun updateFriends(json: String) {
+        Log.d(TAG, "updateFriends called with: $json")
         markUnityReady()
         mainHandler.post { //Android, 2025.
             listeners.forEach { it.onFriendsUpdated(json) }
@@ -93,6 +99,7 @@ object UnityBridge {
     // Called by Unity C# when energy tap occurs
     @JvmStatic //Kotlin, 2025.
     fun notifyEnergyTap(amountString: String) {
+        Log.d(TAG, "notifyEnergyTap called with: $amountString")
         markUnityReady()
         val amount = amountString.toDoubleOrNull() ?: return
         mainHandler.post { //Android, 2025.
@@ -103,6 +110,7 @@ object UnityBridge {
     // Called by Unity C# when burst energy is added
     @JvmStatic //Kotlin, 2025.
     fun notifyEnergyBurst(amountString: String) {
+        Log.d(TAG, "notifyEnergyBurst called with: $amountString")
         markUnityReady()
         val amount = amountString.toDoubleOrNull() ?: return
         mainHandler.post { //Android, 2025.
