@@ -1,6 +1,6 @@
 using System;
 using IdleLoadsheddingAPI.Data;
-using IdleLoadsheddingAPI.Entities;
+using IdleLoadsheddingAPI.Models.AppEntities;
 using IdleLoadsheddingAPI.Models.Requests;
 using IdleLoadsheddingAPI.Models.Responses;
 using Microsoft.EntityFrameworkCore;

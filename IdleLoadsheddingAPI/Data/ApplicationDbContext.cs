@@ -1,4 +1,4 @@
-// File intentionally left blank after simplification.
+
 using IdleLoadsheddingAPI.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 

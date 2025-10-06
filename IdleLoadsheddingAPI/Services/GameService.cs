@@ -1,11 +1,11 @@
 using System;
 using IdleLoadsheddingAPI.Data;
-using IdleLoadsheddingAPI.Entities;
 using IdleLoadsheddingAPI.Models.Requests;
 using IdleLoadsheddingAPI.Models.Responses;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using System.Text.Json;
+using IdleLoadsheddingAPI.Models.AppEntities;
 
 namespace IdleLoadsheddingAPI.Services;
 

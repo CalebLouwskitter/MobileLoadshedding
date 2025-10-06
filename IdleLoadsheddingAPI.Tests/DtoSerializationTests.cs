@@ -51,7 +51,7 @@ public class DtoSerializationTests
     }
 
     /// <summary>
-    /// CRITICAL P1 TEST: Validates that Android JSON can be deserialized by API.
+    /// Validates that Android JSON can be deserialized by API.
     /// Tests the request path (Android -> API).
     /// </summary>
     [Fact]
@@ -118,7 +118,7 @@ public class DtoSerializationTests
     }
 
     /// <summary>
-    /// P1 TEST: Validates that missing required fields result in validation errors.
+    ///  Validates that missing required fields result in validation errors.
     /// </summary>
     [Fact]
     public void UpgradeRequest_MissingRequiredName_DeserializesToDefault()
@@ -140,7 +140,7 @@ public class DtoSerializationTests
     }
 
     /// <summary>
-    /// P1 TEST: Validates numeric boundary values don't overflow.
+    ///  Validates numeric boundary values don't overflow.
     /// </summary>
     [Fact]
     public void SyncRequest_LargeNumbers_DeserializesCorrectly()
