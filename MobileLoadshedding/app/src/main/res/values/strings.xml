@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">MobileLoadshedding</string>
-    <string name="default_web_client_id">YOUR_WEB_CLIENT_ID</string>
+    <string name="default_web_client_id">41587024325-gt1n0vaejub9dme7cvidievg5kcktbmp.apps.googleusercontent.com</string>
+    
     <string name="hud_energy_per_second_format">%1$s /s</string>
     <string name="hud_generators_format">%1$d generators (Lv %2$d)</string>
     <string name="hud_safe_idle_format">Safe idle: %1$s</string>
@@ -87,4 +88,10 @@
     <string name="btn_upload_save">UPLOAD SAVE TO CLOUD</string>
     <string name="btn_sync_save">SYNC SAVE WITH CLOUD</string>
     <string name="text_last_save_sync_default">Last synced: --</string>
+    <string name="btn_logout">LOG OUT</string>
+    <string name="toast_logout_success">Logged out successfully</string>
+    <string name="logout_confirmation_title">Log Out</string>
+    <string name="logout_confirmation_message">Are you sure you want to log out? Your progress is saved in the cloud.</string>
+    <string name="logout_confirm_yes">Log Out</string>
+    <string name="logout_confirm_no">Cancel</string>
 </resources>

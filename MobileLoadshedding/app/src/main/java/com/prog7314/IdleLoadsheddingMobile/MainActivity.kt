@@ -3,6 +3,7 @@ package com.prog7314.IdleLoadsheddingMobile
 import android.content.ClipData //Android, 2025.
 import android.content.ClipboardManager //Android, 2025.
 import android.content.Context //Android, 2025.
+import android.content.Intent //Android, 2025.
 import android.content.SharedPreferences //Android, 2025.
 import android.content.res.Configuration //Android, 2025.
 import android.os.Bundle //Android, 2025.
@@ -540,6 +541,62 @@ class MainActivity : UnityPlayerGameActivity() { //Unity Technologies, 2025.
         // Keeping the UI in place so users know it's coming.
         val themeSpinner = panel.findViewById<Spinner?>(R.id.spinner_theme)
         themeSpinner?.setSelection(0)  // Always default to Light for now
+
+        // Logout button - signs user out of Firebase and returns to auth screen
+        panel.findViewById<Button?>(R.id.btn_logout)?.setOnClickListener {
+            showLogoutConfirmationDialog()
+        }
+    }
+
+    /**
+     * Shows a confirmation dialog before logging out to prevent accidental logouts.
+     * Users expect this pattern from other apps—immediate logout feels jarring.
+     */
+    private fun showLogoutConfirmationDialog() {
+        androidx.appcompat.app.AlertDialog.Builder(this)
+            .setTitle(getString(R.string.logout_confirmation_title))
+            .setMessage(getString(R.string.logout_confirmation_message))
+            .setPositiveButton(getString(R.string.logout_confirm_yes)) { _, _ ->
+                performLogout()
+            }
+            .setNegativeButton(getString(R.string.logout_confirm_no), null)
+            .show()
+    }
+
+    /**
+     * Performs the actual logout sequence:
+     * 1. Upload final save to cloud (preserve progress)
+     * 2. Sign out from Firebase
+     * 3. Clear cached data
+     * 4. Navigate to AuthActivity
+     * 5. Finish this activity to prevent back navigation
+     */
+    private fun performLogout() {
+        // Upload save one last time to ensure progress is preserved
+        SaveSync.requestUnitySave()
+
+        // Sign out from Firebase
+        auth.signOut()
+
+        // Clear cached game state to prevent data leakage between accounts
+        latestStats = null
+        latestLeaderboard = null
+        latestFriends = null
+        latestSave = null
+        currentActiveEvent = null
+        eventHistory = emptyList()
+        previousGeneratorStats.clear()
+
+        // Show success feedback
+        Toast.makeText(this, getString(R.string.toast_logout_success), Toast.LENGTH_SHORT).show()
+
+        // Navigate to AuthActivity
+        val intent = Intent(this, com.prog7314.IdleLoadsheddingMobile.ui.auth.AuthActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+
+        // Finish this activity so user can't navigate back with back button
+        finish()
     }
 
     private fun configureLeaderboardPanel(panel: View) {

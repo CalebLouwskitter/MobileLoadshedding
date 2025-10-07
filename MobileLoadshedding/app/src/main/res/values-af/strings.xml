@@ -87,4 +87,10 @@
     <string name="btn_upload_save">LAAI STOOR OP NA WOLK</string>
     <string name="btn_sync_save">SINKRONISEER STOOR MET WOLK</string>
     <string name="text_last_save_sync_default">Laaste gesinkroniseer: --</string>
+    <string name="btn_logout">TEKEN UIT</string>
+    <string name="toast_logout_success">Suksesvol uitgeteken</string>
+    <string name="logout_confirmation_title">Teken Uit</string>
+    <string name="logout_confirmation_message">Is jy seker jy wil uitteken? Jou vordering is in die wolk gestoor.</string>
+    <string name="logout_confirm_yes">Teken Uit</string>
+    <string name="logout_confirm_no">Kanselleer</string>
 </resources>

@@ -87,4 +87,10 @@
     <string name="btn_upload_save">KENYA POLOKO HO LERU</string>
     <string name="btn_sync_save">LUMELLANA POLOKO LE LERU</string>
     <string name="text_last_save_sync_default">E bolokehile ha moroa: --</string>
+    <string name="btn_logout">TSWA</string>
+    <string name="toast_logout_success">O tsoile ka katleho</string>
+    <string name="logout_confirmation_title">Tswa</string>
+    <string name="logout_confirmation_message">O netefatsa hore o batla ho tswa? Tsoelo-pele ya hao e bolokilwe lerung.</string>
+    <string name="logout_confirm_yes">Tswa</string>
+    <string name="logout_confirm_no">Khansela</string>
 </resources>

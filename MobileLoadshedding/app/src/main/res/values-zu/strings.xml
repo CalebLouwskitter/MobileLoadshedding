@@ -87,4 +87,10 @@
     <string name="btn_upload_save">LAYISHA UKULONDOLOZA EMAFINI</string>
     <string name="btn_sync_save">VUMELANISA UKULONDOLOZA NAMAFINI</string>
     <string name="text_last_save_sync_default">Kugcine kuvumelanisiwe: --</string>
+    <string name="btn_logout">PHUMA</string>
+    <string name="toast_logout_success">Uphumile ngempumelelo</string>
+    <string name="logout_confirmation_title">Phuma</string>
+    <string name="logout_confirmation_message">Uqinisekile ukuthi ufuna ukuphuma? Inqubekela yakho igcinwe emafini.</string>
+    <string name="logout_confirm_yes">Phuma</string>
+    <string name="logout_confirm_no">Khansela</string>
 </resources>

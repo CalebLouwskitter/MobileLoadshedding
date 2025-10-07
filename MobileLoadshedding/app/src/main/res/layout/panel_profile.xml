@@ -283,10 +283,11 @@
                 android:paddingBottom="@dimen/button_padding_vertical"
                 android:text="LOGOUT"
                 android:textColor="#FFFFFF"
-                app:layout_constraintTop_toBottomOf="@id/btn_profile_friends"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/btn_profile_friends" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
