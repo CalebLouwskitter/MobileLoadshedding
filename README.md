@@ -10,6 +10,12 @@ Idle Loadshedding is an interactive mobile game designed to simulate responses t
 
 The frontend of the game is built using Unity, offering a rich and interactive user experience. The interface is designed to be intuitive and visually appealing, allowing players to easily navigate through the game's features.
 
+### Built with Unity's 3D capabilities:
+
+- Camera Controls: Smooth pan and zoom with touch, edge panning for mobile
+- Clickable Objects: Interactive generators and buildings with visual feedback
+- Light System: Dynamic lighting that responds to touch
+- Visual Effects: Animations and material changes for state transitions
 
 <img width="506" height="1145" alt="image" src="https://github.com/user-attachments/assets/27d20d26-32a3-4c2a-9865-16ee9a3ddc8d" />
 
@@ -60,15 +66,273 @@ The project is organized into the following main directories:
 -   **`MobileLoadshedding/`**: The Unity project for the mobile application, structured as a Gradle project.
 -   **`SQL/`**: Contains the Docker configuration and initialization scripts for the SQL Server database.
 
+# Unity Game Systems - In-Depth Documentation
+This section provides comprehensive documentation for the Unity game systems implemented in Idle Loadshedding.
+
+## Architecture Overview
+
+Manager-Based Architecture
+
+The game uses a singleton manager pattern with carefully ordered initialization to ensure dependencies are available when needed.
+
+### Managers
+
+- IdleStatsManager
+- IdleCurrencyManager
+- IdleSectionManager
+- IdleEventManager
+- IdleSaveManager
+
+### Game Loop
+
+Player Action → Manager Processing → State Update → UI Refresh → Save Sync
+
+## Core Manager Systems
+
+<img width="406" height="233" alt="image" src="https://github.com/user-attachments/assets/16321cd8-97bd-4b48-887a-9258e8f2d7de" />
+
+### 1. IdleStatsManager
+
+Purpose: Central hub for all energy-related statistics and production calculations.
+
+Location: Assets/Scripts/Core/IdleStatsManager.cs
+#### Key Responsibilities
+
+- Track current energy and total energy generated
+- Manage energy production from all generators
+- Apply event multipliers to production rates
+- Handle manual energy generation (tap mechanic)
+- Calculate offline progress
+- Sync stats to Android every 5 seconds
+- Auto-save state on pause/quit
+
+### 2. IdleEventManager
+
+Purpose: Manages random gameplay events that modify production rates.
+
+Location: Assets/Scripts/Core/IdleEventManager.cs
+#### Key Responsibilities
+
+- Schedule random events at intervals
+- Trigger timed events (load shedding, power surges)
+- Apply production multipliers
+- Notify Android of event state changes
+- Track active event duration
+
+### 3. IdleCurrencyManager
+
+Purpose: Manages the in-game money economy.
+
+Location: Assets/Scripts/Core/IdleCurrencyManager.cs
+#### Key Responsibilities
+
+- Track current money balance
+- Track total money earned (lifetime)
+- Validate spending transactions
+- Persist currency state
+- Integrate with save system
+
+### 4. IdleSectionManager
+Purpose: Manages all city sections (districts) in the game.
+
+Location: Assets/Scripts/Core/IdleSectionManager.cs
+#### Key Responsibilities
+
+- Track all sections in the game
+- Auto-discover sections in scene
+- Organize sections by tier
+- Coordinate section saves/loads
+- Notify when sections change state
+
+### 5. IdleSaveManager
+Purpose: Coordinates all save/load operations across the game.
+
+Location: Assets/Scripts/Core/IdleSaveManager.cs
+#### Key Responsibilities
+
+- Combine data from all managers
+- Save to local PlayerPrefs
+- Sync to Android every 30 seconds
+- Handle generator states
+- Auto-save on pause/quit
+- Load saved state on startup
+
+## Gameplay Components
+
+<img width="398" height="325" alt="image" src="https://github.com/user-attachments/assets/382fbe4e-2523-452c-93db-6d2484fef9fa" />
+
+### ResourceGenerator
+Purpose: Individual energy generators (solar panels, wind turbines, etc.)
+
+Location: Assets/Scripts/Gameplay/ResourceGenerator.cs
+#### Key Features
+
+- Configurable production rates
+- Upgrade system with exponential costs
+- Auto-registers with IdleStatsManager
+- Optional tap-for-energy mechanic
+- Max level system
+
+### SectionData
+Purpose: Data container for city section configuration.
+
+Location: Assets/Scripts/Gameplay/SectionData.cs
+
+### SectionController
+Purpose: Controls individual section behavior and production.
+
+Location: Assets/Scripts/Gameplay/SectionController.cs
+#### Key Responsibilities
+
+- Execute production cycle (every second)
+- Consume energy, produce money
+- Handle unlock logic
+- Handle upgrade logic
+- Auto-register with IdleSectionManager
+
+## UI Systems (Hidden on the android side as this is used to ensure data is being read correctly)
+
+<img width="298" height="440" alt="image" src="https://github.com/user-attachments/assets/efa84fcf-6fb8-4eda-a934-be3a42bdbb75" />
+
+### StatsDisplayUI
+
+<img width="421" height="933" alt="image" src="https://github.com/user-attachments/assets/2a4a0434-957b-4160-81b4-06274b867eb6" />
+
+Purpose: Real-time display of all game statistics.
+
+Location: Assets/Scripts/UI/StatsDisplayUI.cs
+Displayed Information
+#### Energy Stats:
+
+- Current Energy
+- Total Energy Generated
+- Energy Per Second
+
+#### Currency Stats:
+
+- Current Money
+- Total Money Earned
+
+#### Generator Stats:
+
+- Active Generator Count
+- Total Generator Levels
+
+#### Section Stats:
+
+- Active Section Count
+- Total Section Levels
+- Money Per Second
+
+#### Event Stats:
+
+- Production Multiplier
+- Active Event Status
+
+### SectionUIButton
+
+Purpose: Interactive UI button for section unlock/upgrade.
+
+Location: Assets/Scripts/UI/SectionUIButton.cs
+#### Key Features
+
+- Auto-finds linked section by ID
+- Shows current level and max level
+- Displays unlock cost or upgrade cost
+- Shows production and energy consumption
+- Color-coded affordability
+- Auto-disables when maxed or unaffordable
+
+### EnergyTapButton
+Purpose: Manual energy generation button with visual feedback.
+
+Location: Assets/Scripts/UI/EnergyTapButton.cs
+#### Key Features
+
+- Adds burst energy on tap
+- Scale punch animation
+- Configurable energy amount
+- Integrates with IdleStatsManager
+
+## Input & Interaction
+
+### CameraController
+
+https://github.com/user-attachments/assets/7201ff1b-3a8a-489f-a765-b847d29c5bf6
+
+Purpose: Mobile-friendly camera controls for scene navigation.
+
+Location: Assets/Scripts/Input/CameraController.cs
+### Features
+#### Touch/Mouse Controls:
+
+- Drag to pan camera
+- Edge panning on mobile
+
+#### Boundary System:
+
+- Configurable min/max bounds
+- Smooth clamping
+
+#### Performance:
+
+- Target frame rate for mobile
+- Periodic boundary checks
+- Efficient input handling
+
+### ClickDetector
+Purpose: Handles all click/tap detection with drag prevention.
+
+Location: Assets/Scripts/Input/ClickDetector.cs
+#### Features
+
+- Drag Detection: Prevents accidental clicks during camera pan
+- Time Validation: Ignores long presses
+- Distance Threshold: Configurable drag sensitivity
+- Layer Filtering: Click only on specific layers
+- IClickable Interface: Standard interaction protocol
+
+### ClickableObject
+Purpose: Base implementation of IClickable for simple objects.
+
+Location: Assets/Scripts/Input/ClickableObject.cs
+#### Features
+
+- Toggle state (on/off)
+- Material swapping
+- Color changes
+- Audio feedback
+- Virtual OnClickCustomBehavior for extensions
+
 ## Conclusion
 
 The Idle Loadshedding project is a full-stack application that demonstrates the integration of a Unity game with a .NET backend and a SQL database. The use of Docker for containerization facilitates a smooth development workflow and prepares the application for a scalable cloud deployment on Azure.
 
+### LightController
+
+Purpose: Advanced light control system for buildings/districts.
+
+Location: Assets/Scripts/Input/LightController.cs
+#### Features
+
+- Multi-Light Control: Control arrays of light objects
+- Material Swapping: Change materials on/off
+- Emission Control: Adjust emission intensity
+- Animation Support: Animate light transitions
+- Switch Visibility: Optional visible/hidden switch
+- Auto-Discovery: Find lights by name/tag
+
+##Checkins for version 1 
+<img width="721" height="289" alt="image" src="https://github.com/user-attachments/assets/098748c2-0a4a-4e39-b501-9d7303903ebd" />
+
+## Git pushes for Version 2
+<img width="1281" height="710" alt="image" src="https://github.com/user-attachments/assets/7c54b39d-504e-4332-9bdf-b722ed5715a3" />
+
 ## Contributors
 
--Caleb (ST10275378)
--Logan (ST10268888)
--Kyle (ST10085208)
+- Caleb (ST10275378)
+- Logan (ST10268888)
+- Kyle (ST10085208)
 
 ## Reference list:
 
@@ -168,8 +432,26 @@ Square (2025) OkHttp - An HTTP client for Android and Java. [online] Available a
 Square (2025) Retrofit - Type-safe HTTP client for Android and Java. [online] Available at: https://square.github.io/retrofit/
  [Accessed 29 Sept. 2025].
 
-Unity Technologies (2025) Unity for Android. [online] Available at: https://docs.unity3d.com/Manual/android.html
+Unity Technologies (2025) Best Practice - Understanding Performance in Unity. [online] Unity Manual. Available at: https://docs.unity3d.com/Manual/BestPracticeUnderstandingPerformanceInUnity.html
+ [Accessed 7 Oct. 2025].
+
+Unity Technologies (2025) JsonUtility. [online] Unity Script Reference. Available at: https://docs.unity3d.com/ScriptReference/JsonUtility.html
+ [Accessed 7 Oct. 2025].
+
+Unity Technologies (2025) Mobile Optimization - Practical Guide. [online] Unity Manual. Available at: https://docs.unity3d.com/Manual/MobileOptimizationPracticalGuide.html
+ [Accessed 7 Oct. 2025].
+
+Unity Technologies (2025) PlayerPrefs. [online] Unity Script Reference. Available at: https://docs.unity3d.com/ScriptReference/PlayerPrefs.html
+ [Accessed 7 Oct. 2025].
+
+Unity Technologies (2025) TextMesh Pro. [online] Unity Manual. Available at: https://docs.unity3d.com/Manual/com.unity.textmeshpro.html
+ [Accessed 7 Oct. 2025].
+
+Unity Technologies (2025) Unity for Android. [online] Unity Manual. Available at: https://docs.unity3d.com/Manual/android.html
  [Accessed 30 Sept. 2025].
 
-Unity Technologies (2025) Unity for Android - Native Plugin Integration. [online] Available at: https://docs.unity3d.com/Manual/android-plugins.html
+Unity Technologies (2025) Unity for Android - Native Plugin Integration. [online] Unity Manual. Available at: https://docs.unity3d.com/Manual/android-plugins.html
  [Accessed 3 Oct. 2025].
+
+Unity Technologies (2025) Unity Input System. [online] Unity Package Documentation. Available at: https://docs.unity3d.com/Packages/com.unity.inputsystem@1.5
+ [Accessed 7 Oct. 2025].
