@@ -64,6 +64,12 @@ The project is organized into the following main directories:
 
 The Idle Loadshedding project is a full-stack application that demonstrates the integration of a Unity game with a .NET backend and a SQL database. The use of Docker for containerization facilitates a smooth development workflow and prepares the application for a scalable cloud deployment on Azure.
 
+## Contributors
+
+-Caleb (ST10275378)
+-Logan (ST10268888)
+-Kyle (ST10085208)
+
 ## Reference list:
 
 Android (2025) Android Developers - Activity. [online] Available at: https://developer.android.com/reference/android/app/Activity
