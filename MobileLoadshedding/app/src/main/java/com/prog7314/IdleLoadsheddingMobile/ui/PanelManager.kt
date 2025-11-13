@@ -93,4 +93,18 @@ class PanelManager(
     fun isAnyPanelVisible(): Boolean {
         return currentPanelLayoutId != null
     }
+    
+    /**
+     * Gets the currently visible panel view.
+     */
+    fun getCurrentPanel(): View? {
+        return currentPanelView
+    }
+    
+    /**
+     * Gets the currently visible panel layout ID.
+     */
+    fun getCurrentLayoutId(): Int? {
+        return currentPanelLayoutId
+    }
 }
