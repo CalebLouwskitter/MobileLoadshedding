@@ -71,6 +71,7 @@
     <string name="auth_primary_cta_login">Log In</string>
     <string name="auth_primary_cta_signup">Sign Up</string>
     <string name="auth_google_cta">Continue with Google</string>
+    <string name="auth_biometric_login">Sign in with Biometrics</string>
     <string name="auth_or_label">Or</string>
     <string name="auth_already_signed">Already Signed Up ?</string>
     
