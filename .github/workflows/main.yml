@@ -1,1 +1,61 @@
-# leave this for now
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ master, develop ]
+  pull_request:
+    branches: [ master, develop ]
+  workflow_dispatch:
+
+jobs:
+  check-changes:
+    name: Detect Changes
+    runs-on: ubuntu-latest
+    outputs:
+      api-changed: ${{ steps.filter.outputs.api }}
+      android-changed: ${{ steps.filter.outputs.android }}
+      docs-changed: ${{ steps.filter.outputs.docs }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Check for changes
+        uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            api:
+              - 'IdleLoadsheddingAPI/**'
+              - 'IdleLoadsheddingAPI.Tests/**'
+              - 'SQL/**'
+            android:
+              - 'MobileLoadshedding/**'
+            docs:
+              - 'DocsForClaude/**'
+              - '*.md'
+              
+  trigger-api-build:
+    name: Trigger API Build
+    needs: check-changes
+    if: needs.check-changes.outputs.api-changed == 'true'
+    uses: ./.github/workflows/dotnet-api-ci.yml
+    
+  trigger-android-build:
+    name: Trigger Android Build
+    needs: check-changes
+    if: needs.check-changes.outputs.android-changed == 'true'
+    uses: ./.github/workflows/android-ci.yml
+    
+  all-checks-passed:
+    name: All Checks Passed
+    runs-on: ubuntu-latest
+    needs: [check-changes, trigger-api-build, trigger-android-build]
+    if: always()
+    steps:
+      - name: Check build status
+        run: |
+          if [ "${{ needs.trigger-api-build.result }}" == "failure" ] || [ "${{ needs.trigger-android-build.result }}" == "failure" ]; then
+            echo "One or more builds failed"
+            exit 1
+          fi
+          echo "All builds passed successfully!"
