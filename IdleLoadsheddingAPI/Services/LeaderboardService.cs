@@ -18,6 +18,7 @@ public class LeaderboardService(GameDbContext context)
             .Take(take)
             .Select(entry => new LeaderboardEntryResponse
             {
+                PlayerId = entry.UserId,
                 Username = entry.Username,
                 Score = entry.Score,
                 Rank = entry.Rank,

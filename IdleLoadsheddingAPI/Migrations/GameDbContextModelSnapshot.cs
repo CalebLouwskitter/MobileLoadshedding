@@ -22,7 +22,7 @@ namespace IdleLoadsheddingAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("IdleLoadsheddingAPI.Entities.Friend", b =>
+            modelBuilder.Entity("IdleLoadsheddingAPI.Models.AppEntities.Friend", b =>
                 {
                     b.Property<int>("FriendId")
                         .ValueGeneratedOnAdd()
@@ -49,7 +49,7 @@ namespace IdleLoadsheddingAPI.Migrations
                     b.ToTable("Friends");
                 });
 
-            modelBuilder.Entity("IdleLoadsheddingAPI.Entities.LeaderboardEntry", b =>
+            modelBuilder.Entity("IdleLoadsheddingAPI.Models.AppEntities.LeaderboardEntry", b =>
                 {
                     b.Property<int>("LeaderboardEntryId")
                         .ValueGeneratedOnAdd()
@@ -81,7 +81,7 @@ namespace IdleLoadsheddingAPI.Migrations
                     b.ToTable("LeaderboardEntries");
                 });
 
-            modelBuilder.Entity("IdleLoadsheddingAPI.Entities.Neighbourhood", b =>
+            modelBuilder.Entity("IdleLoadsheddingAPI.Models.AppEntities.Neighbourhood", b =>
                 {
                     b.Property<int>("NeighbourhoodId")
                         .ValueGeneratedOnAdd()
@@ -116,7 +116,7 @@ namespace IdleLoadsheddingAPI.Migrations
                     b.ToTable("Neighbourhoods");
                 });
 
-            modelBuilder.Entity("IdleLoadsheddingAPI.Entities.SaveSnapshot", b =>
+            modelBuilder.Entity("IdleLoadsheddingAPI.Models.AppEntities.SaveSnapshot", b =>
                 {
                     b.Property<int>("SaveSnapshotId")
                         .ValueGeneratedOnAdd()
@@ -141,7 +141,7 @@ namespace IdleLoadsheddingAPI.Migrations
                     b.ToTable("SaveSnapshots");
                 });
 
-            modelBuilder.Entity("IdleLoadsheddingAPI.Entities.Section", b =>
+            modelBuilder.Entity("IdleLoadsheddingAPI.Models.AppEntities.Section", b =>
                 {
                     b.Property<int>("SectionId")
                         .ValueGeneratedOnAdd()
@@ -170,7 +170,7 @@ namespace IdleLoadsheddingAPI.Migrations
                     b.ToTable("Sections");
                 });
 
-            modelBuilder.Entity("IdleLoadsheddingAPI.Entities.StatsSnapshot", b =>
+            modelBuilder.Entity("IdleLoadsheddingAPI.Models.AppEntities.StatsSnapshot", b =>
                 {
                     b.Property<int>("StatsSnapshotId")
                         .ValueGeneratedOnAdd()
@@ -195,7 +195,7 @@ namespace IdleLoadsheddingAPI.Migrations
                     b.ToTable("StatsSnapshots");
                 });
 
-            modelBuilder.Entity("IdleLoadsheddingAPI.Entities.Upgrade", b =>
+            modelBuilder.Entity("IdleLoadsheddingAPI.Models.AppEntities.Upgrade", b =>
                 {
                     b.Property<int>("UpgradeId")
                         .ValueGeneratedOnAdd()
@@ -227,7 +227,7 @@ namespace IdleLoadsheddingAPI.Migrations
                     b.ToTable("Upgrades");
                 });
 
-            modelBuilder.Entity("IdleLoadsheddingAPI.Entities.User", b =>
+            modelBuilder.Entity("IdleLoadsheddingAPI.Models.AppEntities.User", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
@@ -246,12 +246,34 @@ namespace IdleLoadsheddingAPI.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("FcmDeviceId")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("FcmPlatform")
+                        .HasMaxLength(32)
+                        .HasColumnType("nvarchar(32)");
+
+                    b.Property<string>("FcmToken")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<DateTime?>("FcmTokenUpdatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("FirebaseUid")
                         .IsRequired()
                         .HasMaxLength(128)
                         .HasColumnType("nvarchar(128)");
 
+                    b.Property<string>("FriendCode")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
                     b.Property<DateTime?>("LastLoginAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("LastNotificationActionAt")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("LastSyncAt")
@@ -259,6 +281,30 @@ namespace IdleLoadsheddingAPI.Migrations
 
                     b.Property<decimal>("Money")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("NotifEnableEvents")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("NotifEnableFriends")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("NotifEnableLeaderboard")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("NotifEnableMaintenance")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("NotifEnableMilestones")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("NotifEnableOfflineEarnings")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("NotifEnableSystemAnnouncements")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("NotificationPreferencesUpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("PrestigeLevel")
                         .HasColumnType("int");
@@ -276,15 +322,118 @@ namespace IdleLoadsheddingAPI.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("IdleLoadsheddingAPI.Entities.Friend", b =>
+            modelBuilder.Entity("IdleLoadsheddingAPI.Models.Entities.GameEvent", b =>
                 {
-                    b.HasOne("IdleLoadsheddingAPI.Entities.User", "FriendUser")
+                    b.Property<string>("EventId")
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<double>("DurationSeconds")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("EventTimestampUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsStarting")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("ProductionMultiplier")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("RecordedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("EventId");
+
+                    b.ToTable("GameEvents");
+                });
+
+            modelBuilder.Entity("IdleLoadsheddingAPI.Models.Entities.GameEventDefinition", b =>
+                {
+                    b.Property<int>("EventDefinitionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EventDefinitionId"));
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("DurationSeconds")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EffectJson")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EndTimeUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EventCode")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("ProductionMultiplier")
+                        .HasColumnType("float");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<DateTime>("StartTimeUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("TriggerWeight")
+                        .HasColumnType("int");
+
+                    b.HasKey("EventDefinitionId");
+
+                    b.ToTable("GameEventDefinitions");
+                });
+
+            modelBuilder.Entity("IdleLoadsheddingAPI.Models.AppEntities.Friend", b =>
+                {
+                    b.HasOne("IdleLoadsheddingAPI.Models.AppEntities.User", "FriendUser")
                         .WithMany()
                         .HasForeignKey("FriendUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("IdleLoadsheddingAPI.Entities.User", "User")
+                    b.HasOne("IdleLoadsheddingAPI.Models.AppEntities.User", "User")
                         .WithMany("Friends")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -295,9 +444,9 @@ namespace IdleLoadsheddingAPI.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("IdleLoadsheddingAPI.Entities.LeaderboardEntry", b =>
+            modelBuilder.Entity("IdleLoadsheddingAPI.Models.AppEntities.LeaderboardEntry", b =>
                 {
-                    b.HasOne("IdleLoadsheddingAPI.Entities.User", "User")
+                    b.HasOne("IdleLoadsheddingAPI.Models.AppEntities.User", "User")
                         .WithMany("LeaderboardEntries")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -306,9 +455,9 @@ namespace IdleLoadsheddingAPI.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("IdleLoadsheddingAPI.Entities.Neighbourhood", b =>
+            modelBuilder.Entity("IdleLoadsheddingAPI.Models.AppEntities.Neighbourhood", b =>
                 {
-                    b.HasOne("IdleLoadsheddingAPI.Entities.User", "User")
+                    b.HasOne("IdleLoadsheddingAPI.Models.AppEntities.User", "User")
                         .WithMany("Neighbourhoods")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -317,9 +466,9 @@ namespace IdleLoadsheddingAPI.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("IdleLoadsheddingAPI.Entities.SaveSnapshot", b =>
+            modelBuilder.Entity("IdleLoadsheddingAPI.Models.AppEntities.SaveSnapshot", b =>
                 {
-                    b.HasOne("IdleLoadsheddingAPI.Entities.User", "User")
+                    b.HasOne("IdleLoadsheddingAPI.Models.AppEntities.User", "User")
                         .WithMany("SaveSnapshots")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -328,9 +477,9 @@ namespace IdleLoadsheddingAPI.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("IdleLoadsheddingAPI.Entities.Section", b =>
+            modelBuilder.Entity("IdleLoadsheddingAPI.Models.AppEntities.Section", b =>
                 {
-                    b.HasOne("IdleLoadsheddingAPI.Entities.Neighbourhood", "Neighbourhood")
+                    b.HasOne("IdleLoadsheddingAPI.Models.AppEntities.Neighbourhood", "Neighbourhood")
                         .WithMany("Sections")
                         .HasForeignKey("NeighbourhoodId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -339,9 +488,9 @@ namespace IdleLoadsheddingAPI.Migrations
                     b.Navigation("Neighbourhood");
                 });
 
-            modelBuilder.Entity("IdleLoadsheddingAPI.Entities.StatsSnapshot", b =>
+            modelBuilder.Entity("IdleLoadsheddingAPI.Models.AppEntities.StatsSnapshot", b =>
                 {
-                    b.HasOne("IdleLoadsheddingAPI.Entities.User", "User")
+                    b.HasOne("IdleLoadsheddingAPI.Models.AppEntities.User", "User")
                         .WithMany("StatsSnapshots")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -350,9 +499,9 @@ namespace IdleLoadsheddingAPI.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("IdleLoadsheddingAPI.Entities.Upgrade", b =>
+            modelBuilder.Entity("IdleLoadsheddingAPI.Models.AppEntities.Upgrade", b =>
                 {
-                    b.HasOne("IdleLoadsheddingAPI.Entities.User", "User")
+                    b.HasOne("IdleLoadsheddingAPI.Models.AppEntities.User", "User")
                         .WithMany("Upgrades")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -361,12 +510,12 @@ namespace IdleLoadsheddingAPI.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("IdleLoadsheddingAPI.Entities.Neighbourhood", b =>
+            modelBuilder.Entity("IdleLoadsheddingAPI.Models.AppEntities.Neighbourhood", b =>
                 {
                     b.Navigation("Sections");
                 });
 
-            modelBuilder.Entity("IdleLoadsheddingAPI.Entities.User", b =>
+            modelBuilder.Entity("IdleLoadsheddingAPI.Models.AppEntities.User", b =>
                 {
                     b.Navigation("Friends");
 

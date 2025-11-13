@@ -18,6 +18,9 @@ public class SyncService(GameDbContext context)
 
         if (user is null)
         {
+            // Generate friend code for new user
+            var friendCode = FriendCodeGenerator.GenerateFriendCode(request.FirebaseUid);
+            
             user = new User
             {
                 FirebaseUid = request.FirebaseUid,
@@ -26,6 +29,7 @@ public class SyncService(GameDbContext context)
                 Money = 0,
                 Electricity = 0,
                 PrestigeLevel = 0,
+                FriendCode = friendCode,
                 CreatedAt = DateTime.UtcNow,
                 LastSyncAt = DateTime.UtcNow,
                 LastLoginAt = DateTime.UtcNow
@@ -36,6 +40,12 @@ public class SyncService(GameDbContext context)
         }
         else
         {
+            // Update existing user, generate friend code if missing
+            if (string.IsNullOrWhiteSpace(user.FriendCode))
+            {
+                user.FriendCode = FriendCodeGenerator.GenerateFriendCode(user.FirebaseUid);
+            }
+            
             user.Username = request.Username;
             user.Email = request.Email;
             user.LastLoginAt = DateTime.UtcNow;
@@ -80,6 +90,22 @@ public class SyncService(GameDbContext context)
                 })
             .OrderBy(friend => friend.Username)
             .ToListAsync();
+    }
+
+    public async Task<string?> ResolveFriendCodeAsync(string friendCode)
+    {
+        var cleanCode = FriendCodeGenerator.RemoveFormatting(friendCode);
+        
+        if (!FriendCodeGenerator.IsValidFriendCodeFormat(cleanCode))
+        {
+            return null;
+        }
+
+        var user = await _context.Users
+            .AsNoTracking()
+            .FirstOrDefaultAsync(u => u.FriendCode == cleanCode);
+
+        return user?.FirebaseUid;
     }
 
     public async Task AddFriendAsync(string firebaseUid, string friendFirebaseUid)

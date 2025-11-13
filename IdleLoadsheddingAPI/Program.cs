@@ -60,6 +60,8 @@ builder.Services.AddDbContext<GameDbContext>((serviceProvider, options) =>
 builder.Services.AddScoped<GameService>();
 builder.Services.AddScoped<LeaderboardService>();
 builder.Services.AddScoped<SyncService>();
+builder.Services.AddScoped<IdleLoadsheddingAPI.Services.Interfaces.INotificationService, IdleLoadsheddingAPI.Services.Implementations.NotificationService>();
+builder.Services.AddScoped<IdleLoadsheddingAPI.Services.Interfaces.IEventService, IdleLoadsheddingAPI.Services.Implementations.EventService>();
 
 // Firebase Authentication (Google, 2025; Microsoft, 2025)
 var firebaseProjectId = builder.Configuration["Firebase:ProjectId"] ?? string.Empty;

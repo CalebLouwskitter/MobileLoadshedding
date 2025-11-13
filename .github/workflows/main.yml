@@ -2,10 +2,14 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ master, develop ]
+    branches: [ master ]
   pull_request:
     branches: [ master, develop ]
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   check-changes:
@@ -30,9 +34,7 @@ jobs:
               - 'SQL/**'
             android:
               - 'MobileLoadshedding/**'
-            docs:
-              - 'DocsForClaude/**'
-              - '*.md'
+         
               
   trigger-api-build:
     name: Trigger API Build

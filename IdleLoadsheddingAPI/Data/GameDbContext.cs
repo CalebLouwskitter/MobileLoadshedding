@@ -8,13 +8,15 @@ namespace IdleLoadsheddingAPI.Data;
 public class GameDbContext(DbContextOptions<GameDbContext> options) : DbContext(options)
 {
     public DbSet<User> Users => Set<User>();
-    public DbSet<Neighbourhood> Neighbourhoods => Set<Neighbourhood>();
+    public DbSet<Models.AppEntities.Neighbourhood> Neighbourhoods => Set<Models.AppEntities.Neighbourhood>();
     public DbSet<Section> Sections => Set<Section>();
-    public DbSet<Upgrade> Upgrades => Set<Upgrade>();
+    public DbSet<Models.AppEntities.Upgrade> Upgrades => Set<Models.AppEntities.Upgrade>();
     public DbSet<Friend> Friends => Set<Friend>();
-    public DbSet<LeaderboardEntry> LeaderboardEntries => Set<LeaderboardEntry>();
+    public DbSet<Models.AppEntities.LeaderboardEntry> LeaderboardEntries => Set<Models.AppEntities.LeaderboardEntry>();
     public DbSet<StatsSnapshot> StatsSnapshots => Set<StatsSnapshot>();
     public DbSet<SaveSnapshot> SaveSnapshots => Set<SaveSnapshot>();
+    public DbSet<Models.Entities.GameEvent> GameEvents => Set<Models.Entities.GameEvent>();
+    public DbSet<Models.Entities.GameEventDefinition> GameEventDefinitions => Set<Models.Entities.GameEventDefinition>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

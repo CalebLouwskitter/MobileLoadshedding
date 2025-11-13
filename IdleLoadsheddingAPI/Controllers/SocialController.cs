@@ -31,6 +31,24 @@ public class SocialController(SyncService syncService) : ControllerBase
         return Ok(friends);
     }
 
+    [HttpGet("friends/resolve/{friendCode}")]
+    public async Task<ActionResult<string>> ResolveFriendCode(string friendCode)
+    {
+        if (string.IsNullOrWhiteSpace(friendCode))
+        {
+            return BadRequest("Friend code is required.");
+        }
+
+        var firebaseUid = await _syncService.ResolveFriendCodeAsync(friendCode);
+        
+        if (firebaseUid is null)
+        {
+            return NotFound("Friend code not found.");
+        }
+
+        return Ok(new { FirebaseUid = firebaseUid });
+    }
+
     [HttpPost("friends")]
     public async Task<IActionResult> AddFriend([FromBody] AddFriendRequest request)
     {
