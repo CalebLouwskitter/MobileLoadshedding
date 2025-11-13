@@ -21,7 +21,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "MobileLoadshedding"
 include(":app")
-include(":unityLibrary")
-project(":unityLibrary").projectDir = file("unityLibrary")
-include(":unityLibrary:mobilenotifications.androidlib")
-project(":unityLibrary:mobilenotifications.androidlib").projectDir = file("unityLibrary/mobilenotifications.androidlib")
+// TEMPORARILY COMMENTED OUT - Unity library disabled during refactoring
+// TODO: Re-enable after code reorganization is complete
+// include(":unityLibrary")
+// project(":unityLibrary").projectDir = file("unityLibrary")
+// include(":unityLibrary:mobilenotifications.androidlib")
+// project(":unityLibrary:mobilenotifications.androidlib").projectDir = file("unityLibrary/mobilenotifications.androidlib")

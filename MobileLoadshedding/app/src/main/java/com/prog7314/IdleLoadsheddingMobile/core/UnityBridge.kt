@@ -5,7 +5,9 @@ import android.os.Handler //Android, 2025.
 import android.os.Looper //Android, 2025.
 import android.util.Log //Android, 2025.
 import android.widget.Toast //Android, 2025.
-import com.unity3d.player.UnityPlayer //Unity Technologies, 2025.
+// TEMPORARILY USING STUB - Replace with real Unity import after refactoring
+// import com.unity3d.player.UnityPlayer //Unity Technologies, 2025.
+import com.prog7314.IdleLoadsheddingMobile.stub.UnityPlayer
 import java.util.concurrent.CopyOnWriteArraySet //Java, 2025.
 
 /**

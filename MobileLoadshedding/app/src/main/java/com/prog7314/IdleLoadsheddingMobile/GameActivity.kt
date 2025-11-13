@@ -4,7 +4,9 @@ import android.os.Bundle //Android, 2025.
 import com.prog7314.IdleLoadsheddingMobile.GameUI.GameStatsFragment
 import com.prog7314.IdleLoadsheddingMobile.core.UnityBridge
 import com.prog7314.IdleLoadsheddingMobile.unity.Stats
-import com.unity3d.player.UnityPlayerGameActivity //Unity Technologies, 2025.
+// TEMPORARILY USING STUB - Replace with real Unity import after refactoring
+// import com.unity3d.player.UnityPlayerGameActivity //Unity Technologies, 2025.
+import com.prog7314.IdleLoadsheddingMobile.stub.UnityPlayerGameActivity
 
 /**
  * GameActivity extends UnityPlayerGameActivity to embed the Unity game

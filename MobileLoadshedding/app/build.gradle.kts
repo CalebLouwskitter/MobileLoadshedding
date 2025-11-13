@@ -47,8 +47,10 @@ android {
 }
 
 dependencies {
-    implementation(project(":unityLibrary"))
-    implementation(files("../unityLibrary/libs/unity-classes.jar"))
+    // TEMPORARILY COMMENTED OUT - Unity dependencies disabled during refactoring
+    // TODO: Re-enable after code reorganization is complete
+    // implementation(project(":unityLibrary"))
+    // implementation(files("../unityLibrary/libs/unity-classes.jar"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

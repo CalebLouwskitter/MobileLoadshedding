@@ -32,7 +32,9 @@ import com.prog7314.IdleLoadsheddingMobile.unity.Leaderboard
 import com.prog7314.IdleLoadsheddingMobile.unity.PowerManager
 import com.prog7314.IdleLoadsheddingMobile.unity.SaveSync
 import com.prog7314.IdleLoadsheddingMobile.unity.Stats
-import com.unity3d.player.UnityPlayerGameActivity //Unity Technologies, 2025.
+// TEMPORARILY USING STUB - Replace with real Unity import after refactoring
+// import com.unity3d.player.UnityPlayerGameActivity //Unity Technologies, 2025.
+import com.prog7314.IdleLoadsheddingMobile.stub.UnityPlayerGameActivity
 import java.text.DecimalFormat //Oracle, 2025.
 import java.time.Instant //Oracle, 2025.
 import java.time.ZoneId //Oracle, 2025.
