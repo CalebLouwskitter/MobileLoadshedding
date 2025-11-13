@@ -1,0 +1,362 @@
+version: 2.1
+
+# Orbs for common tasks
+orbs:
+  android: circleci/android@2.5.0
+  docker: circleci/docker@2.6.0
+
+# Executors define the environment
+executors:
+  android-executor:
+    docker:
+      - image: cimg/android:2024.01.1-node
+    resource_class: large
+    working_directory: ~/repo
+    environment:
+      JVM_OPTS: -Xmx3200m
+      GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2
+      
+  dotnet-executor:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:9.0
+    resource_class: medium
+    working_directory: ~/repo
+    
+  docker-executor:
+    docker:
+      - image: cimg/base:stable
+    resource_class: medium
+    working_directory: ~/repo
+
+# Reusable commands
+commands:
+  restore-gradle-cache:
+    description: "Restore Gradle cache"
+    steps:
+      - restore_cache:
+          keys:
+            - gradle-cache-v1-{{ checksum "MobileLoadshedding/build.gradle.kts" }}-{{ checksum "MobileLoadshedding/app/build.gradle.kts" }}
+            - gradle-cache-v1-
+            
+  save-gradle-cache:
+    description: "Save Gradle cache"
+    steps:
+      - save_cache:
+          key: gradle-cache-v1-{{ checksum "MobileLoadshedding/build.gradle.kts" }}-{{ checksum "MobileLoadshedding/app/build.gradle.kts" }}
+          paths:
+            - ~/.gradle/caches
+            - ~/.gradle/wrapper
+            
+  restore-dotnet-cache:
+    description: "Restore .NET cache"
+    steps:
+      - restore_cache:
+          keys:
+            - dotnet-cache-v1-{{ checksum "IdleLoadsheddingAPI/IdleLoadsheddingAPI.csproj" }}
+            - dotnet-cache-v1-
+            
+  save-dotnet-cache:
+    description: "Save .NET cache"
+    steps:
+      - save_cache:
+          key: dotnet-cache-v1-{{ checksum "IdleLoadsheddingAPI/IdleLoadsheddingAPI.csproj" }}
+          paths:
+            - ~/.nuget/packages
+
+# Jobs
+jobs:
+  # Android Jobs
+  android-build:
+    executor: android-executor
+    steps:
+      - checkout
+      - restore-gradle-cache
+      - run:
+          name: Grant execute permission for gradlew
+          command: chmod +x MobileLoadshedding/gradlew
+      - run:
+          name: Build with Gradle
+          command: cd MobileLoadshedding && ./gradlew build -x lint --stacktrace
+      - run:
+          name: Build Debug APK
+          command: cd MobileLoadshedding && ./gradlew assembleDebug --stacktrace
+      - save-gradle-cache
+      - store_artifacts:
+          path: MobileLoadshedding/app/build/outputs/apk/debug
+          destination: apk-debug
+      - store_artifacts:
+          path: MobileLoadshedding/app/build/reports/lint-results-*.html
+          destination: lint-reports
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - MobileLoadshedding/app/build/outputs
+            
+  android-lint:
+    executor: android-executor
+    steps:
+      - checkout
+      - restore-gradle-cache
+      - run:
+          name: Grant execute permission for gradlew
+          command: chmod +x MobileLoadshedding/gradlew
+      - run:
+          name: Run lint checks
+          command: cd MobileLoadshedding && ./gradlew lint --stacktrace
+          no_output_timeout: 15m
+      - save-gradle-cache
+      - store_artifacts:
+          path: MobileLoadshedding/app/build/reports/lint-results-*.html
+          destination: lint-reports
+      - store_test_results:
+          path: MobileLoadshedding/app/build/test-results
+          
+  android-release:
+    executor: android-executor
+    steps:
+      - checkout
+      - restore-gradle-cache
+      - run:
+          name: Grant execute permission for gradlew
+          command: chmod +x MobileLoadshedding/gradlew
+      - run:
+          name: Build Release APK
+          command: cd MobileLoadshedding && ./gradlew assembleRelease --stacktrace
+      - save-gradle-cache
+      - store_artifacts:
+          path: MobileLoadshedding/app/build/outputs/apk/release
+          destination: apk-release
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - MobileLoadshedding/app/build/outputs/apk/release
+            
+  # .NET API Jobs
+  dotnet-build-and-test:
+    executor: dotnet-executor
+    steps:
+      - checkout
+      - restore-dotnet-cache
+      - run:
+          name: Restore API dependencies
+          command: dotnet restore IdleLoadsheddingAPI/IdleLoadsheddingAPI.csproj
+      - run:
+          name: Build API
+          command: dotnet build IdleLoadsheddingAPI/IdleLoadsheddingAPI.csproj --configuration Release --no-restore
+      - run:
+          name: Restore test dependencies
+          command: dotnet restore IdleLoadsheddingAPI.Tests/IdleLoadsheddingAPI.Tests.csproj
+      - run:
+          name: Run tests
+          command: dotnet test IdleLoadsheddingAPI.Tests/IdleLoadsheddingAPI.Tests.csproj --configuration Release --no-restore --verbosity minimal --logger "trx;LogFileName=test-results.trx"
+      - save-dotnet-cache
+      - store_test_results:
+          path: IdleLoadsheddingAPI.Tests/TestResults
+      - store_artifacts:
+          path: IdleLoadsheddingAPI.Tests/TestResults/test-results.trx
+          destination: test-results
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - IdleLoadsheddingAPI/bin
+            - IdleLoadsheddingAPI/obj
+            
+  dotnet-format-check:
+    executor: dotnet-executor
+    steps:
+      - checkout
+      - restore-dotnet-cache
+      - run:
+          name: Restore dependencies
+          command: dotnet restore IdleLoadsheddingAPI/IdleLoadsheddingAPI.sln
+      - run:
+          name: Check code formatting
+          command: dotnet format IdleLoadsheddingAPI/IdleLoadsheddingAPI.sln --verify-no-changes --verbosity diagnostic
+      - save-dotnet-cache
+      
+  dotnet-dependency-check:
+    executor: dotnet-executor
+    steps:
+      - checkout
+      - run:
+          name: Check for outdated packages
+          command: |
+            dotnet list IdleLoadsheddingAPI/IdleLoadsheddingAPI.csproj package --outdated || true
+            dotnet list IdleLoadsheddingAPI.Tests/IdleLoadsheddingAPI.Tests.csproj package --outdated || true
+      - run:
+          name: Check for vulnerable packages
+          command: |
+            dotnet list IdleLoadsheddingAPI/IdleLoadsheddingAPI.csproj package --vulnerable --include-transitive || true
+            dotnet list IdleLoadsheddingAPI.Tests/IdleLoadsheddingAPI.Tests.csproj package --vulnerable --include-transitive || true
+            
+  # Docker Jobs
+  docker-build-and-test:
+    executor: docker-executor
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Build SQL Docker image
+          command: |
+            docker build -t idle-loadshedding-sql:${CIRCLE_SHA1} ./SQL
+            docker tag idle-loadshedding-sql:${CIRCLE_SHA1} idle-loadshedding-sql:latest
+      - run:
+          name: Build API Docker image
+          command: |
+            docker build -t idle-loadshedding-webapi:${CIRCLE_SHA1} ./IdleLoadsheddingAPI
+            docker tag idle-loadshedding-webapi:${CIRCLE_SHA1} idle-loadshedding-webapi:latest
+      - run:
+          name: Test Docker Compose setup
+          command: |
+            docker compose up -d
+            sleep 30
+            docker compose ps
+            docker compose logs
+            docker compose down
+      - run:
+          name: Save Docker images
+          command: |
+            docker save idle-loadshedding-sql:latest | gzip > sql-image.tar.gz
+            docker save idle-loadshedding-webapi:latest | gzip > api-image.tar.gz
+      - store_artifacts:
+          path: sql-image.tar.gz
+          destination: docker-images/sql-image.tar.gz
+      - store_artifacts:
+          path: api-image.tar.gz
+          destination: docker-images/api-image.tar.gz
+          
+  # Security Scan
+  security-scan:
+    executor: docker-executor
+    steps:
+      - checkout
+      - run:
+          name: Install Trivy
+          command: |
+            wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+            echo "deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
+            sudo apt-get update
+            sudo apt-get install trivy
+      - run:
+          name: Run Trivy vulnerability scanner
+          command: trivy fs --format sarif --output trivy-results.sarif .
+      - store_artifacts:
+          path: trivy-results.sarif
+          destination: security/trivy-results.sarif
+          
+  # PR Validation
+  pr-validation:
+    executor: docker-executor
+    steps:
+      - checkout
+      - run:
+          name: Check for large files
+          command: |
+            echo "Checking for large files..."
+            find . -type f -size +10M -not -path "./.git/*" -not -path "./MobileLoadshedding/unityLibrary/*" | while read file; do
+              echo "Warning: Large file detected: $file"
+            done
+      - run:
+          name: Count changed files
+          command: |
+            git fetch origin ${CIRCLE_BRANCH}
+            FILES_CHANGED=$(git diff --name-only origin/${CIRCLE_BRANCH}...HEAD | wc -l)
+            echo "Files changed: $FILES_CHANGED"
+            if [ $FILES_CHANGED -gt 100 ]; then
+              echo "Warning: PR contains more than 100 changed files. Consider breaking it into smaller PRs."
+            fi
+
+# Workflows
+workflows:
+  version: 2
+  
+  # Main workflow for pushes to master
+  build-and-deploy:
+    jobs:
+      # Android jobs
+      - android-build:
+          filters:
+            branches:
+              only:
+                - master
+      - android-release:
+          requires:
+            - android-build
+          filters:
+            branches:
+              only:
+                - master
+                
+      # .NET jobs
+      - dotnet-build-and-test:
+          filters:
+            branches:
+              only:
+                - master
+      - dotnet-dependency-check:
+          filters:
+            branches:
+              only:
+                - master
+                
+      # Docker jobs
+      - docker-build-and-test:
+          requires:
+            - dotnet-build-and-test
+          filters:
+            branches:
+              only:
+                - master
+                
+  # Pull request validation workflow
+  pr-checks:
+    jobs:
+      - pr-validation:
+          filters:
+            branches:
+              ignore:
+                - master
+                
+      # Android jobs
+      - android-build:
+          filters:
+            branches:
+              ignore:
+                - master
+      - android-lint:
+          filters:
+            branches:
+              ignore:
+                - master
+                
+      # .NET jobs
+      - dotnet-build-and-test:
+          filters:
+            branches:
+              ignore:
+                - master
+      - dotnet-format-check:
+          filters:
+            branches:
+              ignore:
+                - master
+      - dotnet-dependency-check:
+          filters:
+            branches:
+              ignore:
+                - master
+                
+  # Scheduled security scan
+  nightly-security:
+    triggers:
+      - schedule:
+          cron: "0 2 * * *"  # Run at 2 AM every day
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - security-scan
