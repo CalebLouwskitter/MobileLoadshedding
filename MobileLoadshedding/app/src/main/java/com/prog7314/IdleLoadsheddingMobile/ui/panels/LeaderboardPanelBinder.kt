@@ -68,6 +68,11 @@ class LeaderboardPanelBinder(
      * Binds leaderboard data to UI elements.
      */
     fun bindData(panel: View, payload: UnityLeaderboardPayload?) {
+        Log.d("LeaderboardPanelBinder", "🎨 bindData() called (payload: ${payload != null})")
+        if (payload != null) {
+            Log.d("LeaderboardPanelBinder", "  Entries: ${payload.entries.size}")
+            Log.d("LeaderboardPanelBinder", "  Timestamp: ${payload.timestampUtc}")
+        }
         val loading = panel.findViewById<ProgressBar?>(R.id.leaderboard_loading)
         val empty = panel.findViewById<TextView?>(R.id.text_leaderboard_empty)
         val listContainer = panel.findViewById<LinearLayout?>(R.id.leaderboard_list_container)

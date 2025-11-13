@@ -90,14 +90,17 @@
                 app:layout_constraintBottom_toBottomOf="@id/avatar_container"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <!-- Friend Code Section -->
+            <!-- Friend Code Section - Compact Design -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/friend_code_container"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:background="#E53935"
-                android:padding="@dimen/card_padding"
+                android:paddingStart="@dimen/spacing_normal"
+                android:paddingTop="@dimen/spacing_small"
+                android:paddingEnd="@dimen/spacing_small"
+                android:paddingBottom="@dimen/spacing_small"
                 app:layout_constraintTop_toBottomOf="@id/avatar_container"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
@@ -106,27 +109,27 @@
                     android:id="@+id/label_friend_code"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Friend Code"
+                    android:text="@string/profile_friend_code_label"
                     android:textColor="#FFEBEE"
-                    android:textSize="12sp"
+                    android:textSize="11sp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
                     android:id="@+id/text_profile_friend_code"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="2dp"
                     android:fontFamily="monospace"
-                    android:text="Loading..."
+                    android:text="----·----"
                     android:textColor="#FFFFFF"
                     android:textIsSelectable="true"
-                    android:textSize="14sp"
+                    android:textSize="22sp"
+                    android:letterSpacing="0.12"
                     android:textStyle="bold"
                     app:layout_constraintTop_toBottomOf="@id/label_friend_code"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/btn_copy_friend_code" />
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <Button
                     android:id="@+id/btn_copy_friend_code"
@@ -135,9 +138,13 @@
                     android:layout_height="wrap_content"
                     android:minWidth="0dp"
                     android:minHeight="0dp"
-                    android:padding="8dp"
-                    android:text="COPY"
+                    android:paddingStart="10dp"
+                    android:paddingTop="6dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="6dp"
+                    android:text="📋 COPY"
                     android:textColor="#FFFFFF"
+                    android:textSize="12sp"
                     app:layout_constraintTop_toTopOf="@id/text_profile_friend_code"
                     app:layout_constraintBottom_toBottomOf="@id/text_profile_friend_code"
                     app:layout_constraintEnd_toEndOf="parent" />

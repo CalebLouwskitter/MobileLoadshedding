@@ -1,31 +1,19 @@
-package com.prog7314.IdleLoadsheddingMobile.stub
+ package com.prog7314.IdleLoadsheddingMobile.stub
 
-import android.app.Activity
+import android.util.Log
 
 /**
- * Stub class to replace Unity's UnityPlayer during refactoring.
- * This allows the app to compile without Unity library dependencies.
- * 
- * TEMPORARY: Remove this class and restore actual Unity integration after refactoring is complete.
+ * TEMPORARY STUB for Unity Player - used during refactoring
+ * Replace with real com.unity3d.player.UnityPlayer when Unity integration is restored
  */
 object UnityPlayer {
     /**
-     * Returns null during stub phase - Unity is not available.
-     * Real UnityPlayer.currentActivity returns the Unity activity instance.
-     */
-    var currentActivity: Activity? = null
-    
-    /**
-     * Stub implementation - does nothing during refactoring.
-     * Real implementation sends messages to Unity GameObjects.
-     * 
-     * @param gameObjectName The Unity GameObject to receive the message
-     * @param methodName The method to call on the GameObject
-     * @param message The message/parameter to pass
+     * Stub method - does nothing
+     * Real Unity implementation would send JNI message to Unity C# side
      */
     @JvmStatic
     fun UnitySendMessage(gameObjectName: String, methodName: String, message: String) {
-        // Stub - no-op during refactoring
-        // TODO: Remove this stub and use real Unity implementation
+        Log.w("UnityPlayer", "STUB: UnitySendMessage called but not implemented - Unity integration disabled")
+        Log.d("UnityPlayer", "Would send: GameObject=$gameObjectName, Method=$methodName, Message=$message")
     }
 }

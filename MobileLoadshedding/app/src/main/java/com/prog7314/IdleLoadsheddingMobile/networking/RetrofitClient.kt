@@ -1,5 +1,6 @@
 package com.prog7314.IdleLoadsheddingMobile.networking
 
+import android.content.Context
 import com.prog7314.IdleLoadsheddingMobile.core.BackendClient
 
 /**
@@ -9,6 +10,14 @@ import com.prog7314.IdleLoadsheddingMobile.core.BackendClient
 object RetrofitClient { //Square, 2025.
     val instance: ApiService by lazy { //Kotlin, 2025.
         BackendClient.retrofit.create(ApiService::class.java) //Square, 2025.
+    }
+    
+    /**
+     * Creates an API service instance with authentication.
+     * Used by FCM token registration.
+     */
+    fun createApiService(context: Context): ApiService {
+        return instance
     }
 }
 

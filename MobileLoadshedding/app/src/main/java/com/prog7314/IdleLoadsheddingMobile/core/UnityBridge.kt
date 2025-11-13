@@ -155,7 +155,6 @@ object UnityBridge {
     }
 
     private fun dispatchUnityMessage(gameObject: String, methodName: String, payload: String) {
-        val activity = UnityPlayer.currentActivity
         val runnable = Runnable {
             val targets = buildTargetList(gameObject)
             var delivered = false
@@ -179,11 +178,7 @@ object UnityBridge {
             }
         }
 
-        if (activity != null) {
-            activity.runOnUiThread(runnable)
-        } else {
-            mainHandler.post(runnable)
-        }
+        mainHandler.post(runnable)
     }
 
     private fun buildTargetList(primary: String): List<String> {

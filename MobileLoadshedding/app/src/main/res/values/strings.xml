@@ -95,4 +95,11 @@
     <string name="logout_confirmation_message">Are you sure you want to log out? Your progress is saved in the cloud.</string>
     <string name="logout_confirm_yes">Log Out</string>
     <string name="logout_confirm_no">Cancel</string>
+    
+    <!-- Push Notifications -->
+    <string name="default_notification_channel_id">idle_loadshedding_default</string>
+    <string name="notification_channel_default_name">General Notifications</string>
+    <string name="notification_channel_events_name">Event Notifications</string>
+    <string name="notification_channel_friends_name">Friends Notifications</string>
+    <string name="notification_channel_system_name">System Notifications</string>
 </resources>

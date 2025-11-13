@@ -3,6 +3,7 @@ package com.prog7314.IdleLoadsheddingMobile.ui.coordinators
 import android.app.Activity
 import android.content.Context
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.prog7314.IdleLoadsheddingMobile.R
 import com.prog7314.IdleLoadsheddingMobile.ui.HudManager
@@ -82,12 +83,12 @@ class UIComponentFactory(
         // 4. Create panel binders (depend on utilities and auth)
         val settingsPrefs = context.getSharedPreferences("app_settings", Context.MODE_PRIVATE)
         
-        val districtsPanelBinder = DistrictsPanelBinder(activity, formatUtils)
-        val electricityPanelBinder = ElectricityPanelBinder(activity, formatUtils, districtsPanelBinder)
-        val buildingPanelBinder = BuildingPanelBinder(activity, formatUtils)
-        val profilePanelBinder = ProfilePanelBinder(activity, formatUtils, auth)
+        val districtsPanelBinder = DistrictsPanelBinder(context, formatUtils)
+        val electricityPanelBinder = ElectricityPanelBinder(context, formatUtils, districtsPanelBinder)
+        val buildingPanelBinder = BuildingPanelBinder(context, formatUtils)
+        val profilePanelBinder = ProfilePanelBinder(context, formatUtils, auth)
         val leaderboardPanelBinder = LeaderboardPanelBinder(activity, formatUtils)
-        val friendsPanelBinder = FriendsPanelBinder(activity, formatUtils)
+        val friendsPanelBinder = FriendsPanelBinder(activity as AppCompatActivity, formatUtils)
         val tasksPanelBinder = TasksPanelBinder(activity, formatUtils)
         val profileEditPanelBinder = ProfileEditPanelBinder(activity, auth)
         val settingsPanelBinder = SettingsPanelBinder(

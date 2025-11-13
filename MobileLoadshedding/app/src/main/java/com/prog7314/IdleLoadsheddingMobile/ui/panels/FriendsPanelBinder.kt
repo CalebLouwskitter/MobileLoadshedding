@@ -1,6 +1,5 @@
 package com.prog7314.IdleLoadsheddingMobile.ui.panels
 
-import android.app.Activity
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,19 +10,25 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import com.prog7314.IdleLoadsheddingMobile.R
 import com.prog7314.IdleLoadsheddingMobile.data.models.FriendProfile
 import com.prog7314.IdleLoadsheddingMobile.data.models.FriendsPayload
 import com.prog7314.IdleLoadsheddingMobile.unity.FriendsList
 import com.prog7314.IdleLoadsheddingMobile.utils.FormatUtils
+import com.prog7314.IdleLoadsheddingMobile.utils.FriendCodeGenerator
+import com.prog7314.IdleLoadsheddingMobile.utils.FriendCodeResolver
+import kotlinx.coroutines.launch
 
 /**
+ * FriendsPanelBinder handles the friends list panel UI.
  * Handles friends panel configuration and data binding.
  * Extracted from MainActivity to separate concerns.
  */
 class FriendsPanelBinder(
-    private val activity: Activity,
+    private val activity: AppCompatActivity,
     private val formatUtils: FormatUtils
 ) {
     
@@ -58,24 +63,50 @@ class FriendsPanelBinder(
         // Add friend button
         panel.findViewById<Button?>(R.id.btn_add_friend)?.setOnClickListener {
             val codeInput = panel.findViewById<EditText?>(R.id.input_friend_code)
+            val statusText = panel.findViewById<TextView?>(R.id.text_add_friend_status)
             val friendCode = codeInput?.text?.toString()?.trim().orEmpty()
+            
+            // Validate input
             if (friendCode.isEmpty()) {
                 Toast.makeText(activity, activity.getString(R.string.toast_friend_code_empty), Toast.LENGTH_SHORT).show()
-            } else {
-                FriendsList.updateFriend(
-                    friendCode,
-                    activity.getString(R.string.friend_placeholder_name, friendCode),
-                    15.0,
-                    true
-                )
-                Toast.makeText(activity, activity.getString(R.string.toast_friend_invite_sent), Toast.LENGTH_SHORT).show()
-                codeInput?.text?.clear()
+                return@setOnClickListener
+            }
+            
+            val cleanCode = FriendCodeGenerator.removeFormatting(friendCode)
+            if (!FriendCodeGenerator.isValidFriendCodeFormat(cleanCode)) {
+                Toast.makeText(activity, "Invalid friend code format", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            
+            // Show loading state
+            statusText?.isVisible = true
+            statusText?.text = "Looking up friend code..."
+            
+            // Resolve the friend code to Firebase UID
+            activity.lifecycleScope.launch {
+                val firebaseUid = FriendCodeResolver.resolveFriendCode(cleanCode)
                 
-                // Refresh friends list after adding
-                FriendsList.fetchBackendFriends { result ->
-                    result.onFailure { error ->
-                        Log.e("FriendsPanelBinder", "Failed to refresh after adding friend: ${error.message}", error)
+                if (firebaseUid != null) {
+                    // Add friend using the resolved Firebase UID
+                    FriendsList.updateFriend(
+                        firebaseUid,
+                        activity.getString(R.string.friend_placeholder_name, cleanCode),
+                        15.0,
+                        true
+                    )
+                    Toast.makeText(activity, activity.getString(R.string.toast_friend_invite_sent), Toast.LENGTH_SHORT).show()
+                    codeInput?.text?.clear()
+                    statusText?.isVisible = false
+                    
+                    // Refresh friends list after adding
+                    FriendsList.fetchBackendFriends { result ->
+                        result.onFailure { error ->
+                            Log.e("FriendsPanelBinder", "Failed to refresh after adding friend: ${error.message}", error)
+                        }
                     }
+                } else {
+                    statusText?.text = "Friend code not found. Please check and try again."
+                    statusText?.setTextColor(0xFFE53935.toInt())
                 }
             }
         }

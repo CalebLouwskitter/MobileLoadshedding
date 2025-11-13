@@ -1,5 +1,6 @@
 package com.prog7314.IdleLoadsheddingMobile.ui.coordinators
 
+import android.util.Log
 import com.prog7314.IdleLoadsheddingMobile.data.models.*
 
 /**
@@ -53,14 +54,13 @@ class StateManager {
         _latestStats = snapshot
     }
     
-    /**
-     * Update leaderboard data.
-     */
-    fun updateLeaderboard(payload: UnityLeaderboardPayload) {
-        _latestLeaderboard = payload
-    }
-    
-    /**
+	/**
+	 * Update leaderboard data.
+	 */
+	fun updateLeaderboard(payload: UnityLeaderboardPayload) {
+		Log.d("StateManager", "💾 Updating leaderboard state (${payload.entries.size} entries)")
+		_latestLeaderboard = payload
+	}    /**
      * Update friends list.
      */
     fun updateFriends(payload: FriendsPayload) {

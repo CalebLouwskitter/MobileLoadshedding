@@ -1,5 +1,6 @@
 package com.prog7314.IdleLoadsheddingMobile.ui.coordinators
 
+import android.util.Log
 import android.view.View
 import com.prog7314.IdleLoadsheddingMobile.R
 import com.prog7314.IdleLoadsheddingMobile.ui.panels.*
@@ -132,11 +133,11 @@ class PanelCoordinator(
                 )
             }
             
-            R.layout.panel_leaderboard -> {
-                leaderboardPanelBinder.bindData(panelView, stateManager.latestLeaderboard)
-            }
-            
-            R.layout.panel_friends_leaderboard -> {
+			R.layout.panel_leaderboard -> {
+				val payload = stateManager.latestLeaderboard
+				Log.d("PanelCoordinator", "📊 Updating leaderboard panel (payload: ${payload != null}, entries: ${payload?.entries?.size ?: 0})")
+				leaderboardPanelBinder.bindData(panelView, payload)
+			}            R.layout.panel_friends_leaderboard -> {
                 friendsPanelBinder.bindData(panelView, stateManager.latestFriends)
             }
             

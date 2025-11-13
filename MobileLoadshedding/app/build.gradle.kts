@@ -47,10 +47,10 @@ android {
 }
 
 dependencies {
-    // TEMPORARILY COMMENTED OUT - Unity dependencies disabled during refactoring
-    // TODO: Re-enable after code reorganization is complete
+    // Unity dependencies (temporarily disabled during refactoring)
     // implementation(project(":unityLibrary"))
     // implementation(files("../unityLibrary/libs/unity-classes.jar"))
+    
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -84,6 +84,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
     // Ensure AppCompat for AlertDialog support
     implementation("androidx.appcompat:appcompat:1.7.0")
+    implementation(libs.firebase.messaging)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

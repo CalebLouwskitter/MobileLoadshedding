@@ -77,6 +77,9 @@ object Leaderboard : UnityBridge.Listener {
 				val body = response.body()
 				if (response.isSuccessful && body != null) {
 					Log.d(TAG, "SUCCESS: Leaderboard data received with ${body.size} entries")
+					body.forEach { entry ->
+						Log.d(TAG, "  - ${entry.username}: ${entry.score} (rank ${entry.rank})")
+					}
 					
 					// Convert backend response to Unity format
 					val unityPayload = UnityLeaderboardPayload(

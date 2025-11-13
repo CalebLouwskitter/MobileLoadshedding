@@ -12,6 +12,7 @@ import com.prog7314.IdleLoadsheddingMobile.R
 import com.prog7314.IdleLoadsheddingMobile.data.models.UnitySavePayload
 import com.prog7314.IdleLoadsheddingMobile.data.models.UnityStatsSnapshot
 import com.prog7314.IdleLoadsheddingMobile.utils.FormatUtils
+import com.prog7314.IdleLoadsheddingMobile.utils.FriendCodeGenerator
 
 /**
  * Handles profile panel configuration and data binding.
@@ -54,19 +55,25 @@ class ProfilePanelBinder(
             Toast.makeText(context, context.getString(R.string.toast_logout_placeholder), Toast.LENGTH_SHORT).show()
         }
         
-        // Display friend code
-        val friendCode = auth.currentUser?.uid ?: "Not logged in"
-        panel.findViewById<TextView?>(R.id.text_profile_friend_code)?.text = friendCode
+        // Generate and display short friend code
+        val firebaseUid = auth.currentUser?.uid ?: "Not logged in"
+        val shortFriendCode = if (firebaseUid != "Not logged in") {
+            FriendCodeGenerator.formatForDisplay(FriendCodeGenerator.generateFriendCode(firebaseUid))
+        } else {
+            "------"
+        }
+        panel.findViewById<TextView?>(R.id.text_profile_friend_code)?.text = shortFriendCode
         
         // Display user info
         val user = auth.currentUser
         panel.findViewById<TextView?>(R.id.text_profile_name)?.text = user?.displayName ?: "Player"
         panel.findViewById<TextView?>(R.id.text_profile_email)?.text = user?.email ?: "Not logged in"
         
-        // Copy friend code button
+        // Copy friend code button - copies unformatted code for easy sharing
         panel.findViewById<Button?>(R.id.btn_copy_friend_code)?.setOnClickListener {
             val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val clip = ClipData.newPlainText("Friend Code", friendCode)
+            val unformattedCode = FriendCodeGenerator.removeFormatting(shortFriendCode)
+            val clip = ClipData.newPlainText("Friend Code", unformattedCode)
             clipboard.setPrimaryClip(clip)
             Toast.makeText(context, context.getString(R.string.toast_friend_code_copied), Toast.LENGTH_SHORT).show()
         }

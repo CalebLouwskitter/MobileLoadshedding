@@ -181,9 +181,12 @@ class MainActivity : UnityPlayerGameActivity() {
      * Updates HUD and refreshes any visible panels.
      */
     private fun onGameStateChanged() {
+        Log.d("MainActivity", "🔄 onGameStateChanged() called")
         runOnUiThread {
             // Update HUD with latest state
             val stats = components.stateManager.latestStats
+            val leaderboard = components.stateManager.latestLeaderboard
+            Log.d("MainActivity", "  Stats: ${stats != null}, Leaderboard: ${leaderboard != null} (${leaderboard?.entries?.size ?: 0} entries)")
             if (stats != null) {
                 components.hudManager.updateHud(
                     stats,

@@ -31,14 +31,18 @@ class ObserverCoordinator(
         }
     }
     
-    private val leaderboardObserver = object : Leaderboard.Observer {
-        override fun onLeaderboardUpdated(payload: UnityLeaderboardPayload) {
-            Log.d("ObserverCoordinator", "Leaderboard updated with ${payload.entries.size} entries")
-            stateManager.updateLeaderboard(payload)
-            onStateChanged()
-        }
-    }
-    
+	private val leaderboardObserver = object : Leaderboard.Observer {
+		override fun onLeaderboardUpdated(payload: UnityLeaderboardPayload) {
+			Log.d("ObserverCoordinator", "⚡ LEADERBOARD UPDATE RECEIVED")
+			Log.d("ObserverCoordinator", "Leaderboard updated with ${payload.entries.size} entries")
+			payload.entries.take(3).forEach { entry ->
+				Log.d("ObserverCoordinator", "  - ${entry.displayName}: ${entry.score}")
+			}
+			stateManager.updateLeaderboard(payload)
+			onStateChanged()
+		}
+	}
+
     private val friendsObserver = object : FriendsList.Observer {
         override fun onFriendsUpdated(payload: FriendsPayload) {
             stateManager.updateFriends(payload)
