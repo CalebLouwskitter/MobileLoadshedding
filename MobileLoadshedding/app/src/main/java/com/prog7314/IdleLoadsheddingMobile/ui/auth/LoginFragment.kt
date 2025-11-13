@@ -10,6 +10,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.prog7314.IdleLoadsheddingMobile.R
 import com.prog7314.IdleLoadsheddingMobile.databinding.FragmentLoginBinding
+import com.prog7314.IdleLoadsheddingMobile.ui.auth.Biometrics.BiometricAuthManager
+import com.prog7314.IdleLoadsheddingMobile.ui.auth.Biometrics.BiometricPromptHelper
 import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
@@ -19,15 +21,20 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private val viewModel: LoginViewModel by viewModels()
     private lateinit var googleSignInHelper: GoogleSignInHelper
+    private lateinit var biometricPromptHelper: BiometricPromptHelper
+    private lateinit var biometricAuthManager: BiometricAuthManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentLoginBinding.bind(view)
 
         googleSignInHelper = GoogleSignInHelper(requireContext())
+        biometricAuthManager = BiometricAuthManager(requireContext())
+        biometricPromptHelper = BiometricPromptHelper(requireActivity(), biometricAuthManager)
 
         binding.buttonLogin.setOnClickListener { onLoginClicked() }
         binding.buttonContinueGoogle.setOnClickListener { onGoogleSignInClicked() }
+        binding.buttonBiometric.setOnClickListener { onBiometricLoginClicked() }
         binding.textForgotPassword.setOnClickListener { onForgotPasswordClicked() }
         binding.checkboxRememberMe.setOnCheckedChangeListener { buttonView, isChecked ->
             if (buttonView.isPressed) {
@@ -36,6 +43,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
 
         observeViewModel()
+        updateBiometricButtonVisibility()
     }
 
     override fun onDestroyView() {
@@ -54,6 +62,9 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                                 (activity as? AuthActivity)?.onAuthenticationSuccess()
                             }
                             is AuthenticationState.Error -> {
+                                Toast.makeText(context, state.message, Toast.LENGTH_LONG).show()
+                            }
+                            is AuthenticationState.BiometricSetupRequired -> {
                                 Toast.makeText(context, state.message, Toast.LENGTH_LONG).show()
                             }
                             is AuthenticationState.Loading -> {
@@ -79,6 +90,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                         }
                     }
                 }
+                launch {
+                    viewModel.biometricEnabled.collect { enabled ->
+                        updateBiometricButtonVisibility()
+                    }
+                }
             }
         }
     }
@@ -88,6 +104,48 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         val password = binding.editPassword.text?.toString().orEmpty()
         viewModel.trackLoginAttempt(email)
         viewModel.signIn(email, password)
+        
+        // After successful login, offer to enable biometric if available and not already enabled
+        if (biometricAuthManager.isBiometricAvailable().isAvailable() && !viewModel.biometricEnabled.value) {
+            // Enable biometric for this account
+            viewModel.enableBiometricAuth(email)
+        }
+    }
+
+    private fun onBiometricLoginClicked() {
+        val (available, errorMessage) = biometricPromptHelper.checkAvailability()
+        
+        if (!available) {
+            Toast.makeText(context, errorMessage ?: "Biometric not available", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        biometricPromptHelper.authenticate(
+            title = "Sign in to Mobile Loadshedding",
+            subtitle = "Use your biometric credential",
+            description = "Authenticate to access your account",
+            onSuccess = {
+                viewModel.signInWithBiometric()
+            },
+            onError = { errorMessage ->
+                Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+            },
+            onCancelled = {
+                // User cancelled, do nothing
+            }
+        )
+    }
+
+    private fun updateBiometricButtonVisibility() {
+        val biometricAvailable = biometricAuthManager.isBiometricAvailable().isAvailable()
+        val biometricEnabled = viewModel.biometricEnabled.value
+        
+        // Show biometric button only if hardware is available and user has enrolled biometric auth
+        binding.buttonBiometric.visibility = if (biometricAvailable && biometricEnabled) {
+            View.VISIBLE
+        } else {
+            View.GONE
+        }
     }
 
     private fun onGoogleSignInClicked() {

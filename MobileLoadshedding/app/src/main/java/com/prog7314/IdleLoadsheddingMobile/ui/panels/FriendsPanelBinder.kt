@@ -1,0 +1,172 @@
+package com.prog7314.IdleLoadsheddingMobile.ui.panels
+
+import android.app.Activity
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.ProgressBar
+import android.widget.TextView
+import android.widget.Toast
+import androidx.core.view.isVisible
+import com.prog7314.IdleLoadsheddingMobile.R
+import com.prog7314.IdleLoadsheddingMobile.data.models.FriendProfile
+import com.prog7314.IdleLoadsheddingMobile.data.models.FriendsPayload
+import com.prog7314.IdleLoadsheddingMobile.unity.FriendsList
+import com.prog7314.IdleLoadsheddingMobile.utils.FormatUtils
+
+/**
+ * Handles friends panel configuration and data binding.
+ * Extracted from MainActivity to separate concerns.
+ */
+class FriendsPanelBinder(
+    private val activity: Activity,
+    private val formatUtils: FormatUtils
+) {
+    
+    /**
+     * Configures friends panel UI elements and event handlers.
+     */
+    fun configure(
+        panel: View,
+        friends: FriendsPayload?,
+        onShowPanel: (Int) -> Unit
+    ) {
+        Log.d("FriendsPanelBinder", "Configuring friends leaderboard panel")
+        
+        // Back to global leaderboard
+        panel.findViewById<TextView?>(R.id.btn_show_global)?.setOnClickListener {
+            onShowPanel(R.layout.panel_leaderboard)
+        }
+
+        // Refresh friends button
+        panel.findViewById<TextView?>(R.id.btn_show_friends)?.setOnClickListener {
+            Log.d("FriendsPanelBinder", "Refreshing friends list from backend")
+            FriendsList.fetchBackendFriends { result ->
+                result.onSuccess { payload ->
+                    Log.d("FriendsPanelBinder", "SUCCESS: Friends fetched with ${payload.friends.size} entries")
+                }.onFailure { error ->
+                    Log.e("FriendsPanelBinder", "FAILED: Friends fetch error: ${error.message}", error)
+                    Toast.makeText(activity, "Failed to refresh friends list", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        // Add friend button
+        panel.findViewById<Button?>(R.id.btn_add_friend)?.setOnClickListener {
+            val codeInput = panel.findViewById<EditText?>(R.id.input_friend_code)
+            val friendCode = codeInput?.text?.toString()?.trim().orEmpty()
+            if (friendCode.isEmpty()) {
+                Toast.makeText(activity, activity.getString(R.string.toast_friend_code_empty), Toast.LENGTH_SHORT).show()
+            } else {
+                FriendsList.updateFriend(
+                    friendCode,
+                    activity.getString(R.string.friend_placeholder_name, friendCode),
+                    15.0,
+                    true
+                )
+                Toast.makeText(activity, activity.getString(R.string.toast_friend_invite_sent), Toast.LENGTH_SHORT).show()
+                codeInput?.text?.clear()
+                
+                // Refresh friends list after adding
+                FriendsList.fetchBackendFriends { result ->
+                    result.onFailure { error ->
+                        Log.e("FriendsPanelBinder", "Failed to refresh after adding friend: ${error.message}", error)
+                    }
+                }
+            }
+        }
+
+        // Bind data
+        bindData(panel, friends)
+        
+        // Fetch if no cached data
+        if (friends == null) {
+            Log.d("FriendsPanelBinder", "No cached friends data, fetching from backend API")
+            FriendsList.fetchBackendFriends { result ->
+                result.onSuccess { payload ->
+                    Log.d("FriendsPanelBinder", "Initial friends fetch successful: ${payload.friends.size} friends")
+                }.onFailure { error ->
+                    Log.e("FriendsPanelBinder", "Failed to fetch initial friends: ${error.message}", error)
+                    FriendsList.requestUnityFriends()
+                }
+            }
+        } else {
+            Log.d("FriendsPanelBinder", "Using cached friends data with ${friends.friends.size} friends")
+        }
+    }
+    
+    /**
+     * Binds friends data to UI elements.
+     */
+    fun bindData(panel: View, payload: FriendsPayload?) {
+        val loading = panel.findViewById<ProgressBar?>(R.id.friends_loading)
+        val empty = panel.findViewById<View?>(R.id.text_friends_empty)
+        val listContainer = panel.findViewById<LinearLayout?>(R.id.friends_list_container)
+        val lastUpdated = panel.findViewById<TextView?>(R.id.text_friends_last_updated)
+
+        if (payload == null) {
+            // Show loading state
+            loading?.isVisible = true
+            empty?.isVisible = false
+            listContainer?.isVisible = false
+            lastUpdated?.text = "Loading friends..."
+            return
+        }
+
+        loading?.isVisible = false
+        lastUpdated?.text = activity.getString(R.string.friends_last_updated, formatUtils.formatTimestamp(payload.timestampUtc))
+
+        val entries = payload.friends
+        if (entries.isEmpty()) {
+            // Show empty state
+            empty?.isVisible = true
+            listContainer?.isVisible = false
+            Log.d("FriendsPanelBinder", "Friends list is empty - showing empty state")
+        } else {
+            empty?.isVisible = false
+            listContainer?.isVisible = true
+            listContainer?.let { renderEntries(it, entries) }
+            Log.d("FriendsPanelBinder", "Displaying ${entries.size} friends")
+        }
+    }
+    
+    /**
+     * Renders friends entries into the container.
+     */
+    private fun renderEntries(
+        container: LinearLayout,
+        entries: List<FriendProfile>
+    ) {
+        container.removeAllViews()
+        entries.forEachIndexed { index, friend ->
+            val row = LayoutInflater.from(activity).inflate(R.layout.view_leaderboard_row, container, false)
+            row.findViewById<TextView?>(R.id.text_rank)?.text = "#${index + 1}"
+            
+            // Add cosmetic tags based on contribution
+            val displayNameWithTag = buildString {
+                append(friend.displayName)
+                append(" ")
+                when {
+                    friend.contributionPerHour > 1000.0 -> append("🏆")
+                    friend.contributionPerHour > 100.0 -> append("⚡")
+                    else -> append("🌟")
+                }
+            }
+            
+            row.findViewById<TextView?>(R.id.text_entry_title)?.text = displayNameWithTag
+            row.findViewById<TextView?>(R.id.text_entry_detail)?.text =
+                "${formatUtils.formatEnergy(friend.contributionPerHour)} /hr • ${formatUtils.formatTimestamp(friend.lastInteractionUtc)}"
+            
+            // Online presence icons
+            val icon = row.findViewById<ImageView?>(R.id.image_entry_status)
+            icon?.setImageResource(
+                if (friend.isOnline) android.R.drawable.presence_online else android.R.drawable.presence_invisible
+            )
+            container.addView(row)
+        }
+    }
+}

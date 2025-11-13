@@ -18,6 +18,8 @@ class AuthPreferences(private val context: Context) {
     private object Keys {
         val rememberMe: Preferences.Key<Boolean> = booleanPreferencesKey("remember_me")
         val rememberedEmail: Preferences.Key<String> = stringPreferencesKey("remembered_email")
+        val biometricEnabled: Preferences.Key<Boolean> = booleanPreferencesKey("biometric_enabled")
+        val biometricEmail: Preferences.Key<String> = stringPreferencesKey("biometric_email")
     }
 
     val rememberMe: Flow<Boolean> = context.authPreferencesDataStore.data.map { preferences ->
@@ -26,6 +28,14 @@ class AuthPreferences(private val context: Context) {
 
     val rememberedEmail: Flow<String> = context.authPreferencesDataStore.data.map { preferences ->
         preferences[Keys.rememberedEmail] ?: ""
+    }
+
+    val biometricEnabled: Flow<Boolean> = context.authPreferencesDataStore.data.map { preferences ->
+        preferences[Keys.biometricEnabled] ?: false
+    }
+
+    val biometricEmail: Flow<String> = context.authPreferencesDataStore.data.map { preferences ->
+        preferences[Keys.biometricEmail] ?: ""
     }
 
     suspend fun setRememberMe(value: Boolean) {
@@ -50,6 +60,24 @@ class AuthPreferences(private val context: Context) {
     suspend fun clearRememberedEmail() {
         context.authPreferencesDataStore.edit { preferences ->
             preferences.remove(Keys.rememberedEmail)
+        }
+    }
+
+    suspend fun setBiometricEnabled(enabled: Boolean, email: String? = null) {
+        context.authPreferencesDataStore.edit { preferences ->
+            preferences[Keys.biometricEnabled] = enabled
+            if (enabled && !email.isNullOrBlank()) {
+                preferences[Keys.biometricEmail] = email
+            } else if (!enabled) {
+                preferences.remove(Keys.biometricEmail)
+            }
+        }
+    }
+
+    suspend fun clearBiometricData() {
+        context.authPreferencesDataStore.edit { preferences ->
+            preferences.remove(Keys.biometricEnabled)
+            preferences.remove(Keys.biometricEmail)
         }
     }
 }

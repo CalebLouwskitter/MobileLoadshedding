@@ -31,6 +31,18 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         initialValue = ""
     )
 
+    val biometricEnabled = authPreferences.biometricEnabled.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.Eagerly,
+        initialValue = false
+    )
+
+    val biometricEmail = authPreferences.biometricEmail.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.Eagerly,
+        initialValue = ""
+    )
+
     fun signIn(email: String, password: String) {
         if (email.isEmpty() || password.isEmpty()) {
             _authenticationState.value = AuthenticationState.Error("Please fill in all fields.")
@@ -98,6 +110,52 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         }
         _authenticationState.value = AuthenticationState.Success
     }
+
+    /**
+     * Authenticate using biometrics (passwordless sign-in)
+     * This retrieves the stored email and signs in with Firebase
+     */
+    fun signInWithBiometric() {
+        val email = biometricEmail.value
+        if (email.isEmpty()) {
+            _authenticationState.value = AuthenticationState.Error("No biometric account configured.")
+            return
+        }
+
+        viewModelScope.launch {
+            _authenticationState.value = AuthenticationState.Loading
+            // For passwordless authentication, we rely on Firebase's persistent auth state
+            // The biometric just confirms the user's identity
+            val currentUser = auth.currentUser
+            if (currentUser != null && currentUser.email == email) {
+                _authenticationState.value = AuthenticationState.Success
+            } else {
+                // User needs to sign in again
+                _authenticationState.value = AuthenticationState.BiometricSetupRequired(
+                    "Please sign in with your password first to enable biometric authentication."
+                )
+            }
+        }
+    }
+
+    /**
+     * Enable biometric authentication for the current user
+     * Should be called after successful password-based login
+     */
+    fun enableBiometricAuth(email: String) {
+        viewModelScope.launch {
+            authPreferences.setBiometricEnabled(true, email)
+        }
+    }
+
+    /**
+     * Disable biometric authentication
+     */
+    fun disableBiometricAuth() {
+        viewModelScope.launch {
+            authPreferences.clearBiometricData()
+        }
+    }
 }
 
 sealed class AuthenticationState {
@@ -105,4 +163,5 @@ sealed class AuthenticationState {
     object Loading : AuthenticationState()
     object Success : AuthenticationState()
     data class Error(val message: String) : AuthenticationState()
+    data class BiometricSetupRequired(val message: String) : AuthenticationState()
 }

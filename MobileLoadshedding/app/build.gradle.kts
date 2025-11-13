@@ -74,6 +74,9 @@ dependencies {
 
     implementation("androidx.datastore:datastore-preferences:1.1.1")
 
+    // Biometric Authentication
+    implementation("androidx.biometric:biometric:1.2.0-alpha05")
+
     implementation("androidx.games:games-activity:3.0.5")
     implementation(libs.firebase.auth)
     implementation("androidx.navigation:navigation-fragment-ktx:2.8.0")
