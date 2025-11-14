@@ -148,7 +148,7 @@ jobs:
           command: dotnet restore IdleLoadsheddingAPI.Tests/IdleLoadsheddingAPI.Tests.csproj
       - run:
           name: Run tests
-          command: dotnet test IdleLoadsheddingAPI.Tests/IdleLoadsheddingAPI.Tests.csproj --configuration Release --no-restore --verbosity minimal --logger "trx;LogFileName=test-results.trx"
+          command: dotnet test IdleLoadsheddingAPI.Tests/IdleLoadsheddingAPI.Tests.csproj --configuration Release --no-restore --verbosity minimal --logger "trx;LogFileName=test-results.trx" --logger "console;verbosity=normal"
       - save-dotnet-cache
       - store_test_results:
           path: IdleLoadsheddingAPI.Tests/TestResults

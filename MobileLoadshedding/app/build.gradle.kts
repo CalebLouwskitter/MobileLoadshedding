@@ -84,7 +84,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
     // Ensure AppCompat for AlertDialog support
     implementation("androidx.appcompat:appcompat:1.7.0")
-    implementation(libs.firebase.messaging)
+    implementation("com.google.firebase:firebase-messaging:25.0.1")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
