@@ -26,6 +26,7 @@
             android:text="Electricity"
             android:textColor="@color/modal_text_primary"
             android:textSize="@dimen/modal_tab_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/tab_spacer"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -54,6 +55,7 @@
             android:textColor="@color/modal_text_primary"
             android:textSize="@dimen/modal_tab_text_size"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tab_spacer"
             app:layout_constraintTop_toTopOf="parent" />
@@ -66,8 +68,10 @@
         android:id="@+id/content_scroll"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/modal_tab_overlap_height"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="16dp"
         android:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

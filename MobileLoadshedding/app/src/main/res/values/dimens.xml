@@ -41,6 +41,8 @@
     <!-- Modal System -->
     <dimen name="modal_close_button_size">44dp</dimen>
     <dimen name="modal_close_button_margin">-8dp</dimen>
+    <dimen name="modal_close_button_margin_top">-22dp</dimen>
+    <dimen name="modal_close_button_margin_end">-8dp</dimen>
     <dimen name="modal_close_button_elevation">10dp</dimen>
     <dimen name="modal_tab_overlap_height">20dp</dimen>
     <dimen name="modal_tab_padding_vertical">12dp</dimen>
@@ -48,4 +50,11 @@
     <dimen name="modal_tab_spacer_width">6dp</dimen>
     <dimen name="modal_tab_text_size">13sp</dimen>
     <dimen name="modal_corner_radius">12dp</dimen>
+    <dimen name="modal_panel_corner_radius">20dp</dimen>
+    <dimen name="modal_item_corner_radius">12dp</dimen>
+    <dimen name="modal_tab_corner_radius">12dp</dimen>
+    <dimen name="modal_panel_shadow_offset">4dp</dimen>
+    <dimen name="modal_tab_shadow_offset">2dp</dimen>
+    <dimen name="modal_item_shadow_offset">2dp</dimen>
+    <dimen name="modal_tab_shadow_overlap">-2dp</dimen>
 </resources>
