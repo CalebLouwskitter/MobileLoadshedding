@@ -37,4 +37,15 @@
     <!-- Stats Section -->
     <dimen name="stats_card_padding">16dp</dimen>
     <dimen name="stats_item_spacing">8dp</dimen>
+    
+    <!-- Modal System -->
+    <dimen name="modal_close_button_size">44dp</dimen>
+    <dimen name="modal_close_button_margin">-8dp</dimen>
+    <dimen name="modal_close_button_elevation">10dp</dimen>
+    <dimen name="modal_tab_overlap_height">20dp</dimen>
+    <dimen name="modal_tab_padding_vertical">12dp</dimen>
+    <dimen name="modal_tab_drawable_padding">8dp</dimen>
+    <dimen name="modal_tab_spacer_width">6dp</dimen>
+    <dimen name="modal_tab_text_size">13sp</dimen>
+    <dimen name="modal_corner_radius">12dp</dimen>
 </resources>

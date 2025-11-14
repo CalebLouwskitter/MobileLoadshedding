@@ -35,6 +35,8 @@ import com.prog7314.IdleLoadsheddingMobile.unity.Stats
 // TEMPORARILY USING STUB - Replace with real Unity import after refactoring
 // import com.unity3d.player.UnityPlayerGameActivity //Unity Technologies, 2025.
 import com.prog7314.IdleLoadsheddingMobile.stub.UnityPlayerGameActivity
+import com.prog7314.IdleLoadsheddingMobile.networking.FirebasePush.FcmIntegrationHelper
+import com.prog7314.IdleLoadsheddingMobile.networking.FirebasePush.NotificationSimulator
 import com.prog7314.IdleLoadsheddingMobile.ui.HudManager
 import com.prog7314.IdleLoadsheddingMobile.ui.PanelManager
 import com.prog7314.IdleLoadsheddingMobile.ui.coordinators.UIComponentFactory
@@ -102,7 +104,31 @@ class MainActivity : UnityPlayerGameActivity() {
         )
         addContentView(overlay, layoutParams)
 
-        // 7. Initialize Unity integration
+        // 7. Initialize Firebase Cloud Messaging (FCM) for push notifications
+        // This will request notification permissions on Android 13+ and register the FCM token
+        FcmIntegrationHelper.initialize(this)
+
+        // 8. Handle notification intent if app was opened from a notification
+        FcmIntegrationHelper.handleNotificationIntent(intent) { type, data ->
+            Log.d("MainActivity", "Notification clicked: type=$type")
+            // TODO: Route user to appropriate screen based on notification type
+            // Example routing:
+            when (type) {
+                "EVENT_STARTED", "EVENT_ENDING_SOON" -> {
+                    // Navigate to events panel
+                    showPanel(R.layout.panel_tasks_board)
+                }
+                "FRIEND_REQUEST", "FRIEND_ACCEPTED" -> {
+                    // Navigate to friends/profile panel
+                    showPanel(R.layout.panel_profile)
+                }
+                else -> {
+                    Log.d("MainActivity", "Unknown notification type: $type")
+                }
+            }
+        }
+
+        // 9. Initialize Unity integration
         SaveSync.initialize(this)
 
         window.decorView.post {
@@ -122,6 +148,11 @@ class MainActivity : UnityPlayerGameActivity() {
     override fun onDestroy() {
         // Clean up all Unity observers to prevent memory leaks
         components.observerCoordinator.unsubscribeAll()
+        
+        // Clean up FCM subscriptions if user is logging out
+        // Note: Only cleanup on logout, not on normal activity destruction
+        // If you have a logout function, call FcmIntegrationHelper.cleanup(this) there
+        
         super.onDestroy()
     }
 
@@ -143,6 +174,13 @@ class MainActivity : UnityPlayerGameActivity() {
         // Profile button opens profile panel
         overlay.findViewById<ImageButton>(R.id.btn_hud_profile).setOnClickListener {
             showPanel(R.layout.panel_profile)
+        }
+        
+        // Profile button (long press) - open debug notifications menu
+        overlay.findViewById<ImageButton>(R.id.btn_hud_profile).setOnLongClickListener {
+            showPanel(R.layout.panel_debug_notifications)
+            Toast.makeText(this, "🔔 Debug Notifications Menu", Toast.LENGTH_SHORT).show()
+            true
         }
 
         // Level up button opens building upgrades

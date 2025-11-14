@@ -102,4 +102,12 @@
     <string name="notification_channel_events_name">Event Notifications</string>
     <string name="notification_channel_friends_name">Friends Notifications</string>
     <string name="notification_channel_system_name">System Notifications</string>
+    
+    <!-- Accessibility -->
+    <string name="accessibility_close">Close modal</string>
+    <string name="accessibility_back">Go back</string>
+    <string name="accessibility_tab">Tab, %1$s</string>
+    <string name="accessibility_toggle">Toggle, %1$s</string>
+    <string name="accessibility_profile_avatar">Profile avatar</string>
+    <string name="accessibility_rank_badge">Rank badge</string>
 </resources>

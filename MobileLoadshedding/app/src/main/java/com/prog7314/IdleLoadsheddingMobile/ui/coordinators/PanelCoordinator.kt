@@ -99,6 +99,10 @@ class PanelCoordinator(
                     stateManager.currentActiveEvent
                 )
             }
+            
+            R.layout.panel_debug_notifications -> {
+                configureDebugNotificationsPanel(panelView)
+            }
         }
     }
     
@@ -152,6 +156,46 @@ class PanelCoordinator(
                     stateManager.currentActiveEvent
                 )
             }
+            
+            R.layout.panel_debug_notifications -> {
+                // Debug panel doesn't need updates
+            }
+        }
+    }
+    
+    /**
+     * Configure the debug notifications panel.
+     * This panel allows testing push notifications without needing Firebase Console.
+     */
+    private fun configureDebugNotificationsPanel(panelView: View) {
+        val context = panelView.context
+        
+        panelView.findViewById<View>(com.prog7314.IdleLoadsheddingMobile.R.id.btn_test_event_started)?.setOnClickListener {
+            com.prog7314.IdleLoadsheddingMobile.networking.FirebasePush.NotificationSimulator.simulateEventStarted(context)
+        }
+        
+        panelView.findViewById<View>(com.prog7314.IdleLoadsheddingMobile.R.id.btn_test_event_ending_soon)?.setOnClickListener {
+            com.prog7314.IdleLoadsheddingMobile.networking.FirebasePush.NotificationSimulator.simulateEventEndingSoon(context)
+        }
+        
+        panelView.findViewById<View>(com.prog7314.IdleLoadsheddingMobile.R.id.btn_test_friend_request)?.setOnClickListener {
+            com.prog7314.IdleLoadsheddingMobile.networking.FirebasePush.NotificationSimulator.simulateFriendRequest(context)
+        }
+        
+        panelView.findViewById<View>(com.prog7314.IdleLoadsheddingMobile.R.id.btn_test_friend_accepted)?.setOnClickListener {
+            com.prog7314.IdleLoadsheddingMobile.networking.FirebasePush.NotificationSimulator.simulateFriendAccepted(context)
+        }
+        
+        panelView.findViewById<View>(com.prog7314.IdleLoadsheddingMobile.R.id.btn_test_system_announcement)?.setOnClickListener {
+            com.prog7314.IdleLoadsheddingMobile.networking.FirebasePush.NotificationSimulator.simulateSystemAnnouncement(context)
+        }
+        
+        panelView.findViewById<View>(com.prog7314.IdleLoadsheddingMobile.R.id.btn_test_maintenance)?.setOnClickListener {
+            com.prog7314.IdleLoadsheddingMobile.networking.FirebasePush.NotificationSimulator.simulateMaintenanceRequired(context)
+        }
+        
+        panelView.findViewById<View>(com.prog7314.IdleLoadsheddingMobile.R.id.btn_test_general)?.setOnClickListener {
+            com.prog7314.IdleLoadsheddingMobile.networking.FirebasePush.NotificationSimulator.simulateGeneral(context)
         }
     }
 }

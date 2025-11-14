@@ -51,6 +51,10 @@ class ProfilePanelBinder(
             onShowPanel(R.layout.panel_friends_leaderboard)
         }
         
+        panel.findViewById<View?>(R.id.btn_profile_debug_notifications)?.setOnClickListener {
+            onShowPanel(R.layout.panel_debug_notifications)
+        }
+        
         panel.findViewById<View?>(R.id.btn_profile_logout)?.setOnClickListener {
             Toast.makeText(context, context.getString(R.string.toast_logout_placeholder), Toast.LENGTH_SHORT).show()
         }
