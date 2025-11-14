@@ -1,6 +1,7 @@
 package com.prog7314.IdleLoadsheddingMobile.ui
 
 import android.content.Context
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
@@ -44,6 +45,14 @@ class PanelManager(
         val panelView = LayoutInflater.from(context).inflate(layoutResId, modalContainer, false)
         
         modalContainer.removeAllViews()
+        // Keep modal content floating instead of stretching edge-to-edge
+        val layoutParams = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.MATCH_PARENT,
+            FrameLayout.LayoutParams.WRAP_CONTENT
+        ).apply {
+            gravity = Gravity.CENTER
+        }
+        panelView.layoutParams = layoutParams
         modalContainer.addView(panelView)
         modalContainer.visibility = View.VISIBLE
         modalScrim.visibility = View.VISIBLE

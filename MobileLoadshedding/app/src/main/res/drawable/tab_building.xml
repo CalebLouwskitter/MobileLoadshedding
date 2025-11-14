@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#C91E8C" />
+    <solid android:color="@color/modal_panel_pink_center" />
     <corners
-        android:topLeftRadius="12dp"
-        android:topRightRadius="12dp"
-        android:bottomLeftRadius="12dp"
+        android:topLeftRadius="@dimen/modal_tab_corner_radius"
+        android:topRightRadius="@dimen/modal_tab_corner_radius"
+        android:bottomLeftRadius="@dimen/modal_tab_corner_radius"
         android:bottomRightRadius="0dp" />
 </shape>

@@ -6,64 +6,49 @@
     android:background="@drawable/bg_panel_rounded"
     android:animateLayoutChanges="true">
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/header_tabs_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tab_profile"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tab_profile"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#B71C1C"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"
-                android:gravity="center"
-                android:minHeight="48dp"
-                android:padding="@dimen/spacing_medium"
-                android:text="Profile"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tab_leaderboard"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#212121"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"
-                android:gravity="center"
-                android:minHeight="48dp"
-                android:padding="@dimen/spacing_medium"
-                android:text="Leader board"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/close_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="end"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Close"
+            android:layout_weight="1"
+            android:background="@color/modal_header_primary"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:minHeight="48dp"
             android:padding="@dimen/spacing_medium"
-            android:src="@drawable/ic_close_white" />
-    </FrameLayout>
+            android:text="Profile"
+            android:textColor="@color/modal_text_primary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tab_leaderboard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/modal_text_on_light"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:minHeight="48dp"
+            android:padding="@dimen/spacing_medium"
+            android:text="Leader board"
+            android:textColor="@color/modal_text_primary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/label_add_friend"
@@ -72,7 +57,7 @@
         android:layout_marginTop="@dimen/spacing_normal"
         android:layout_marginStart="@dimen/panel_padding_horizontal"
         android:text="Add Friend by Code"
-        android:textColor="#0E3D57"
+        android:textColor="@color/modal_text_dark_blue"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/header_tabs_container"
@@ -106,14 +91,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/panel_padding_horizontal"
-        android:backgroundTint="#4CAF50"
+        android:backgroundTint="@color/modal_button_primary"
         android:minWidth="0dp"
         android:paddingStart="16dp"
         android:paddingTop="10dp"
         android:paddingEnd="16dp"
         android:paddingBottom="10dp"
         android:text="ADD"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/modal_text_primary"
         android:textSize="13sp"
         app:layout_constraintTop_toTopOf="@id/input_friend_code"
         app:layout_constraintBottom_toBottomOf="@id/input_friend_code"
@@ -127,7 +112,7 @@
         android:layout_marginStart="@dimen/panel_padding_horizontal"
         android:layout_marginEnd="@dimen/panel_padding_horizontal"
         android:text=""
-        android:textColor="#757575"
+        android:textColor="@color/modal_text_on_light_secondary"
         android:textSize="12sp"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/input_friend_code"
@@ -151,7 +136,7 @@
         android:paddingTop="@dimen/spacing_medium"
         android:paddingBottom="@dimen/spacing_medium"
         android:text="Friends"
-        android:textColor="#000000"
+        android:textColor="@color/modal_toggle_inactive_text"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/text_add_friend_status"
@@ -173,7 +158,7 @@
         android:paddingTop="@dimen/spacing_medium"
         android:paddingBottom="@dimen/spacing_medium"
         android:text="Global"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/modal_toggle_active_text"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="@id/btn_show_friends"
@@ -187,7 +172,7 @@
         android:layout_marginTop="@dimen/spacing_small"
         android:layout_marginStart="@dimen/panel_padding_horizontal"
         android:text="Updated --"
-        android:textColor="#424242"
+        android:textColor="@color/modal_text_dark_gray"
         android:textSize="13sp"
         app:layout_constraintTop_toBottomOf="@id/btn_show_friends"
         app:layout_constraintStart_toStartOf="parent" />
@@ -209,7 +194,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_xlarge"
         android:text="No friends yet"
-        android:textColor="#757575"
+        android:textColor="@color/modal_text_on_light_secondary"
         android:textSize="14sp"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/text_friends_last_updated"
@@ -230,4 +215,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Close Button overlaying tabs -->
+    <include layout="@layout/include_modal_close_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

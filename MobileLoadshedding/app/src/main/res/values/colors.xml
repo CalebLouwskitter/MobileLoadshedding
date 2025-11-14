@@ -20,4 +20,83 @@
     <color name="auth_google_border">#E0E0E0</color>
     <color name="auth_google_text">#3C4043</color>
     <color name="auth_divider">#E5E8F5</color>
+    
+    <!-- Modal Color Palette -->
+    <color name="modal_overlay_background">#80000000</color>
+
+    <!-- Modal Backgrounds -->
+    <color name="modal_background_pink">#E91E63</color>
+    <color name="modal_background_blue">#2196F3</color>
+    <color name="modal_background_red">#D32F2F</color>
+    <color name="modal_background_leaderboard">#FFE0B2</color>
+    <color name="modal_background_tasks">#4CAF50</color>
+    <color name="modal_background_utility">#FFFFFF</color>
+    <color name="modal_panel_surface">#F5F7F9</color>
+    <color name="modal_header_primary">#B71C1C</color>
+    <color name="modal_friend_code_bg">#E53935</color>
+
+    <!-- Panel Gradients -->
+    <color name="modal_panel_pink_start">#E91E8C</color>
+    <color name="modal_panel_pink_center">#C91E8C</color>
+    <color name="modal_panel_pink_end">#A0156E</color>
+    <color name="modal_panel_blue_start">#1E88E5</color>
+    <color name="modal_panel_blue_center">#0A7BB8</color>
+    <color name="modal_panel_blue_end">#0565A1</color>
+    <color name="modal_panel_red_start">#C62828</color>
+    <color name="modal_panel_red_center">#8B0000</color>
+    <color name="modal_panel_red_end">#6A0000</color>
+    <color name="modal_panel_tasks_start">#5DB8B8</color>
+    <color name="modal_panel_tasks_end">#3A7D7D</color>
+    <color name="modal_panel_leaderboard_top">#F5F5F5</color>
+    <color name="modal_panel_leaderboard_bottom">#E0E0E0</color>
+    
+    <!-- Modal Text Colors -->
+    <color name="modal_text_primary">#FFFFFF</color>
+    <color name="modal_text_secondary">#E0E0E0</color>
+    <color name="modal_text_tertiary">#BDBDBD</color>
+    <color name="modal_text_on_light">#212121</color>
+    <color name="modal_text_on_light_secondary">#757575</color>
+    <color name="modal_text_on_light_tertiary">#9E9E9E</color>
+    <color name="modal_text_dark_blue">#0E3D57</color>
+    <color name="modal_text_light_red">#FFCDD2</color>
+    <color name="modal_text_dark_gray">#424242</color>
+    <color name="modal_text_muted">#616161</color>
+    <color name="modal_text_on_accent">#FFEBEE</color>
+    
+    <!-- Modal Interactive Elements -->
+    <color name="modal_close_bg">#D32F2F</color>
+    <color name="modal_close_icon">#FFFFFF</color>
+    <color name="modal_tab_active_text">#FFFFFF</color>
+    <color name="modal_tab_inactive_text">#B0FFFFFF</color>
+    <color name="modal_button_primary">#4CAF50</color>
+    <color name="modal_button_secondary">#2196F3</color>
+    <color name="modal_button_danger">#F44336</color>
+    <color name="modal_button_warning">#FF9800</color>
+    <color name="modal_button_accent">#FFC107</color>
+    <color name="modal_button_info">#607D8B</color>
+    <color name="modal_button_purple">#9C27B0</color>
+    
+    <!-- Modal Dividers & Borders -->
+    <color name="modal_divider">#1AFFFFFF</color>
+    <color name="modal_divider_solid">#FFFFFF</color>
+    <color name="modal_divider_on_light">#1A000000</color>
+    
+    <!-- Modal Toggle States -->
+    <color name="modal_toggle_active_bg">#000000</color>
+    <color name="modal_toggle_active_text">#FFFFFF</color>
+    <color name="modal_toggle_inactive_bg">#FFFFFF</color>
+    <color name="modal_toggle_inactive_text">#000000</color>
+
+    <!-- Shadows -->
+    <color name="modal_shadow_panel">#40000000</color>
+    <color name="modal_shadow_tab">#60000000</color>
+    <color name="modal_shadow_item">#30000000</color>
+    <color name="modal_shadow_soft">#1A000000</color>
+
+    <!-- Utility Colors -->
+    <color name="modal_info_background">#F5F5F5</color>
+    <color name="modal_info_text">#999999</color>
+    <color name="modal_chip_success_bg">#FFC107</color>
+    <color name="modal_chip_success_text">#212121</color>
+    <color name="modal_status_chip_bg">#FFEED28C</color>
 </resources>

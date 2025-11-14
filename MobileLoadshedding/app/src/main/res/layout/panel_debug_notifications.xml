@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/modal_background_utility"
+    android:padding="@dimen/panel_padding_horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Header -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🔔 Push Notification Tester"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/modal_text_dark_blue"
+            android:gravity="center"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tap any button to simulate a push notification"
+            android:textSize="14sp"
+            android:textColor="@color/modal_text_on_light_tertiary"
+            android:gravity="center"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Event Notifications Section -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📅 Event Notifications"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/modal_text_dark_blue"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btn_test_event_started"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🎉 Event Started"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/modal_button_primary"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_test_event_ending_soon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="⏰ Event Ending Soon"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/modal_button_warning"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Friend Notifications Section -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="👥 Friend Notifications"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/modal_text_dark_blue"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btn_test_friend_request"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="👋 Friend Request"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/modal_button_secondary"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_test_friend_accepted"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="✅ Friend Accepted"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/modal_button_primary"
+            android:layout_marginBottom="24dp" />
+
+        <!-- System Notifications Section -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="⚙️ System Notifications"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/modal_text_dark_blue"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btn_test_system_announcement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📢 System Announcement"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/modal_button_purple"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_test_maintenance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🔧 Maintenance Required"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/modal_button_danger"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_test_general"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📬 General Notification"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/modal_button_info"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Info Section -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ℹ️ These notifications will simulate incoming FCM messages and test the notification routing system."
+            android:textSize="12sp"
+            android:textColor="@color/modal_info_text"
+            android:textStyle="italic"
+            android:gravity="center"
+            android:padding="@dimen/panel_padding_horizontal"
+            android:background="@color/modal_info_background"
+            android:layout_marginTop="8dp" />
+
+    </LinearLayout>
+</ScrollView>

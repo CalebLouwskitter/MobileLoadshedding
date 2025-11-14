@@ -7,11 +7,11 @@
     android:animateLayoutChanges="true">
 
     <!-- Header -->
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#B71C1C"
+        android:background="@color/modal_header_primary"
         android:padding="@dimen/spacing_small"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,22 +20,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:text="@string/settings_panel_title"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/modal_text_primary"
             android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <ImageButton
-            android:id="@+id/close_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="end|center_vertical"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Close"
-            android:src="@drawable/ic_close_white"
-            app:tint="#FFFFFF" />
-    </FrameLayout>
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Content -->
     <TextView
@@ -46,7 +39,7 @@
         android:layout_marginStart="@dimen/panel_padding_horizontal"
         android:layout_marginBottom="@dimen/spacing_medium"
         android:text="@string/settings_save_management_label"
-        android:textColor="#0E3D57"
+        android:textColor="@color/modal_text_dark_blue"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/header_container"
@@ -60,11 +53,11 @@
         android:layout_marginTop="@dimen/spacing_medium"
         android:layout_marginStart="@dimen/panel_padding_horizontal"
         android:layout_marginEnd="@dimen/panel_padding_horizontal"
-        android:backgroundTint="#4CAF50"
+        android:backgroundTint="@color/modal_button_primary"
         android:paddingTop="@dimen/button_padding_vertical"
         android:paddingBottom="@dimen/button_padding_vertical"
         android:text="@string/btn_upload_save"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/modal_text_primary"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/label_save_management"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,8 +74,8 @@
         android:paddingTop="@dimen/button_padding_vertical"
         android:paddingBottom="@dimen/button_padding_vertical"
         android:text="@string/btn_sync_save"
-        android:textColor="#2196F3"
-        app:strokeColor="#2196F3"
+        android:textColor="@color/modal_button_secondary"
+        app:strokeColor="@color/modal_button_secondary"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/btn_upload_save"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_medium"
         android:text="@string/text_last_save_sync_default"
-        android:textColor="#757575"
+        android:textColor="@color/modal_text_on_light_secondary"
         android:textSize="13sp"
         app:layout_constraintTop_toBottomOf="@id/btn_sync_save"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,7 +101,7 @@
         android:layout_marginBottom="@dimen/section_spacing"
         android:layout_marginStart="@dimen/panel_padding_horizontal"
         android:layout_marginEnd="@dimen/panel_padding_horizontal"
-        android:background="#1A000000"
+        android:background="@color/modal_divider_on_light"
         app:layout_constraintTop_toBottomOf="@id/text_last_save_sync"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -121,7 +114,7 @@
         android:layout_marginTop="@dimen/section_spacing"
         android:layout_marginStart="@dimen/panel_padding_horizontal"
         android:text="@string/settings_language_label"
-        android:textColor="#0E3D57"
+        android:textColor="@color/modal_text_dark_blue"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/divider1"
@@ -137,8 +130,8 @@
         android:background="@drawable/bg_settings_dropdown"
         android:minHeight="48dp"
         android:entries="@array/settings_languages"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
+        android:paddingStart="@dimen/spacing_small"
+        android:paddingEnd="@dimen/spacing_small"
         app:layout_constraintTop_toBottomOf="@id/label_language"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -151,7 +144,7 @@
         android:layout_marginTop="@dimen/spacing_normal"
         android:layout_marginStart="@dimen/panel_padding_horizontal"
         android:text="@string/settings_theme_label"
-        android:textColor="#0E3D57"
+        android:textColor="@color/modal_text_dark_blue"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/spinner_language"
@@ -167,8 +160,8 @@
         android:background="@drawable/bg_settings_dropdown"
         android:minHeight="48dp"
         android:entries="@array/settings_themes"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
+        android:paddingStart="@dimen/spacing_small"
+        android:paddingEnd="@dimen/spacing_small"
         app:layout_constraintTop_toBottomOf="@id/label_theme"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -181,7 +174,7 @@
         android:layout_marginBottom="@dimen/section_spacing"
         android:layout_marginStart="@dimen/panel_padding_horizontal"
         android:layout_marginEnd="@dimen/panel_padding_horizontal"
-        android:background="#1A000000"
+        android:background="@color/modal_divider_on_light"
         app:layout_constraintTop_toBottomOf="@id/spinner_theme"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -198,11 +191,14 @@
         android:paddingTop="@dimen/button_padding_vertical"
         android:paddingBottom="@dimen/button_padding_vertical"
         android:text="@string/btn_logout"
-        android:textColor="#B71C1C"
-        app:strokeColor="#B71C1C"
+        android:textColor="@color/modal_header_primary"
+        app:strokeColor="@color/modal_header_primary"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/divider2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Close Button overlaying header -->
+    <include layout="@layout/include_modal_close_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

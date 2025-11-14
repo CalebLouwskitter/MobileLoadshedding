@@ -6,11 +6,11 @@
     android:background="@drawable/bg_panel_rounded"
     android:animateLayoutChanges="true">
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#B71C1C"
+        android:background="@color/modal_header_primary"
         android:padding="@dimen/spacing_small"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,22 +19,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:text="@string/profile_edit_title"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/modal_text_primary"
             android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <ImageButton
-            android:id="@+id/close_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="end|center_vertical"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Close"
-            android:src="@drawable/ic_close_white"
-            app:tint="#FFFFFF" />
-    </FrameLayout>
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/label_nickname"
@@ -43,7 +36,7 @@
         android:layout_marginTop="@dimen/spacing_small"
         android:layout_marginStart="@dimen/panel_padding_horizontal"
         android:text="@string/profile_edit_nickname"
-        android:textColor="#0E3D57"
+        android:textColor="@color/modal_text_dark_blue"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/header_container"
@@ -72,7 +65,7 @@
         android:layout_marginTop="@dimen/spacing_normal"
         android:layout_marginStart="@dimen/panel_padding_horizontal"
         android:text="@string/profile_edit_email"
-        android:textColor="#0E3D57"
+        android:textColor="@color/modal_text_dark_blue"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/input_nickname"
@@ -87,7 +80,7 @@
         android:layout_marginEnd="@dimen/panel_padding_horizontal"
         android:background="@android:drawable/edit_text"
         android:text="email@example.com"
-        android:textColor="#757575"
+        android:textColor="@color/modal_text_on_light_secondary"
         android:minHeight="48dp"
         android:paddingStart="@dimen/spacing_medium"
         android:paddingEnd="@dimen/spacing_medium"
@@ -107,7 +100,9 @@
         android:layout_marginEnd="@dimen/spacing_small"
         android:paddingTop="@dimen/button_padding_vertical"
         android:paddingBottom="@dimen/button_padding_vertical"
+        android:backgroundTint="@color/modal_button_primary"
         android:text="@string/profile_edit_save"
+        android:textColor="@color/modal_text_primary"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/text_email_static"
         app:layout_constraintStart_toStartOf="parent"
@@ -124,9 +119,14 @@
         android:paddingTop="@dimen/button_padding_vertical"
         android:paddingBottom="@dimen/button_padding_vertical"
         android:text="@string/profile_edit_cancel"
+        android:textColor="@color/modal_button_secondary"
         android:textSize="14sp"
+        app:strokeColor="@color/modal_button_secondary"
         app:layout_constraintTop_toTopOf="@id/btn_save_profile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/btn_save_profile"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Close Button overlaying header -->
+    <include layout="@layout/include_modal_close_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

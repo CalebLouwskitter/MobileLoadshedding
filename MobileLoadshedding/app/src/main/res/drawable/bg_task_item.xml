@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#FFFFFF" />
-    <corners android:radius="12dp" />
-</shape>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Soft shadow for elevation -->
+    <item android:left="0dp" android:top="@dimen/modal_item_shadow_offset" android:right="0dp" android:bottom="0dp">
+        <shape>
+            <solid android:color="@color/modal_shadow_item" />
+            <corners android:radius="@dimen/modal_item_corner_radius" />
+        </shape>
+    </item>
+    <!-- Card surface -->
+    <item android:left="0dp" android:top="0dp" android:right="0dp" android:bottom="@dimen/modal_item_shadow_offset">
+        <shape>
+            <solid android:color="@color/modal_background_utility" />
+            <corners android:radius="@dimen/modal_item_corner_radius" />
+        </shape>
+    </item>
+</layer-list>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Reusable modal close button component
+     Usage: <include layout="@layout/include_modal_close_button" />
+     
+     This provides a consistent close button across all modals with:
+     - Red circular background (44dp)
+     - White X icon
+     - Proper elevation (10dp)
+     - Negative margins for overlay effect (-8dp)
+     - Accessibility support
+-->
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <View
+        android:id="@+id/close_button_bg"
+        android:layout_width="@dimen/modal_close_button_size"
+        android:layout_height="@dimen/modal_close_button_size"
+        android:layout_marginTop="@dimen/modal_close_button_margin_top"
+        android:layout_marginEnd="@dimen/modal_close_button_margin_end"
+        android:background="@drawable/circle_red"
+        android:elevation="@dimen/modal_close_button_elevation"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/close_button"
+        android:layout_width="@dimen/modal_close_button_size"
+        android:layout_height="@dimen/modal_close_button_size"
+        android:layout_marginTop="@dimen/modal_close_button_margin_top"
+        android:layout_marginEnd="@dimen/modal_close_button_margin_end"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/accessibility_close"
+        android:elevation="@dimen/modal_close_button_elevation"
+        android:src="@drawable/ic_close_white"
+        app:tint="@color/modal_close_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</merge>
