@@ -10,6 +10,8 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import org.json.JSONException
+import org.json.JSONObject
 
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -113,39 +115,72 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
     /**
      * Authenticate using biometrics (passwordless sign-in)
-     * This retrieves the stored email and signs in with Firebase
+     * Verifies the stored biometric credentials and re-authenticates if needed
      */
-    fun signInWithBiometric() {
-        val email = biometricEmail.value
-        if (email.isEmpty()) {
-            _authenticationState.value = AuthenticationState.Error("No biometric account configured.")
-            return
-        }
-
+    fun signInWithBiometricToken(payload: String) {
         viewModelScope.launch {
             _authenticationState.value = AuthenticationState.Loading
-            // For passwordless authentication, we rely on Firebase's persistent auth state
-            // The biometric just confirms the user's identity
-            val currentUser = auth.currentUser
-            if (currentUser != null && currentUser.email == email) {
-                _authenticationState.value = AuthenticationState.Success
-            } else {
-                // User needs to sign in again
-                _authenticationState.value = AuthenticationState.BiometricSetupRequired(
-                    "Please sign in with your password first to enable biometric authentication."
+            try {
+                val json = JSONObject(payload)
+                val email = json.optString("email")
+                val uid = json.optString("uid")
+                val password = json.optString("password") // May be empty for older payloads
+                
+                val currentUser = auth.currentUser
+                
+                when {
+                    // User already signed in with matching credentials
+                    currentUser != null && currentUser.email == email && currentUser.uid == uid -> {
+                        // Verify session is still valid
+                        currentUser.reload()
+                            .addOnSuccessListener {
+                                _authenticationState.value = AuthenticationState.Success
+                            }
+                            .addOnFailureListener {
+                                // Session expired but we have password - re-authenticate
+                                if (password.isNotBlank()) {
+                                    signInWithStoredCredentials(email, password)
+                                } else {
+                                    _authenticationState.value = AuthenticationState.BiometricSetupRequired(
+                                        "Session expired. Please sign in with your password."
+                                    )
+                                }
+                            }
+                    }
+                    // No user logged in but we have password - sign in
+                    password.isNotBlank() -> {
+                        signInWithStoredCredentials(email, password)
+                    }
+                    // No user logged in and no password stored
+                    else -> {
+                        _authenticationState.value = AuthenticationState.BiometricSetupRequired(
+                            "Session expired. Please sign in with your password."
+                        )
+                    }
+                }
+            } catch (e: JSONException) {
+                _authenticationState.value = AuthenticationState.Error(
+                    "Stored biometric credential is invalid. Please re-enable biometric login."
                 )
             }
         }
     }
 
     /**
-     * Enable biometric authentication for the current user
-     * Should be called after successful password-based login
+     * Sign in with stored credentials from biometric payload
      */
-    fun enableBiometricAuth(email: String) {
-        viewModelScope.launch {
-            authPreferences.setBiometricEnabled(true, email)
-        }
+    private fun signInWithStoredCredentials(email: String, password: String) {
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    _authenticationState.value = AuthenticationState.Success
+                } else {
+                    _authenticationState.value = AuthenticationState.BiometricSetupRequired(
+                        task.exception?.localizedMessage
+                            ?: "Authentication failed. Please sign in with your password."
+                    )
+                }
+            }
     }
 
     /**

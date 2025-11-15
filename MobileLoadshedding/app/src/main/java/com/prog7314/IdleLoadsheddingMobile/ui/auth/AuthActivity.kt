@@ -110,12 +110,15 @@ class AuthActivity : AppCompatActivity() { //AndroidX, 2025.
     private fun maybeHandleRememberedSession() {
         lifecycleScope.launch {
             val rememberMeEnabled = authPreferences.rememberMe.first()
+            val biometricEnabled = authPreferences.biometricEnabled.first()
             val currentUser = firebaseAuth.currentUser
 
-            if (rememberMeEnabled && currentUser != null) {
-                onAuthenticationSuccess()
-            } else if (!rememberMeEnabled && currentUser != null) {
-                firebaseAuth.signOut()
+            if (currentUser != null) {
+                when {
+                    rememberMeEnabled -> onAuthenticationSuccess()
+                    !rememberMeEnabled && !biometricEnabled -> firebaseAuth.signOut()
+                    else -> Unit // Keep session for biometric login
+                }
             }
         }
     }

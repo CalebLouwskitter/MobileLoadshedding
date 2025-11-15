@@ -3,6 +3,7 @@ package com.prog7314.IdleLoadsheddingMobile.ui.panels
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -11,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.prog7314.IdleLoadsheddingMobile.R
 import com.prog7314.IdleLoadsheddingMobile.data.models.UnitySavePayload
 import com.prog7314.IdleLoadsheddingMobile.data.models.UnityStatsSnapshot
+import com.prog7314.IdleLoadsheddingMobile.ui.settings.BiometricSettingsActivity
 import com.prog7314.IdleLoadsheddingMobile.utils.FormatUtils
 import com.prog7314.IdleLoadsheddingMobile.utils.FriendCodeGenerator
 
@@ -45,6 +47,12 @@ class ProfilePanelBinder(
         
         panel.findViewById<View?>(R.id.btn_profile_settings)?.setOnClickListener {
             onShowPanel(R.layout.panel_settings)
+        }
+        
+        panel.findViewById<View?>(R.id.btn_profile_biometric)?.setOnClickListener {
+            // Launch BiometricSettingsActivity
+            val intent = Intent(context, BiometricSettingsActivity::class.java)
+            context.startActivity(intent)
         }
         
         panel.findViewById<View?>(R.id.btn_profile_friends)?.setOnClickListener {

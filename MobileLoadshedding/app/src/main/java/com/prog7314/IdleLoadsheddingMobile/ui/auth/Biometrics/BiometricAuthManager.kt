@@ -71,22 +71,49 @@ class BiometricAuthManager(private val context: Context) {
     }
 
     /**
+     * Authenticate with a CryptoObject for secure encryption/decryption
+     * Use this when you need to encrypt or decrypt data with biometric protection
+     */
+    fun authenticateWithCrypto(
+        activity: FragmentActivity,
+        cryptoObject: BiometricPrompt.CryptoObject,
+        promptInfo: BiometricPrompt.PromptInfo,
+        onSuccess: (BiometricPrompt.AuthenticationResult) -> Unit,
+        onError: (Int, String) -> Unit,
+        onFailed: () -> Unit
+    ) {
+        val biometricPrompt = createBiometricPrompt(activity, onSuccess, onError, onFailed)
+        biometricPrompt.authenticate(promptInfo, cryptoObject)
+    }
+
+    /**
      * Create prompt info for biometric authentication
+     * Note: When using DEVICE_CREDENTIAL, negative button must not be set
      */
     fun createPromptInfo(
         title: String,
         subtitle: String? = null,
         description: String? = null,
-        negativeButtonText: String = "Cancel"
+        negativeButtonText: String = "Cancel",
+        allowDeviceCredential: Boolean = true
     ): BiometricPrompt.PromptInfo {
         return BiometricPrompt.PromptInfo.Builder()
             .setTitle(title)
             .apply {
                 subtitle?.let { setSubtitle(it) }
                 description?.let { setDescription(it) }
+                // Negative button can only be set when NOT using device credentials
+                if (!allowDeviceCredential) {
+                    setNegativeButtonText(negativeButtonText)
+                }
             }
-            .setNegativeButtonText(negativeButtonText)
-            .setAllowedAuthenticators(BIOMETRIC_STRONG or DEVICE_CREDENTIAL)
+            .setAllowedAuthenticators(
+                if (allowDeviceCredential) {
+                    BIOMETRIC_STRONG or DEVICE_CREDENTIAL
+                } else {
+                    BIOMETRIC_STRONG
+                }
+            )
             .build()
     }
 }

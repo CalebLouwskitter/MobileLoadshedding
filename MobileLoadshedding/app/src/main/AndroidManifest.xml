@@ -38,6 +38,12 @@
             android:name=".MainActivity"
             android:exported="false" />
         
+        <activity
+            android:name=".ui.settings.BiometricSettingsActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.MobileLoadshedding" />
+        
         <!-- Firebase Cloud Messaging Service -->
         <service
             android:name=".networking.FirebasePush.IdleLoadsheddingMessagingService"
