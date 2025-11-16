@@ -30,6 +30,128 @@
             android:gravity="center"
             android:layout_marginBottom="24dp" />
 
+        <!-- Status + Action Section -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="✅ Presentation Checklist"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/modal_text_dark_blue"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/modal_panel_surface"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:id="@+id/text_status_permission"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Checking notification permission..."
+                android:textColor="@color/modal_text_on_light"
+                android:textSize="14sp"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/text_status_token"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Checking FCM token..."
+                android:textColor="@color/modal_text_on_light"
+                android:textSize="14sp"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/text_status_backend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Syncing with backend..."
+                android:textColor="@color/modal_text_on_light"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginBottom="12dp">
+
+            <Button
+                android:id="@+id/btn_request_notification_permission"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Grant Permission"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/modal_button_secondary"
+                android:layout_marginEnd="8dp" />
+
+            <Button
+                android:id="@+id/btn_force_token_refresh"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Sync Token"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/modal_button_primary" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_open_notification_settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Open Android Notification Settings"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/modal_button_info"
+            android:layout_marginBottom="24dp" />
+
+        <TextView
+            android:id="@+id/text_last_notification_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Last simulation: --"
+            android:textSize="14sp"
+            android:textColor="@color/modal_text_dark_blue"
+            android:background="@color/modal_panel_surface"
+            android:padding="12dp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Cloud Broadcast Section -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="☁️ Firebase Cloud Broadcast"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/modal_text_dark_blue"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btn_send_cloud_notification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Send Event Started via Firebase"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/modal_button_accent"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/text_cloud_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cloud status: waiting"
+            android:textSize="14sp"
+            android:textColor="@color/modal_text_on_light"
+            android:background="@color/modal_panel_surface"
+            android:padding="12dp"
+            android:layout_marginBottom="24dp" />
+
         <!-- Event Notifications Section -->
         <TextView
             android:layout_width="match_parent"

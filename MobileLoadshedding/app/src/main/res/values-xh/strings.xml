@@ -48,6 +48,18 @@
     <string name="profile_tag_newbie">🌟 INTSHA</string>
     <string name="friends_empty_message">Akukho bahlobo bongezelelweyo okwangoku.\nYabelana ngekhowudi yakho yomhlobo ukuze uqhagamshelane!</string>
     <string name="friends_error_message">Ayikwazi ukulayisha uluhlu lwabahlobo.\nJonga uqhagamshelo lwakho kwaye uzame kwakhona.</string>
+    <string name="auth_biometric_login">Ngena nge-Biometrics</string>
+    <string name="default_notification_channel_id">idle_loadshedding_default</string>
+    <string name="notification_channel_default_name">Izaziso Ngokubanzi</string>
+    <string name="notification_channel_events_name">Izaziso Zeziganeko</string>
+    <string name="notification_channel_friends_name">Izaziso Zabahlobo</string>
+    <string name="notification_channel_system_name">Izaziso Zenkqubo</string>
+    <string name="accessibility_close">Vala imodali</string>
+    <string name="accessibility_back">Buyela umva</string>
+    <string name="accessibility_tab">Ithebhu, %1$s</string>
+    <string name="accessibility_toggle">Tshintsha, %1$s</string>
+    <string name="accessibility_profile_avatar">Umfanekiso weprofayile</string>
+    <string name="accessibility_rank_badge">Ibheji yomgangatho</string>
 
     <!-- Auth -->
     <string name="auth_header_title">Idle Loadshedding</string>

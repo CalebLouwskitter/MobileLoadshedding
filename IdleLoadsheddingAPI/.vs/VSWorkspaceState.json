@@ -1,16 +1,14 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Controllers",
     "\\Data",
-    "\\Entities",
-    "\\Logic",
-    "\\Middleware",
     "\\Models",
     "\\Models\\Responses",
     "\\Properties",
     "\\Services",
     "\\Services\\Implementations"
   ],
-  "SelectedNode": "\\IdleLoadsheddingAPI.sln",
+  "SelectedNode": "\\Controllers\\GameController.cs",
   "PreviewInSolutionExplorer": false
 }

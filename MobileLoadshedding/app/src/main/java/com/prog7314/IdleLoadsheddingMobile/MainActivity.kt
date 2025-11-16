@@ -36,7 +36,6 @@ import com.prog7314.IdleLoadsheddingMobile.unity.Stats
 // import com.unity3d.player.UnityPlayerGameActivity //Unity Technologies, 2025.
 import com.prog7314.IdleLoadsheddingMobile.stub.UnityPlayerGameActivity
 import com.prog7314.IdleLoadsheddingMobile.networking.FirebasePush.FcmIntegrationHelper
-import com.prog7314.IdleLoadsheddingMobile.networking.FirebasePush.NotificationSimulator
 import com.prog7314.IdleLoadsheddingMobile.ui.HudManager
 import com.prog7314.IdleLoadsheddingMobile.ui.PanelManager
 import com.prog7314.IdleLoadsheddingMobile.ui.coordinators.UIComponentFactory

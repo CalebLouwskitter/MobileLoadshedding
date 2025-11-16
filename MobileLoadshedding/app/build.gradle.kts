@@ -22,6 +22,8 @@ android {
     buildTypes {
         debug {
             buildConfigField("String", "BACKEND_BASE_URL", "\"http://10.0.2.2:5001/api/\"")
+            buildConfigField("Boolean", "ENABLE_BACKEND_TOKEN_REGISTRATION", "false")
+            buildConfigField("String", "FIREBASE_FUNCTIONS_REGION", "\"us-central1\"")
         }
         release {
             isMinifyEnabled = false
@@ -31,6 +33,8 @@ android {
             )
             // Azure hosted backend in South Africa when it's done for part 3
             buildConfigField("String", "BACKEND_BASE_URL", "\"http://10.0.2.2:5001/api/\"")
+            buildConfigField("Boolean", "ENABLE_BACKEND_TOKEN_REGISTRATION", "true")
+            buildConfigField("String", "FIREBASE_FUNCTIONS_REGION", "\"us-central1\"")
         }
     }
     compileOptions {
@@ -60,6 +64,8 @@ dependencies {
     // Firebase
     implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
     implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.firebase:firebase-functions-ktx")
 
     // Google Identity Services & Credential Manager
     implementation("androidx.credentials:credentials:1.3.0")
@@ -93,7 +99,20 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.firebase:firebase-messaging:25.0.1")
 
+    // Testing dependencies
     testImplementation(libs.junit)
+    testImplementation("org.mockito:mockito-core:5.8.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.2.1")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+    testImplementation("app.cash.turbine:turbine:1.0.0")
+    testImplementation("org.robolectric:robolectric:4.11.1")
+    
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation("androidx.test:runner:1.6.2")
+    androidTestImplementation("androidx.test:rules:1.6.1")
+    androidTestImplementation("androidx.test.ext:junit-ktx:1.2.1")
+    androidTestImplementation("org.mockito:mockito-android:5.8.0")
+    androidTestImplementation("androidx.biometric:biometric:1.2.0-alpha05")
 }

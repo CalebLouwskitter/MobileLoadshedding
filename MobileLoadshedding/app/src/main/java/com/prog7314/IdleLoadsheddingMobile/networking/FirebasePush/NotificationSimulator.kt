@@ -24,7 +24,7 @@ object NotificationSimulator {
     /**
      * Simulates an "Event Started" notification.
      */
-    fun simulateEventStarted(context: Context) {
+    fun simulateEventStarted(context: Context): Boolean {
         Log.d(TAG, "Simulating EVENT_STARTED notification")
         
         val data = mapOf(
@@ -34,7 +34,7 @@ object NotificationSimulator {
             "eventName" to "Weekend Power Challenge"
         )
         
-        sendMockNotification(
+        return sendMockNotification(
             context = context,
             title = "⚡ New Event Started!",
             body = "Weekend Power Challenge is now live. Join now to earn bonus rewards!",
@@ -45,7 +45,7 @@ object NotificationSimulator {
     /**
      * Simulates an "Event Ending Soon" notification.
      */
-    fun simulateEventEndingSoon(context: Context) {
+    fun simulateEventEndingSoon(context: Context): Boolean {
         Log.d(TAG, "Simulating EVENT_ENDING_SOON notification")
         
         val data = mapOf(
@@ -56,7 +56,7 @@ object NotificationSimulator {
             "timeRemaining" to "30 minutes"
         )
         
-        sendMockNotification(
+        return sendMockNotification(
             context = context,
             title = "⏰ Event Ending Soon!",
             body = "Daily Energy Sprint ends in 30 minutes. Complete your tasks now!",
@@ -67,7 +67,7 @@ object NotificationSimulator {
     /**
      * Simulates a "Friend Request" notification.
      */
-    fun simulateFriendRequest(context: Context) {
+    fun simulateFriendRequest(context: Context): Boolean {
         Log.d(TAG, "Simulating FRIEND_REQUEST notification")
         
         val data = mapOf(
@@ -77,7 +77,7 @@ object NotificationSimulator {
             "friendName" to "PowerPlayer123"
         )
         
-        sendMockNotification(
+        return sendMockNotification(
             context = context,
             title = "👋 New Friend Request",
             body = "PowerPlayer123 wants to be your friend!",
@@ -88,7 +88,7 @@ object NotificationSimulator {
     /**
      * Simulates a "Friend Accepted" notification.
      */
-    fun simulateFriendAccepted(context: Context) {
+    fun simulateFriendAccepted(context: Context): Boolean {
         Log.d(TAG, "Simulating FRIEND_ACCEPTED notification")
         
         val data = mapOf(
@@ -98,7 +98,7 @@ object NotificationSimulator {
             "friendName" to "EnergyMaster99"
         )
         
-        sendMockNotification(
+        return sendMockNotification(
             context = context,
             title = "✅ Friend Request Accepted",
             body = "EnergyMaster99 accepted your friend request. Start competing now!",
@@ -109,7 +109,7 @@ object NotificationSimulator {
     /**
      * Simulates a "System Announcement" notification.
      */
-    fun simulateSystemAnnouncement(context: Context) {
+    fun simulateSystemAnnouncement(context: Context): Boolean {
         Log.d(TAG, "Simulating SYSTEM_ANNOUNCEMENT notification")
         
         val data = mapOf(
@@ -118,7 +118,7 @@ object NotificationSimulator {
             "announcementId" to "announcement_001"
         )
         
-        sendMockNotification(
+        return sendMockNotification(
             context = context,
             title = "📢 System Announcement",
             body = "New features added! Check out the improved leaderboard and updated achievements.",
@@ -129,7 +129,7 @@ object NotificationSimulator {
     /**
      * Simulates a "Maintenance Required" notification.
      */
-    fun simulateMaintenanceRequired(context: Context) {
+    fun simulateMaintenanceRequired(context: Context): Boolean {
         Log.d(TAG, "Simulating MAINTENANCE_REQUIRED notification")
         
         val data = mapOf(
@@ -139,7 +139,7 @@ object NotificationSimulator {
             "maintenanceDuration" to "2 hours"
         )
         
-        sendMockNotification(
+        return sendMockNotification(
             context = context,
             title = "🔧 Scheduled Maintenance",
             body = "Server maintenance scheduled for tonight at 2:00 AM (2 hours). Please save your progress.",
@@ -150,7 +150,7 @@ object NotificationSimulator {
     /**
      * Simulates a "General" notification.
      */
-    fun simulateGeneral(context: Context) {
+    fun simulateGeneral(context: Context): Boolean {
         Log.d(TAG, "Simulating GENERAL notification")
         
         val data = mapOf(
@@ -158,7 +158,7 @@ object NotificationSimulator {
             "notificationId" to System.currentTimeMillis().toString()
         )
         
-        sendMockNotification(
+        return sendMockNotification(
             context = context,
             title = "📬 Idle Loadshedding",
             body = "You've earned offline rewards! Come back to collect them.",
@@ -174,7 +174,7 @@ object NotificationSimulator {
         title: String,
         body: String,
         data: Map<String, String>
-    ) {
+    ): Boolean {
         try {
             // Create a mock RemoteMessage using data-only payload
             val remoteMessageBuilder = RemoteMessage.Builder("mock_sender_id")
@@ -204,9 +204,11 @@ object NotificationSimulator {
             messagingService.onMessageReceived(remoteMessage)
             
             Log.d(TAG, "Mock notification sent successfully: $title")
-            
+            return true
+
         } catch (e: Exception) {
             Log.e(TAG, "Failed to send mock notification", e)
+            return false
         }
     }
 }

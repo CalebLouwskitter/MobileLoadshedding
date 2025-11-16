@@ -9,6 +9,9 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
+import com.prog7314.IdleLoadsheddingMobile.BuildConfig
 import com.prog7314.IdleLoadsheddingMobile.data.models.FcmTokenRequest
 import com.prog7314.IdleLoadsheddingMobile.networking.RetrofitClient
 import kotlinx.coroutines.CoroutineScope
@@ -55,6 +58,8 @@ class FcmTokenManager private constructor(private val context: Context) {
             }
         }
     }
+
+    private val firestore by lazy { FirebaseFirestore.getInstance() }
 
     private object Keys {
         val fcmToken: Preferences.Key<String> = stringPreferencesKey("fcm_token")
@@ -107,6 +112,7 @@ class FcmTokenManager private constructor(private val context: Context) {
 
                 // Store token locally
                 saveFcmToken(token)
+                persistTokenInFirebase(token)
 
                 // Register with backend if token has changed
                 registerTokenWithBackend(token)
@@ -128,6 +134,7 @@ class FcmTokenManager private constructor(private val context: Context) {
                 
                 // Store new token
                 saveFcmToken(newToken)
+                persistTokenInFirebase(newToken)
                 
                 // Register with backend
                 registerTokenWithBackend(newToken)
@@ -182,6 +189,12 @@ class FcmTokenManager private constructor(private val context: Context) {
      * Registers the FCM token with the backend API.
      */
     private suspend fun registerTokenWithBackend(token: String) {
+        if (!BuildConfig.ENABLE_BACKEND_TOKEN_REGISTRATION) {
+            Log.d(TAG, "Skipping backend registration (disabled via BuildConfig)")
+            markTokenRegistered(token)
+            return
+        }
+
         try {
             val currentUser = FirebaseAuth.getInstance().currentUser
             if (currentUser == null) {
@@ -210,18 +223,46 @@ class FcmTokenManager private constructor(private val context: Context) {
             val response = apiService.registerFcmToken(request)
 
             if (response.isSuccessful) {
-                // Mark as registered
-                context.fcmPreferencesDataStore.edit { preferences ->
-                    preferences[Keys.lastRegisteredToken] = token
-                    preferences[Keys.lastRegistrationTime] = Instant.now().toString()
-                }
+                markTokenRegistered(token)
                 Log.d(TAG, "FCM token successfully registered with backend")
+                persistTokenInFirebase(token)
             } else {
                 Log.e(TAG, "Failed to register FCM token: ${response.code()} ${response.message()}")
             }
 
         } catch (e: Exception) {
             Log.e(TAG, "Error registering FCM token with backend", e)
+        }
+    }
+
+    private suspend fun markTokenRegistered(token: String) {
+        context.fcmPreferencesDataStore.edit { preferences ->
+            preferences[Keys.lastRegisteredToken] = token
+            preferences[Keys.lastRegistrationTime] = Instant.now().toString()
+        }
+    }
+
+    private suspend fun persistTokenInFirebase(token: String) {
+        try {
+            val currentUser = FirebaseAuth.getInstance().currentUser
+            val deviceIdentifier = deviceId.first()
+            val documentId = currentUser?.uid ?: deviceIdentifier
+            val payload = hashMapOf(
+                "token" to token,
+                "firebaseUid" to currentUser?.uid,
+                "deviceId" to deviceIdentifier,
+                "platform" to "android",
+                "updatedAt" to FieldValue.serverTimestamp()
+            )
+
+            firestore.collection("fcmTokens")
+                .document(documentId)
+                .set(payload)
+                .await()
+
+            Log.d(TAG, "Token stored in Firestore for $documentId")
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to store token in Firestore", e)
         }
     }
 

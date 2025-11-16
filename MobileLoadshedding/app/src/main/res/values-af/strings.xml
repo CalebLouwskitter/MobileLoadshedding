@@ -48,6 +48,18 @@
     <string name="profile_tag_newbie">🌟 NUWELING</string>
     <string name="friends_empty_message">Geen vriende bygevoeg nie.\nDeel jou Vriend Kode om te koppel!</string>
     <string name="friends_error_message">Kan nie vriendelys laai nie.\nGaan jou verbinding na en probeer weer.</string>
+    <string name="auth_biometric_login">Teken in met Biometrie</string>
+    <string name="default_notification_channel_id">idle_loadshedding_default</string>
+    <string name="notification_channel_default_name">Algemene Kennisgewings</string>
+    <string name="notification_channel_events_name">Gebeurtenis Kennisgewings</string>
+    <string name="notification_channel_friends_name">Vriende Kennisgewings</string>
+    <string name="notification_channel_system_name">Stelsel Kennisgewings</string>
+    <string name="accessibility_close">Sluit venster</string>
+    <string name="accessibility_back">Gaan terug</string>
+    <string name="accessibility_tab">Oortjie, %1$s</string>
+    <string name="accessibility_toggle">Skakel, %1$s</string>
+    <string name="accessibility_profile_avatar">Profiel avatar</string>
+    <string name="accessibility_rank_badge">Rang kenteken</string>
 
     <!-- Auth -->
     <string name="auth_header_title">Idle Loadshedding</string>

@@ -48,6 +48,18 @@
     <string name="profile_tag_newbie">🌟 MOTJHA</string>
     <string name="friends_empty_message">Ha hona metswalle e kentseng hajoale.\nAbelana ka khoutu ya hao ya motswalle ho hokahana!</string>
     <string name="friends_error_message">Ha e kgone ho laisa lenane la metswalle.\nHlahloba kgokahano ya hao mme o leke hape.</string>
+    <string name="auth_biometric_login">Kena ka Biometrics</string>
+    <string name="default_notification_channel_id">idle_loadshedding_default</string>
+    <string name="notification_channel_default_name">Ditsebiso Tsa Kakaretso</string>
+    <string name="notification_channel_events_name">Ditsebiso Tsa Diketsahalo</string>
+    <string name="notification_channel_friends_name">Ditsebiso Tsa Metswalle</string>
+    <string name="notification_channel_system_name">Ditsebiso Tsa Tsamaiso</string>
+    <string name="accessibility_close">Koala modal</string>
+    <string name="accessibility_back">Kgutlela morao</string>
+    <string name="accessibility_tab">Thebhu, %1$s</string>
+    <string name="accessibility_toggle">Fetola, %1$s</string>
+    <string name="accessibility_profile_avatar">Setshwantsho sa porofaele</string>
+    <string name="accessibility_rank_badge">Letshwao la boemo</string>
 
     <!-- Auth -->
     <string name="auth_header_title">Idle Loadshedding</string>

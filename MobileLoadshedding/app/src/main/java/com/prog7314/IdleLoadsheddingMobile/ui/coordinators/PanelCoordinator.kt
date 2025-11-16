@@ -1,9 +1,26 @@
 package com.prog7314.IdleLoadsheddingMobile.ui.coordinators
 
+import android.content.Intent
+import android.provider.Settings
 import android.util.Log
 import android.view.View
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
+import com.prog7314.IdleLoadsheddingMobile.BuildConfig
 import com.prog7314.IdleLoadsheddingMobile.R
+import com.prog7314.IdleLoadsheddingMobile.networking.FirebasePush.FcmIntegrationHelper
+import com.prog7314.IdleLoadsheddingMobile.networking.FirebasePush.FcmTokenManager
+import com.prog7314.IdleLoadsheddingMobile.networking.FirebasePush.FirebaseCloudMessenger
+import com.prog7314.IdleLoadsheddingMobile.networking.FirebasePush.NotificationSimulator
+import com.prog7314.IdleLoadsheddingMobile.data.models.NotificationType
 import com.prog7314.IdleLoadsheddingMobile.ui.panels.*
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.first
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 /**
  * Coordinates panel configuration by routing to appropriate binders.
@@ -169,33 +186,139 @@ class PanelCoordinator(
      */
     private fun configureDebugNotificationsPanel(panelView: View) {
         val context = panelView.context
+        val activity = context as? AppCompatActivity
+        val lifecycleOwner = activity
+        val permissionStatus = panelView.findViewById<TextView?>(R.id.text_status_permission)
+        val tokenStatus = panelView.findViewById<TextView?>(R.id.text_status_token)
+        val backendStatus = panelView.findViewById<TextView?>(R.id.text_status_backend)
+        val resultStatus = panelView.findViewById<TextView?>(R.id.text_last_notification_result)
+        val cloudStatus = panelView.findViewById<TextView?>(R.id.text_cloud_result)
+
+        fun TextView?.setStatus(ok: Boolean, message: String) {
+            this?.text = if (ok) "✅ $message" else "⚠️ $message"
+            val colorRes = if (ok) R.color.modal_button_primary else R.color.modal_button_danger
+            this?.setTextColor(ContextCompat.getColor(context, colorRes))
+        }
+
+        fun logResult(success: Boolean, label: String) {
+            val formatter = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+            val stamp = formatter.format(Date())
+            resultStatus?.text = if (success) {
+                "✅ $label • $stamp"
+            } else {
+                "⚠️ $label • $stamp"
+            }
+            val colorRes = if (success) R.color.modal_button_primary else R.color.modal_button_danger
+            resultStatus?.setTextColor(ContextCompat.getColor(context, colorRes))
+        }
+
+        fun refreshStatuses() {
+            val permissionGranted = activity?.let { FcmIntegrationHelper.hasNotificationPermission(it) } ?: false
+            permissionStatus.setStatus(permissionGranted, if (permissionGranted) {
+                "Notifications allowed"
+            } else {
+                "Permission required"
+            })
+
+            lifecycleOwner?.lifecycleScope?.launch {
+                val manager = FcmTokenManager.getInstance(context)
+                val token = manager.fcmToken.first()
+                val registered = manager.lastRegisteredToken.first()
+                val hasToken = !token.isNullOrBlank()
+                tokenStatus.setStatus(hasToken, if (hasToken) {
+                    "Token cached • …${token!!.takeLast(6)}"
+                } else {
+                    "Waiting for token"
+                })
+                val backendDisabled = !BuildConfig.ENABLE_BACKEND_TOKEN_REGISTRATION
+                val backendSynced = hasToken && token == registered
+                when {
+                    backendDisabled -> backendStatus.setStatus(true, "Backend sync bypassed (Firebase only)")
+                    backendSynced -> backendStatus.setStatus(true, "Synced with backend")
+                    else -> backendStatus.setStatus(false, "Tap Sync Token")
+                }
+            }
+        }
         
         panelView.findViewById<View>(com.prog7314.IdleLoadsheddingMobile.R.id.btn_test_event_started)?.setOnClickListener {
-            com.prog7314.IdleLoadsheddingMobile.networking.FirebasePush.NotificationSimulator.simulateEventStarted(context)
+            val success = NotificationSimulator.simulateEventStarted(context)
+            logResult(success, "Event Started simulated")
         }
         
         panelView.findViewById<View>(com.prog7314.IdleLoadsheddingMobile.R.id.btn_test_event_ending_soon)?.setOnClickListener {
-            com.prog7314.IdleLoadsheddingMobile.networking.FirebasePush.NotificationSimulator.simulateEventEndingSoon(context)
+            val success = NotificationSimulator.simulateEventEndingSoon(context)
+            logResult(success, "Event Ending Soon simulated")
         }
         
         panelView.findViewById<View>(com.prog7314.IdleLoadsheddingMobile.R.id.btn_test_friend_request)?.setOnClickListener {
-            com.prog7314.IdleLoadsheddingMobile.networking.FirebasePush.NotificationSimulator.simulateFriendRequest(context)
+            val success = NotificationSimulator.simulateFriendRequest(context)
+            logResult(success, "Friend Request simulated")
         }
         
         panelView.findViewById<View>(com.prog7314.IdleLoadsheddingMobile.R.id.btn_test_friend_accepted)?.setOnClickListener {
-            com.prog7314.IdleLoadsheddingMobile.networking.FirebasePush.NotificationSimulator.simulateFriendAccepted(context)
+            val success = NotificationSimulator.simulateFriendAccepted(context)
+            logResult(success, "Friend Accepted simulated")
         }
         
         panelView.findViewById<View>(com.prog7314.IdleLoadsheddingMobile.R.id.btn_test_system_announcement)?.setOnClickListener {
-            com.prog7314.IdleLoadsheddingMobile.networking.FirebasePush.NotificationSimulator.simulateSystemAnnouncement(context)
+            val success = NotificationSimulator.simulateSystemAnnouncement(context)
+            logResult(success, "System Announcement simulated")
         }
         
         panelView.findViewById<View>(com.prog7314.IdleLoadsheddingMobile.R.id.btn_test_maintenance)?.setOnClickListener {
-            com.prog7314.IdleLoadsheddingMobile.networking.FirebasePush.NotificationSimulator.simulateMaintenanceRequired(context)
+            val success = NotificationSimulator.simulateMaintenanceRequired(context)
+            logResult(success, "Maintenance simulated")
         }
         
         panelView.findViewById<View>(com.prog7314.IdleLoadsheddingMobile.R.id.btn_test_general)?.setOnClickListener {
-            com.prog7314.IdleLoadsheddingMobile.networking.FirebasePush.NotificationSimulator.simulateGeneral(context)
+            val success = NotificationSimulator.simulateGeneral(context)
+            logResult(success, "General notification simulated")
         }
+
+        panelView.findViewById<View>(R.id.btn_request_notification_permission)?.setOnClickListener {
+            activity?.let { act ->
+                FcmIntegrationHelper.initialize(act) {
+                    refreshStatuses()
+                }
+            }
+        }
+
+        panelView.findViewById<View>(R.id.btn_force_token_refresh)?.setOnClickListener {
+            activity?.let { act ->
+                FcmIntegrationHelper.forceTokenRefresh(act) { success ->
+                    act.runOnUiThread {
+                        logResult(success, if (success) "Token synced" else "Token sync failed")
+                        refreshStatuses()
+                    }
+                }
+            }
+        }
+
+        panelView.findViewById<View>(R.id.btn_open_notification_settings)?.setOnClickListener {
+            activity?.let { act ->
+                try {
+                    val intent = Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).apply {
+                        putExtra(Settings.EXTRA_APP_PACKAGE, act.packageName)
+                    }
+                    act.startActivity(intent)
+                } catch (e: Exception) {
+                    Log.w("PanelCoordinator", "Unable to open notification settings", e)
+                }
+            }
+        }
+
+        panelView.findViewById<View>(R.id.btn_send_cloud_notification)?.setOnClickListener {
+            cloudStatus?.text = "⏳ Sending request to Firebase..."
+            cloudStatus?.setTextColor(ContextCompat.getColor(context, R.color.modal_text_on_light))
+            FirebaseCloudMessenger.sendDemoNotification(NotificationType.EVENT_STARTED) { success, message ->
+                logResult(success, "Firebase cloud: $message")
+                val prefix = if (success) "✅" else "⚠️"
+                val colorRes = if (success) R.color.modal_button_primary else R.color.modal_button_danger
+                cloudStatus?.text = "$prefix $message"
+                cloudStatus?.setTextColor(ContextCompat.getColor(context, colorRes))
+            }
+        }
+
+        refreshStatuses()
     }
 }
