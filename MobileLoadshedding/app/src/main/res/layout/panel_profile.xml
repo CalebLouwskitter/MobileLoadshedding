@@ -5,15 +5,71 @@
     android:layout_height="wrap_content"
     android:animateLayoutChanges="true">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/tabs_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/content_scroll"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tab_profile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/tab_profile_selected"
+            android:drawableStart="@drawable/ic_profile_white"
+            android:drawablePadding="@dimen/modal_tab_drawable_padding"
+            android:elevation="4dp"
+            android:gravity="center"
+            android:paddingTop="@dimen/modal_tab_padding_vertical"
+            android:paddingBottom="@dimen/modal_tab_padding_vertical"
+            android:text="Profile"
+            android:textColor="@color/modal_text_primary"
+            android:textSize="@dimen/modal_tab_text_size"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/tab_spacer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Space
+            android:id="@+id/tab_spacer"
+            android:layout_width="@dimen/modal_tab_spacer_width"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tab_leaderboard"
+            app:layout_constraintStart_toEndOf="@id/tab_profile"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tab_leaderboard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/tab_leaderboard"
+            android:drawableStart="@drawable/ic_leaderboard"
+            android:drawablePadding="@dimen/modal_tab_drawable_padding"
+            android:elevation="2dp"
+            android:gravity="center"
+            android:paddingTop="@dimen/modal_tab_padding_vertical"
+            android:paddingBottom="@dimen/modal_tab_padding_vertical"
+            android:text="Leader board"
+            android:textColor="@color/modal_toggle_active_bg"
+            android:textSize="@dimen/modal_tab_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tab_spacer"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.core.widget.NestedScrollView
         android:id="@+id/content_scroll"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/modal_tab_overlap_height"
+        android:layout_marginTop="40dp"
         android:elevation="6dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -29,8 +85,8 @@
                 android:id="@+id/avatar_container"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <View
                     android:layout_width="64dp"
@@ -55,9 +111,9 @@
                 android:textColor="@color/modal_text_primary"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="@id/avatar_container"
+                app:layout_constraintEnd_toStartOf="@id/text_profile_tag"
                 app:layout_constraintStart_toEndOf="@id/avatar_container"
-                app:layout_constraintEnd_toStartOf="@id/text_profile_tag" />
+                app:layout_constraintTop_toTopOf="@id/avatar_container" />
 
             <TextView
                 android:id="@+id/text_profile_email"
@@ -68,10 +124,10 @@
                 android:text="myName@gmail.com"
                 android:textColor="@color/modal_text_light_red"
                 android:textSize="13sp"
-                app:layout_constraintTop_toBottomOf="@id/text_profile_name"
                 app:layout_constraintBottom_toBottomOf="@id/avatar_container"
+                app:layout_constraintEnd_toStartOf="@id/text_profile_tag"
                 app:layout_constraintStart_toEndOf="@id/avatar_container"
-                app:layout_constraintEnd_toStartOf="@id/text_profile_tag" />
+                app:layout_constraintTop_toBottomOf="@id/text_profile_name" />
 
             <TextView
                 android:id="@+id/text_profile_tag"
@@ -86,9 +142,9 @@
                 android:textColor="@color/modal_chip_success_text"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="@id/avatar_container"
                 app:layout_constraintBottom_toBottomOf="@id/avatar_container"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/avatar_container" />
 
             <!-- Friend Code Section - Compact Design -->
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -101,9 +157,9 @@
                 android:paddingTop="@dimen/spacing_small"
                 android:paddingEnd="@dimen/spacing_small"
                 android:paddingBottom="@dimen/spacing_small"
-                app:layout_constraintTop_toBottomOf="@id/avatar_container"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintTop_toBottomOf="@id/avatar_container">
 
                 <TextView
                     android:id="@+id/label_friend_code"
@@ -112,8 +168,8 @@
                     android:text="@string/profile_friend_code_label"
                     android:textColor="@color/modal_text_on_accent"
                     android:textSize="11sp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/text_profile_friend_code"
@@ -121,15 +177,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:fontFamily="monospace"
+                    android:letterSpacing="0.12"
                     android:text="----·----"
                     android:textColor="@color/modal_text_primary"
                     android:textIsSelectable="true"
                     android:textSize="22sp"
-                    android:letterSpacing="0.12"
                     android:textStyle="bold"
-                    app:layout_constraintTop_toBottomOf="@id/label_friend_code"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/label_friend_code" />
 
                 <Button
                     android:id="@+id/btn_copy_friend_code"
@@ -145,9 +201,9 @@
                     android:text="📋 COPY"
                     android:textColor="@color/modal_text_primary"
                     android:textSize="12sp"
-                    app:layout_constraintTop_toTopOf="@id/text_profile_friend_code"
                     app:layout_constraintBottom_toBottomOf="@id/text_profile_friend_code"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/text_profile_friend_code" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!-- Divider Line -->
@@ -158,9 +214,9 @@
                 android:layout_marginTop="@dimen/section_spacing"
                 android:layout_marginBottom="@dimen/section_spacing"
                 android:background="@color/modal_divider_solid"
-                app:layout_constraintTop_toBottomOf="@id/friend_code_container"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/friend_code_container" />
 
             <!-- Player Statistics Section -->
             <TextView
@@ -172,8 +228,8 @@
                 android:textColor="@color/modal_text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@id/divider1"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider1" />
 
             <LinearLayout
                 android:id="@+id/stats_container"
@@ -183,9 +239,9 @@
                 android:background="@drawable/bg_upgrade_item"
                 android:orientation="vertical"
                 android:padding="@dimen/stats_card_padding"
-                app:layout_constraintTop_toBottomOf="@id/label_statistics"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintTop_toBottomOf="@id/label_statistics">
 
                 <TextView
                     android:id="@+id/text_profile_energy_total"
@@ -234,6 +290,7 @@
             </LinearLayout>
 
             <!-- Action Buttons -->
+
             <Button
                 android:id="@+id/btn_profile_edit"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -244,10 +301,11 @@
                 android:paddingBottom="@dimen/button_padding_vertical"
                 android:text="EDIT PROFILE"
                 android:textColor="@color/modal_text_primary"
-                app:strokeColor="@color/modal_text_primary"
-                app:layout_constraintTop_toBottomOf="@id/stats_container"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/stats_container"
+                app:strokeColor="@color/modal_text_primary" />
 
             <Button
                 android:id="@+id/btn_profile_settings"
@@ -259,10 +317,10 @@
                 android:paddingBottom="@dimen/button_padding_vertical"
                 android:text="SETTINGS"
                 android:textColor="@color/modal_text_primary"
-                app:strokeColor="@color/modal_text_primary"
-                app:layout_constraintTop_toBottomOf="@id/btn_profile_edit"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/btn_profile_edit"
+                app:strokeColor="@color/modal_text_primary" />
 
             <Button
                 android:id="@+id/btn_profile_biometric"
@@ -274,10 +332,10 @@
                 android:paddingBottom="@dimen/button_padding_vertical"
                 android:text="🔐 BIOMETRIC SETTINGS"
                 android:textColor="@color/modal_text_primary"
-                app:strokeColor="@color/modal_text_primary"
-                app:layout_constraintTop_toBottomOf="@id/btn_profile_settings"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/btn_profile_settings"
+                app:strokeColor="@color/modal_text_primary" />
 
             <Button
                 android:id="@+id/btn_profile_friends"
@@ -289,10 +347,10 @@
                 android:paddingBottom="@dimen/button_padding_vertical"
                 android:text="FRIENDS"
                 android:textColor="@color/modal_text_primary"
-                app:strokeColor="@color/modal_text_primary"
-                app:layout_constraintTop_toBottomOf="@id/btn_profile_biometric"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/btn_profile_biometric"
+                app:strokeColor="@color/modal_text_primary" />
 
             <Button
                 android:id="@+id/btn_profile_debug_notifications"
@@ -304,10 +362,10 @@
                 android:paddingBottom="@dimen/button_padding_vertical"
                 android:text="🔔 DEBUG NOTIFICATIONS"
                 android:textColor="@color/modal_button_accent"
-                app:strokeColor="@color/modal_button_accent"
-                app:layout_constraintTop_toBottomOf="@id/btn_profile_friends"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/btn_profile_friends"
+                app:strokeColor="@color/modal_button_accent" />
 
             <Button
                 android:id="@+id/btn_profile_logout"
@@ -329,61 +387,6 @@
     </androidx.core.widget.NestedScrollView>
 
     <!-- Tabs Section (Overlapping at top) -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/tabs_container"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/content_scroll"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/tab_profile"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/tab_profile_selected"
-            android:drawableStart="@drawable/ic_profile_white"
-            android:drawablePadding="@dimen/modal_tab_drawable_padding"
-            android:elevation="4dp"
-            android:gravity="center"
-            android:paddingTop="@dimen/modal_tab_padding_vertical"
-            android:paddingBottom="@dimen/modal_tab_padding_vertical"
-            android:text="Profile"
-            android:textColor="@color/modal_text_primary"
-            android:textSize="@dimen/modal_tab_text_size"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@id/tab_spacer"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Space
-            android:id="@+id/tab_spacer"
-            android:layout_width="@dimen/modal_tab_spacer_width"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/tab_leaderboard"
-            app:layout_constraintStart_toEndOf="@id/tab_profile"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tab_leaderboard"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/tab_leaderboard"
-            android:drawableStart="@drawable/ic_leaderboard_white"
-            android:drawablePadding="@dimen/modal_tab_drawable_padding"
-            android:elevation="2dp"
-            android:gravity="center"
-            android:paddingTop="@dimen/modal_tab_padding_vertical"
-            android:paddingBottom="@dimen/modal_tab_padding_vertical"
-            android:text="Leader board"
-            android:textColor="@color/modal_text_primary"
-            android:textSize="@dimen/modal_tab_text_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tab_spacer"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Close Button overlaying tabs -->
     <include layout="@layout/include_modal_close_button" />
