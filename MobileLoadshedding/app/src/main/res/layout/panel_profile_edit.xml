@@ -25,6 +25,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
+        <!-- Back arrow row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btn_back_profile_edit"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/profile_edit_title"
+                android:src="@drawable/ic_arrow_back"
+                android:tint="@android:color/white" />
+        </LinearLayout>
+
         <!-- Header: avatar + name/email -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -99,6 +116,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
+                    android:gravity="end"
                     android:hint="@string/profile_edit_nickname_hint"
                     android:inputType="textPersonName"
                     android:maxLines="1"
@@ -142,6 +160,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:ellipsize="end"
+                    android:gravity="end"
                     android:maxLines="1"
                     android:text="email@example.com"
                     android:textColor="@android:color/white"
@@ -170,6 +189,7 @@
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
                 android:background="@android:color/white"
+                android:backgroundTint="@android:color/white"
                 android:text="@string/profile_edit_save"
                 android:textAllCaps="false"
                 android:textColor="@android:color/black" />
@@ -181,6 +201,7 @@
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
                 android:background="@android:color/white"
+                android:backgroundTint="@android:color/white"
                 android:text="@string/profile_edit_cancel"
                 android:textAllCaps="false"
                 android:textColor="@android:color/black" />
