@@ -263,7 +263,7 @@
                     <!-- Test Biometric Button -->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/buttonTestBiometric"
-                        style="@style/Widget.Material3.Button.FilledTonalButton"
+                        style="@style/Widget.MaterialComponents.Button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Test biometric unlock"
@@ -273,7 +273,7 @@
                     <!-- Re-enroll Button -->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/buttonReenroll"
-                        style="@style/Widget.Material3.Button.TextButton"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Re-enroll biometrics"

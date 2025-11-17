@@ -129,7 +129,7 @@
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_request_notification_permission"
-                        style="@style/Widget.Material3.Button.FilledTonalButton"
+                        style="@style/Widget.MaterialComponents.Button"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -141,7 +141,7 @@
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_force_token_refresh"
-                        style="@style/Widget.Material3.Button.FilledButton"
+                        style="@style/Widget.MaterialComponents.Button"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -153,7 +153,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_open_notification_settings"
-                    style="@style/Widget.Material3.Button.TextButton"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Open Android notification settings"
@@ -210,7 +210,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_send_cloud_notification"
-                    style="@style/Widget.Material3.Button.FilledButton"
+                    style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Send event started"
@@ -259,7 +259,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_test_event_started"
-                    style="@style/Widget.Material3.Button.FilledButton"
+                    style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=" Event started"
@@ -270,7 +270,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_test_event_ending_soon"
-                    style="@style/Widget.Material3.Button.FilledButton"
+                    style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Event ending soon"
@@ -308,7 +308,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_test_friend_request"
-                    style="@style/Widget.Material3.Button.FilledTonalButton"
+                    style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Friend request"
@@ -319,7 +319,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_test_friend_accepted"
-                    style="@style/Widget.Material3.Button.FilledButton"
+                    style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=" Friend accepted"
@@ -356,7 +356,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_test_system_announcement"
-                    style="@style/Widget.Material3.Button.FilledButton"
+                    style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="System announcement"
@@ -367,7 +367,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_test_maintenance"
-                    style="@style/Widget.Material3.Button.FilledButton"
+                    style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Maintenance required"
@@ -378,7 +378,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_test_general"
-                    style="@style/Widget.Material3.Button.FilledButton"
+                    style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="General notification"
