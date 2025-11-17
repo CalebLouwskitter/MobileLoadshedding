@@ -69,13 +69,18 @@
     </LinearLayout>
 
     <!-- Close Button overlaying top-right of panel
-         Positioned so that it sits just outside the green card, not cut off. -->
-    <include
-        layout="@layout/include_modal_close_button"
+         Wrapped in a ConstraintLayout so the included views can use constraint params
+         and appear on the right without being cut off. -->
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|end"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp" />
+        android:layout_marginEnd="24dp">
+
+        <include
+            layout="@layout/include_modal_close_button" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
