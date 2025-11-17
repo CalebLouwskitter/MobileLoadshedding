@@ -365,7 +365,7 @@ AndroidX (2025) AndroidX Navigation Component. [online] Available at: https://de
  [Accessed 2 Oct. 2025].
 
 Coding-Meet (2023). Google-Admob-Integration-App. [online] GitHub. Available at: https://github.com/Coding-Meet/Google-Admob-Integration-App.git 
- [Accessed 25 Oct. 2023].
+ [Accessed 15 Nov. 2025].
 
 Firebase (2025) Authenticate with Google on Android. [online] Available at: https://firebase.google.com/docs/auth/android/google-signin
  [Accessed 29 Sept. 2025].
@@ -393,7 +393,6 @@ Google (2025) Sign in with Google for Android - Credential Manager. [online] Ava
 
 hall9zeha (2022). AdvertisementsApp. [online] GitHub. Available at: https://github.com/hall9zeha/AdvertisementsApp.git 
  [Accessed 15 Nov. 2025].
-
 
 Kotlin (2025) Kotlin Coroutines Guide. [online] Available at: https://kotlinlang.org/docs/coroutines-guide.html
  [Accessed 28 Sept. 2025].
