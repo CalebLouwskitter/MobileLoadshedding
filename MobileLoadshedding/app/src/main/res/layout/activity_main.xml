@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_hud_icon"
-                android:contentDescription="Upgrades"
+                android:contentDescription="@string/hud_upgrades_content_description"
                 android:padding="8dp"
                 android:src="@drawable/ic_hud_lightning" />
 
@@ -53,7 +53,7 @@
                     android:id="@+id/text_energy_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Energy Credits"
+                    android:text="@string/hud_energy_label"
                     android:textColor="#052E45"
                     android:textSize="12sp" />
 
@@ -87,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_hud_icon"
-                android:contentDescription="Profile"
+                android:contentDescription="@string/hud_profile_content_description"
                 android:padding="8dp"
                 android:src="@drawable/ic_hud_profile" />
         </LinearLayout>
@@ -99,7 +99,7 @@
             android:layout_marginTop="8dp"
             android:background="#260E3D57"
             android:padding="8dp"
-            android:text="No active grid events"
+            android:text="@string/hud_event_inactive"
             android:textColor="#052E45"
             android:visibility="gone" />
 
@@ -130,7 +130,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
-                    android:text="Level Ups" />
+                    android:text="@string/nav_level_up" />
 
                 <Button
                     android:id="@+id/btn_nav_power"
@@ -140,7 +140,7 @@
                     android:layout_marginHorizontal="8dp"
                     android:layout_weight="1"
                     android:backgroundTint="#FFEB3B"
-                    android:text="Power"
+                    android:text="@string/nav_power"
                     android:textColor="#052E45"
                     android:textStyle="bold"
                     android:visibility="invisible"
@@ -153,7 +153,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    android:text="Tasks" />
+                    android:text="@string/nav_tasks" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

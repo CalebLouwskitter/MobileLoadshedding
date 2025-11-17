@@ -54,6 +54,7 @@ class MainActivity : UnityPlayerGameActivity() {
 
     // All UI components managed by factory
     private lateinit var components: UIComponentFactory.UIComponents
+    private lateinit var localeManager: LocaleManager
 
     // View references needed for click handlers
     private lateinit var modalContainer: FrameLayout
@@ -64,6 +65,10 @@ class MainActivity : UnityPlayerGameActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("MainActivity", "onCreate() started")
+
+        // Apply saved locale BEFORE inflating any views so resources use correct language
+        localeManager = LocaleManager(this)
+        localeManager.applySavedLocale()
 
         // 1. Inflate UI overlay
         val overlay = LayoutInflater.from(this).inflate(R.layout.activity_main, null)

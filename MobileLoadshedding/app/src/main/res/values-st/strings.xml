@@ -105,4 +105,12 @@
     <string name="logout_confirmation_message">O netefatsa hore o batla ho tswa? Tsoelo-pele ya hao e bolokilwe lerung.</string>
     <string name="logout_confirm_yes">Tswa</string>
     <string name="logout_confirm_no">Khansela</string>
+
+    <!-- HUD / Navigation labels -->
+    <string name="hud_energy_label">Dikhredite Tsa Matla</string>
+    <string name="nav_level_up">Maemo a Phahameng</string>
+    <string name="nav_power">Matla</string>
+    <string name="nav_tasks">Mesebetsi</string>
+    <string name="hud_upgrades_content_description">Matswela Pele</string>
+    <string name="hud_profile_content_description">Profaele</string>
 </resources>

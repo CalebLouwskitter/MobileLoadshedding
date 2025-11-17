@@ -105,4 +105,12 @@
     <string name="logout_confirmation_message">Uqinisekile ukuthi ufuna ukuphuma? Inqubekela yakho igcinwe emafini.</string>
     <string name="logout_confirm_yes">Phuma</string>
     <string name="logout_confirm_no">Khansela</string>
+
+    <!-- HUD / Navigation labels -->
+    <string name="hud_energy_label">Amakhredithi Amandla</string>
+    <string name="nav_level_up">Izinga Phezulu</string>
+    <string name="nav_power">Amandla</string>
+    <string name="nav_tasks">Imisebenzi</string>
+    <string name="hud_upgrades_content_description">Izibuyekezo</string>
+    <string name="hud_profile_content_description">Iphrofayela</string>
 </resources>
