@@ -25,16 +25,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Header row: title centered -->
+        <!-- Header row: back arrow + centered title -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
+            <ImageButton
+                android:id="@+id/btn_back_settings"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/settings_panel_title"
+                android:src="@drawable/ic_arrow_back"
+                android:tint="@android:color/white" />
+
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
                 android:text="@string/settings_panel_title"
                 android:textColor="@android:color/white"
                 android:textSize="18sp"
@@ -92,6 +104,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"
+                android:alpha="0"
                 android:entries="@array/settings_languages" />
         </FrameLayout>
 
@@ -139,6 +152,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"
+                android:alpha="0"
                 android:entries="@array/settings_themes" />
         </FrameLayout>
 

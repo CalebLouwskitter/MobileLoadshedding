@@ -77,6 +77,19 @@ class SettingsPanelBinder(
         panel.findViewById<Button?>(R.id.btn_logout)?.setOnClickListener {
             showLogoutConfirmationDialog()
         }
+
+        // Back arrow in header - behaves like closing settings and returning to profile
+        panel.findViewById<View?>(R.id.btn_back_settings)?.setOnClickListener {
+            // Profile panel is responsible for showing settings, so we navigate back to it
+            activity.runOnUiThread {
+                // MainActivity uses showPanel(R.layout.panel_profile) for profile
+                (activity as? com.prog7314.IdleLoadsheddingMobile.MainActivity)?.let { main ->
+                    main.runOnUiThread {
+                        main.showPanel(com.prog7314.IdleLoadsheddingMobile.R.layout.panel_profile)
+                    }
+                }
+            }
+        }
     }
     
     /**
