@@ -225,6 +225,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* CameraCaptureBridge_GetCachedC
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
+// Method Definition Index: 81731
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MonoScriptData_t82B1EDB2E75C6D415B8D03B486672468ACF9471A UnitySourceGeneratedAssemblyMonoScriptTypes_v1_Get_m586E7B58DA433D6C284C4C29185006F170A6B633 (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -237,6 +238,8 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MonoScriptData_t82B1EDB2E75C6D415B8D03B486672
 	}
 	MonoScriptData_t82B1EDB2E75C6D415B8D03B486672468ACF9471A V_0;
 	memset((&V_0), 0, sizeof(V_0));
+	MonoScriptData_t82B1EDB2E75C6D415B8D03B486672468ACF9471A V_1;
+	memset((&V_1), 0, sizeof(V_1));
 	{
 		il2cpp_codegen_initobj((&V_0), sizeof(MonoScriptData_t82B1EDB2E75C6D415B8D03B486672468ACF9471A));
 		ByteU5BU5D_tA6237BF417AE52AD70CFB4EF24A7A82613DF9031* L_0 = (ByteU5BU5D_tA6237BF417AE52AD70CFB4EF24A7A82613DF9031*)(ByteU5BU5D_tA6237BF417AE52AD70CFB4EF24A7A82613DF9031*)SZArrayNew(ByteU5BU5D_tA6237BF417AE52AD70CFB4EF24A7A82613DF9031_il2cpp_TypeInfo_var, (uint32_t)((int32_t)112));
@@ -255,9 +258,17 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MonoScriptData_t82B1EDB2E75C6D415B8D03B486672
 		(&V_0)->___TotalTypes = 1;
 		(&V_0)->___IsEditorOnly = (bool)0;
 		MonoScriptData_t82B1EDB2E75C6D415B8D03B486672468ACF9471A L_6 = V_0;
-		return L_6;
+		V_1 = L_6;
+		goto IL_0057;
+	}
+
+IL_0057:
+	{
+		MonoScriptData_t82B1EDB2E75C6D415B8D03B486672468ACF9471A L_7 = V_1;
+		return L_7;
 	}
 }
+// Method Definition Index: 81732
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void UnitySourceGeneratedAssemblyMonoScriptTypes_v1__ctor_mC16F012056158B3BD5187FB0B498F4B4AC67F058 (UnitySourceGeneratedAssemblyMonoScriptTypes_v1_t21637E60B4727FCC74DBA2662FABA55B062650DA* __this, const RuntimeMethod* method) 
 {
 	{
@@ -343,6 +354,7 @@ IL2CPP_EXTERN_C void MonoScriptData_t82B1EDB2E75C6D415B8D03B486672468ACF9471A_ma
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
+// Method Definition Index: 81733
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* CameraCaptureBridge_GetCachedCaptureActionsEnumerator_m5AF96FFFE623D93E1ABDE12DF9E17A420A69C498 (Camera_tA92CC927D7439999BC82DBEDC0AA45B470F9E184* ___0_camera, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -352,6 +364,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* CameraCaptureBridge_GetCachedC
 		s_Il2CppMethodInitialized = true;
 	}
 	{
+		//<source_info:./Library/PackageCache/com.unity.render-pipelines.core@317e801bb3aa/Runtime-PrivateShared/AssemblyInfo.cs:22>
 		Camera_tA92CC927D7439999BC82DBEDC0AA45B470F9E184* L_0 = ___0_camera;
 		il2cpp_codegen_runtime_class_init_inline(CameraCaptureBridge_t6C1AB840270CFB56643B53A817B2D298D52CC559_il2cpp_TypeInfo_var);
 		RuntimeObject* L_1;

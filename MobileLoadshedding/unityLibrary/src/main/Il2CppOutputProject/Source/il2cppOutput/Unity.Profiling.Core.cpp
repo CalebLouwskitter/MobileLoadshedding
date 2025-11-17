@@ -373,6 +373,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t String_get_Length_m42625D
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
+// Method Definition Index: 81627
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void EmbeddedAttribute__ctor_mC8F05DF619664423E825A1166C0F3A041D1241B1 (EmbeddedAttribute_t2162DE2BA28C5C71F9EE2BAE3466A44381F0A0BB* __this, const RuntimeMethod* method) 
 {
 	{
@@ -388,6 +389,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void EmbeddedAttribute__ctor_mC8F05DF61966442
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
+// Method Definition Index: 81628
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void IsUnmanagedAttribute__ctor_mC550690DDF4A9CAB011A3631E63E8C7E0A716753 (IsUnmanagedAttribute_t613A5BF19DFA2D6776C1DF030C7AD37F7AF8E4EE* __this, const RuntimeMethod* method) 
 {
 	{
@@ -403,6 +405,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void IsUnmanagedAttribute__ctor_mC550690DDF4A
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
+// Method Definition Index: 81629
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MonoScriptData_t7CF59309CF0346AA5BD14CF279AEE01C93C2389C UnitySourceGeneratedAssemblyMonoScriptTypes_v1_Get_mDB1B799915F97315B896EC64462D37F89080AD5F (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -415,6 +418,8 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MonoScriptData_t7CF59309CF0346AA5BD14CF279AEE
 	}
 	MonoScriptData_t7CF59309CF0346AA5BD14CF279AEE01C93C2389C V_0;
 	memset((&V_0), 0, sizeof(V_0));
+	MonoScriptData_t7CF59309CF0346AA5BD14CF279AEE01C93C2389C V_1;
+	memset((&V_1), 0, sizeof(V_1));
 	{
 		il2cpp_codegen_initobj((&V_0), sizeof(MonoScriptData_t7CF59309CF0346AA5BD14CF279AEE01C93C2389C));
 		ByteU5BU5D_tA6237BF417AE52AD70CFB4EF24A7A82613DF9031* L_0 = (ByteU5BU5D_tA6237BF417AE52AD70CFB4EF24A7A82613DF9031*)(ByteU5BU5D_tA6237BF417AE52AD70CFB4EF24A7A82613DF9031*)SZArrayNew(ByteU5BU5D_tA6237BF417AE52AD70CFB4EF24A7A82613DF9031_il2cpp_TypeInfo_var, (uint32_t)((int32_t)689));
@@ -433,9 +438,17 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MonoScriptData_t7CF59309CF0346AA5BD14CF279AEE
 		(&V_0)->___TotalTypes = ((int32_t)10);
 		(&V_0)->___IsEditorOnly = (bool)0;
 		MonoScriptData_t7CF59309CF0346AA5BD14CF279AEE01C93C2389C L_6 = V_0;
-		return L_6;
+		V_1 = L_6;
+		goto IL_005e;
+	}
+
+IL_005e:
+	{
+		MonoScriptData_t7CF59309CF0346AA5BD14CF279AEE01C93C2389C L_7 = V_1;
+		return L_7;
 	}
 }
+// Method Definition Index: 81630
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void UnitySourceGeneratedAssemblyMonoScriptTypes_v1__ctor_m131ECEC1C57B0D37EA2E0D2A09C7985C7DCB1213 (UnitySourceGeneratedAssemblyMonoScriptTypes_v1_t08AF3BBE508CBDA27FFE33186CBD188F234E3F54* __this, const RuntimeMethod* method) 
 {
 	{
@@ -521,6 +534,7 @@ IL2CPP_EXTERN_C void MonoScriptData_t7CF59309CF0346AA5BD14CF279AEE01C93C2389C_ma
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
+// Method Definition Index: 81662
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ProfilerMarkerExtension_Begin_m3023D2EEDDAC3DF4525CDD3E68CBECEDB0B338A7 (ProfilerMarker_tA256E18DA86EDBC5528CE066FC91C96EE86501AD ___0_marker, int32_t ___1_metadata, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -534,6 +548,12 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ProfilerMarkerExtension_Begin_m3023D2EED
 	ProfilerMarkerData_tC01B15D61B904B700E4DE1FFB3452F2C5C2789A2 V_1;
 	memset((&V_1), 0, sizeof(V_1));
 	{
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:26>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:27>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:28>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:29>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:30>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:31>
 		il2cpp_codegen_initobj((&V_1), sizeof(ProfilerMarkerData_tC01B15D61B904B700E4DE1FFB3452F2C5C2789A2));
 		(&V_1)->___Type = (uint8_t)2;
 		int32_t L_0;
@@ -542,12 +562,15 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ProfilerMarkerExtension_Begin_m3023D2EED
 		(&V_1)->___Ptr = (void*)((uintptr_t)(&___1_metadata));
 		ProfilerMarkerData_tC01B15D61B904B700E4DE1FFB3452F2C5C2789A2 L_1 = V_1;
 		V_0 = L_1;
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:32>
 		intptr_t L_2;
 		L_2 = ProfilerMarker_get_Handle_mE228BCE74751B66026EBC49DE7F1A440EDE7B845_inline((&___0_marker), NULL);
 		ProfilerUnsafeUtility_BeginSampleWithMetadata_m3B2BEAB4BD309F00529472FE574F6C642B776325(L_2, 1, (void*)((uintptr_t)(&V_0)), NULL);
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:33>
 		return;
 	}
 }
+// Method Definition Index: 81663
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ProfilerMarkerExtension_Begin_mDADCC5976AE21FA2B1D4A7CA096514EE6489A6DB (ProfilerMarker_tA256E18DA86EDBC5528CE066FC91C96EE86501AD ___0_marker, uint32_t ___1_metadata, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -561,6 +584,12 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ProfilerMarkerExtension_Begin_mDADCC5976
 	ProfilerMarkerData_tC01B15D61B904B700E4DE1FFB3452F2C5C2789A2 V_1;
 	memset((&V_1), 0, sizeof(V_1));
 	{
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:46>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:47>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:48>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:49>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:50>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:51>
 		il2cpp_codegen_initobj((&V_1), sizeof(ProfilerMarkerData_tC01B15D61B904B700E4DE1FFB3452F2C5C2789A2));
 		(&V_1)->___Type = (uint8_t)3;
 		int32_t L_0;
@@ -569,12 +598,15 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ProfilerMarkerExtension_Begin_mDADCC5976
 		(&V_1)->___Ptr = (void*)((uintptr_t)(&___1_metadata));
 		ProfilerMarkerData_tC01B15D61B904B700E4DE1FFB3452F2C5C2789A2 L_1 = V_1;
 		V_0 = L_1;
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:52>
 		intptr_t L_2;
 		L_2 = ProfilerMarker_get_Handle_mE228BCE74751B66026EBC49DE7F1A440EDE7B845_inline((&___0_marker), NULL);
 		ProfilerUnsafeUtility_BeginSampleWithMetadata_m3B2BEAB4BD309F00529472FE574F6C642B776325(L_2, 1, (void*)((uintptr_t)(&V_0)), NULL);
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:53>
 		return;
 	}
 }
+// Method Definition Index: 81664
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ProfilerMarkerExtension_Begin_m088F2A3A6CF7B9F4882A8C5CC26DC5FAE350639D (ProfilerMarker_tA256E18DA86EDBC5528CE066FC91C96EE86501AD ___0_marker, int64_t ___1_metadata, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -588,6 +620,12 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ProfilerMarkerExtension_Begin_m088F2A3A6
 	ProfilerMarkerData_tC01B15D61B904B700E4DE1FFB3452F2C5C2789A2 V_1;
 	memset((&V_1), 0, sizeof(V_1));
 	{
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:66>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:67>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:68>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:69>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:70>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:71>
 		il2cpp_codegen_initobj((&V_1), sizeof(ProfilerMarkerData_tC01B15D61B904B700E4DE1FFB3452F2C5C2789A2));
 		(&V_1)->___Type = (uint8_t)4;
 		int32_t L_0;
@@ -596,12 +634,15 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ProfilerMarkerExtension_Begin_m088F2A3A6
 		(&V_1)->___Ptr = (void*)((uintptr_t)(&___1_metadata));
 		ProfilerMarkerData_tC01B15D61B904B700E4DE1FFB3452F2C5C2789A2 L_1 = V_1;
 		V_0 = L_1;
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:72>
 		intptr_t L_2;
 		L_2 = ProfilerMarker_get_Handle_mE228BCE74751B66026EBC49DE7F1A440EDE7B845_inline((&___0_marker), NULL);
 		ProfilerUnsafeUtility_BeginSampleWithMetadata_m3B2BEAB4BD309F00529472FE574F6C642B776325(L_2, 1, (void*)((uintptr_t)(&V_0)), NULL);
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:73>
 		return;
 	}
 }
+// Method Definition Index: 81665
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ProfilerMarkerExtension_Begin_mB9E46B6A68217096FA1B093657969D5D53C0ED4B (ProfilerMarker_tA256E18DA86EDBC5528CE066FC91C96EE86501AD ___0_marker, uint64_t ___1_metadata, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -615,6 +656,12 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ProfilerMarkerExtension_Begin_mB9E46B6A6
 	ProfilerMarkerData_tC01B15D61B904B700E4DE1FFB3452F2C5C2789A2 V_1;
 	memset((&V_1), 0, sizeof(V_1));
 	{
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:86>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:87>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:88>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:89>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:90>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:91>
 		il2cpp_codegen_initobj((&V_1), sizeof(ProfilerMarkerData_tC01B15D61B904B700E4DE1FFB3452F2C5C2789A2));
 		(&V_1)->___Type = (uint8_t)5;
 		int32_t L_0;
@@ -623,12 +670,15 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ProfilerMarkerExtension_Begin_mB9E46B6A6
 		(&V_1)->___Ptr = (void*)((uintptr_t)(&___1_metadata));
 		ProfilerMarkerData_tC01B15D61B904B700E4DE1FFB3452F2C5C2789A2 L_1 = V_1;
 		V_0 = L_1;
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:92>
 		intptr_t L_2;
 		L_2 = ProfilerMarker_get_Handle_mE228BCE74751B66026EBC49DE7F1A440EDE7B845_inline((&___0_marker), NULL);
 		ProfilerUnsafeUtility_BeginSampleWithMetadata_m3B2BEAB4BD309F00529472FE574F6C642B776325(L_2, 1, (void*)((uintptr_t)(&V_0)), NULL);
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:93>
 		return;
 	}
 }
+// Method Definition Index: 81666
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ProfilerMarkerExtension_Begin_m899B1C6F7DD4BE71A5CA0D3C8643D6EE64361ED6 (ProfilerMarker_tA256E18DA86EDBC5528CE066FC91C96EE86501AD ___0_marker, float ___1_metadata, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -642,6 +692,12 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ProfilerMarkerExtension_Begin_m899B1C6F7
 	ProfilerMarkerData_tC01B15D61B904B700E4DE1FFB3452F2C5C2789A2 V_1;
 	memset((&V_1), 0, sizeof(V_1));
 	{
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:106>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:107>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:108>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:109>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:110>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:111>
 		il2cpp_codegen_initobj((&V_1), sizeof(ProfilerMarkerData_tC01B15D61B904B700E4DE1FFB3452F2C5C2789A2));
 		(&V_1)->___Type = (uint8_t)6;
 		int32_t L_0;
@@ -650,12 +706,15 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ProfilerMarkerExtension_Begin_m899B1C6F7
 		(&V_1)->___Ptr = (void*)((uintptr_t)(&___1_metadata));
 		ProfilerMarkerData_tC01B15D61B904B700E4DE1FFB3452F2C5C2789A2 L_1 = V_1;
 		V_0 = L_1;
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:112>
 		intptr_t L_2;
 		L_2 = ProfilerMarker_get_Handle_mE228BCE74751B66026EBC49DE7F1A440EDE7B845_inline((&___0_marker), NULL);
 		ProfilerUnsafeUtility_BeginSampleWithMetadata_m3B2BEAB4BD309F00529472FE574F6C642B776325(L_2, 1, (void*)((uintptr_t)(&V_0)), NULL);
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:113>
 		return;
 	}
 }
+// Method Definition Index: 81667
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ProfilerMarkerExtension_Begin_mDEE72C4D6E4497C10542BC16154BA05BD136FC8A (ProfilerMarker_tA256E18DA86EDBC5528CE066FC91C96EE86501AD ___0_marker, double ___1_metadata, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -669,6 +728,12 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ProfilerMarkerExtension_Begin_mDEE72C4D6
 	ProfilerMarkerData_tC01B15D61B904B700E4DE1FFB3452F2C5C2789A2 V_1;
 	memset((&V_1), 0, sizeof(V_1));
 	{
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:126>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:127>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:128>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:129>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:130>
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:131>
 		il2cpp_codegen_initobj((&V_1), sizeof(ProfilerMarkerData_tC01B15D61B904B700E4DE1FFB3452F2C5C2789A2));
 		(&V_1)->___Type = (uint8_t)7;
 		int32_t L_0;
@@ -677,12 +742,15 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ProfilerMarkerExtension_Begin_mDEE72C4D6
 		(&V_1)->___Ptr = (void*)((uintptr_t)(&___1_metadata));
 		ProfilerMarkerData_tC01B15D61B904B700E4DE1FFB3452F2C5C2789A2 L_1 = V_1;
 		V_0 = L_1;
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:132>
 		intptr_t L_2;
 		L_2 = ProfilerMarker_get_Handle_mE228BCE74751B66026EBC49DE7F1A440EDE7B845_inline((&___0_marker), NULL);
 		ProfilerUnsafeUtility_BeginSampleWithMetadata_m3B2BEAB4BD309F00529472FE574F6C642B776325(L_2, 1, (void*)((uintptr_t)(&V_0)), NULL);
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:133>
 		return;
 	}
 }
+// Method Definition Index: 81668
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ProfilerMarkerExtension_Begin_mEA0E2F2019E9A1E43B86A3E71A2EA3BE40A16240 (ProfilerMarker_tA256E18DA86EDBC5528CE066FC91C96EE86501AD ___0_marker, String_t* ___1_metadata, const RuntimeMethod* method) 
 {
 	ProfilerMarkerData_tC01B15D61B904B700E4DE1FFB3452F2C5C2789A2 V_0;
@@ -692,18 +760,20 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ProfilerMarkerExtension_Begin_mEA0E2F201
 	Il2CppChar* V_2 = NULL;
 	String_t* V_3 = NULL;
 	{
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:146>
 		il2cpp_codegen_initobj((&V_1), sizeof(ProfilerMarkerData_tC01B15D61B904B700E4DE1FFB3452F2C5C2789A2));
 		(&V_1)->___Type = (uint8_t)((int32_t)9);
 		ProfilerMarkerData_tC01B15D61B904B700E4DE1FFB3452F2C5C2789A2 L_0 = V_1;
 		V_0 = L_0;
 		String_t* L_1 = ___1_metadata;
 		V_3 = L_1;
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:147>
 		String_t* L_2 = V_3;
 		V_2 = (Il2CppChar*)((uintptr_t)L_2);
 		Il2CppChar* L_3 = V_2;
 		if (!L_3)
 		{
-			goto IL_0023;
+			goto IL_0024;
 		}
 	}
 	{
@@ -713,19 +783,23 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ProfilerMarkerExtension_Begin_mEA0E2F201
 		V_2 = ((Il2CppChar*)il2cpp_codegen_add((intptr_t)L_4, L_5));
 	}
 
-IL_0023:
+IL_0024:
 	{
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:149>
 		String_t* L_6 = ___1_metadata;
 		NullCheck(L_6);
 		int32_t L_7;
 		L_7 = String_get_Length_m42625D67623FA5CC7A44D47425CE86FB946542D2_inline(L_6, NULL);
 		(&V_0)->___Size = ((int32_t)il2cpp_codegen_multiply(((int32_t)il2cpp_codegen_add(L_7, 1)), 2));
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:150>
 		Il2CppChar* L_8 = V_2;
 		(&V_0)->___Ptr = (void*)L_8;
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:151>
 		intptr_t L_9;
 		L_9 = ProfilerMarker_get_Handle_mE228BCE74751B66026EBC49DE7F1A440EDE7B845_inline((&___0_marker), NULL);
 		ProfilerUnsafeUtility_BeginSampleWithMetadata_m3B2BEAB4BD309F00529472FE574F6C642B776325(L_9, 1, (void*)((uintptr_t)(&V_0)), NULL);
 		V_3 = (String_t*)NULL;
+		//<source_info:./Library/PackageCache/com.unity.profiling.core@aac7b93912bc/Runtime/ProfilerMarkerExtensions.cs:153>
 		return;
 	}
 }
@@ -764,6 +838,7 @@ IL_0023:
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
+// Method Definition Index: 45451
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR intptr_t ProfilerMarker_get_Handle_mE228BCE74751B66026EBC49DE7F1A440EDE7B845_inline (ProfilerMarker_tA256E18DA86EDBC5528CE066FC91C96EE86501AD* __this, const RuntimeMethod* method) 
 {
 	{
@@ -771,6 +846,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR intptr_t ProfilerMarker_get_Handl
 		return L_0;
 	}
 }
+// Method Definition Index: 432
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t String_get_Length_m42625D67623FA5CC7A44D47425CE86FB946542D2_inline (String_t* __this, const RuntimeMethod* method) 
 {
 	{
@@ -778,6 +854,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t String_get_Length_m42625D
 		return L_0;
 	}
 }
+// Method Definition Index: 45727
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t UnsafeUtility_SizeOf_TisInt32_t680FF22E76F6EFAD4375103CBBFFA0421349384C_mED481D505BF43CBD96972069EDD4E3509BE84931_gshared_inline (const RuntimeMethod* method) 
 {
 	{
@@ -785,6 +862,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t UnsafeUtility_SizeOf_TisI
 		return (int32_t)L_0;
 	}
 }
+// Method Definition Index: 45727
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t UnsafeUtility_SizeOf_TisUInt32_t1833D51FFA667B18A5AA4B8D34DE284F8495D29B_mD5B3C428BB4E25A820C242BF663DC5471EFFA654_gshared_inline (const RuntimeMethod* method) 
 {
 	{
@@ -792,6 +870,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t UnsafeUtility_SizeOf_TisU
 		return (int32_t)L_0;
 	}
 }
+// Method Definition Index: 45727
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t UnsafeUtility_SizeOf_TisInt64_t092CFB123BE63C28ACDAF65C68F21A526050DBA3_m9712F6405A5D5C4128EAFA7860A222DE388ED6C5_gshared_inline (const RuntimeMethod* method) 
 {
 	{
@@ -799,6 +878,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t UnsafeUtility_SizeOf_TisI
 		return (int32_t)L_0;
 	}
 }
+// Method Definition Index: 45727
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t UnsafeUtility_SizeOf_TisUInt64_t8F12534CC8FC4B5860F2A2CD1EE79D322E7A41AF_m6C198B51ACD7B8EC62D5E0E75433C12BE9D65A58_gshared_inline (const RuntimeMethod* method) 
 {
 	{
@@ -806,6 +886,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t UnsafeUtility_SizeOf_TisU
 		return (int32_t)L_0;
 	}
 }
+// Method Definition Index: 45727
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t UnsafeUtility_SizeOf_TisSingle_t4530F2FF86FCB0DC29F35385CA1BD21BE294761C_m3E4AF62978F92E52CE242CAC83115C8EA6C850A3_gshared_inline (const RuntimeMethod* method) 
 {
 	{
@@ -813,6 +894,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t UnsafeUtility_SizeOf_TisS
 		return (int32_t)L_0;
 	}
 }
+// Method Definition Index: 45727
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t UnsafeUtility_SizeOf_TisDouble_tE150EF3D1D43DEE85D533810AB4C742307EEDE5F_mE4A49234E23602F164AFD4455C15DB62D199B934_gshared_inline (const RuntimeMethod* method) 
 {
 	{
