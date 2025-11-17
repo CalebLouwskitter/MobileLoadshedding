@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">MobileLoadshedding</string>
     <string name="default_web_client_id" translatable="false">41587024325-gt1n0vaejub9dme7cvidievg5kcktbmp.apps.googleusercontent.com</string>
+    <string name="admob_app_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
     
     <string name="hud_energy_per_second_format" translatable="false">%1$s /s</string>
     <string name="hud_generators_format">%1$d generators (Lv %2$d)</string>

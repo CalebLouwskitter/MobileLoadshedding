@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="timestamp_unknown" translatable="false">--</string>
+    <string name="app_name" translatable="false">MobileLoadshedding</string>
+    <string name="default_web_client_id" translatable="false">41587024325-gt1n0vaejub9dme7cvidievg5kcktbmp.apps.googleusercontent.com</string>
+    <string name="hud_energy_per_second_format" translatable="false">%1$s /s</string>
     <string name="hud_generators_format">%1$d iijenereyitha (Lv %2$d)</string>
     <string name="hud_safe_idle_format">Kukhuselekile: %1$s</string>
     <string name="hud_event_active">Isiganeko: %1$s (x%2$.2f)</string>
