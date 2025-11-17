@@ -10,10 +10,10 @@
         android:id="@+id/tasks_panel_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/bg_tasks_panel"
         android:elevation="6dp"
         android:orientation="vertical"
@@ -27,8 +27,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:orientation="horizontal"
-            android:paddingBottom="12dp">
+            android:orientation="vertical"
+            android:paddingBottom="8dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -37,6 +37,13 @@
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
                 android:textStyle="bold" />
+
+            <!-- Thin white divider under title, matching reference image -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="8dp"
+                android:background="#FFFFFF" />
         </LinearLayout>
 
         <!-- Empty state text -->
@@ -56,17 +63,19 @@
             android:id="@+id/tasks_list_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:orientation="vertical" />
 
     </LinearLayout>
 
-    <!-- Close Button overlaying top-right of panel -->
+    <!-- Close Button overlaying top-right of panel
+         Positioned so that it sits just outside the green card, not cut off. -->
     <include
         layout="@layout/include_modal_close_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|end"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp" />
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp" />
 
 </FrameLayout>
