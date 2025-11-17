@@ -20,6 +20,7 @@
         <item>zu</item>     <!-- isiZulu -->
         <item>xh</item>     <!-- isiXhosa -->
         <item>st</item>     <!-- Sesotho -->
+        <item>ve</item>     <!-- Venda -->
     </string-array>
     
     <string-array name="settings_themes">

@@ -84,6 +84,9 @@ dependencies {
     // Biometric Authentication
     implementation("androidx.biometric:biometric:1.2.0-alpha05")
 
+    // AdMob Addition
+    implementation(libs.play.services.ads.api)
+
     // Room Database
     val roomVersion = "2.6.1"
     implementation("androidx.room:room-runtime:$roomVersion")
