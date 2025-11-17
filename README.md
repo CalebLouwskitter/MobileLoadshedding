@@ -333,6 +333,7 @@ Location: Assets/Scripts/Input/LightController.cs
 - Caleb (ST10275378)
 - Logan (ST10268888)
 - Kyle (ST10085208)
+- Michael (ST10085212)
 
 ## Reference list:
 
@@ -363,6 +364,9 @@ AndroidX (2025) AndroidX Core Library. [online] Available at: https://developer.
 AndroidX (2025) AndroidX Navigation Component. [online] Available at: https://developer.android.com/guide/navigation
  [Accessed 2 Oct. 2025].
 
+Coding-Meet (2023). Google-Admob-Integration-App. [online] GitHub. Available at: https://github.com/Coding-Meet/Google-Admob-Integration-App.git 
+ [Accessed 15 Nov. 2025].
+
 Firebase (2025) Authenticate with Google on Android. [online] Available at: https://firebase.google.com/docs/auth/android/google-signin
  [Accessed 29 Sept. 2025].
 
@@ -372,11 +376,23 @@ Firebase (2025) Firebase Authentication for Android. [online] Available at: http
 Google (2025) Authenticate with Firebase using ID tokens. [online] Available at: https://developers.google.com/identity/gsi/web/guides/firebase-auth
  [Accessed 25 Sept. 2025].
 
+Google (2025). Get Started | Android - AdMob. [online] Available at: https://developers.google.com/admob/android/quick-start
+[Accessed 15 Nov. 2025].
+
+Google (2025). googleads-mobile-android-examples. [online] GitHub. Available at: https://github.com/googleads/googleads-mobile-android-examples.kt
+[Accessed 15 Nov. 2025].
+
 Google (2025) Gson - A Java serialization library. [online] Available at: https://github.com/google/gson
  [Accessed 30 Sept. 2025].
 
+Google (2025). Rewarded Ads | Android - AdMob. [online] Available at: https://developers.google.com/admob/android/rewarded#kotlin_1
+[Accessed 15 Nov. 2025].
+
 Google (2025) Sign in with Google for Android - Credential Manager. [online] Available at: https://developers.google.com/identity/android-credential-manager
  [Accessed 1 Oct. 2025].
+
+hall9zeha (2022). AdvertisementsApp. [online] GitHub. Available at: https://github.com/hall9zeha/AdvertisementsApp.git 
+ [Accessed 15 Nov. 2025].
 
 Kotlin (2025) Kotlin Coroutines Guide. [online] Available at: https://kotlinlang.org/docs/coroutines-guide.html
  [Accessed 28 Sept. 2025].
