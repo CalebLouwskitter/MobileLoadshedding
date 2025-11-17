@@ -65,6 +65,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:layout_marginEnd="8dp"
                     android:src="@drawable/ic_language"
                     android:tint="@android:color/black" />
 
@@ -111,6 +112,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:layout_marginEnd="8dp"
                     android:src="@drawable/ic_theme"
                     android:tint="@android:color/black" />
 
@@ -157,6 +159,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:background="@drawable/bg_button_white"
+            android:backgroundTint="@android:color/transparent"
             android:text="@string/btn_upload_save"
             android:textAllCaps="false"
             android:textColor="@android:color/black" />
@@ -167,6 +170,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@drawable/bg_button_white"
+            android:backgroundTint="@android:color/transparent"
             android:text="@string/btn_sync_save"
             android:textAllCaps="false"
             android:textColor="@android:color/black" />
@@ -187,6 +191,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:background="@drawable/bg_button_white"
+            android:backgroundTint="@android:color/transparent"
             android:text="@string/btn_logout"
             android:textAllCaps="false"
             android:textColor="@color/modal_header_primary" />
