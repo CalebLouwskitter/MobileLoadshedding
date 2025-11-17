@@ -1,6 +1,7 @@
 package com.prog7314.IdleLoadsheddingMobile.data.repository
 
 import android.util.Log
+import com.google.gson.Gson
 import com.prog7314.IdleLoadsheddingMobile.data.local.AppDatabase
 import com.prog7314.IdleLoadsheddingMobile.data.local.entities.DistrictEntity
 import com.prog7314.IdleLoadsheddingMobile.data.local.entities.GameStateEntity
@@ -8,6 +9,7 @@ import com.prog7314.IdleLoadsheddingMobile.data.local.entities.GameStateFull
 import com.prog7314.IdleLoadsheddingMobile.data.local.entities.GeneratorEntity
 import com.prog7314.IdleLoadsheddingMobile.data.models.*
 import kotlinx.coroutines.flow.Flow
+import java.time.Instant
 import java.util.Date
 
 /**
@@ -25,6 +27,7 @@ class GameStateRepository(private val database: AppDatabase) {
     private val gameStateDao = database.gameStateDao()
     private val districtDao = database.districtDao()
     private val generatorDao = database.generatorDao()
+    private val gson = Gson()
     
     companion object {
         private const val TAG = "GameStateRepository"
@@ -52,10 +55,34 @@ class GameStateRepository(private val database: AppDatabase) {
         playerId: String,
         unityStats: UnityStatsSnapshot,
         generators: List<UnitySavePayload.GeneratorState>? = null,
-        prestigeLevel: Int = 0
+        prestigeLevel: Int = 0,
+        currency: UnityCurrencySnapshot? = null,
+        happiness: UnityHappinessSnapshot? = null,
+        sections: List<UnitySectionSnapshot.SectionState>? = null,
+        statsJson: String? = null
     ) {
         try {
             val now = Date()
+            val needExistingState = currency == null || happiness == null
+            val existingState = if (needExistingState) {
+                gameStateDao.getGameState(playerId)?.gameState
+            } else {
+                null
+            }
+
+            val (currentMoney, totalMoneyEarned) = when {
+                currency != null -> currency.currentMoney to currency.totalMoneyEarned
+                existingState != null -> existingState.currentMoney to existingState.totalMoneyEarned
+                else -> unityStats.currentMoney to unityStats.totalMoneyEarned
+            }
+
+            val (currentHappiness, totalHappinessPenalty) = when {
+                happiness != null -> happiness.currentHappiness to happiness.totalPenalty
+                existingState != null -> existingState.currentHappiness to existingState.totalHappinessPenalty
+                else -> 0.0 to 0.0
+            }
+
+            val resolvedStatsJson = statsJson ?: existingState?.statsJson ?: gson.toJson(unityStats)
             
             // Create game state entity
             val gameState = GameStateEntity(
@@ -63,8 +90,11 @@ class GameStateRepository(private val database: AppDatabase) {
                 totalEnergyGenerated = unityStats.totalEnergyGenerated,
                 currentEnergy = unityStats.currentEnergy,
                 energyPerSecond = unityStats.energyPerSecond,
-                currentMoney = unityStats.currentMoney,
-                totalMoneyEarned = unityStats.totalMoneyEarned,
+                currentMoney = currentMoney,
+                totalMoneyEarned = totalMoneyEarned,
+                statsJson = resolvedStatsJson,
+                currentHappiness = currentHappiness,
+                totalHappinessPenalty = totalHappinessPenalty,
                 activeGenerators = unityStats.activeGenerators,
                 generatorLevelSum = unityStats.generatorLevelSum,
                 prestigeLevel = prestigeLevel,
@@ -83,41 +113,59 @@ class GameStateRepository(private val database: AppDatabase) {
             gameStateDao.insertGameState(gameState)
             
             // Save districts
-            val districts = unityStats.districts?.map { district ->
-                DistrictEntity(
-                    playerId = playerId,
-                    districtId = district.id,
-                    name = district.name,
-                    level = district.level,
-                    efficiency = district.efficiency,
-                    powerPerSecond = district.powerPerSecond,
-                    moneyPerSecond = district.moneyPerSecond,
-                    hoursUntilMaintenance = district.hoursUntilMaintenance,
-                    nextUpgradeCost = district.nextUpgradeCost,
-                    lastModified = now
-                )
-            } ?: emptyList()
+            val districts = when {
+                sections != null -> sections.map { section ->
+                    DistrictEntity(
+                        playerId = playerId,
+                        districtId = section.id,
+                        name = section.id,
+                        level = section.level,
+                        efficiency = if (section.isUnlocked) 1.0 else 0.0,
+                        powerPerSecond = 0.0,
+                        moneyPerSecond = 0.0,
+                        hoursUntilMaintenance = 0.0,
+                        nextUpgradeCost = 0.0,
+                        lastModified = now
+                    )
+                }
+                !unityStats.districts.isNullOrEmpty() -> unityStats.districts!!.map { district ->
+                    DistrictEntity(
+                        playerId = playerId,
+                        districtId = district.id,
+                        name = district.name,
+                        level = district.level,
+                        efficiency = district.efficiency,
+                        powerPerSecond = district.powerPerSecond,
+                        moneyPerSecond = district.moneyPerSecond,
+                        hoursUntilMaintenance = district.hoursUntilMaintenance,
+                        nextUpgradeCost = district.nextUpgradeCost,
+                        lastModified = now
+                    )
+                }
+                else -> null
+            }
             
-            // Clear old districts and insert new ones
-            districtDao.deleteDistricts(playerId)
-            if (districts.isNotEmpty()) {
-                districtDao.insertDistricts(districts)
+            if (districts != null) {
+                districtDao.deleteDistricts(playerId)
+                if (districts.isNotEmpty()) {
+                    districtDao.insertDistricts(districts)
+                }
             }
             
             // Save generators
-            val generatorEntities = generators?.map { gen ->
-                GeneratorEntity(
-                    playerId = playerId,
-                    generatorId = gen.id,
-                    level = gen.level,
-                    lastModified = now
-                )
-            } ?: emptyList()
-            
-            // Clear old generators and insert new ones
-            generatorDao.deleteGenerators(playerId)
-            if (generatorEntities.isNotEmpty()) {
-                generatorDao.insertGenerators(generatorEntities)
+            if (generators != null) {
+                val generatorEntities = generators.map { gen ->
+                    GeneratorEntity(
+                        playerId = playerId,
+                        generatorId = gen.id,
+                        level = gen.level,
+                        lastModified = now
+                    )
+                }
+                generatorDao.deleteGenerators(playerId)
+                if (generatorEntities.isNotEmpty()) {
+                    generatorDao.insertGenerators(generatorEntities)
+                }
             }
             
             Log.d(TAG, "Game state saved for player: $playerId")
@@ -190,9 +238,10 @@ class GameStateRepository(private val database: AppDatabase) {
                 )
             }
         )
+        val serializedStats = gameState.statsJson ?: gson.toJson(stats)
         
         return UnitySavePayload(
-            stats = "", // Serialized stats JSON if needed
+            stats = serializedStats,
             generators = gameStateFull.generators.map { gen ->
                 UnitySavePayload.GeneratorState(
                     id = gen.generatorId,
@@ -217,11 +266,11 @@ class GameStateRepository(private val database: AppDatabase) {
      * Parse ISO timestamp string to Date.
      */
     private fun parseTimestamp(timestamp: String): Date {
+        val trimmed = timestamp.trim()
         return try {
-            // Simple parsing - enhance with proper ISO 8601 parser if needed
-            Date(timestamp.toLongOrNull() ?: System.currentTimeMillis())
-        } catch (e: Exception) {
-            Date()
+            Date.from(Instant.parse(trimmed))
+        } catch (_: Exception) {
+            trimmed.toLongOrNull()?.let { Date(it) } ?: Date()
         }
     }
 }

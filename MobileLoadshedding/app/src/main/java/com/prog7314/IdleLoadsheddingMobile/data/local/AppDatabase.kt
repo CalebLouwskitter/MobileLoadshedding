@@ -31,7 +31,7 @@ import com.prog7314.IdleLoadsheddingMobile.data.local.entities.GeneratorEntity
         DistrictEntity::class,
         GeneratorEntity::class
     ],
-    version = 1,
+    version = 3,
     exportSchema = true
 )
 @TypeConverters(DateConverter::class)

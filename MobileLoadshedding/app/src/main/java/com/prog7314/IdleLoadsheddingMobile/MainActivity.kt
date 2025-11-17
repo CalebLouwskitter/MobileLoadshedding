@@ -28,15 +28,14 @@ import com.google.gson.Gson //Google, 2025.
 import com.prog7314.IdleLoadsheddingMobile.core.UnityBridge
 import com.prog7314.IdleLoadsheddingMobile.data.models.*
 import com.prog7314.IdleLoadsheddingMobile.advertisement.*
+import com.prog7314.IdleLoadsheddingMobile.services.GameSyncService
 import com.prog7314.IdleLoadsheddingMobile.unity.Events
 import com.prog7314.IdleLoadsheddingMobile.unity.FriendsList
 import com.prog7314.IdleLoadsheddingMobile.unity.Leaderboard
 import com.prog7314.IdleLoadsheddingMobile.unity.PowerManager
 import com.prog7314.IdleLoadsheddingMobile.unity.SaveSync
 import com.prog7314.IdleLoadsheddingMobile.unity.Stats
-// TEMPORARILY USING STUB - Replace with real Unity import after refactoring
-// import com.unity3d.player.UnityPlayerGameActivity //Unity Technologies, 2025.
-import com.prog7314.IdleLoadsheddingMobile.stub.UnityPlayerGameActivity
+import com.unity3d.player.UnityPlayerGameActivity //Unity Technologies, 2025.
 import com.prog7314.IdleLoadsheddingMobile.networking.FirebasePush.FcmIntegrationHelper
 import com.prog7314.IdleLoadsheddingMobile.ui.HudManager
 import com.prog7314.IdleLoadsheddingMobile.ui.PanelManager
@@ -66,6 +65,7 @@ class MainActivity : UnityPlayerGameActivity() {
     private lateinit var modalScrim: View
 
     private val auth = FirebaseAuth.getInstance()
+    private var gameSyncService: GameSyncService? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,6 +74,15 @@ class MainActivity : UnityPlayerGameActivity() {
         // Apply saved locale BEFORE inflating any views so resources use correct language
         localeManager = LocaleManager(this)
         localeManager.applySavedLocale()
+
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            gameSyncService = GameSyncService(this).also { service ->
+                service.initialize(currentUser.uid)
+            }
+        } else {
+            Log.w("MainActivity", "Skipping GameSyncService init; currentUser is null")
+        }
 
         // 1. Inflate UI overlay
         val overlay = LayoutInflater.from(this).inflate(R.layout.activity_main, null)
@@ -164,6 +173,7 @@ class MainActivity : UnityPlayerGameActivity() {
     override fun onDestroy() {
         // Clean up all Unity observers to prevent memory leaks
         components.observerCoordinator.unsubscribeAll()
+        gameSyncService?.cleanup()
         
         // Clean up FCM subscriptions if user is logging out
         // Note: Only cleanup on logout, not on normal activity destruction

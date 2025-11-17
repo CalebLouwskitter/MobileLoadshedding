@@ -5,7 +5,11 @@ import android.util.Log
 import com.google.gson.Gson
 import com.prog7314.IdleLoadsheddingMobile.core.UnityBridge
 import com.prog7314.IdleLoadsheddingMobile.data.local.AppDatabase
+import com.prog7314.IdleLoadsheddingMobile.data.local.entities.GameStateFull
+import com.prog7314.IdleLoadsheddingMobile.data.models.UnityCurrencySnapshot
+import com.prog7314.IdleLoadsheddingMobile.data.models.UnityHappinessSnapshot
 import com.prog7314.IdleLoadsheddingMobile.data.models.UnitySavePayload
+import com.prog7314.IdleLoadsheddingMobile.data.models.UnitySectionSnapshot
 import com.prog7314.IdleLoadsheddingMobile.data.models.UnityStatsSnapshot
 import com.prog7314.IdleLoadsheddingMobile.data.repository.GameStateRepository
 import com.prog7314.IdleLoadsheddingMobile.core.BackendClient
@@ -35,6 +39,7 @@ internal class GameSyncService(
     private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     
     private var currentPlayerId: String? = null
+    @Volatile private var lastUnityBroadcastVersion: Long? = null
     
     companion object {
         private const val TAG = "GameSyncService"
@@ -84,6 +89,7 @@ internal class GameSyncService(
                         "LoadGameState",
                         json
                     )
+                    lastUnityBroadcastVersion = gameState.gameState.lastModified?.time
                     
                     Log.d(TAG, "Game state sent to Unity")
                 } else {
@@ -101,7 +107,13 @@ internal class GameSyncService(
     private fun observeGameState(playerId: String) {
         serviceScope.launch {
             repository.getGameStateFlow(playerId).collectLatest { gameState ->
-                if (gameState?.gameState?.needsUpload == true) {
+                if (gameState == null) {
+                    return@collectLatest
+                }
+
+                maybeBroadcastUnityUpdate(gameState)
+
+                if (gameState.gameState.needsUpload) {
                     Log.d(TAG, "Game state needs upload, syncing with backend...")
                     syncWithBackend(playerId)
                 }
@@ -124,7 +136,8 @@ internal class GameSyncService(
                     playerId = playerId,
                     unityStats = stats,
                     generators = null, // Will be provided in onSaveSynced
-                    prestigeLevel = 0
+                    prestigeLevel = 0,
+                    statsJson = json
                 )
                 
                 Log.d(TAG, "Stats saved to Room database")
@@ -148,16 +161,31 @@ internal class GameSyncService(
                 val stats = if (savePayload.stats.isNotEmpty()) {
                     gson.fromJson(savePayload.stats, UnityStatsSnapshot::class.java)
                 } else {
-                    // Create default stats if not provided
-                    createDefaultStats()
+                    loadFallbackStats(playerId)
                 }
+
+                val currency = savePayload.currency
+                    .takeIf { it.isNotBlank() }
+                    ?.let { gson.fromJson(it, UnityCurrencySnapshot::class.java) }
+
+                val happiness = savePayload.happiness
+                    .takeIf { it.isNotBlank() }
+                    ?.let { gson.fromJson(it, UnityHappinessSnapshot::class.java) }
+
+                val sections = savePayload.sections
+                    .takeIf { it.isNotBlank() }
+                    ?.let { gson.fromJson(it, UnitySectionSnapshot::class.java) }
                 
                 // Save to Room database
                 repository.saveGameState(
                     playerId = playerId,
                     unityStats = stats,
                     generators = savePayload.generators,
-                    prestigeLevel = 0
+                    prestigeLevel = 0,
+                    currency = currency,
+                    happiness = happiness,
+                    sections = sections?.sections,
+                    statsJson = savePayload.stats.takeIf { it.isNotBlank() }
                 )
                 
                 Log.d(TAG, "Complete save data saved to Room database")
@@ -216,11 +244,37 @@ internal class GameSyncService(
             syncWithBackend(playerId)
         }
     }
+
+    private fun maybeBroadcastUnityUpdate(gameStateFull: GameStateFull) {
+        // Only broadcast when data originated externally (needsUpload == false),
+        // and ignore duplicate versions.
+        if (gameStateFull.gameState.needsUpload) {
+            return
+        }
+
+        val version = gameStateFull.gameState.lastModified?.time ?: return
+        if (lastUnityBroadcastVersion == version) {
+            return
+        }
+
+        lastUnityBroadcastVersion = version
+
+        val payload = repository.toUnitySavePayload(gameStateFull)
+        val json = gson.toJson(payload)
+        UnityBridge.sendJsonToUnity(
+            "AndroidUIManager",
+            "LoadGameState",
+            json
+        )
+        Log.d(TAG, "Broadcasted Room changes to Unity (version=$version)")
+    }
     
-    /**
-     * Create default stats snapshot when none is provided.
-     */
-    private fun createDefaultStats(): UnityStatsSnapshot {
+    private suspend fun loadFallbackStats(playerId: String): UnityStatsSnapshot {
+        val existing = repository.getGameState(playerId)
+        if (existing != null) {
+            return existing.toStatsSnapshot()
+        }
+
         return UnityStatsSnapshot(
             totalEnergyGenerated = 0.0,
             currentEnergy = 0.0,
@@ -235,6 +289,42 @@ internal class GameSyncService(
             hoursUntilMaintenance = 0.0,
             coreChargePercent = 0.0,
             districts = emptyList()
+        )
+    }
+
+    private fun GameStateFull.toStatsSnapshot(): UnityStatsSnapshot {
+        val storedJson = gameState.statsJson
+        if (!storedJson.isNullOrBlank()) {
+            runCatching { gson.fromJson(storedJson, UnityStatsSnapshot::class.java) }
+                .getOrNull()
+                ?.let { return it }
+        }
+
+        return UnityStatsSnapshot(
+            totalEnergyGenerated = gameState.totalEnergyGenerated,
+            currentEnergy = gameState.currentEnergy,
+            energyPerSecond = gameState.energyPerSecond,
+            activeGenerators = gameState.activeGenerators,
+            generatorLevelSum = gameState.generatorLevelSum,
+            offlineSeconds = gameState.offlineSeconds,
+            lastEventId = gameState.lastEventId,
+            timestampUtc = gameState.timestampUtc.time.toString(),
+            currentMoney = gameState.currentMoney,
+            totalMoneyEarned = gameState.totalMoneyEarned,
+            hoursUntilMaintenance = gameState.hoursUntilMaintenance,
+            coreChargePercent = gameState.coreChargePercent,
+            districts = districts.map { district ->
+                UnityStatsSnapshot.DistrictSnapshot(
+                    id = district.districtId,
+                    name = district.name,
+                    level = district.level,
+                    efficiency = district.efficiency,
+                    powerPerSecond = district.powerPerSecond,
+                    moneyPerSecond = district.moneyPerSecond,
+                    hoursUntilMaintenance = district.hoursUntilMaintenance,
+                    nextUpgradeCost = district.nextUpgradeCost
+                )
+            }
         )
     }
 }

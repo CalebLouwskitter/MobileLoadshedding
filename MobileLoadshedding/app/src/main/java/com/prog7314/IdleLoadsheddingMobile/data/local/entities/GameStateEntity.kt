@@ -22,6 +22,9 @@ data class GameStateEntity(
     val energyPerSecond: Double,
     val currentMoney: Double,
     val totalMoneyEarned: Double,
+        val statsJson: String?,
+    val currentHappiness: Double,
+    val totalHappinessPenalty: Double,
     
     // Game progress
     val activeGenerators: Int,

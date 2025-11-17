@@ -1,14 +1,9 @@
+@file:Suppress("unused")
+
 package com.prog7314.IdleLoadsheddingMobile.stub
 
-import androidx.appcompat.app.AppCompatActivity
-import android.util.Log
-
 /**
- * TEMPORARY STUB for UnityPlayerGameActivity - used during refactoring
- * Replace with real com.unity3d.player.UnityPlayerGameActivity when Unity integration is restored
+ * Legacy placeholder retained purely for documentation. The real Unity activity from
+ * `com.unity3d.player.UnityPlayerGameActivity` is now wired back in, so this stub intentionally
+ * has no implementation and should remain unused.
  */
-abstract class UnityPlayerGameActivity : AppCompatActivity() {
-    init {
-        Log.w("UnityPlayerGameActivity", "STUB: Using stub implementation - Unity integration disabled")
-    }
-}

@@ -2,6 +2,9 @@ package com.prog7314.IdleLoadsheddingMobile.data.models
 
 data class UnitySavePayload(
     val stats: String,
+    val currency: String = "",
+    val sections: String = "",
+    val happiness: String = "",
     val generators: List<GeneratorState>? = emptyList(),
     val timestampUtc: String,
     val districts: List<DistrictState>? = emptyList(),
@@ -20,6 +23,29 @@ data class UnitySavePayload(
 
     data class CentralState(
         val charge: Double
+    )
+}
+
+data class UnityCurrencySnapshot(
+    val currentMoney: Double = 0.0,
+    val totalMoneyEarned: Double = 0.0,
+    val timestampUtc: String = ""
+)
+
+data class UnityHappinessSnapshot(
+    val currentHappiness: Double = 0.0,
+    val totalPenalty: Double = 0.0,
+    val timestampUtc: String = ""
+)
+
+data class UnitySectionSnapshot(
+    val sections: List<SectionState> = emptyList(),
+    val timestampUtc: String = ""
+) {
+    data class SectionState(
+        val id: String,
+        val level: Int,
+        val isUnlocked: Boolean
     )
 }
 

@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.prog7314.IdleLoadsheddingMobile"
-        minSdk = 30
+        minSdk = 35
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -49,12 +49,17 @@ android {
         buildConfig = true
         viewBinding = true
     }
+
+    packaging {
+        jniLibs {
+            useLegacyPackaging = true
+        }
+    }
 }
 
 dependencies {
-    // Unity dependencies (temporarily disabled during refactoring)
-    // implementation(project(":unityLibrary"))
-    // implementation(files("../unityLibrary/libs/unity-classes.jar"))
+    implementation(project(":unityLibrary"))
+    implementation(files("../unityLibrary/libs/unity-classes.jar"))
     
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
