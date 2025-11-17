@@ -60,11 +60,17 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/auth_primary" />
-        
+
         <!-- Notification channel configuration -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
+
+        <!--AdMob meta-data-->
+        <!--Sample app id needs to be changed to the AdMob ID-->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544/5224354917" />
     </application>
 
 </manifest>

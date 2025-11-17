@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="app_name" translatable="false">MobileLoadshedding</string>
+    <string name="default_web_client_id" translatable="false">41587024325-gt1n0vaejub9dme7cvidievg5kcktbmp.apps.googleusercontent.com</string>
+
+    <string name="hud_energy_per_second_format" translatable="false">%1$s /s</string>
+    <string name="hud_generators_format">%1$d dzigandzisi (Lv %2$d)</string>
+    <string name="hud_safe_idle_format">Nako ya u awela: %1$s</string>
+    <string name="hud_event_active">Tshiga: %1$s (x%2$.2f)</string>
+    <string name="hud_event_inactive">A huna tshiga tsho shumaho</string>
+    <string name="leaderboard_last_updated">Ho fhedzwaho u khwinifhadzwa %1$s</string>
+    <string name="friends_last_updated">Ho khwinifhadzwa %1$s</string>
+    <string name="profile_energy_total">Muthihi wo bveledzwaho: %1$s</string>
+    <string name="profile_energy_per_second">Bveledzo: %1$s /s</string>
+    <string name="profile_generators_count">Dzigandzisi dzi tshi shuma: %1$d</string>
+    <string name="profile_offline_time">Ndi zwa u bveledza musi ni si kha Inthanethe: %1$s</string>
+    <string name="profile_last_sync">Ho khwinifhadzwa u fhedza: %1$s</string>
+    <string name="tasks_empty">A huna tshiga tsho thomiwaho</string>
+    <string name="tasks_event_active">%1$s • Tsho Shuma</string>
+    <string name="tasks_event_inactive">%1$s • Tsho Fhedzwa</string>
+    <string name="tasks_event_multiplier">Mubebi x%1$.2f</string>
+    <string name="tasks_event_duration">Nako %1$s</string>
+    <string name="timestamp_unknown" translatable="false">--</string>
+    <string name="friend_placeholder_name">Muthannga %1$s</string>
+    <string name="electricity_current_energy">Muroho wa zwino: %1$s</string>
+    <string name="electricity_production">Bveledzo: %1$s /s</string>
+    <string name="electricity_generators">Dzigandzisi: %1$d (Lv %2$d)</string>
+    <string name="electricity_currency">Tshelede ya Muroho: %1$s</string>
+    <string name="electricity_offline">U bveledza musi ni si kha Inthanethe: %1$s</string>
+    <string name="electricity_safe_idle">Nako ya u awela: %1$s</string>
+    <string name="electricity_core_charge">Core charge: %1$d%%</string>
+    <string name="electricity_last_event">Tshiga tsha u fhedza: %1$s</string>
+    <string name="electricity_last_save">U vhulunga ho fhedza: %1$s</string>
+    <string name="districts_empty">A huna vhuvhinduni ho no wanalaho</string>
+    <string name="district_level_format">Nḓila %1$d</string>
+    <string name="district_output_format">%1$s muraḓo /s • %2$s tshikhao/s</string>
+    <string name="district_efficiency_format">%1$d%% mushumo</string>
+    <string name="district_idle_time_format">Ho tsireledzwa lwa %1$s</string>
+    <string name="district_upgrade_cost_format">Khwinifhadzani (%1$s)</string>
+    <string name="district_upgrade_maxed">Nḓila yo fhedzelaho</string>
+    <string name="toast_friend_invite_sent">Mbebo ya muthannga yo rumelwa</string>
+    <string name="toast_friend_code_empty">Thayani khodi ya muthannga</string>
+    <string name="toast_logout_placeholder">U bva (placeholder)</string>
+    <string name="toast_friend_code_copied">Khodi ya muthannga yo kopiwa</string>
+    <string name="toast_save_uploaded">U vhulunga ho rumelwaho zwavhuḓi</string>
+    <string name="toast_save_synced">U vhulunga ho sinikiswa zwavhuḓi</string>
+    <string name="profile_friend_code_label">Khodi Ya Muthannga</string>
+    <string name="profile_tag_active">⚡ TSHO SHUMA</string>
+    <string name="profile_tag_veteran">🏆 MUTSHIFHI</string>
+    <string name="profile_tag_newbie">🌟 MUSWA</string>
+    <string name="friends_empty_message">A huna vhathu vha u dala.\nDelani Khodi ya Muthannga u wana vhaṅwe!</string>
+    <string name="friends_error_message">Ro kundelwa u dzhenisa mutevhe wa vhathu.\nLavhelesani thendelano yaṋu nahone lingedzani hafhu.</string>
+    <string name="settings_language_changed">Luambo lu shanduka. Thomani app hafhu u shumisa tshanduko.</string>
+    <string name="settings_language_label">Luambo</string>
+    <string name="settings_theme_label">Muthelo</string>
+    <string name="settings_save_management_label">Vhulungo ha u Vhulunga</string>
+
+    <!-- Auth -->
+    <string name="auth_header_title">Idle Loadshedding</string>
+    <string name="auth_header_subtitle">Vhumbani akhaunti kana ingedzani u bvela phanda na mutambo.</string>
+    <string name="auth_login_title">Ingedzani</string>
+    <string name="auth_login_subtitle">Thomani zwino</string>
+    <string name="auth_signup_title">Vhumbani Akhaunti</string>
+    <string name="auth_signup_subtitle">Vhumbani akhaunti yanu</string>
+    <string name="auth_toggle_login">Ingedzani</string>
+    <string name="auth_toggle_signup">Vhumbani Akhaunti</string>
+    <string name="auth_email_hint">Email</string>
+    <string name="auth_password_hint">Phasiwede</string>
+    <string name="auth_confirm_password_hint">Khwaṱhisedzani Phasiwede</string>
+    <string name="auth_remember_me">Ndi humbule</string>
+    <string name="auth_forgot_password">Ni hangwele Phasiwede?</string>
+    <string name="auth_primary_cta_login">Ingedzani</string>
+    <string name="auth_primary_cta_signup">Vhumbani</string>
+    <string name="auth_google_cta">Bvelani phanda nga Google</string>
+    <string name="auth_biometric_login">Ingedzani nga Biometrics</string>
+    <string name="auth_or_label">Kana</string>
+    <string name="auth_already_signed">No no Vhumbani Akhaunti?</string>
+
+    <!-- Profile Edit -->
+    <string name="profile_edit_title">Khwinifhadzani Profaili</string>
+    <string name="profile_edit_nickname">Dzina ḽa u Vhidzwa</string>
+    <string name="profile_edit_nickname_hint">Dzina ḽa u Vhidzwa lanṋu</string>
+    <string name="profile_edit_email">Email</string>
+    <string name="profile_edit_save">Vhulungani Tshanduko</string>
+    <string name="profile_edit_cancel">Fhelisani</string>
+    <string name="toast_profile_updated">Profaili yo khwinifhadzwa zwavhuḓi</string>
+    <string name="toast_profile_update_failed">Profaili a yo ngo khwinifhadzwa</string>
+    <string name="toast_nickname_empty">Thayani dzina ḽa u vhidzwa</string>
+    <string name="settings_panel_title">Nzudzanyo</string>
+    <string name="btn_upload_save">RUMELANI VHULUNGO CLOUDANI</string>
+    <string name="btn_sync_save">SINIKISANI VHULUNGO NA CLOUD</string>
+    <string name="text_last_save_sync_default">Ho sinikiswa u fhedza: --</string>
+    <string name="btn_logout">BVA</string>
+    <string name="toast_logout_success">No bva zwavhuḓi</string>
+    <string name="logout_confirmation_title">Bva</string>
+    <string name="logout_confirmation_message">Ni na vhuṱanzi ha u da u bva? Vhupfi haṋu vhu vhulungiwa kha cloud.</string>
+    <string name="logout_confirm_yes">Bva</string>
+    <string name="logout_confirm_no">Fhelisani</string>
+
+    <!-- Push Notifications -->
+    <string name="default_notification_channel_id" translatable="false">idle_loadshedding_default</string>
+    <string name="notification_channel_default_name">Zwithu zwa Tshikirini</string>
+    <string name="notification_channel_events_name">Tshikirini tsha Tshiga</string>
+    <string name="notification_channel_friends_name">Tshikirini tsha Muthannga</string>
+    <string name="notification_channel_system_name">Tshikirini tsha Sisitemu</string>
+
+    <!-- Accessibility -->
+    <string name="accessibility_close">Valani modal</string>
+    <string name="accessibility_back">Dzhiani murahu</string>
+    <string name="accessibility_tab">Tab, %1$s</string>
+    <string name="accessibility_toggle">Shandukisani, %1$s</string>
+    <string name="accessibility_profile_avatar">Avatar ya profaili</string>
+    <string name="accessibility_rank_badge">Bheji ḽa muthetho</string>
+</resources>
