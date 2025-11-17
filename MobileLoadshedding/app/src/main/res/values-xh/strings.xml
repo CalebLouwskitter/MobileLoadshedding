@@ -105,4 +105,12 @@
     <string name="logout_confirmation_message">Uqinisekile ukuba ufuna ukuphuma? Inkqubela yakho igcinwe kwifayile.</string>
     <string name="logout_confirm_yes">Phuma</string>
     <string name="logout_confirm_no">Rhoxisa</string>
+
+    <!-- HUD / Navigation labels -->
+    <string name="hud_energy_label">Iikhredithi Zamandla</string>
+    <string name="nav_level_up">Amanqanaba Aphezulu</string>
+    <string name="nav_power">Amandla</string>
+    <string name="nav_tasks">Imisebenzi</string>
+    <string name="hud_upgrades_content_description">Uhlaziyo</string>
+    <string name="hud_profile_content_description">Iprofayile</string>
 </resources>

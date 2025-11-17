@@ -110,4 +110,12 @@
     <string name="accessibility_toggle">Toggle, %1$s</string>
     <string name="accessibility_profile_avatar">Profile avatar</string>
     <string name="accessibility_rank_badge">Rank badge</string>
+
+    <!-- HUD / Navigation labels -->
+    <string name="hud_energy_label">Energy Credits</string>
+    <string name="nav_level_up">Level Ups</string>
+    <string name="nav_power">Power</string>
+    <string name="nav_tasks">Tasks</string>
+    <string name="hud_upgrades_content_description">Upgrades</string>
+    <string name="hud_profile_content_description">Profile</string>
 </resources>
