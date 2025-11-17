@@ -7,8 +7,14 @@
     "node": "20"
   },
   "scripts": {
-    "deploy": "firebase deploy --only functions:triggerNotification",
+    "deploy": "firebase deploy --only functions",
+    "deploy:single": "firebase deploy --only functions:triggerNotification",
+    "deploy:events": "firebase deploy --only functions:sendEventStarted,functions:sendEventEndingSoon",
+    "deploy:friends": "firebase deploy --only functions:sendFriendRequest,functions:sendFriendAccepted",
+    "deploy:system": "firebase deploy --only functions:sendMaintenanceNotification,functions:sendSystemAnnouncement,functions:sendGeneralNotification",
+    "deploy:game": "firebase deploy --only functions:sendLeaderboardUpdate,functions:sendEnergyMilestone,functions:sendOfflineEarningsReady",
     "serve": "firebase emulators:start --only functions",
+    "test": "node test-notifications.js",
     "lint": "npx eslint . || echo 'Add ESLint if desired'"
   },
   "dependencies": {

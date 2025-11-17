@@ -13,13 +13,14 @@
     
     <!-- Locale codes map 1:1 to settings_languages by index.
          These get passed to Locale constructors when user changes language.
-         Empty string = default (English), rest are standard ISO 639-1 codes. -->
+         Empty string = explicit English fallback handled in LocaleManager, rest are ISO 639-1 codes. -->
     <string-array name="language_codes">
         <item></item>        <!-- English (default) -->
         <item>af</item>     <!-- Afrikaans -->
         <item>zu</item>     <!-- isiZulu -->
         <item>xh</item>     <!-- isiXhosa -->
         <item>st</item>     <!-- Sesotho -->
+        <item>ve</item>     <!-- Venda -->
     </string-array>
     
     <string-array name="settings_themes">

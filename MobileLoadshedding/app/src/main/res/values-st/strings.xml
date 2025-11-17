@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MobileLoadshedding</string>
-    <string name="hud_energy_per_second_format">%1$s /s</string>
+    <string name="timestamp_unknown" translatable="false">--</string>
+    <string name="app_name" translatable="false">MobileLoadshedding</string>
+    <string name="default_web_client_id" translatable="false">41587024325-gt1n0vaejub9dme7cvidievg5kcktbmp.apps.googleusercontent.com</string>
+    <string name="hud_energy_per_second_format" translatable="false">%1$s /s</string>
     <string name="hud_generators_format">%1$d dijeneretara (Lv %2$d)</string>
     <string name="hud_safe_idle_format">Tshireletseho: %1$s</string>
     <string name="hud_event_active">Ketsahalo: %1$s (x%2$.2f)</string>
@@ -18,7 +20,6 @@
     <string name="tasks_event_inactive">%1$s • E phethilwe</string>
     <string name="tasks_event_multiplier">Seatadi x%1$.2f</string>
     <string name="tasks_event_duration">Nako %1$s</string>
-    <string name="timestamp_unknown">--</string>
     <string name="friend_placeholder_name">Motswalle %1$s</string>
     <string name="electricity_current_energy">Matla a hona joale: %1$s</string>
     <string name="electricity_production">Tlhahiso: %1$s /s</string>
@@ -49,7 +50,6 @@
     <string name="friends_empty_message">Ha hona metswalle e kentseng hajoale.\nAbelana ka khoutu ya hao ya motswalle ho hokahana!</string>
     <string name="friends_error_message">Ha e kgone ho laisa lenane la metswalle.\nHlahloba kgokahano ya hao mme o leke hape.</string>
     <string name="auth_biometric_login">Kena ka Biometrics</string>
-    <string name="default_notification_channel_id">idle_loadshedding_default</string>
     <string name="notification_channel_default_name">Ditsebiso Tsa Kakaretso</string>
     <string name="notification_channel_events_name">Ditsebiso Tsa Diketsahalo</string>
     <string name="notification_channel_friends_name">Ditsebiso Tsa Metswalle</string>

@@ -241,38 +241,52 @@ class PanelCoordinator(
         }
         
         panelView.findViewById<View>(com.prog7314.IdleLoadsheddingMobile.R.id.btn_test_event_started)?.setOnClickListener {
-            val success = NotificationSimulator.simulateEventStarted(context)
-            logResult(success, "Event Started simulated")
+            logResult(false, "⏳ Sending to Firebase...")
+            FirebaseCloudMessenger.sendCloudNotification(NotificationType.EVENT_STARTED) { success, message ->
+                logResult(success, message)
+            }
         }
         
         panelView.findViewById<View>(com.prog7314.IdleLoadsheddingMobile.R.id.btn_test_event_ending_soon)?.setOnClickListener {
-            val success = NotificationSimulator.simulateEventEndingSoon(context)
-            logResult(success, "Event Ending Soon simulated")
+            logResult(false, "⏳ Sending to Firebase...")
+            FirebaseCloudMessenger.sendCloudNotification(NotificationType.EVENT_ENDING_SOON) { success, message ->
+                logResult(success, message)
+            }
         }
         
         panelView.findViewById<View>(com.prog7314.IdleLoadsheddingMobile.R.id.btn_test_friend_request)?.setOnClickListener {
-            val success = NotificationSimulator.simulateFriendRequest(context)
-            logResult(success, "Friend Request simulated")
+            logResult(false, "⏳ Sending to Firebase...")
+            FirebaseCloudMessenger.sendCloudNotification(NotificationType.FRIEND_REQUEST) { success, message ->
+                logResult(success, message)
+            }
         }
         
         panelView.findViewById<View>(com.prog7314.IdleLoadsheddingMobile.R.id.btn_test_friend_accepted)?.setOnClickListener {
-            val success = NotificationSimulator.simulateFriendAccepted(context)
-            logResult(success, "Friend Accepted simulated")
+            logResult(false, "⏳ Sending to Firebase...")
+            FirebaseCloudMessenger.sendCloudNotification(NotificationType.FRIEND_ACCEPTED) { success, message ->
+                logResult(success, message)
+            }
         }
         
         panelView.findViewById<View>(com.prog7314.IdleLoadsheddingMobile.R.id.btn_test_system_announcement)?.setOnClickListener {
-            val success = NotificationSimulator.simulateSystemAnnouncement(context)
-            logResult(success, "System Announcement simulated")
+            logResult(false, "⏳ Sending to Firebase...")
+            FirebaseCloudMessenger.sendCloudNotification(NotificationType.SYSTEM_ANNOUNCEMENT) { success, message ->
+                logResult(success, message)
+            }
         }
         
         panelView.findViewById<View>(com.prog7314.IdleLoadsheddingMobile.R.id.btn_test_maintenance)?.setOnClickListener {
-            val success = NotificationSimulator.simulateMaintenanceRequired(context)
-            logResult(success, "Maintenance simulated")
+            logResult(false, "⏳ Sending to Firebase...")
+            FirebaseCloudMessenger.sendCloudNotification(NotificationType.MAINTENANCE_REQUIRED) { success, message ->
+                logResult(success, message)
+            }
         }
         
         panelView.findViewById<View>(com.prog7314.IdleLoadsheddingMobile.R.id.btn_test_general)?.setOnClickListener {
-            val success = NotificationSimulator.simulateGeneral(context)
-            logResult(success, "General notification simulated")
+            logResult(false, "⏳ Sending to Firebase...")
+            FirebaseCloudMessenger.sendCloudNotification(NotificationType.GENERAL) { success, message ->
+                logResult(success, message)
+            }
         }
 
         panelView.findViewById<View>(R.id.btn_request_notification_permission)?.setOnClickListener {

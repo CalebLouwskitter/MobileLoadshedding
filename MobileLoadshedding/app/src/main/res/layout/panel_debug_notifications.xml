@@ -1,262 +1,406 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/modal_background_utility"
-    android:padding="@dimen/panel_padding_horizontal">
+    android:background="@color/modal_background_red"
+    android:paddingStart="@dimen/panel_padding_horizontal"
+    android:paddingEnd="@dimen/panel_padding_horizontal"
+    android:paddingTop="@dimen/panel_padding_horizontal"
+    android:paddingBottom="@dimen/panel_padding_horizontal">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Header -->
-        <TextView
+        <!-- Hero Card -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="🔔 Push Notification Tester"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@color/modal_text_dark_blue"
-            android:gravity="center"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/modal_background_red"
+            app:strokeColor="@color/modal_header_primary"
+            app:strokeWidth="1dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tap any button to simulate a push notification"
-            android:textSize="14sp"
-            android:textColor="@color/modal_text_on_light_tertiary"
-            android:gravity="center"
-            android:layout_marginBottom="24dp" />
-
-        <!-- Status + Action Section -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="✅ Presentation Checklist"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/modal_text_dark_blue"
-            android:layout_marginBottom="8dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/modal_panel_surface"
-            android:padding="12dp"
-            android:layout_marginBottom="12dp">
-
-            <TextView
-                android:id="@+id/text_status_permission"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="• Checking notification permission..."
-                android:textColor="@color/modal_text_on_light"
-                android:textSize="14sp"
-                android:layout_marginBottom="4dp" />
+                android:orientation="vertical"
+                android:padding="20dp">
 
-            <TextView
-                android:id="@+id/text_status_token"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=" Notification Studio"
+                    android:textColor="@color/auth_header_text"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="6dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Preview exactly what players see before sending anything live."
+                    android:textColor="@color/modal_text_on_accent"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Use the cards below to grant permissions, refresh tokens, and simulate every state the app supports."
+                        android:textColor="@color/modal_text_on_accent"
+                    android:textSize="12sp"
+                    android:lineSpacingMultiplier="1.1" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Checklist Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/modal_background_red"
+            app:strokeColor="@color/modal_header_primary"
+            app:strokeWidth="0.5dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="• Checking FCM token..."
-                android:textColor="@color/modal_text_on_light"
-                android:textSize="14sp"
-                android:layout_marginBottom="4dp" />
+                android:orientation="vertical"
+                android:padding="18dp">
 
-            <TextView
-                android:id="@+id/text_status_backend"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=" Readiness checklist"
+                    android:textColor="@color/auth_header_text"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="12dp" />
+
+                <TextView
+                    android:id="@+id/text_status_permission"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/modal_header_primary"
+                    android:padding="12dp"
+                    android:text="Notification permission: checking..."
+                    android:textColor="@color/auth_header_text"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/text_status_token"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/modal_header_primary"
+                    android:padding="12dp"
+                    android:text="FCM token: checking..."
+                    android:textColor="@color/auth_header_text"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/text_status_backend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/modal_header_primary"
+                    android:padding="12dp"
+                    android:text="Backend sync: checking..."
+                    android:textColor="@color/auth_header_text"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_marginBottom="12dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_request_notification_permission"
+                        style="@style/Widget.MaterialComponents.Button"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Grant permission"
+                        android:textAllCaps="false"
+                        android:backgroundTint="@color/modal_button_secondary"
+                        android:textColor="@android:color/white"
+                        android:layout_marginEnd="8dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_force_token_refresh"
+                        style="@style/Widget.MaterialComponents.Button"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Sync token"
+                        android:textAllCaps="false"
+                        android:backgroundTint="@color/modal_button_primary"
+                        android:textColor="@android:color/white" />
+                </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_open_notification_settings"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Open Android notification settings"
+                    android:textAllCaps="false"
+                    android:textColor="@color/auth_header_text"
+                    android:layout_marginBottom="16dp"
+                    android:backgroundTint="@android:color/transparent" />
+
+                <TextView
+                    android:id="@+id/text_last_notification_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Last simulation: --"
+                    android:textColor="@color/auth_header_text"
+                    android:textSize="14sp"
+                    android:background="@color/modal_header_primary"
+                    android:padding="12dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Cloud Broadcast Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/modal_background_red"
+            app:strokeColor="@color/modal_header_primary"
+            app:strokeWidth="0.5dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="• Syncing with backend..."
-                android:textColor="@color/modal_text_on_light"
-                android:textSize="14sp" />
-        </LinearLayout>
+                android:orientation="vertical"
+                android:padding="18dp">
 
-        <LinearLayout
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=" Firebase cloud broadcast"
+                    android:textColor="@color/auth_header_text"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="12dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Send a full round-trip test through Firebase before presenting to users."
+                    android:textColor="@color/modal_text_on_accent"
+                    android:textSize="13sp"
+                    android:layout_marginBottom="12dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_send_cloud_notification"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Send event started"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@color/modal_button_accent"
+                    android:textColor="@android:color/white"
+                    android:layout_marginBottom="12dp" />
+
+                <TextView
+                    android:id="@+id/text_cloud_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cloud status: waiting"
+                    android:textColor="@color/auth_header_text"
+                    android:textSize="14sp"
+                    android:background="@color/modal_header_primary"
+                    android:padding="12dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Event Notifications Card -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2"
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/modal_background_red"
+            app:strokeColor="@color/modal_header_primary"
+            app:strokeWidth="0.5dp">
 
-            <Button
-                android:id="@+id/btn_request_notification_permission"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Grant Permission"
-                android:textAllCaps="false"
-                android:backgroundTint="@color/modal_button_secondary"
-                android:layout_marginEnd="8dp" />
+                android:orientation="vertical"
+                android:padding="18dp">
 
-            <Button
-                android:id="@+id/btn_force_token_refresh"
-                android:layout_width="0dp"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Event alerts"
+                    android:textColor="@color/auth_header_text"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="12dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_test_event_started"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=" Event started"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@color/modal_button_primary"
+                    android:textColor="@android:color/white"
+                    android:layout_marginBottom="8dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_test_event_ending_soon"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Event ending soon"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@color/modal_button_warning"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Friend Notifications Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/modal_background_red"
+            app:strokeColor="@color/modal_header_primary"
+            app:strokeWidth="0.5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Sync Token"
-                android:textAllCaps="false"
-                android:backgroundTint="@color/modal_button_primary" />
-        </LinearLayout>
+                android:orientation="vertical"
+                android:padding="18dp">
 
-        <Button
-            android:id="@+id/btn_open_notification_settings"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="👥 Friend updates"
+                    android:textColor="@color/auth_header_text"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="12dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_test_friend_request"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Friend request"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@color/modal_button_secondary"
+                    android:textColor="@android:color/white"
+                    android:layout_marginBottom="8dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_test_friend_accepted"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=" Friend accepted"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@color/modal_button_primary"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- System Notifications Card -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Open Android Notification Settings"
-            android:textAllCaps="false"
-            android:backgroundTint="@color/modal_button_info"
-            android:layout_marginBottom="24dp" />
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/modal_background_red"
+            app:strokeColor="@color/modal_header_primary"
+            app:strokeWidth="0.5dp">
 
-        <TextView
-            android:id="@+id/text_last_notification_result"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Last simulation: --"
-            android:textSize="14sp"
-            android:textColor="@color/modal_text_dark_blue"
-            android:background="@color/modal_panel_surface"
-            android:padding="12dp"
-            android:layout_marginBottom="24dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="18dp">
 
-        <!-- Cloud Broadcast Section -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="☁️ Firebase Cloud Broadcast"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/modal_text_dark_blue"
-            android:layout_marginBottom="12dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="System notices"
+                    android:textColor="@color/auth_header_text"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="12dp" />
 
-        <Button
-            android:id="@+id/btn_send_cloud_notification"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Send Event Started via Firebase"
-            android:textAllCaps="false"
-            android:backgroundTint="@color/modal_button_accent"
-            android:layout_marginBottom="8dp" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_test_system_announcement"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="System announcement"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@color/modal_button_info"
+                    android:textColor="@android:color/white"
+                    android:layout_marginBottom="8dp" />
 
-        <TextView
-            android:id="@+id/text_cloud_result"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Cloud status: waiting"
-            android:textSize="14sp"
-            android:textColor="@color/modal_text_on_light"
-            android:background="@color/modal_panel_surface"
-            android:padding="12dp"
-            android:layout_marginBottom="24dp" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_test_maintenance"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Maintenance required"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@color/modal_button_danger"
+                    android:textColor="@android:color/white"
+                    android:layout_marginBottom="8dp" />
 
-        <!-- Event Notifications Section -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="📅 Event Notifications"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/modal_text_dark_blue"
-            android:layout_marginBottom="12dp" />
-
-        <Button
-            android:id="@+id/btn_test_event_started"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="🎉 Event Started"
-            android:textAllCaps="false"
-            android:backgroundTint="@color/modal_button_primary"
-            android:layout_marginBottom="8dp" />
-
-        <Button
-            android:id="@+id/btn_test_event_ending_soon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="⏰ Event Ending Soon"
-            android:textAllCaps="false"
-            android:backgroundTint="@color/modal_button_warning"
-            android:layout_marginBottom="24dp" />
-
-        <!-- Friend Notifications Section -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="👥 Friend Notifications"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/modal_text_dark_blue"
-            android:layout_marginBottom="12dp" />
-
-        <Button
-            android:id="@+id/btn_test_friend_request"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="👋 Friend Request"
-            android:textAllCaps="false"
-            android:backgroundTint="@color/modal_button_secondary"
-            android:layout_marginBottom="8dp" />
-
-        <Button
-            android:id="@+id/btn_test_friend_accepted"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="✅ Friend Accepted"
-            android:textAllCaps="false"
-            android:backgroundTint="@color/modal_button_primary"
-            android:layout_marginBottom="24dp" />
-
-        <!-- System Notifications Section -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="⚙️ System Notifications"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/modal_text_dark_blue"
-            android:layout_marginBottom="12dp" />
-
-        <Button
-            android:id="@+id/btn_test_system_announcement"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="📢 System Announcement"
-            android:textAllCaps="false"
-            android:backgroundTint="@color/modal_button_purple"
-            android:layout_marginBottom="8dp" />
-
-        <Button
-            android:id="@+id/btn_test_maintenance"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="🔧 Maintenance Required"
-            android:textAllCaps="false"
-            android:backgroundTint="@color/modal_button_danger"
-            android:layout_marginBottom="8dp" />
-
-        <Button
-            android:id="@+id/btn_test_general"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="📬 General Notification"
-            android:textAllCaps="false"
-            android:backgroundTint="@color/modal_button_info"
-            android:layout_marginBottom="24dp" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_test_general"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="General notification"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@color/modal_button_info"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <!-- Info Section -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ℹ️ These notifications will simulate incoming FCM messages and test the notification routing system."
+            android:text="Simulations stay on-device and help you validate layouts, sounds, and navigation without needing staging traffic."
             android:textSize="12sp"
-            android:textColor="@color/modal_info_text"
+            android:textColor="@color/auth_header_text"
             android:textStyle="italic"
             android:gravity="center"
             android:padding="@dimen/panel_padding_horizontal"
-            android:background="@color/modal_info_background"
-            android:layout_marginTop="8dp" />
+            android:background="@color/modal_header_primary"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="4dp" />
 
     </LinearLayout>
 </ScrollView>

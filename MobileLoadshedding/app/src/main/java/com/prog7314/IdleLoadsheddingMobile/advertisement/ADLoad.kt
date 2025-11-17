@@ -1,18 +1,19 @@
 package com.prog7314.IdleLoadsheddingMobile.advertisement
 
 import android.app.Activity
-import android.content.Context
 import android.util.Log
-import com.google.android.gms.ads.AdError
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.FullScreenContentCallback
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.OnUserEarnedRewardListener
-import com.google.android.gms.ads.rewarded.RewardItem
-import com.google.android.gms.ads.rewarded.RewardedAd
-import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
-import com.google.android.gms.ads.MobileAds
-import com.google.android.gms.ads.RequestConfiguration
+import com.google.android.gms.ads.AdError //Google, 2025
+import com.google.android.gms.ads.AdRequest //Google, 2025
+import com.google.android.gms.ads.FullScreenContentCallback //Google, 2025
+import com.google.android.gms.ads.LoadAdError //Google, 2025
+import com.google.android.gms.ads.OnUserEarnedRewardListener //Google, 2025
+import com.google.android.gms.ads.rewarded.RewardItem //Google, 2025
+import com.google.android.gms.ads.rewarded.RewardedAd //Google, 2025
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback //Google, 2025
+import com.google.android.gms.ads.MobileAds //Google, 2025
+import com.google.android.gms.ads.RequestConfiguration //Google, 2025
+
+private val adUnitIdl = "ca-app-pub-3940256099942544/5224354917"
 
 class ADLoad(private val activity: Activity) {
 
@@ -38,7 +39,7 @@ class ADLoad(private val activity: Activity) {
         )
     }
 
-    fun showRewardAds(afterCodeRewardCoin: (RewardItem) -> Unit){
+    fun showRewardAd(afterCodeRewardCoin: (RewardItem) -> Unit){
         if(rewardedAd != null){
             rewardedAd!!.fullScreenContentCallback = object : FullScreenContentCallback(){
                 override fun onAdDismissedFullScreenContent() {
@@ -59,15 +60,4 @@ class ADLoad(private val activity: Activity) {
             Log.d("ADVERTLOADER", "showRewardAds: Rewarded AD Null ")
         }
     }
-
-    final val adUnitIdl = "ca-app-pub-3940256099942544/5224354917"
-
 }
-/*
-* References:
-* Coding-Meet (2023). Google-Admob-Integration-App. [online] GitHub. Available at: https://github.com/Coding-Meet/Google-Admob-Integration-App.git [Accessed 25 Oct. 2023].
-* Google Developers (2023a). Get Started | Android. [online] Google for Developers. Available at: https://developers.google.com/admob/android/quick-start [Accessed 25 Oct. 2023].
-* Google Developers (2023b). Rewarded Ads | Android. [online] Google for Developers. Available at: https://developers.google.com/admob/android/rewarded#kotlin_1 [Accessed 25 Oct. 2023].
-* Google LLC (2023). googleads-mobile-android-examples. [online] GitHub. Available at: https://github.com/googleads/googleads-mobile-android-examples.kt [Accessed 25 Oct. 2023].
-* hall9zeha (2022). AdvertisementsApp. [online] GitHub. Available at: https://github.com/hall9zeha/AdvertisementsApp.git [Accessed 25 Oct. 2023].
-*/

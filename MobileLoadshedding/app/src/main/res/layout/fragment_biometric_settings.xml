@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/auth_background"
+    android:background="@color/modal_background_red"
     android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,34 +33,62 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <!-- Title -->
-            <TextView
-                android:id="@+id/textTitle"
+            <!-- Header Card -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Biometric Authentication"
-                android:textColor="@color/auth_title"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/modal_panel_red_center"
+                app:strokeColor="@color/modal_header_primary"
+                app:strokeWidth="1dp">
 
-            <!-- Subtitle -->
-            <TextView
-                android:id="@+id/textSubtitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Manage biometric login settings for your account"
-                android:textColor="@color/auth_body"
-                android:textSize="14sp"
-                android:layout_marginBottom="24dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/textTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Stay secure with biometrics"
+                        android:textColor="@color/auth_header_text"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="6dp" />
+
+                    <TextView
+                        android:id="@+id/textSubtitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Skip typing your password on trusted devices by using fingerprint or face unlock."
+                        android:textColor="@color/auth_subtitle_text"
+                        android:textSize="14sp"
+                        android:layout_marginBottom="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Your biometric data never leaves the device. You can switch it off any time if you misplace your phone."
+                        android:textColor="@color/modal_text_on_accent"
+                        android:textSize="12sp"
+                        android:lineSpacingMultiplier="1.2" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- Enable/Disable Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="2dp">
+                app:cardCornerRadius="12dp"
+                app:cardElevation="1dp"
+                app:cardBackgroundColor="@color/modal_panel_red_center"
+                app:strokeColor="@color/modal_header_primary"
+                app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -79,8 +107,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Enable Biometric Login"
-                            android:textColor="@color/auth_title"
+                            android:text="Enable biometric login"
+                            android:textColor="@color/auth_header_text"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -90,15 +118,31 @@
                             android:layout_height="wrap_content" />
                     </LinearLayout>
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Keep this on for devices you trust. We’ll remind you to re-verify if your device changes."
+                        android:textColor="@color/auth_subtitle_text"
+                        android:textSize="12sp"
+                        android:layout_marginTop="6dp"
+                        android:lineSpacingMultiplier="1.1" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="12dp"
+                        app:dividerColor="@color/auth_header_text"
+                        app:dividerThickness="1dp" />
+
                     <!-- Status Text -->
                     <TextView
                         android:id="@+id/textStatus"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
                         android:text="Biometric authentication is disabled"
-                        android:textColor="@color/auth_body"
-                        android:textSize="14sp" />
+                        android:textColor="@color/auth_header_text"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -107,8 +151,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="2dp">
+                app:cardCornerRadius="12dp"
+                app:cardElevation="1dp"
+                app:cardBackgroundColor="@color/modal_panel_red_center"
+                app:strokeColor="@color/modal_header_primary"
+                app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -119,8 +166,8 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Status Information"
-                        android:textColor="@color/auth_title"
+                        android:text="Account status"
+                        android:textColor="@color/auth_header_text"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:layout_marginBottom="12dp" />
@@ -130,13 +177,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginBottom="8dp">
+                        android:layout_marginBottom="8dp"
+                        android:gravity="center_vertical">
 
                         <TextView
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
-                            android:text="User:"
-                            android:textColor="@color/auth_body"
+                            android:text="Signed in as"
+                            android:textColor="@color/auth_subtitle_text"
                             android:textSize="14sp" />
 
                         <TextView
@@ -145,21 +193,24 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="No user configured"
-                            android:textColor="@color/auth_title"
-                            android:textSize="14sp" />
+                            android:textColor="@color/auth_header_text"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <!-- Hardware Status -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="8dp"
+                        android:gravity="center_vertical">
 
                         <TextView
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
-                            android:text="Hardware:"
-                            android:textColor="@color/auth_body"
+                            android:text="Device support"
+                            android:textColor="@color/auth_subtitle_text"
                             android:textSize="14sp" />
 
                         <TextView
@@ -168,9 +219,18 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Checking..."
-                            android:textColor="@color/auth_title"
-                            android:textSize="14sp" />
+                            android:textColor="@color/auth_header_text"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="We validate your biometrics using the secure hardware on this device."
+                        android:textColor="@color/auth_subtitle_text"
+                        android:textSize="12sp"
+                        android:lineSpacingMultiplier="1.1" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -178,8 +238,12 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="2dp">
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="1dp"
+                app:cardBackgroundColor="@color/modal_panel_red_center"
+                app:strokeColor="@color/modal_header_primary"
+                app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -190,8 +254,8 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Actions"
-                        android:textColor="@color/auth_title"
+                        android:text="Quick actions"
+                        android:textColor="@color/auth_header_text"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:layout_marginBottom="12dp" />
@@ -199,31 +263,82 @@
                     <!-- Test Biometric Button -->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/buttonTestBiometric"
+                        style="@style/Widget.MaterialComponents.Button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Test Biometric Authentication"
-                        android:layout_marginBottom="8dp"
-                        style="@style/Widget.Material3.Button.OutlinedButton" />
+                        android:text="Test biometric unlock"
+                        android:textAllCaps="false"
+                        android:layout_marginBottom="8dp" />
 
                     <!-- Re-enroll Button -->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/buttonReenroll"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Re-enroll Biometric"
-                        style="@style/Widget.Material3.Button.TextButton" />
+                        android:text="Re-enroll biometrics"
+                        android:textAllCaps="false"
+                        android:textColor="@color/auth_header_text" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Use these tools to confirm everything works before relying on biometrics for daily sign-ins."
+                        android:textColor="@color/auth_subtitle_text"
+                        android:textSize="12sp"
+                        android:layout_marginTop="12dp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Help Text -->
-            <TextView
+            <!-- Tips Card -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Biometric authentication allows you to sign in using your fingerprint, face, or other biometric credentials instead of your password."
-                android:textColor="@color/auth_body"
-                android:textSize="12sp"
-                android:lineSpacingMultiplier="1.2" />
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/modal_background_red"
+                app:strokeColor="@color/modal_header_primary"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Helpful tips"
+                        android:textColor="@color/auth_header_text"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="• Turn biometrics off before lending or servicing your phone."
+                        android:textColor="@color/auth_subtitle_text"
+                        android:textSize="12sp"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="• Re-enroll if you add new fingerprints or face profiles."
+                        android:textColor="@color/auth_subtitle_text"
+                        android:textSize="12sp"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="• Biometrics complement your password—they don’t replace it."
+                        android:textColor="@color/auth_subtitle_text"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 

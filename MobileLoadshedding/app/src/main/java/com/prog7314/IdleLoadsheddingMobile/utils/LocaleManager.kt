@@ -19,6 +19,8 @@ import java.util.Locale
 class LocaleManager(private val context: Context) {
     
     private val prefs: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+    // Explicit fallback helps us reliably switch back to English even after custom locales were applied.
+    private val appDefaultLocale = Locale("en", "ZA")
     
     companion object {
         private const val PREFS_NAME = "app_settings"
@@ -71,11 +73,10 @@ class LocaleManager(private val context: Context) {
             
             val localeCode = localeCodes[languageIndex]
             
-            // Empty string means default locale (English)
-            val locale = if (localeCode.isEmpty()) {
-                Locale.getDefault()
-            } else {
-                Locale(localeCode)
+            val locale = when {
+                localeCode.isBlank() -> appDefaultLocale
+                localeCode.contains('-') -> Locale.forLanguageTag(localeCode)
+                else -> Locale(localeCode)
             }
             
             // Update default locale first—this affects NumberFormat, DateFormat, etc.

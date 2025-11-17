@@ -16,32 +16,31 @@ import com.prog7314.IdleLoadsheddingMobile.data.models.NotificationType
 object FirebaseCloudMessenger {
 
     private const val TAG = "FirebaseCloudMessenger"
-    private const val FUNCTION_NAME = "triggerNotification"
 
     private val functions by lazy {
         FirebaseFunctions.getInstance(BuildConfig.FIREBASE_FUNCTIONS_REGION)
     }
     private val gson = Gson()
 
-    fun sendDemoNotification(
+    /**
+     * Send a notification using the appropriate specialized Cloud Function
+     */
+    fun sendCloudNotification(
         type: NotificationType,
         onResult: (Boolean, String) -> Unit
     ) {
-        val template = templateForType(type)
-        val payload = hashMapOf(
-            "targetTopic" to "all_users",
-            "type" to type.name,
-            "title" to template.title,
-            "body" to template.body,
-            "data" to template.data
-        )
-
+        val (functionName, payload) = getFunctionAndPayload(type)
+        
+        Log.d(TAG, "Calling Firebase function: $functionName for type: ${type.name}")
+        
         functions
-            .getHttpsCallable(FUNCTION_NAME)
+            .getHttpsCallable(functionName)
             .call(payload)
-            .addOnSuccessListener {
-                Log.d(TAG, "Firebase function dispatched ${type.name}")
-                onResult(true, "Cloud broadcast queued")
+            .addOnSuccessListener { result ->
+                Log.d(TAG, "Firebase function $functionName dispatched ${type.name}")
+                val data = result.data as? Map<*, *>
+                val notificationId = data?.get("notificationId") as? String ?: "unknown"
+                onResult(true, "✅ Sent via $functionName")
             }
             .addOnFailureListener { error ->
                 val message = when (error) {
@@ -49,40 +48,112 @@ object FirebaseCloudMessenger {
                         "Firebase error (${error.code}): ${error.localizedMessage}"
                     else -> error.localizedMessage ?: "Unknown Firebase error"
                 }
-                Log.e(TAG, "Failed to dispatch cloud notification", error)
-                onResult(false, message)
+                Log.e(TAG, "Failed to dispatch cloud notification via $functionName", error)
+                onResult(false, "❌ $message")
             }
     }
 
-    private data class Template(
-        val title: String,
-        val body: String,
-        val data: Map<String, String>
-    )
+    /**
+     * Legacy method for backward compatibility
+     */
+    fun sendDemoNotification(
+        type: NotificationType,
+        onResult: (Boolean, String) -> Unit
+    ) {
+        sendCloudNotification(type, onResult)
+    }
 
-    private fun templateForType(type: NotificationType): Template = when (type) {
-        NotificationType.EVENT_STARTED -> Template(
-            title = "⚡ New Event Started!",
-            body = "Weekend Power Challenge is now live. Join now to earn bonus rewards!",
-            data = mapOf(
-                "type" to type.name,
-                "eventId" to "event_cloud_001"
-            )
-        )
+    /**
+     * Get the appropriate Cloud Function name and payload for each notification type
+     */
+    private fun getFunctionAndPayload(type: NotificationType): Pair<String, Map<String, Any>> {
+        return when (type) {
+            NotificationType.EVENT_STARTED -> {
+                "sendEventStarted" to mapOf(
+                    "eventName" to "Weekend Power Challenge",
+                    "eventId" to "event_demo_${System.currentTimeMillis()}",
+                    "duration" to "48 hours",
+                    "rewards" to "2x Energy + Bonus Items",
+                    "targetTopic" to "all_users"
+                )
+            }
 
-        NotificationType.FRIEND_REQUEST -> Template(
-            title = "👋 New Friend Request",
-            body = "PowerPlayer123 wants to be your friend!",
-            data = mapOf(
-                "type" to type.name,
-                "friendId" to "cloud_friend_001"
-            )
-        )
+            NotificationType.EVENT_ENDING_SOON -> {
+                "sendEventEndingSoon" to mapOf(
+                    "eventName" to "Weekend Power Challenge",
+                    "eventId" to "event_demo_${System.currentTimeMillis()}",
+                    "timeRemaining" to "30 minutes",
+                    "targetTopic" to "all_users"
+                )
+            }
 
-        else -> Template(
-            title = "📬 Idle Loadshedding",
-            body = "Firebase broadcast triggered from device.",
-            data = mapOf("type" to type.name)
-        )
+            NotificationType.FRIEND_REQUEST -> {
+                "sendFriendRequest" to mapOf(
+                    "fromPlayerName" to "PowerPlayer123",
+                    "fromPlayerId" to "player_demo_${System.currentTimeMillis()}",
+                    "recipientToken" to "demo_token_self" // In real scenario, use actual FCM token
+                )
+            }
+
+            NotificationType.FRIEND_ACCEPTED -> {
+                "sendFriendAccepted" to mapOf(
+                    "playerName" to "EnergyMaster456",
+                    "playerId" to "player_demo_${System.currentTimeMillis()}",
+                    "recipientToken" to "demo_token_self" // In real scenario, use actual FCM token
+                )
+            }
+
+            NotificationType.MAINTENANCE_REQUIRED -> {
+                "sendMaintenanceNotification" to mapOf(
+                    "maintenanceTime" to "2025-11-20 02:00 UTC",
+                    "duration" to "2 hours",
+                    "targetTopic" to "all_users"
+                )
+            }
+
+            NotificationType.SYSTEM_ANNOUNCEMENT -> {
+                "sendSystemAnnouncement" to mapOf(
+                    "title" to "New Features Available",
+                    "message" to "Check out the new district upgrades and friend leaderboards!",
+                    "announcementId" to "ann_demo_${System.currentTimeMillis()}",
+                    "targetTopic" to "all_users"
+                )
+            }
+
+            NotificationType.GENERAL -> {
+                "sendGeneralNotification" to mapOf(
+                    "title" to "Daily Login Bonus",
+                    "body" to "You've received 1000 energy for logging in today!",
+                    "data" to mapOf("bonusAmount" to "1000"),
+                    "targetTopic" to "all_users"
+                )
+            }
+
+            NotificationType.LEADERBOARD_UPDATE -> {
+                "sendLeaderboardUpdate" to mapOf(
+                    "newRank" to 5,
+                    "oldRank" to 12,
+                    "leaderboardName" to "Global Energy Leaders",
+                    "recipientToken" to "demo_token_self" // In real scenario, use actual FCM token
+                )
+            }
+
+            NotificationType.ENERGY_MILESTONE -> {
+                "sendEnergyMilestone" to mapOf(
+                    "milestone" to "1M Energy Generated",
+                    "energyAmount" to "1,000,000 kWh",
+                    "reward" to "Legendary Generator",
+                    "recipientToken" to "demo_token_self" // In real scenario, use actual FCM token
+                )
+            }
+
+            NotificationType.OFFLINE_EARNINGS_READY -> {
+                "sendOfflineEarningsReady" to mapOf(
+                    "energyEarned" to "50,000 kWh",
+                    "timeAway" to "8 hours",
+                    "recipientToken" to "demo_token_self" // In real scenario, use actual FCM token
+                )
+            }
+        }
     }
 }

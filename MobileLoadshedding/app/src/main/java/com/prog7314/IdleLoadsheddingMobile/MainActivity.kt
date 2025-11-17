@@ -22,10 +22,12 @@ import android.widget.ProgressBar //Android, 2025.
 import android.widget.TextView //Android, 2025.
 import android.widget.Toast //Android, 2025.
 import androidx.core.view.isVisible //AndroidX, 2025.
+import com.google.android.gms.ads.MobileAds //Google, 2025
 import com.google.firebase.auth.FirebaseAuth //Firebase, 2025.
 import com.google.gson.Gson //Google, 2025.
 import com.prog7314.IdleLoadsheddingMobile.core.UnityBridge
 import com.prog7314.IdleLoadsheddingMobile.data.models.*
+import com.prog7314.IdleLoadsheddingMobile.advertisement.*
 import com.prog7314.IdleLoadsheddingMobile.unity.Events
 import com.prog7314.IdleLoadsheddingMobile.unity.FriendsList
 import com.prog7314.IdleLoadsheddingMobile.unity.Leaderboard
@@ -42,6 +44,9 @@ import com.prog7314.IdleLoadsheddingMobile.ui.coordinators.UIComponentFactory
 import com.prog7314.IdleLoadsheddingMobile.ui.panels.*
 import com.prog7314.IdleLoadsheddingMobile.utils.FormatUtils
 import com.prog7314.IdleLoadsheddingMobile.utils.LocaleManager
+import kotlinx.coroutines.CoroutineScope //Google, 2025
+import kotlinx.coroutines.Dispatchers //Google, 2025
+import kotlinx.coroutines.launch //Google, 2025
 import java.text.DecimalFormat //Oracle, 2025.
 import java.time.Instant //Oracle, 2025.
 import java.time.ZoneId //Oracle, 2025.
@@ -134,6 +139,13 @@ class MainActivity : UnityPlayerGameActivity() {
 
         // 9. Initialize Unity integration
         SaveSync.initialize(this)
+
+        // 10. Initialise the Adverts module
+        CoroutineScope(Dispatchers.IO).launch {
+            // Initialize the Google Mobile Ads SDK on a background thread.
+            MobileAds.initialize(this@MainActivity) {}
+            ADLoad(this@MainActivity)
+        }
 
         window.decorView.post {
             // Hide Unity's internal HUD (we use native Android overlay)

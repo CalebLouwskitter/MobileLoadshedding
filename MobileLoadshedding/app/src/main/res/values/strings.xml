@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">MobileLoadshedding</string>
-    <string name="default_web_client_id">41587024325-gt1n0vaejub9dme7cvidievg5kcktbmp.apps.googleusercontent.com</string>
+    <string name="app_name" translatable="false">MobileLoadshedding</string>
+    <string name="default_web_client_id" translatable="false">41587024325-gt1n0vaejub9dme7cvidievg5kcktbmp.apps.googleusercontent.com</string>
+    <string name="admob_app_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
     
-    <string name="hud_energy_per_second_format">%1$s /s</string>
+    <string name="hud_energy_per_second_format" translatable="false">%1$s /s</string>
     <string name="hud_generators_format">%1$d generators (Lv %2$d)</string>
     <string name="hud_safe_idle_format">Safe idle: %1$s</string>
     <string name="hud_event_active">Event: %1$s (x%2$.2f)</string>
@@ -19,7 +20,7 @@
     <string name="tasks_event_inactive">%1$s • Completed</string>
     <string name="tasks_event_multiplier">Multiplier x%1$.2f</string>
     <string name="tasks_event_duration">Duration %1$s</string>
-    <string name="timestamp_unknown">--</string>
+    <string name="timestamp_unknown" translatable="false">--</string>
     <string name="friend_placeholder_name">Friend %1$s</string>
     <string name="electricity_current_energy">Current energy: %1$s</string>
     <string name="electricity_production">Production: %1$s /s</string>
@@ -97,7 +98,7 @@
     <string name="logout_confirm_no">Cancel</string>
     
     <!-- Push Notifications -->
-    <string name="default_notification_channel_id">idle_loadshedding_default</string>
+    <string name="default_notification_channel_id" translatable="false">idle_loadshedding_default</string>
     <string name="notification_channel_default_name">General Notifications</string>
     <string name="notification_channel_events_name">Event Notifications</string>
     <string name="notification_channel_friends_name">Friends Notifications</string>
