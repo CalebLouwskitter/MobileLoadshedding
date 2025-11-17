@@ -32,10 +32,10 @@ class TasksPanelBinder(
         val container = panel.findViewById<LinearLayout?>(R.id.tasks_list_container) ?: return
 
         if (eventHistory.isEmpty()) {
-            // Show empty state
-            empty?.isVisible = true
-            container.isVisible = false
-            container.removeAllViews()
+            // For now, show placeholder rows so the UI matches the designed layout
+            empty?.isVisible = false
+            container.isVisible = true
+            renderPlaceholderTasks(container)
         } else {
             empty?.isVisible = false
             container.isVisible = true
@@ -76,6 +76,28 @@ class TasksPanelBinder(
             icon?.setImageResource(
                 if (event.isStarting) android.R.drawable.checkbox_on_background else android.R.drawable.checkbox_off_background
             )
+
+            container.addView(row)
+        }
+    }
+
+    /**
+     * Temporary placeholder content for when there is no real event history yet.
+     * This keeps the tasks panel looking like the final UI during development.
+     */
+    private fun renderPlaceholderTasks(container: LinearLayout) {
+        container.removeAllViews()
+
+        repeat(3) {
+            val row = LayoutInflater.from(activity).inflate(R.layout.view_task_item, container, false)
+
+            row.findViewById<TextView?>(R.id.task_description)?.text =
+                "Upgrade Storage to level 6"
+
+            row.findViewById<TextView?>(R.id.task_reward)?.text = "R 20,000"
+
+            val icon = row.findViewById<ImageView?>(R.id.task_check_icon)
+            icon?.setImageResource(android.R.drawable.checkbox_on_background)
 
             container.addView(row)
         }
