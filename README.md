@@ -1,11 +1,6 @@
-# Idle Loadshedding
-
-This document provides a comprehensive overview of the Idle Loadshedding project, a mobile game developed with Unity and supported by a .NET backend and Azure SQL for data persistence.
-
-## Introduction
+# Idle Loadshedding POE
 
 Idle Loadshedding is an interactive mobile game designed to simulate responses to power outages in a fun and engaging way. The project integrates a Unity-based frontend with a robust .NET backend, utilizing Azure SQL for cloud data storage. This README outlines the key features, architecture, and setup of the application.
-
 
 ## Contributors
 
