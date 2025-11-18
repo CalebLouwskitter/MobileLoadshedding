@@ -131,8 +131,7 @@ class SettingsPanelBinder(
                         Toast.LENGTH_LONG
                     ).show()
                     
-                    // Recreate activity to apply locale change to all views
-                    activity.recreate()
+
                 }
             }
             
