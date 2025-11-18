@@ -22,29 +22,40 @@
         android:paddingEnd="16dp"
         android:paddingBottom="16dp">
 
-        <!-- Title bar -->
+        <!-- Header row: back arrow + centered title -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:paddingBottom="8dp">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btn_back_tasks"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_arrow_back"
+                android:tint="@android:color/white" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
                 android:text="Tasks"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
                 android:textStyle="bold" />
-
-            <!-- Thin white divider under title, matching reference image -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginTop="8dp"
-                android:background="#FFFFFF" />
         </LinearLayout>
+
+        <!-- Thin white divider under header -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF" />
 
         <!-- Empty state text -->
         <TextView

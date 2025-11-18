@@ -28,6 +28,11 @@ class TasksPanelBinder(
         eventHistory: List<UnityEventPayload>,
         currentActiveEvent: UnityEventPayload?
     ) {
+        // Back arrow in header - behaves like tapping the close button on the modal
+        panel.findViewById<View?>(R.id.btn_back_tasks)?.setOnClickListener {
+            panel.rootView.findViewById<View?>(R.id.close_button)?.performClick()
+        }
+
         val empty = panel.findViewById<TextView?>(R.id.text_tasks_empty)
         val container = panel.findViewById<LinearLayout?>(R.id.tasks_list_container) ?: return
 

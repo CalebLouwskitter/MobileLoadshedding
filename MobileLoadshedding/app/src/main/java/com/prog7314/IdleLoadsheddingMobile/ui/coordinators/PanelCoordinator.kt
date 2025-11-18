@@ -98,7 +98,7 @@ class PanelCoordinator(
             }
             
             R.layout.panel_settings -> {
-                settingsPanelBinder.configure(panelView, stateManager.latestSave)
+                settingsPanelBinder.configure(panelView, stateManager.latestSave, onNavigate)
             }
             
             R.layout.panel_friends_leaderboard -> {

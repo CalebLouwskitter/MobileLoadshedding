@@ -33,7 +33,22 @@ class LeaderboardPanelBinder(
     ) {
         Log.d("LeaderboardPanelBinder", "Configuring leaderboard panel")
         
-        // Tab navigation to friends
+        // Top tabs: switch between Profile and Leader board panels
+        panel.findViewById<View?>(R.id.tab_profile)?.setOnClickListener {
+            onShowPanel(R.layout.panel_profile)
+        }
+
+        panel.findViewById<View?>(R.id.tab_leaderboard)?.setOnClickListener {
+            // Stay on leaderboard; treat as a manual refresh
+            Log.d("LeaderboardPanelBinder", "Leaderboard tab clicked - refreshing from API")
+            Leaderboard.fetchBackendLeaderboard { result ->
+                result.onFailure { error ->
+                    Log.e("LeaderboardPanelBinder", "Failed to refresh leaderboard from tab: ${error.message}", error)
+                }
+            }
+        }
+
+        // Friends/global toggle tabs within leaderboard content
         panel.findViewById<View?>(R.id.btn_tab_friends)?.setOnClickListener {
             onShowPanel(R.layout.panel_friends_leaderboard)
         }
@@ -77,12 +92,13 @@ class LeaderboardPanelBinder(
         val empty = panel.findViewById<TextView?>(R.id.text_leaderboard_empty)
         val listContainer = panel.findViewById<LinearLayout?>(R.id.leaderboard_list_container)
         val lastUpdated = panel.findViewById<TextView?>(R.id.text_leaderboard_last_updated)
+        val topThreeContainer = panel.findViewById<View?>(R.id.top_three_container)
 
         if (payload == null) {
-            // Show loading state
-            loading?.isVisible = true
+            // No data yet – show placeholder leaderboard matching the mock
+            loading?.isVisible = false
             empty?.isVisible = false
-            listContainer?.isVisible = false
+            renderPlaceholderLeaderboard(panel)
             return
         }
 
@@ -91,13 +107,40 @@ class LeaderboardPanelBinder(
 
         val entries = payload.entries
         if (entries.isEmpty()) {
-            // Show empty state
-            empty?.isVisible = true
-            listContainer?.isVisible = false
+            // No entries from backend – fall back to placeholder UI
+            loading?.isVisible = false
+            empty?.isVisible = false
+            renderPlaceholderLeaderboard(panel)
         } else {
             empty?.isVisible = false
-            listContainer?.isVisible = true
-            listContainer?.let { renderEntries(it, entries) }
+            topThreeContainer?.isVisible = true
+
+            // Populate top 3 slots
+            val top1 = entries.getOrNull(0)
+            val top2 = entries.getOrNull(1)
+            val top3 = entries.getOrNull(2)
+
+            panel.findViewById<TextView?>(R.id.text_top1_name)?.text = top1?.displayName ?: "--"
+            panel.findViewById<TextView?>(R.id.text_top1_score)?.text = top1?.let { formatUtils.formatEnergy(it.score) } ?: "--"
+
+            panel.findViewById<TextView?>(R.id.text_top2_name)?.text = top2?.displayName ?: "--"
+            panel.findViewById<TextView?>(R.id.text_top2_score)?.text = top2?.let { formatUtils.formatEnergy(it.score) } ?: "--"
+
+            panel.findViewById<TextView?>(R.id.text_top3_name)?.text = top3?.displayName ?: "--"
+            panel.findViewById<TextView?>(R.id.text_top3_score)?.text = top3?.let { formatUtils.formatEnergy(it.score) } ?: "--"
+
+            // Hide second/third slots if not enough entries
+            panel.findViewById<View?>(R.id.top_two_container)?.isVisible = top2 != null
+            panel.findViewById<View?>(R.id.top_three_container_slot)?.isVisible = top3 != null
+
+            // Render remaining entries (4th and beyond)
+            val remaining = if (entries.size > 3) entries.drop(3) else emptyList()
+            if (remaining.isEmpty()) {
+                listContainer?.isVisible = false
+            } else {
+                listContainer?.isVisible = true
+                listContainer?.let { renderEntries(it, remaining, startRank = 4) }
+            }
         }
     }
     
@@ -106,12 +149,13 @@ class LeaderboardPanelBinder(
      */
     private fun renderEntries(
         container: LinearLayout,
-        entries: List<UnityLeaderboardPayload.Entry>
+        entries: List<UnityLeaderboardPayload.Entry>,
+        startRank: Int = 1
     ) {
         container.removeAllViews()
         entries.forEachIndexed { index, entry ->
             val row = LayoutInflater.from(activity).inflate(R.layout.view_leaderboard_row, container, false)
-            row.findViewById<TextView?>(R.id.text_rank)?.text = "#${index + 1}"
+            row.findViewById<TextView?>(R.id.text_rank)?.text = "#${startRank + index}"
             
             // Add cosmetic tags based on score
             val displayNameWithTag = buildString {
@@ -136,6 +180,55 @@ class LeaderboardPanelBinder(
             }
             icon?.setImageResource(iconRes)
             container.addView(row)
+        }
+    }
+
+    /**
+     * Renders a static placeholder leaderboard when no real data is available.
+     * This is purely for visual fidelity during development.
+     */
+    private fun renderPlaceholderLeaderboard(panel: View) {
+        val topThreeContainer = panel.findViewById<View?>(R.id.top_three_container)
+        val listContainer = panel.findViewById<LinearLayout?>(R.id.leaderboard_list_container)
+        val empty = panel.findViewById<TextView?>(R.id.text_leaderboard_empty)
+
+        empty?.isVisible = false
+        topThreeContainer?.isVisible = true
+
+        // Sample top 3
+        panel.findViewById<TextView?>(R.id.text_top1_name)?.text = "Kyle Weissman"
+        panel.findViewById<TextView?>(R.id.text_top1_score)?.text = "R 120 343"
+
+        panel.findViewById<TextView?>(R.id.text_top2_name)?.text = "Kyle Weiss..."
+        panel.findViewById<TextView?>(R.id.text_top2_score)?.text = "R 120 343"
+
+        panel.findViewById<TextView?>(R.id.text_top3_name)?.text = "Caleb Louw..."
+        panel.findViewById<TextView?>(R.id.text_top3_score)?.text = "R 120 343"
+
+        // Ensure all three slots are visible in placeholder
+        panel.findViewById<View?>(R.id.top_two_container)?.isVisible = true
+        panel.findViewById<View?>(R.id.top_three_container_slot)?.isVisible = true
+
+        // Sample rows 4–7
+        listContainer?.let { container ->
+            container.isVisible = true
+            container.removeAllViews()
+
+            val names = listOf(
+                "Caleb Lou..." to "R 204 242",
+                "Jess Rola..." to "R 204 242",
+                "Mike Til..." to "R 204 242",
+                "Steven Sm..." to "R 204 242"
+            )
+
+            names.forEachIndexed { index, (name, score) ->
+                val row = LayoutInflater.from(activity).inflate(R.layout.view_leaderboard_row, container, false)
+                row.findViewById<TextView?>(R.id.text_rank)?.text = "#${4 + index}"
+                row.findViewById<TextView?>(R.id.text_entry_title)?.text = name
+                row.findViewById<TextView?>(R.id.text_entry_detail)?.text = score
+                row.findViewById<ImageView?>(R.id.image_entry_status)?.setImageResource(android.R.drawable.btn_star_big_off)
+                container.addView(row)
+            }
         }
     }
 }

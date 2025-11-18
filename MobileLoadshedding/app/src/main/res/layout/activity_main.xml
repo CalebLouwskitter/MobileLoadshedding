@@ -121,7 +121,10 @@
                 android:layout_width="248dp"
                 android:layout_height="41dp"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/advert_upgrade_text" />
+                android:background="@drawable/bg_button_white"
+                android:backgroundTint="@android:color/transparent"
+                android:text="@string/advert_upgrade_text"
+                android:textColor="@android:color/black" />
 
             <LinearLayout
                 android:id="@+id/bottom_nav"
@@ -138,7 +141,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
-                    android:text="@string/nav_level_up" />
+                    android:background="@drawable/bg_button_white"
+                    android:backgroundTint="@android:color/transparent"
+                    android:text="@string/nav_level_up"
+                    android:textColor="@android:color/black" />
 
                 <Button
                     android:id="@+id/btn_nav_power"
@@ -159,7 +165,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    android:text="@string/nav_tasks" />
+                    android:background="@drawable/bg_button_white"
+                    android:backgroundTint="@android:color/transparent"
+                    android:text="@string/nav_tasks"
+                    android:textColor="@android:color/black" />
             </LinearLayout>
 
         </LinearLayout>
