@@ -77,6 +77,11 @@ class SettingsPanelBinder(
         panel.findViewById<Button?>(R.id.btn_logout)?.setOnClickListener {
             showLogoutConfirmationDialog()
         }
+
+        // Back arrow in header - behaves like tapping the close button on the modal
+        panel.findViewById<View?>(R.id.btn_back_settings)?.setOnClickListener {
+            panel.rootView.findViewById<View?>(R.id.close_button)?.performClick()
+        }
     }
     
     /**

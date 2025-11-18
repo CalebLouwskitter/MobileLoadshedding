@@ -37,6 +37,11 @@ class ProfileEditPanelBinder(
             onShowPanel(R.layout.panel_profile)
         }
 
+        // Back arrow - behaves like cancel (navigate back to profile panel)
+        panel.findViewById<View?>(R.id.btn_back_profile_edit)?.setOnClickListener {
+            onShowPanel(R.layout.panel_profile)
+        }
+
         // Save button - update Firebase profile
         panel.findViewById<Button?>(R.id.btn_save_profile)?.setOnClickListener {
             val nicknameInput = panel.findViewById<EditText?>(R.id.input_nickname)
