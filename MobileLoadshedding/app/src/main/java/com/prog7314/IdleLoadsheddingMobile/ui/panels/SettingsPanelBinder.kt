@@ -42,12 +42,23 @@ class SettingsPanelBinder(
     }
     
     /**
-     * Configures settings panel UI elements and event handlers.
+     * Backwards-compatible entry point used when navigation callback is not needed.
      */
     fun configure(
         panel: View,
         save: UnitySavePayload?,
         onShowPanel: (Int) -> Unit = {}
+    ) {
+        configure(panel, save) { _ -> }
+    }
+
+    /**
+     * Configures settings panel UI elements and event handlers.
+     */
+    fun configure(
+        panel: View,
+        save: UnitySavePayload?,
+        onShowPanel: (Int) -> Unit
     ) {
         // Upload save button
         panel.findViewById<Button?>(R.id.btn_upload_save)?.setOnClickListener {
@@ -80,8 +91,7 @@ class SettingsPanelBinder(
             showLogoutConfirmationDialog()
         }
 
-        // Header back arrow: behave like profile edit back button
-        // Always navigate back to the profile panel for now
+        // Back arrow in header - navigate back to profile panel
         panel.findViewById<View?>(R.id.btn_back_settings)?.setOnClickListener {
             onShowPanel(R.layout.panel_profile)
         }

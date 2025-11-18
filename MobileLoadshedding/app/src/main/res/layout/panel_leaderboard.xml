@@ -79,6 +79,134 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btn_tab_friends" />
 
+            <!-- Top 3 leaderboard entries (podium layout) -->
+            <LinearLayout
+                android:id="@+id/top_three_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_leaderboard_last_updated">
+
+                <!-- Second place -->
+                <LinearLayout
+                    android:id="@+id/top_two_container"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/image_top2_avatar"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_profile_large"
+                        android:tint="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/text_top2_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="--"
+                        android:textColor="@color/modal_text_dark_blue"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/text_top2_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="--"
+                        android:textColor="@color/modal_text_dark_blue"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- First place -->
+                <LinearLayout
+                    android:id="@+id/top_one_container"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.2"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/image_top1_avatar"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_profile_large"
+                        android:tint="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/text_top1_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="--"
+                        android:textColor="@color/modal_text_dark_blue"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/text_top1_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="--"
+                        android:textColor="@color/modal_text_dark_blue"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- Third place -->
+                <LinearLayout
+                    android:id="@+id/top_three_container_slot"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/image_top3_avatar"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_profile_large"
+                        android:tint="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/text_top3_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="--"
+                        android:textColor="@color/modal_text_dark_blue"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/text_top3_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="--"
+                        android:textColor="@color/modal_text_dark_blue"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
             <ProgressBar
                 android:id="@+id/leaderboard_loading"
                 style="@android:style/Widget.ProgressBar.Small"
@@ -88,7 +216,7 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_leaderboard_last_updated" />
+                app:layout_constraintTop_toBottomOf="@id/top_three_container" />
 
             <TextView
                 android:id="@+id/text_leaderboard_empty"
@@ -101,7 +229,7 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_leaderboard_last_updated" />
+                app:layout_constraintTop_toBottomOf="@id/top_three_container" />
 
             <LinearLayout
                 android:id="@+id/leaderboard_list_container"
@@ -113,7 +241,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_leaderboard_last_updated" />
+                app:layout_constraintTop_toBottomOf="@id/top_three_container" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
@@ -131,10 +259,10 @@
             android:id="@+id/tab_profile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/tab_profile"
+            android:background="@android:color/transparent"
             android:drawableStart="@drawable/ic_profile_white"
             android:drawablePadding="@dimen/modal_tab_drawable_padding"
-            android:elevation="2dp"
+            android:elevation="0dp"
             android:gravity="center"
             android:paddingTop="@dimen/modal_tab_padding_vertical"
             android:paddingBottom="@dimen/modal_tab_padding_vertical"
@@ -161,7 +289,7 @@
             android:background="@drawable/tab_leaderboard_selected"
             android:drawableStart="@drawable/ic_leaderboard_white"
             android:drawablePadding="@dimen/modal_tab_drawable_padding"
-            android:elevation="4dp"
+            android:elevation="2dp"
             android:gravity="center"
             android:paddingTop="@dimen/modal_tab_padding_vertical"
             android:paddingBottom="@dimen/modal_tab_padding_vertical"

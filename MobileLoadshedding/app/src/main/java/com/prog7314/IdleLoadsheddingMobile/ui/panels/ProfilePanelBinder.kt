@@ -55,10 +55,6 @@ class ProfilePanelBinder(
             context.startActivity(intent)
         }
         
-        panel.findViewById<View?>(R.id.btn_profile_friends)?.setOnClickListener {
-            onShowPanel(R.layout.panel_friends_leaderboard)
-        }
-        
         panel.findViewById<View?>(R.id.btn_profile_debug_notifications)?.setOnClickListener {
             onShowPanel(R.layout.panel_debug_notifications)
         }

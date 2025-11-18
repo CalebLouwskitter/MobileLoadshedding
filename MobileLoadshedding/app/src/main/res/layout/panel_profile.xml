@@ -21,7 +21,7 @@
             android:background="@drawable/tab_profile_selected"
             android:drawableStart="@drawable/ic_profile_white"
             android:drawablePadding="@dimen/modal_tab_drawable_padding"
-            android:elevation="4dp"
+            android:elevation="2dp"
             android:gravity="center"
             android:paddingTop="@dimen/modal_tab_padding_vertical"
             android:paddingBottom="@dimen/modal_tab_padding_vertical"
@@ -49,7 +49,7 @@
             android:background="@drawable/tab_leaderboard"
             android:drawableStart="@drawable/ic_leaderboard"
             android:drawablePadding="@dimen/modal_tab_drawable_padding"
-            android:elevation="2dp"
+            android:elevation="0dp"
             android:gravity="center"
             android:paddingTop="@dimen/modal_tab_padding_vertical"
             android:paddingBottom="@dimen/modal_tab_padding_vertical"
@@ -65,7 +65,7 @@
         android:id="@+id/content_scroll"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="@dimen/modal_tab_overlap_height"
         android:elevation="6dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -338,21 +338,6 @@
                 app:layout_constraintTop_toBottomOf="@id/btn_profile_settings" />
 
             <Button
-                android:id="@+id/btn_profile_friends"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_small"
-                android:background="@drawable/bg_button_white"
-                app:backgroundTint="@null"
-                android:paddingTop="@dimen/button_padding_vertical"
-                android:paddingBottom="@dimen/button_padding_vertical"
-                android:text="FRIENDS"
-                android:textColor="@android:color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_profile_biometric" />
-
-            <Button
                 android:id="@+id/btn_profile_debug_notifications"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -365,7 +350,8 @@
                 android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_profile_friends" />
+                app:layout_constraintTop_toBottomOf="@id/btn_profile_biometric"
+                app:strokeColor="@color/modal_button_accent" />
 
             <Button
                 android:id="@+id/btn_profile_logout"
@@ -387,5 +373,4 @@
     </androidx.core.widget.NestedScrollView>
 
     <!-- Tabs Section (Overlapping at top) -->
-
 </androidx.constraintlayout.widget.ConstraintLayout>
