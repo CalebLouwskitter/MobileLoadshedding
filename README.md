@@ -26,7 +26,8 @@ Idle Loadshedding is an interactive mobile game designed to simulate responses t
 <img width="1080" height="2400" alt="image" src="https://github.com/user-attachments/assets/38f7235c-3dd5-4a88-8580-85aa2e442d90" />
 
 - Home Page
-(add pic)
+<img width="1440" height="3120" alt="image" src="https://github.com/user-attachments/assets/67b5fa34-01d2-4d8e-b536-0b34b3519f6e" />
+
 - Upgrade Page
 <img width="1440" height="3120" alt="image" src="https://github.com/user-attachments/assets/74942348-18e3-427a-a7a1-773d4ca2fae2" />
 <img width="1440" height="3120" alt="image" src="https://github.com/user-attachments/assets/1255e49f-47f7-4f8e-80af-eb70af135f8e" />
