@@ -121,4 +121,6 @@
     <string name="nav_tasks">Tasks</string>
     <string name="hud_upgrades_content_description">Upgrades</string>
     <string name="hud_profile_content_description">Profile</string>
+    <string name="advert_upgrade_text">Free Upgrade (AD)</string>
+
 </resources>

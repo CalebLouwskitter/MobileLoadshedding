@@ -118,4 +118,5 @@
     <string name="nav_tasks">Mishumo</string>
     <string name="hud_upgrades_content_description">U U fusha / U Nwalela</string>
     <string name="hud_profile_content_description">Mbuno ya Muthu</string>
+    <string name="advert_upgrade_text">U vhudzisa ha u fhasi (AD)</string>
 </resources>

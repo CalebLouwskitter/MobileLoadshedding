@@ -116,10 +116,12 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/ad_test_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="AD TEST BUTTON (DELETE WHEN DONE)" />
+                android:id="@+id/btn_advert_upgrade"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="248dp"
+                android:layout_height="41dp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/advert_upgrade_text" />
 
             <LinearLayout
                 android:id="@+id/bottom_nav"

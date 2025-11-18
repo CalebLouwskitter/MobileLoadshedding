@@ -182,9 +182,17 @@ class MainActivity : UnityPlayerGameActivity() {
      * This is the only place MainActivity handles UI events directly.
      */
     private fun setupHudButtons(overlay: View) {
-        // AD TEST BUTTON DELETE WHEN DONE WITH TESTING
-        overlay.findViewById<Button>(R.id.ad_test_button).setOnClickListener {
-            adLoader.showRewardAd()
+        // AD upgrade button that's sitting inj the middle just above the power button
+        overlay.findViewById<Button>(R.id.btn_advert_upgrade).setOnClickListener {
+        adLoader.showRewardAd()
+        //WHEN YOU WISH TO IMPLEMENT THE REWARD FOR THE ADS COMMENT OUT THE LINE ABOVE THIS AND UNCOMMENT THE LINES BELOW
+        // THEN GO TO ADLoad.kt and follow instruction there
+            //if it doesnt work just undo what was done and revert it to the state it is currently in (ie reward commented out state)
+        //    adLoader.showRewardAd{
+                //so the below code should only execute on a successful adwatch, otherwise it does not execute (leave this line commented regardless)
+        //      PowerManager.upgradeGenerator("generator_1")
+        //      Stats.requestUnitySnapshot()
+        //    }
         }
 
         // Modal scrim closes any open panel
