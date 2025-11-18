@@ -147,12 +147,14 @@ class FriendsPanelBinder(
         val empty = panel.findViewById<View?>(R.id.text_friends_empty)
         val listContainer = panel.findViewById<LinearLayout?>(R.id.friends_list_container)
         val lastUpdated = panel.findViewById<TextView?>(R.id.text_friends_last_updated)
+        val topThreeContainer = panel.findViewById<View?>(R.id.top_three_container)
 
         if (payload == null) {
             // Show loading state
             loading?.isVisible = true
             empty?.isVisible = false
             listContainer?.isVisible = false
+            topThreeContainer?.isVisible = false
             lastUpdated?.text = "Loading friends..."
             return
         }
@@ -165,12 +167,40 @@ class FriendsPanelBinder(
             // Show empty state
             empty?.isVisible = true
             listContainer?.isVisible = false
+            topThreeContainer?.isVisible = false
             Log.d("FriendsPanelBinder", "Friends list is empty - showing empty state")
         } else {
             empty?.isVisible = false
-            listContainer?.isVisible = true
-            listContainer?.let { renderEntries(it, entries) }
-            Log.d("FriendsPanelBinder", "Displaying ${entries.size} friends")
+            topThreeContainer?.isVisible = true
+
+            // Populate top 3 slots
+            val top1 = entries.getOrNull(0)
+            val top2 = entries.getOrNull(1)
+            val top3 = entries.getOrNull(2)
+
+            panel.findViewById<TextView?>(R.id.text_top1_name)?.text = top1?.displayName ?: "--"
+            panel.findViewById<TextView?>(R.id.text_top1_score)?.text = top1?.let { formatUtils.formatEnergy(it.contributionPerHour) } ?: "--"
+
+            panel.findViewById<TextView?>(R.id.text_top2_name)?.text = top2?.displayName ?: "--"
+            panel.findViewById<TextView?>(R.id.text_top2_score)?.text = top2?.let { formatUtils.formatEnergy(it.contributionPerHour) } ?: "--"
+
+            panel.findViewById<TextView?>(R.id.text_top3_name)?.text = top3?.displayName ?: "--"
+            panel.findViewById<TextView?>(R.id.text_top3_score)?.text = top3?.let { formatUtils.formatEnergy(it.contributionPerHour) } ?: "--"
+
+            // Hide second/third slots if not enough entries
+            panel.findViewById<View?>(R.id.top_two_container)?.isVisible = top2 != null
+            panel.findViewById<View?>(R.id.top_three_container_slot)?.isVisible = top3 != null
+
+            // Render remaining entries (4th and beyond)
+            val remaining = if (entries.size > 3) entries.drop(3) else emptyList()
+            if (remaining.isEmpty()) {
+                listContainer?.isVisible = false
+            } else {
+                listContainer?.isVisible = true
+                listContainer?.let { renderEntries(it, remaining, startRank = 4) }
+            }
+
+            Log.d("FriendsPanelBinder", "Displaying ${entries.size} friends (top 3 + list)")
         }
     }
     
@@ -179,12 +209,13 @@ class FriendsPanelBinder(
      */
     private fun renderEntries(
         container: LinearLayout,
-        entries: List<FriendProfile>
+        entries: List<FriendProfile>,
+        startRank: Int = 1
     ) {
         container.removeAllViews()
         entries.forEachIndexed { index, friend ->
             val row = LayoutInflater.from(activity).inflate(R.layout.view_leaderboard_row, container, false)
-            row.findViewById<TextView?>(R.id.text_rank)?.text = "#${index + 1}"
+            row.findViewById<TextView?>(R.id.text_rank)?.text = "#${startRank + index}"
             
             // Add cosmetic tags based on contribution
             val displayNameWithTag = buildString {
