@@ -1,69 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="timestamp_unknown" translatable="false">--</string>
     <string name="app_name" translatable="false">MobileLoadshedding</string>
     <string name="default_web_client_id" translatable="false">41587024325-gt1n0vaejub9dme7cvidievg5kcktbmp.apps.googleusercontent.com</string>
+    <string name="admob_app_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
+    
     <string name="hud_energy_per_second_format" translatable="false">%1$s /s</string>
-    <string name="hud_generators_format">%1$d generators (Lv %2$d)</string>
-    <string name="hud_safe_idle_format">Veilig: %1$s</string>
+    <string name="hud_generators_format">%1$d kragopwekkers (Vlak %2$d)</string>
+    <string name="hud_safe_idle_format">Veilige ledig: %1$s</string>
     <string name="hud_event_active">Gebeurtenis: %1$s (x%2$.2f)</string>
-    <string name="hud_event_inactive">Geen aktiewe gebeurtenisse</string>
+    <string name="hud_event_inactive">Geen aktiewe roostergebeurtenisse nie</string>
     <string name="leaderboard_last_updated">Opgedateer %1$s</string>
     <string name="friends_last_updated">Gesinkroniseer %1$s</string>
     <string name="profile_energy_total">Totaal gegenereer: %1$s</string>
     <string name="profile_energy_per_second">Produksie: %1$s /s</string>
-    <string name="profile_generators_count">Aktiewe generators: %1$d</string>
+    <string name="profile_generators_count">Aktiewe kragopwekkers: %1$d</string>
     <string name="profile_offline_time">Vanlyn vordering: %1$s</string>
-    <string name="profile_last_sync">Laaste gesinkroniseer: %1$s</string>
-    <string name="tasks_empty">Geen gebeurtenisse tans</string>
+    <string name="profile_last_sync">Laas gesinkroniseer: %1$s</string>
+    <string name="tasks_empty">Nog geen gebeurtenisse nie</string>
     <string name="tasks_event_active">%1$s • Aktief</string>
     <string name="tasks_event_inactive">%1$s • Voltooi</string>
     <string name="tasks_event_multiplier">Vermenigvuldiger x%1$.2f</string>
     <string name="tasks_event_duration">Duur %1$s</string>
+    <string name="timestamp_unknown" translatable="false">--</string>
     <string name="friend_placeholder_name">Vriend %1$s</string>
     <string name="electricity_current_energy">Huidige energie: %1$s</string>
     <string name="electricity_production">Produksie: %1$s /s</string>
-    <string name="electricity_generators">Generators: %1$d (Lv %2$d)</string>
-    <string name="electricity_currency">Energie krediete: %1$s</string>
+    <string name="electricity_generators">Kragopwekkers: %1$d (Vlak %2$d)</string>
+    <string name="electricity_currency">Energiekrediete: %1$s</string>
     <string name="electricity_offline">Vanlyn vordering: %1$s</string>
-    <string name="electricity_safe_idle">Veilige buffer: %1$s</string>
-    <string name="electricity_core_charge">Kern lading: %1$d%%</string>
+    <string name="electricity_safe_idle">Veilige ledige buffer: %1$s</string>
+    <string name="electricity_core_charge">Kernlading: %1$d%%</string>
     <string name="electricity_last_event">Laaste gebeurtenis: %1$s</string>
-    <string name="electricity_last_save">Laaste stoor sinkroniseer: %1$s</string>
-    <string name="districts_empty">Geen distrikte beskikbaar tans</string>
+    <string name="electricity_last_save">Laaste stoorsinkronisering: %1$s</string>
+    <string name="districts_empty">Nog geen distrikte beskikbaar nie</string>
     <string name="district_level_format">Vlak %1$d</string>
     <string name="district_output_format">%1$s krag /s • %2$s krediete/s</string>
     <string name="district_efficiency_format">%1$d%% doeltreffendheid</string>
     <string name="district_idle_time_format">Veilig vir %1$s</string>
     <string name="district_upgrade_cost_format">Opgradeer (%1$s)</string>
     <string name="district_upgrade_maxed">Maksimum vlak</string>
-    <string name="toast_friend_invite_sent">Vriend uitnodiging gestuur</string>
-    <string name="toast_friend_code_empty">Voer \'n vriend kode in</string>
-    <string name="toast_logout_placeholder">Teken uit (tydelik)</string>
-    <string name="toast_friend_code_copied">Vriend kode gekopieer</string>
+    <string name="toast_friend_invite_sent">Vrienduitnodiging gestuur</string>
+    <string name="toast_friend_code_empty">Voer \'n vriendkode in</string>
+    <string name="toast_logout_placeholder">Teken uit (plekhouer)</string>
+    <string name="toast_friend_code_copied">Vriendkode na knipbord gekopieer</string>
     <string name="toast_save_uploaded">Stoor suksesvol opgelaai</string>
     <string name="toast_save_synced">Stoor suksesvol gesinkroniseer</string>
-    <string name="profile_friend_code_label">Jou Vriend Kode</string>
+    <string name="profile_friend_code_label">Jou Vriendkode</string>
     <string name="profile_tag_active">⚡ AKTIEF</string>
     <string name="profile_tag_veteran">🏆 VETERAAN</string>
     <string name="profile_tag_newbie">🌟 NUWELING</string>
-    <string name="friends_empty_message">Geen vriende bygevoeg nie.\nDeel jou Vriend Kode om te koppel!</string>
-    <string name="friends_error_message">Kan nie vriendelys laai nie.\nGaan jou verbinding na en probeer weer.</string>
-    <string name="auth_biometric_login">Teken in met Biometrie</string>
-    <string name="notification_channel_default_name">Algemene Kennisgewings</string>
-    <string name="notification_channel_events_name">Gebeurtenis Kennisgewings</string>
-    <string name="notification_channel_friends_name">Vriende Kennisgewings</string>
-    <string name="notification_channel_system_name">Stelsel Kennisgewings</string>
-    <string name="accessibility_close">Sluit venster</string>
-    <string name="accessibility_back">Gaan terug</string>
-    <string name="accessibility_tab">Oortjie, %1$s</string>
-    <string name="accessibility_toggle">Skakel, %1$s</string>
-    <string name="accessibility_profile_avatar">Profiel avatar</string>
-    <string name="accessibility_rank_badge">Rang kenteken</string>
+    <string name="friends_empty_message">Nog geen vriende bygevoeg nie.\nDeel jou Vriendkode om te koppel!</string>
+    <string name="friends_error_message">Kan nie vriendelys laai nie.\nKontroleer jou verbinding en probeer weer.</string>
+    <string name="settings_language_changed">Taal verander. Herbegin die toepassing om toe te pas.</string>
+    <string name="settings_language_label">Taal</string>
+    <string name="settings_theme_label">Tema</string>
+    <string name="settings_save_management_label">Stoorbestuur</string>
 
     <!-- Auth -->
     <string name="auth_header_title">Idle Loadshedding</string>
-    <string name="auth_header_subtitle">Skep \'n rekening of meld aan om voort te gaan met speel..</string>
+    <string name="auth_header_subtitle">Skep \'n rekening of meld aan om verder te speel..</string>
     <string name="auth_login_title">Meld Aan</string>
     <string name="auth_login_subtitle">Begin nou</string>
     <string name="auth_signup_title">Registreer</string>
@@ -74,44 +69,218 @@
     <string name="auth_password_hint">Wagwoord</string>
     <string name="auth_confirm_password_hint">Bevestig Wagwoord</string>
     <string name="auth_remember_me">Onthou my</string>
-    <string name="auth_forgot_password">Wagwoord Vergeet ?</string>
+    <string name="auth_forgot_password">Wagwoord Vergeet?</string>
     <string name="auth_primary_cta_login">Meld Aan</string>
     <string name="auth_primary_cta_signup">Registreer</string>
     <string name="auth_google_cta">Gaan voort met Google</string>
+    <string name="auth_biometric_login">Meld aan met Biometrie</string>
     <string name="auth_or_label">Of</string>
-    <string name="auth_already_signed">Reeds Geregistreer ?</string>
+    <string name="auth_already_signed">Reeds Geregistreer?</string>
     
     <!-- Profile Edit -->
-    <string name="profile_edit_title">Redigeer Profiel</string>
-    <string name="profile_edit_nickname">Bynaam</string>
-    <string name="profile_edit_nickname_hint">Jou Bynaam</string>
+    <string name="profile_edit_title">Wysig Profiel</string>
+    <string name="profile_edit_nickname">Naam</string>
+    <string name="profile_edit_nickname_hint">Jou Naam</string>
+
     <string name="profile_edit_email">E-pos</string>
     <string name="profile_edit_save">STOOR VERANDERINGE</string>
     <string name="profile_edit_cancel">KANSELLEER</string>
     <string name="toast_profile_updated">Profiel suksesvol opgedateer</string>
     <string name="toast_profile_update_failed">Kon nie profiel opdateer nie</string>
-    <string name="toast_nickname_empty">Voer asseblief \'n bynaam in</string>
-    <string name="settings_language_changed">Taal verander. Herbegin die app om toe te pas.</string>
-    <string name="settings_language_label">Taal</string>
-    <string name="settings_theme_label">Tema</string>
-    <string name="settings_save_management_label">Stoor Bestuur</string>
+    <string name="toast_nickname_empty">Voer asseblief \'n naam in</string>
+
     <string name="settings_panel_title">Instellings</string>
     <string name="btn_upload_save">LAAI STOOR OP NA WOLK</string>
     <string name="btn_sync_save">SINKRONISEER STOOR MET WOLK</string>
-    <string name="text_last_save_sync_default">Laaste gesinkroniseer: --</string>
+    <string name="text_last_save_sync_default">Laas gesinkroniseer: --</string>
     <string name="btn_logout">TEKEN UIT</string>
     <string name="toast_logout_success">Suksesvol uitgeteken</string>
     <string name="logout_confirmation_title">Teken Uit</string>
-    <string name="logout_confirmation_message">Is jy seker jy wil uitteken? Jou vordering is in die wolk gestoor.</string>
+    <string name="logout_confirmation_message">Is jy seker jy wil uitteken? Jou vordering word in die wolk gestoor.</string>
     <string name="logout_confirm_yes">Teken Uit</string>
     <string name="logout_confirm_no">Kanselleer</string>
+    
+    <!-- Push Notifications -->
+    <string name="default_notification_channel_id" translatable="false">idle_loadshedding_default</string>
+    <string name="notification_channel_default_name">Algemene Kennisgewings</string>
+    <string name="notification_channel_events_name">Gebeurtenis Kennisgewings</string>
+    <string name="notification_channel_friends_name">Vriende Kennisgewings</string>
+    <string name="notification_channel_system_name">Stelsel Kennisgewings</string>
+    
+    <!-- Accessibility -->
+    <string name="accessibility_close">Maak modale venster toe</string>
+    <string name="accessibility_back">Gaan terug</string>
+    <string name="accessibility_tab">Oortjie, %1$s</string>
+    <string name="accessibility_toggle">Wissel, %1$s</string>
+    <string name="accessibility_profile_avatar">Profiel avatar</string>
+    <string name="accessibility_rank_badge">Rang kenteken</string>
 
     <!-- HUD / Navigation labels -->
-    <string name="hud_energy_label">Energie Krediete</string>
-    <string name="nav_level_up">Vlak Opgraderings</string>
+    <string name="hud_energy_label">Energiekrediete</string>
+    <string name="nav_level_up">Vlak Op</string>
     <string name="nav_power">Krag</string>
     <string name="nav_tasks">Take</string>
     <string name="hud_upgrades_content_description">Opgraderings</string>
     <string name="hud_profile_content_description">Profiel</string>
     <string name="advert_upgrade_text">Gratis Opgradering (AD)</string>
+
+    <!-- Biometric Settings -->
+    <string name="biometric_settings_title">Biometriese instellings</string>
+    <string name="biometric_promo_title">Bly veilig met biometrie</string>
+    <string name="biometric_promo_subtitle">Slaan wagwoordtik oor op betroubare toestelle deur vingerafdruk of gesigontsluiting te gebruik.</string>
+    <string name="biometric_promo_privacy">Jou biometriese data verlaat nooit die toestel nie. Jy kan dit enige tyd afskakel as jy jou foon verloor.</string>
+    <string name="biometric_enable_label">Aktiveer biometriese aanmelding</string>
+    <string name="biometric_enable_description">Hou dit aan vir toestelle wat jy vertrou. Ons sal jou herinner om weer te verifieer as jou toestel verander.</string>
+    <string name="biometric_status_disabled">Biometriese verifikasie is gedeaktiveer</string>
+    <string name="biometric_status_active">✓ Biometriese verifikasie is aktief en gereed</string>
+    <string name="biometric_status_not_configured">⚠ Biometrie geaktiveer maar nie ten volle gekonfigureer nie</string>
+    <string name="biometric_account_status_title">Rekeningstatus</string>
+    <string name="biometric_signed_in_as">Aangemeld as</string>
+    <string name="biometric_no_user">Geen gebruiker gekonfigureer nie</string>
+    <string name="biometric_device_support">Toestelondersteuning</string>
+    <string name="biometric_checking">Kontroleer...</string>
+    <string name="biometric_hardware_available">✓ Biometriese hardeware beskikbaar</string>
+    <string name="biometric_hardware_unavailable">✗ %1$s</string>
+    <string name="biometric_hardware_description">Ons valideer jou biometrie met behulp van die veilige hardeware op hierdie toestel.</string>
+    <string name="biometric_actions_title">Vinnige aksies</string>
+    <string name="biometric_btn_test">Toets biometriese ontsluiting</string>
+    <string name="biometric_btn_reenroll">Herregistreer biometrie</string>
+    <string name="biometric_actions_description">Gebruik hierdie nutsmiddels om te bevestig dat alles werk voordat jy op biometrie staatmaak vir daaglikse aanmeldings.</string>
+    <string name="biometric_tips_title">Nuttige wenke</string>
+    <string name="biometric_tip_1">• Skakel biometrie af voordat jy jou foon uitleen of laat diens.</string>
+    <string name="biometric_tip_2">• Herregistreer as jy nuwe vingerafdrukke of gesigprofiele byvoeg.</string>
+    <string name="biometric_tip_3">• Biometrie vul jou wagwoord aan—dit vervang dit nie.</string>
+    
+    <!-- Biometric Messages -->
+    <string name="biometric_error_loading">Kon nie biometriese status laai nie</string>
+    <string name="biometric_msg_enabled">Biometriese verifikasie geaktiveer</string>
+    <string name="biometric_msg_disabled">Biometriese verifikasie gedeaktiveer</string>
+    <string name="biometric_msg_cleared">Biometriese data uitgevee. Aktiveer asseblief weer om te herregistreer.</string>
+    <string name="biometric_error_no_user">Geen gebruiker gekonfigureer vir biometriese verifikasie nie</string>
+    <string name="biometric_error_enrollment_failed">Kon nie biometriese registrasie voltooi nie</string>
+    <string name="biometric_error_setup_failed">Kon nie biometriese opstelling voltooi nie</string>
+    <string name="biometric_error_disable_failed">Kon nie biometriese verifikasie deaktiveer nie</string>
+    <string name="biometric_error_reenroll_failed">Kon nie biometriese verifikasie herregistreer nie</string>
+    <string name="biometric_prompt_enable_title">Aktiveer Biometriese Verifikasie</string>
+    <string name="biometric_prompt_enable_subtitle">Bevestig jou identiteit</string>
+    <string name="biometric_prompt_enable_desc">Gebruik jou biometriese geloofsbrief om hierdie toestel te beveilig.</string>
+    <string name="biometric_prompt_test_title">Toets Biometriese Verifikasie</string>
+    <string name="biometric_prompt_test_subtitle">Verifieer jou biometriese geloofsbrief</string>
+    <string name="biometric_prompt_test_desc">Hierdie is \'n toets om te verseker dat biometriese verifikasie korrek werk</string>
+    <string name="biometric_test_success">✓ Biometriese verifikasie suksesvol!</string>
+    <string name="biometric_error_prefix">Fout: %1$s</string>
+    <string name="biometric_cancelled">Verifikasie gekanselleer</string>
+    <string name="biometric_login_required">Meld asseblief eers aan om biometriese verifikasie te aktiveer</string>
+    <string name="biometric_error_start">Kan nie biometriese registrasie begin nie: %1$s</string>
+    <string name="biometric_error_crypto">Kan nie kriptografiese data vaslê nie. Probeer asseblief weer.</string>
+    <string name="biometric_reenroll_instruction">Wissel asseblief biometriese verifikasie om te herregistreer</string>
+
+    <!-- Profile Panel -->
+    <string name="tab_profile">Profiel</string>
+    <string name="tab_leaderboard">Ranglys</string>
+    <string name="profile_default_name">Jou Naam</string>
+    <string name="profile_default_email">myNaam@gmail.com</string>
+    <string name="profile_email_placeholder">epos@voorbeeld.com</string>
+    <string name="profile_friend_code_placeholder">----·----</string>
+    <string name="btn_copy">KOPIEER</string>
+    <string name="label_player_statistics">Speler Statistieke</string>
+    <string name="profile_energy_total_default">Totaal gegenereer: --</string>
+    <string name="profile_energy_per_second_default">Produksie: --</string>
+    <string name="profile_generators_default">Generators: --</string>
+    <string name="profile_offline_default">Vanlyn: --</string>
+    <string name="profile_last_sync_default">Laas gesinkroniseer: --</string>
+    <string name="btn_edit_profile">WYSIG PROFIEL</string>
+    <string name="btn_settings">INSTELLINGS</string>
+    <string name="btn_biometric_settings">BIOMETRIESE INSTELLINGS</string>
+    <string name="btn_debug_notifications">ONTFOLUT KENNISGEWINGS</string>
+    
+    <!-- Leaderboard Panel -->
+    <string name="tab_friends">Vriende</string>
+    <string name="tab_global">Wêreldwyd</string>
+    <string name="leaderboard_updated_default">Opgedateer --</string>
+    <string name="placeholder_dash">--</string>
+    <string name="leaderboard_empty">Nog geen ranglysinskrywings nie</string>
+    <string name="leaderboard_rank_placeholder">#1</string>
+    <string name="leaderboard_name_placeholder">Speler Naam</string>
+    <string name="leaderboard_score_placeholder">R 120 343</string>
+
+    <!-- Friends Leaderboard Panel -->
+    <string name="label_add_friend">Voeg Vriend by met Kode</string>
+    <string name="hint_friend_code">K7M9-P2WX</string>
+    <string name="btn_add">VOEG BY</string>
+
+    <!-- Electricity Upgrade Panel -->
+    <string name="title_grid_production">Roosterproduksie</string>
+    <string name="label_current_energy">Huidige energie: --</string>
+    <string name="label_production">Produksie: --</string>
+    <string name="label_generators">Kragopwekkers: --</string>
+    <string name="label_energy_credits">Energiekrediete: --</string>
+    <string name="label_offline_progress">Vanlyn vordering: --</string>
+    <string name="label_safe_idle">Veilige ledig: --</string>
+    <string name="label_core_charge">Kernlading: --</string>
+    <string name="label_last_event">Laaste gebeurtenis: --</string>
+    <string name="label_last_save_sync">Laaste stoorsinkronisering: --</string>
+    <string name="title_district_overview">Distrik Oorsig</string>
+    <string name="btn_refresh">VERFRIS</string>
+
+    <!-- Building Upgrade Panel -->
+    <string name="tab_electricity">Elektrisiteit</string>
+    <string name="tab_building">Gebou</string>
+
+    <!-- Debug Notifications Panel -->
+    <string name="title_debug_notifications">Ontfout kennisgewings</string>
+    <string name="title_notification_studio"> Kennisgewing Studio</string>
+    <string name="desc_notification_studio_preview">Voorskou presies wat spelers sien voordat enigiets regstreeks gestuur word.</string>
+    <string name="desc_notification_studio_cards">Gebruik die kaarte hieronder om toestemmings toe te staan, tokens te verfris en elke toestand wat die toepassing ondersteun, te simuleer.</string>
+    <string name="title_readiness_checklist"> Gereedheidskontrolelys</string>
+    <string name="status_notification_permission_checking">Kennisgewingtoestemming: kontroleer...</string>
+    <string name="status_fcm_token_checking">FCM-token: kontroleer...</string>
+    <string name="status_backend_sync_checking">Agtergrondsinkronisering: kontroleer...</string>
+    <string name="btn_grant_permission">Gee toestemming</string>
+    <string name="btn_sync_token">Sinkroniseer token</string>
+    <string name="btn_open_android_settings">Maak Android-kennisgewinginstellings oop</string>
+    <string name="status_last_simulation">Laaste simulasie: --</string>
+
+    <!-- Upgrade Item View -->
+    <string name="upgrade_default_name">Kragopwekker 1</string>
+    <string name="upgrade_default_level">Vlak: 1</string>
+    <string name="upgrade_level_delta">+1</string>
+    <string name="btn_tap_to_upgrade">Tik om op te gradeer</string>
+
+    <!-- Game Activity -->
+    <string name="welcome_message">Welkom by die Spel!</string>
+
+    <!-- HUD -->
+    <string name="hud_currency_placeholder">1,978.12</string>
+    <string name="hud_production_placeholder">+0.00 /s</string>
+    <string name="hud_generators_placeholder">0 kragopwekkers</string>
+    <string name="hud_safe_idle_placeholder">Veilige ledig: --</string>
+
+    <!-- Game Stats Fragment -->
+    <string name="stats_title">Spel Statistieke</string>
+    <string name="stats_current_energy">Huidige Energie:</string>
+    <string name="stats_value_placeholder">0.00</string>
+    <string name="stats_total_generated">Totaal Gegenereer:</string>
+    <string name="stats_energy_per_second">Energie/Sekonde:</string>
+    <string name="stats_active_generators">Aktiewe Kragopwekkers:</string>
+    <string name="stats_count_placeholder">0</string>
+    <string name="stats_total_levels">Totale Vlakke:</string>
+    <string name="stats_tap_count">Tik Telling:</string>
+    <string name="stats_taps_placeholder">Tikke: 0</string>
+
+    <!-- District Status Item -->
+    <string name="district_default_name">Distrik</string>
+    <string name="district_default_level">Vlak 1</string>
+    <string name="district_default_output">0 /s</string>
+    <string name="district_default_efficiency">100% doeltreffendheid</string>
+    <string name="district_default_idle">Veilige ledig: --</string>
+    <string name="btn_service">DIENS</string>
+    <string name="btn_upgrade">OPGRADEER</string>
+
+    <!-- Tasks Panel -->
+    <string name="tasks_title">Take</string>
+
+    <!-- Task Item View -->
+    <string name="task_description_placeholder">Gradeer Stoor op na vlak 6</string>
+    <string name="task_reward_placeholder">R 20,000</string>
 </resources>

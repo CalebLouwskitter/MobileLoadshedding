@@ -30,7 +30,7 @@
                 android:id="@+id/text_upgrade_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Generator 1"
+                android:text="@string/upgrade_default_name"
                 android:textColor="@color/modal_text_on_light"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -50,7 +50,7 @@
                     android:id="@+id/text_upgrade_level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Level: 1"
+                    android:text="@string/upgrade_default_level"
                     android:textColor="@color/modal_text_muted"
                     android:textSize="13sp" />
 
@@ -68,7 +68,7 @@
                     android:layout_gravity="end|center_vertical"
                     android:layout_marginStart="@dimen/spacing_small"
                     android:alpha="0"
-                    android:text="+1"
+                    android:text="@string/upgrade_level_delta"
                     android:textColor="@color/modal_button_primary"
                     android:textSize="13sp"
                     android:textStyle="bold" />
@@ -97,7 +97,7 @@
             android:paddingEnd="@dimen/button_padding_horizontal"
             android:paddingBottom="@dimen/button_padding_vertical"
             android:stateListAnimator="@null"
-            android:text="Tap to Upgrade"
+            android:text="@string/btn_tap_to_upgrade"
             android:textAllCaps="false"
             android:textColor="@color/modal_text_primary"
             android:textSize="13sp"

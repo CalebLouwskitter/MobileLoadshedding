@@ -21,11 +21,11 @@
             android:background="@drawable/tab_profile_selected"
             android:drawableStart="@drawable/ic_profile_white"
             android:drawablePadding="@dimen/modal_tab_drawable_padding"
-            android:elevation="4dp"
+            android:elevation="2dp"
             android:gravity="center"
             android:paddingTop="@dimen/modal_tab_padding_vertical"
             android:paddingBottom="@dimen/modal_tab_padding_vertical"
-            android:text="Profile"
+            android:text="@string/tab_profile"
             android:textColor="@color/modal_text_primary"
             android:textSize="@dimen/modal_tab_text_size"
             android:textStyle="bold"
@@ -47,15 +47,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/tab_leaderboard"
-            android:drawableStart="@drawable/ic_leaderboard"
+            android:drawableStart="@drawable/ic_leaderboard_white"
             android:drawablePadding="@dimen/modal_tab_drawable_padding"
             android:elevation="2dp"
             android:gravity="center"
             android:paddingTop="@dimen/modal_tab_padding_vertical"
             android:paddingBottom="@dimen/modal_tab_padding_vertical"
-            android:text="Leader board"
-            android:textColor="@color/modal_toggle_active_bg"
+            android:text="@string/tab_leaderboard"
+            android:textColor="@color/black"
             android:textSize="@dimen/modal_tab_text_size"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tab_spacer"
             app:layout_constraintTop_toTopOf="parent" />
@@ -65,8 +66,9 @@
         android:id="@+id/content_scroll"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="@dimen/modal_tab_overlap_height"
         android:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -107,7 +109,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_normal"
-                android:text="Your Name"
+                                    android:text="@string/profile_default_name"
                 android:textColor="@color/modal_text_primary"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -121,8 +123,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_normal"
                 android:layout_marginTop="@dimen/spacing_tiny"
-                android:text="myName@gmail.com"
-                android:textColor="@color/modal_text_light_red"
+                                    android:text="@string/profile_default_email"
+                android:textColor="@color/modal_text_on_accent"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="@id/avatar_container"
                 app:layout_constraintEnd_toStartOf="@id/text_profile_tag"
@@ -178,8 +180,8 @@
                     android:layout_marginTop="2dp"
                     android:fontFamily="monospace"
                     android:letterSpacing="0.12"
-                    android:text="----·----"
-                    android:textColor="@color/modal_text_primary"
+                    android:text="@string/profile_friend_code_placeholder"
+                    android:textColor="@color/modal_text_on_accent"
                     android:textIsSelectable="true"
                     android:textSize="22sp"
                     android:textStyle="bold"
@@ -198,7 +200,7 @@
                     android:paddingTop="6dp"
                     android:paddingEnd="10dp"
                     android:paddingBottom="6dp"
-                    android:text="📋 COPY"
+                    android:text="@string/btn_copy"
                     android:textColor="@color/modal_text_primary"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@id/text_profile_friend_code"
@@ -224,7 +226,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/section_spacing"
-                android:text="Player Statistics"
+                android:text="@string/label_player_statistics"
                 android:textColor="@color/modal_text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -247,7 +249,7 @@
                     android:id="@+id/text_profile_energy_total"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Total generated: --"
+                    android:text="@string/profile_energy_total_default"
                     android:textColor="@color/modal_text_on_light"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -257,7 +259,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/stats_item_spacing"
-                    android:text="Production: --"
+                    android:text="@string/profile_energy_per_second_default"
                     android:textColor="@color/modal_text_on_light"
                     android:textSize="14sp" />
 
@@ -266,7 +268,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/stats_item_spacing"
-                    android:text="Generators: --"
+                    android:text="@string/profile_generators_default"
                     android:textColor="@color/modal_text_on_light"
                     android:textSize="14sp" />
 
@@ -275,7 +277,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/stats_item_spacing"
-                    android:text="Offline: --"
+                    android:text="@string/profile_offline_default"
                     android:textColor="@color/modal_text_on_light"
                     android:textSize="14sp" />
 
@@ -284,7 +286,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/stats_item_spacing"
-                    android:text="Last sync: --"
+                    android:text="@string/profile_last_sync_default"
                     android:textColor="@color/modal_text_on_light"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -293,91 +295,77 @@
 
             <Button
                 android:id="@+id/btn_profile_edit"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_large"
+                android:background="@drawable/bg_button_white"
+                app:backgroundTint="@null"
                 android:paddingTop="@dimen/button_padding_vertical"
                 android:paddingBottom="@dimen/button_padding_vertical"
-                android:text="EDIT PROFILE"
-                android:textColor="@color/modal_text_primary"
+                android:text="@string/btn_edit_profile"
+                android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/stats_container"
-                app:strokeColor="@color/modal_text_primary" />
+                app:layout_constraintTop_toBottomOf="@id/stats_container" />
 
             <Button
                 android:id="@+id/btn_profile_settings"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_small"
+                android:background="@drawable/bg_button_white"
+                app:backgroundTint="@null"
                 android:paddingTop="@dimen/button_padding_vertical"
                 android:paddingBottom="@dimen/button_padding_vertical"
-                android:text="SETTINGS"
-                android:textColor="@color/modal_text_primary"
+                android:text="@string/btn_settings"
+                android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_profile_edit"
-                app:strokeColor="@color/modal_text_primary" />
+                app:layout_constraintTop_toBottomOf="@id/btn_profile_edit" />
 
             <Button
                 android:id="@+id/btn_profile_biometric"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_small"
+                android:background="@drawable/bg_button_white"
+                app:backgroundTint="@null"
                 android:paddingTop="@dimen/button_padding_vertical"
                 android:paddingBottom="@dimen/button_padding_vertical"
-                android:text="🔐 BIOMETRIC SETTINGS"
-                android:textColor="@color/modal_text_primary"
+                android:text="@string/btn_biometric_settings"
+                android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_profile_settings"
-                app:strokeColor="@color/modal_text_primary" />
-
-            <Button
-                android:id="@+id/btn_profile_friends"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_small"
-                android:paddingTop="@dimen/button_padding_vertical"
-                android:paddingBottom="@dimen/button_padding_vertical"
-                android:text="FRIENDS"
-                android:textColor="@color/modal_text_primary"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_profile_biometric"
-                app:strokeColor="@color/modal_text_primary" />
+                app:layout_constraintTop_toBottomOf="@id/btn_profile_settings" />
 
             <Button
                 android:id="@+id/btn_profile_debug_notifications"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_small"
+                android:background="@drawable/bg_button_white"
+                app:backgroundTint="@null"
                 android:paddingTop="@dimen/button_padding_vertical"
                 android:paddingBottom="@dimen/button_padding_vertical"
-                android:text="🔔 DEBUG NOTIFICATIONS"
-                android:textColor="@color/modal_button_accent"
+                android:text="@string/btn_debug_notifications"
+                android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_profile_friends"
+                app:layout_constraintTop_toBottomOf="@id/btn_profile_biometric"
                 app:strokeColor="@color/modal_button_accent" />
 
             <Button
                 android:id="@+id/btn_profile_logout"
-                style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_normal"
-                android:backgroundTint="@color/modal_background_red"
+                android:background="@drawable/bg_button_white"
+                app:backgroundTint="@null"
                 android:paddingTop="@dimen/button_padding_vertical"
                 android:paddingBottom="@dimen/button_padding_vertical"
                 android:text="LOGOUT"
-                android:textColor="@color/modal_text_primary"
+                android:textColor="@color/modal_header_primary"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -387,7 +375,4 @@
     </androidx.core.widget.NestedScrollView>
 
     <!-- Tabs Section (Overlapping at top) -->
-
-    <!-- Close Button overlaying tabs -->
-    <include layout="@layout/include_modal_close_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

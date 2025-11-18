@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="timestamp_unknown" translatable="false">--</string>
     <string name="app_name" translatable="false">MobileLoadshedding</string>
     <string name="default_web_client_id" translatable="false">41587024325-gt1n0vaejub9dme7cvidievg5kcktbmp.apps.googleusercontent.com</string>
+    <string name="admob_app_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
+    
     <string name="hud_energy_per_second_format" translatable="false">%1$s /s</string>
     <string name="hud_generators_format">%1$d iijenereyitha (Lv %2$d)</string>
     <string name="hud_safe_idle_format">Kukhuselekile: %1$s</string>
@@ -20,6 +21,7 @@
     <string name="tasks_event_inactive">%1$s • Igqityiwe</string>
     <string name="tasks_event_multiplier">Isiphinda-phindo x%1$.2f</string>
     <string name="tasks_event_duration">Ixesha %1$s</string>
+    <string name="timestamp_unknown" translatable="false">--</string>
     <string name="friend_placeholder_name">Umhlobo %1$s</string>
     <string name="electricity_current_energy">Amandla angoku: %1$s</string>
     <string name="electricity_production">Imveliso: %1$s /s</string>
@@ -49,17 +51,10 @@
     <string name="profile_tag_newbie">🌟 INTSHA</string>
     <string name="friends_empty_message">Akukho bahlobo bongezelelweyo okwangoku.\nYabelana ngekhowudi yakho yomhlobo ukuze uqhagamshelane!</string>
     <string name="friends_error_message">Ayikwazi ukulayisha uluhlu lwabahlobo.\nJonga uqhagamshelo lwakho kwaye uzame kwakhona.</string>
-    <string name="auth_biometric_login">Ngena nge-Biometrics</string>
-    <string name="notification_channel_default_name">Izaziso Ngokubanzi</string>
-    <string name="notification_channel_events_name">Izaziso Zeziganeko</string>
-    <string name="notification_channel_friends_name">Izaziso Zabahlobo</string>
-    <string name="notification_channel_system_name">Izaziso Zenkqubo</string>
-    <string name="accessibility_close">Vala imodali</string>
-    <string name="accessibility_back">Buyela umva</string>
-    <string name="accessibility_tab">Ithebhu, %1$s</string>
-    <string name="accessibility_toggle">Tshintsha, %1$s</string>
-    <string name="accessibility_profile_avatar">Umfanekiso weprofayile</string>
-    <string name="accessibility_rank_badge">Ibheji yomgangatho</string>
+    <string name="settings_language_changed">Ulwimi lutshintshile. Qalisa kwakhona usetyenziso ukuze usebenze.</string>
+    <string name="settings_language_label">Ulwimi</string>
+    <string name="settings_theme_label">Umxholo</string>
+    <string name="settings_save_management_label">Ulawulo Lokugcina</string>
 
     <!-- Auth -->
     <string name="auth_header_title">Idle Loadshedding</string>
@@ -78,6 +73,7 @@
     <string name="auth_primary_cta_login">Ngena</string>
     <string name="auth_primary_cta_signup">Bhalisa</string>
     <string name="auth_google_cta">Qhubeka nge-Google</string>
+    <string name="auth_biometric_login">Ngena nge-Biometrics</string>
     <string name="auth_or_label">Okanye</string>
     <string name="auth_already_signed">Sele Ubhalisile ?</string>
     
@@ -91,27 +87,199 @@
     <string name="toast_profile_updated">Iprofayile ihlaziywe ngempumelelo</string>
     <string name="toast_profile_update_failed">Ayiphumelelanga ukuhlaziya iprofayile</string>
     <string name="toast_nickname_empty">Nceda ufake igama lesitegezo</string>
-    <string name="settings_language_changed">Ulwimi lutshintshile. Qalisa kwakhona usetyenziso ukuze usebenze.</string>
-    <string name="settings_language_label">Ulwimi</string>
-    <string name="settings_theme_label">Umxholo</string>
-    <string name="settings_save_management_label">Ulawulo Lokugcina</string>
+
     <string name="settings_panel_title">Iisetingi</string>
     <string name="btn_upload_save">LAYISHA UKUGCINA KWIFU</string>
     <string name="btn_sync_save">VUMISA UKUGCINA KWIFU</string>
-    <string name="text_last_save_sync_default">Kugcinwe okugqibela: --</string>
+    <string name="text_last_save_sync_default">Igciniwe okokugqibela: --</string>
     <string name="btn_logout">PHUMA</string>
-    <string name="toast_logout_success">Uphumile ngempumelelo</string>
+    <string name="toast_logout_success">Uphume ngempumelelo</string>
     <string name="logout_confirmation_title">Phuma</string>
-    <string name="logout_confirmation_message">Uqinisekile ukuba ufuna ukuphuma? Inkqubela yakho igcinwe kwifayile.</string>
+    <string name="logout_confirmation_message">Uqinisekile ukuba ufuna ukuphuma? Inkqubela yakho igcinwe efini.</string>
     <string name="logout_confirm_yes">Phuma</string>
     <string name="logout_confirm_no">Rhoxisa</string>
+    
+    <!-- Push Notifications -->
+    <string name="default_notification_channel_id" translatable="false">idle_loadshedding_default</string>
+    <string name="notification_channel_default_name">Izaziso Ngokubanzi</string>
+    <string name="notification_channel_events_name">Izaziso Zeziganeko</string>
+    <string name="notification_channel_friends_name">Izaziso Zabahlobo</string>
+    <string name="notification_channel_system_name">Izaziso Zenkqubo</string>
+    
+    <!-- Accessibility -->
+    <string name="accessibility_close">Vala imodali</string>
+    <string name="accessibility_back">Buyela umva</string>
+    <string name="accessibility_tab">Ithebhu, %1$s</string>
+    <string name="accessibility_toggle">Tshintsha, %1$s</string>
+    <string name="accessibility_profile_avatar">Umfanekiso weprofayile</string>
+    <string name="accessibility_rank_badge">Ibheji yomgangatho</string>
 
     <!-- HUD / Navigation labels -->
     <string name="hud_energy_label">Iikhredithi Zamandla</string>
-    <string name="nav_level_up">Amanqanaba Aphezulu</string>
+    <string name="nav_level_up">Nyusa Inqanaba</string>
     <string name="nav_power">Amandla</string>
     <string name="nav_tasks">Imisebenzi</string>
-    <string name="hud_upgrades_content_description">Uhlaziyo</string>
+    <string name="hud_upgrades_content_description">Uphuculo</string>
     <string name="hud_profile_content_description">Iprofayile</string>
-    <string name="advert_upgrade_text">Uphuculo mahala (AD)</string>
+    <string name="advert_upgrade_text">Uphuculo lwasimahla (AD)</string>
+
+    <!-- Biometric Settings -->
+    <string name="biometric_settings_title">Iisetingi ze-Biometric</string>
+    <string name="biometric_promo_title">Hlala ukhuselekile nge-biometrics</string>
+    <string name="biometric_promo_subtitle">Tsiba ukuchwetheza igama lokugqitha kwizixhobo ezithembekileyo ngokusebenzisa umnwe okanye ukuvula ngobuso.</string>
+    <string name="biometric_promo_privacy">Idatha ye-biometric ayisishiyi isixhobo. Ungayicima nanini na ukuba ulahlekelwe yifowuni yakho.</string>
+    <string name="biometric_enable_label">Vumela ukungena nge-biometric</string>
+    <string name="biometric_enable_description">Gcina oku kuvuliwe kwizixhobo ozithembayo. Siza kukucela ukuba uqinisekise kwakhona ukuba isixhobo sakho siyatshintsha.</string>
+    <string name="biometric_status_disabled">Uqinisekiso lwe-biometric lucinyiwe</string>
+    <string name="biometric_status_active">✓ Uqinisekiso lwe-biometric luyasebenza kwaye lulungile</string>
+    <string name="biometric_status_not_configured">⚠ I-biometric ivunyelwe kodwa ayiqwalaselwanga ngokupheleleyo</string>
+    <string name="biometric_account_status_title">Ubume be-akhawunti</string>
+    <string name="biometric_signed_in_as">Ungene njenge</string>
+    <string name="biometric_no_user">Akukho msebenzisi uqwalaselweyo</string>
+    <string name="biometric_device_support">Inkxaso yesixhobo</string>
+    <string name="biometric_checking">Iyajonga...</string>
+    <string name="biometric_hardware_available">✓ I-hardware ye-biometric ikhona</string>
+    <string name="biometric_hardware_unavailable">✗ %1$s</string>
+    <string name="biometric_hardware_description">Siqinisekisa i-biometrics yakho sisebenzisa i-hardware ekhuselekileyo kwesi sixhobo.</string>
+    <string name="biometric_actions_title">Izenzo ezikhawulezayo</string>
+    <string name="biometric_btn_test">Vavanya ukuvula nge-biometric</string>
+    <string name="biometric_btn_reenroll">Bhalisa kwakhona kwi-biometrics</string>
+    <string name="biometric_actions_description">Sebenzisa ezi zixhobo ukuqinisekisa ukuba yonke into iyasebenza phambi kokuba uthembele kwi-biometrics ukungena imihla ngemihla.</string>
+    <string name="biometric_tips_title">Iingcebiso eziluncedo</string>
+    <string name="biometric_tip_1">• Cima i-biometrics phambi kokuba uboleke okanye uthumele ifowuni yakho ukuba ilungiswe.</string>
+    <string name="biometric_tip_2">• Bhalisa kwakhona ukuba wongeza iminwe emitsha okanye iiprofayile zobuso.</string>
+    <string name="biometric_tip_3">• I-biometrics yongeza igama lakho lokugqitha—ayithathi indawo yalo.</string>
+    
+    <!-- Biometric Messages -->
+    <string name="biometric_error_loading">Ayiphumelelanga ukulayisha ubume be-biometric</string>
+    <string name="biometric_msg_enabled">Uqinisekiso lwe-biometric luvunyelwe</string>
+    <string name="biometric_msg_disabled">Uqinisekiso lwe-biometric lucinyiwe</string>
+    <string name="biometric_msg_cleared">Idatha ye-biometric icinyiwe. Nceda uvumele kwakhona ukubhalisa kwakhona.</string>
+    <string name="biometric_error_no_user">Akukho msebenzisi uqwalaselweyo woqinisekiso lwe-biometric</string>
+    <string name="biometric_error_enrollment_failed">Ayiphumelelanga ukugqiba ukubhalisa kwe-biometric</string>
+    <string name="biometric_error_setup_failed">Ayiphumelelanga ukugqiba ukuseta i-biometric</string>
+    <string name="biometric_error_disable_failed">Ayiphumelelanga ukucima uqinisekiso lwe-biometric</string>
+    <string name="biometric_error_reenroll_failed">Ayiphumelelanga ukubhalisa kwakhona kuqinisekiso lwe-biometric</string>
+    <string name="biometric_prompt_enable_title">Vumela Uqinisekiso lwe-Biometric</string>
+    <string name="biometric_prompt_enable_subtitle">Qinisekisa isazisi sakho</string>
+    <string name="biometric_prompt_enable_desc">Sebenzisa ubungqina bakho be-biometric ukukhusela esi sixhobo.</string>
+    <string name="biometric_prompt_test_title">Vavanya Uqinisekiso lwe-Biometric</string>
+    <string name="biometric_prompt_test_subtitle">Qinisekisa ubungqina bakho be-biometric</string>
+    <string name="biometric_prompt_test_desc">Olu luvavanyo lokuqinisekisa ukuba uqinisekiso lwe-biometric lusebenza ngokufanelekileyo</string>
+    <string name="biometric_test_success">✓ Uqinisekiso lwe-biometric luphumelele!</string>
+    <string name="biometric_error_prefix">Impazamo: %1$s</string>
+    <string name="biometric_cancelled">Uqinisekiso lurhoxisiwe</string>
+    <string name="biometric_login_required">Nceda ungene phambi kokuvumela uqinisekiso lwe-biometric</string>
+    <string name="biometric_error_start">Ayikwazi ukuqalisa ukubhalisa kwe-biometric: %1$s</string>
+    <string name="biometric_error_crypto">Ayikwazi ukufumana idatha ye-cryptographic. Nceda uzame kwakhona.</string>
+    <string name="biometric_reenroll_instruction">Nceda utshintshe uqinisekiso lwe-biometric ukubhalisa kwakhona</string>
+
+    <!-- Profile Panel -->
+    <string name="tab_profile">Iprofayile</string>
+    <string name="tab_leaderboard">Ibhodi Yeenkokeli</string>
+    <string name="profile_default_name">Igama Lakho</string>
+    <string name="profile_default_email">igamaLam@gmail.com</string>
+    <string name="profile_email_placeholder">imeyile@umzekelo.com</string>
+    <string name="profile_friend_code_placeholder">----·----</string>
+    <string name="btn_copy">KOPA</string>
+    <string name="label_player_statistics">Izibalo Zomdlali</string>
+    <string name="profile_energy_total_default">Iyonke evelisiwe: --</string>
+    <string name="profile_energy_per_second_default">Imveliso: --</string>
+    <string name="profile_generators_default">Iijenereyitha: --</string>
+    <string name="profile_offline_default">Ayisebenzi: --</string>
+    <string name="profile_last_sync_default">Ivumelaniswe kokugqibela: --</string>
+    <string name="btn_edit_profile">HLELA IPROFAYILE</string>
+    <string name="btn_settings">IISETINGI</string>
+    <string name="btn_biometric_settings">IISETINGI ZE-BIOMETRIC</string>
+    <string name="btn_debug_notifications">IZAZISO ZE-DEBUG</string>
+    
+    <!-- Leaderboard Panel -->
+    <string name="tab_friends">Abahlobo</string>
+    <string name="tab_global">Ihlabathi</string>
+    <string name="leaderboard_updated_default">Ihlaziyiwe --</string>
+    <string name="placeholder_dash">--</string>
+    <string name="leaderboard_empty">Akukho zingeniso zebhodi yeenkokeli okwangoku</string>
+    <string name="leaderboard_rank_placeholder">#1</string>
+    <string name="leaderboard_name_placeholder">Igama Lomdlali</string>
+    <string name="leaderboard_score_placeholder">R 120 343</string>
+
+    <!-- Friends Leaderboard Panel -->
+    <string name="label_add_friend">Yongeza Umhlobo ngeKhowudi</string>
+    <string name="hint_friend_code">K7M9-P2WX</string>
+    <string name="btn_add">YONGEZA</string>
+
+    <!-- Electricity Upgrade Panel -->
+    <string name="title_grid_production">Imveliso ye-Grid</string>
+    <string name="label_current_energy">Amandla angoku: --</string>
+    <string name="label_production">Imveliso: --</string>
+    <string name="label_generators">Iijenereyitha: --</string>
+    <string name="label_energy_credits">Iikhredithi zamandla: --</string>
+    <string name="label_offline_progress">Inkqubela engekho kwi-intanethi: --</string>
+    <string name="label_safe_idle">Kukhuselekile: --</string>
+    <string name="label_core_charge">Intlawulo yomongo: --</string>
+    <string name="label_last_event">Isiganeko sokugqibela: --</string>
+    <string name="label_last_save_sync">Uvumelaniso lwesigcino: --</string>
+    <string name="title_district_overview">Isishwankathelo Sesithili</string>
+    <string name="btn_refresh">HLAZIYA</string>
+
+    <!-- Building Upgrade Panel -->
+    <string name="tab_electricity">Umbane</string>
+    <string name="tab_building">Isakhiwo</string>
+
+    <!-- Debug Notifications Panel -->
+    <string name="title_debug_notifications">Izaziso ze-Debug</string>
+    <string name="title_notification_studio">Isitudiyo Sesaziso</string>
+    <string name="desc_notification_studio_preview">Jonga kanye into ebonwa ngabadlali phambi kokuthumela nantoni na ephilayo.</string>
+    <string name="desc_notification_studio_cards">Sebenzisa amakhadi angezantsi ukunika imvume, ukuhlaziya iithokheni, kunye nokulinganisa nayiphi na imeko exhaswa sisixhobo.</string>
+    <string name="title_readiness_checklist">Uluhlu lokukhangela ukulungela</string>
+    <string name="status_notification_permission_checking">Imvume yesaziso: iyajonga...</string>
+    <string name="status_fcm_token_checking">Ithokheni ye-FCM: iyajonga...</string>
+    <string name="status_backend_sync_checking">Uqhagamshelo lwangasemva: iyajonga...</string>
+    <string name="btn_grant_permission">Nika imvume</string>
+    <string name="btn_sync_token">Vumelanisa ithokheni</string>
+    <string name="btn_open_android_settings">Vula iisetingi zesaziso ze-Android</string>
+    <string name="status_last_simulation">Ulinganiso lokugqibela: --</string>
+
+    <!-- Upgrade Item View -->
+    <string name="upgrade_default_name">Ijenereyitha 1</string>
+    <string name="upgrade_default_level">Inqanaba: 1</string>
+    <string name="upgrade_level_delta">+1</string>
+    <string name="btn_tap_to_upgrade">Cofa ukuze Uphucule</string>
+
+    <!-- Game Activity -->
+    <string name="welcome_message">Wamkelekile eMdlalweni!</string>
+
+    <!-- HUD -->
+    <string name="hud_currency_placeholder">1,978.12</string>
+    <string name="hud_production_placeholder">+0.00 /s</string>
+    <string name="hud_generators_placeholder">0 iijenereyitha</string>
+    <string name="hud_safe_idle_placeholder">Kukhuselekile: --</string>
+
+    <!-- Game Stats Fragment -->
+    <string name="stats_title">Izibalo Zomdlalo</string>
+    <string name="stats_current_energy">Amandla Angoku:</string>
+    <string name="stats_value_placeholder">0.00</string>
+    <string name="stats_total_generated">Iyonke Evelisiweyo:</string>
+    <string name="stats_energy_per_second">Amandla/Ngemzuzwana:</string>
+    <string name="stats_active_generators">Iijenereyitha Ezisebenzayo:</string>
+    <string name="stats_count_placeholder">0</string>
+    <string name="stats_total_levels">Amanqanaba Ewonke:</string>
+    <string name="stats_tap_count">Inani Lokucofa:</string>
+    <string name="stats_taps_placeholder">Ukucofa: 0</string>
+
+    <!-- District Status Item -->
+    <string name="district_default_name">Isithili</string>
+    <string name="district_default_level">Inqanaba 1</string>
+    <string name="district_default_output">0 /s</string>
+    <string name="district_default_efficiency">100% ukusebenza kakuhle</string>
+    <string name="district_default_idle">Kukhuselekile: --</string>
+    <string name="btn_service">INKONZO</string>
+    <string name="btn_upgrade">PHUCULA</string>
+
+    <!-- Tasks Panel -->
+    <string name="tasks_title">Imisebenzi</string>
+
+    <!-- Task Item View -->
+    <string name="task_description_placeholder">Phucula Ugcino ukuya kwinqanaba 6</string>
+    <string name="task_reward_placeholder">R 20,000</string>
 </resources>

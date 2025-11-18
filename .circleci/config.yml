@@ -173,7 +173,7 @@ jobs:
           name: Check code formatting
           command: dotnet format IdleLoadsheddingAPI/IdleLoadsheddingAPI.sln --verify-no-changes --verbosity diagnostic
       - save-dotnet-cache
-      
+            
   dotnet-dependency-check:
     executor: dotnet-executor
     steps:

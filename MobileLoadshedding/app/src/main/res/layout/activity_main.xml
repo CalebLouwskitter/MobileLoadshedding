@@ -44,7 +44,7 @@
                     android:id="@+id/text_currency_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1,978.12"
+                    android:text="@string/hud_currency_placeholder"
                     android:textColor="#052E45"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -61,7 +61,7 @@
                     android:id="@+id/text_energy_per_second"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+0.00 /s"
+                    android:text="@string/hud_production_placeholder"
                     android:textColor="#052E45"
                     android:textSize="12sp" />
 
@@ -69,7 +69,7 @@
                     android:id="@+id/text_active_generators"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0 generators"
+                    android:text="@string/hud_generators_placeholder"
                     android:textColor="#052E45"
                     android:textSize="12sp" />
 
@@ -77,7 +77,7 @@
                     android:id="@+id/text_safe_idle_hours"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Safe idle: --"
+                    android:text="@string/hud_safe_idle_placeholder"
                     android:textColor="#052E45"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -121,7 +121,10 @@
                 android:layout_width="248dp"
                 android:layout_height="41dp"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/advert_upgrade_text" />
+                android:background="@drawable/bg_button_white"
+                android:backgroundTint="@android:color/transparent"
+                android:text="@string/advert_upgrade_text"
+                android:textColor="@android:color/black" />
 
             <LinearLayout
                 android:id="@+id/bottom_nav"
@@ -138,7 +141,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
-                    android:text="@string/nav_level_up" />
+                    android:background="@drawable/bg_button_white"
+                    android:backgroundTint="@android:color/transparent"
+                    android:text="@string/nav_level_up"
+                    android:textColor="@android:color/black" />
 
                 <Button
                     android:id="@+id/btn_nav_power"
@@ -159,7 +165,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    android:text="@string/nav_tasks" />
+                    android:background="@drawable/bg_button_white"
+                    android:backgroundTint="@android:color/transparent"
+                    android:text="@string/nav_tasks"
+                    android:textColor="@android:color/black" />
             </LinearLayout>
 
         </LinearLayout>
