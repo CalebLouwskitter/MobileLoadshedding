@@ -79,4 +79,9 @@
 
     </LinearLayout>
 
+    <!-- Hidden close button include so back arrow can delegate to shared modal close logic -->
+    <include
+        layout="@layout/include_modal_close_button"
+        android:visibility="gone" />
+
 </FrameLayout>
