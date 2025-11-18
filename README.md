@@ -124,32 +124,7 @@ Player progress, including game state, statistics, and achievements, is securely
 </p>
 
 ---
-## Feature 1: Unity game interface
 
-The frontend of the game is built using Unity, offering a rich and interactive user experience. The interface is designed to be intuitive and visually appealing, allowing players to easily navigate through the game's features.
-
-### Built with Unity's 3D capabilities:
-
-- Camera Controls: Smooth pan and zoom with touch, edge panning for mobile
-- Clickable Objects: Interactive generators and buildings with visual feedback
-- Light System: Dynamic lighting that responds to touch
-- Visual Effects: Animations and material changes for state transitions
-
-<img width="506" height="1145" alt="image" src="https://github.com/user-attachments/assets/27d20d26-32a3-4c2a-9865-16ee9a3ddc8d" />
-
-
-## Feature 2: Leaderboard System
-
-A competitive leaderboard system is implemented to enhance player engagement. The system ranks players based on their scores, which are submitted to the backend. The backend processes these scores and serves the leaderboard data to the game client.
-
-<img width="509" height="1144" alt="image" src="https://github.com/user-attachments/assets/8582fa07-3db9-4678-9fbe-eedb2c032b75" />
-
-
-## Feature 3: Cloud Save Functionality with Azure SQL
-
-Player progress, including game state, statistics, and achievements, is securely saved to an Azure SQL database. This ensures data persistence across different devices and game sessions, providing a seamless experience for the user.
-
-<img width="535" height="390" alt="image" src="https://github.com/user-attachments/assets/e4b99401-df25-4504-9777-33bfaeea4972" />
 
 ## Contributors
 
