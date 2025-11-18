@@ -188,7 +188,259 @@
                 app:layout_constraintTop_toBottomOf="@id/text_friends_last_updated"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <!-- Top 3 leaderboard items -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingTop="@dimen/spacing_large"
+                    android:paddingBottom="@dimen/spacing_large">
+
+                    <!-- 2nd place -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/spacing_small"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:background="@drawable/bg_leaderboard_avatar_secondary"
+                            android:gravity="center"
+                            android:text="2"
+                            android:textColor="@color/modal_text_primary"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_small"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Kyle Weis..."
+                            android:textColor="@color/modal_text_dark_blue"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="R 120 343"
+                            android:textColor="@color/modal_text_dark_gray"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <!-- 1st place -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_small"
+                        android:layout_marginEnd="@dimen/spacing_small"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:background="@drawable/bg_leaderboard_avatar_primary"
+                            android:gravity="center"
+                            android:text="1"
+                            android:textColor="@color/modal_text_primary"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_small"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Kyle Weis..."
+                            android:textColor="@color/modal_text_dark_blue"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="R 120 343"
+                            android:textColor="@color/modal_text_dark_gray"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <!-- 3rd place -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_small"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:background="@drawable/bg_leaderboard_avatar_secondary"
+                            android:gravity="center"
+                            android:text="3"
+                            android:textColor="@color/modal_text_primary"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_small"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Caleb Lou..."
+                            android:textColor="@color/modal_text_dark_blue"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="R 120 343"
+                            android:textColor="@color/modal_text_dark_gray"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Remaining positions -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:background="@drawable/bg_leaderboard_row"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/spacing_medium">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_leaderboard_rank_circle"
+                        android:gravity="center"
+                        android:minWidth="28dp"
+                        android:minHeight="28dp"
+                        android:text="4"
+                        android:textColor="@color/modal_text_dark_blue"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_medium"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Caleb Lou..."
+                        android:textColor="@color/modal_text_dark_blue"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="R 204 242"
+                        android:textColor="@color/modal_text_dark_gray"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:background="@drawable/bg_leaderboard_row"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/spacing_medium">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_leaderboard_rank_circle"
+                        android:gravity="center"
+                        android:minWidth="28dp"
+                        android:minHeight="28dp"
+                        android:text="5"
+                        android:textColor="@color/modal_text_dark_blue"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_medium"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Jess Rola..."
+                        android:textColor="@color/modal_text_dark_blue"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="R 204 242"
+                        android:textColor="@color/modal_text_dark_gray"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:background="@drawable/bg_leaderboard_row"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/spacing_medium">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_leaderboard_rank_circle"
+                        android:gravity="center"
+                        android:minWidth="28dp"
+                        android:minHeight="28dp"
+                        android:text="6"
+                        android:textColor="@color/modal_text_dark_blue"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_medium"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Mike Til..."
+                        android:textColor="@color/modal_text_dark_blue"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="R 204 242"
+                        android:textColor="@color/modal_text_dark_gray"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
