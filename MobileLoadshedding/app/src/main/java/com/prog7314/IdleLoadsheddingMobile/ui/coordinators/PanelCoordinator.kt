@@ -97,7 +97,7 @@ class PanelCoordinator(
             }
             
             R.layout.panel_settings -> {
-                settingsPanelBinder.configure(panelView, stateManager.latestSave, onNavigate)
+                settingsPanelBinder.configure(panelView, stateManager.latestSave)
             }
             
             R.layout.panel_friends_leaderboard -> {
@@ -155,7 +155,7 @@ class PanelCoordinator(
             
             R.layout.panel_leaderboard -> {
                 val payload = stateManager.latestLeaderboard
-                Log.d("PanelCoordinator", "📊 Updating leaderboard panel (payload: ${payload != null}, entries: ${payload?.entries?.size ?: 0})")
+                Log.d("PanelCoordinator", "Updating leaderboard panel (payload: ${payload != null}, entries: ${payload?.entries?.size ?: 0})")
                 leaderboardPanelBinder.bindData(panelView, payload)
             }
 
@@ -196,7 +196,7 @@ class PanelCoordinator(
         val cloudStatus = panelView.findViewById<TextView?>(R.id.text_cloud_result)
 
         fun TextView?.setStatus(ok: Boolean, message: String) {
-            this?.text = if (ok) "✅ $message" else "⚠️ $message"
+            this?.text = message
             val colorRes = if (ok) R.color.modal_button_primary else R.color.modal_button_danger
             this?.setTextColor(ContextCompat.getColor(context, colorRes))
         }
@@ -204,11 +204,7 @@ class PanelCoordinator(
         fun logResult(success: Boolean, label: String) {
             val formatter = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
             val stamp = formatter.format(Date())
-            resultStatus?.text = if (success) {
-                "✅ $label • $stamp"
-            } else {
-                "⚠️ $label • $stamp"
-            }
+            resultStatus?.text = "$label • $stamp"
             val colorRes = if (success) R.color.modal_button_primary else R.color.modal_button_danger
             resultStatus?.setTextColor(ContextCompat.getColor(context, colorRes))
         }
@@ -233,58 +229,64 @@ class PanelCoordinator(
                 })
                 val backendDisabled = !BuildConfig.ENABLE_BACKEND_TOKEN_REGISTRATION
                 val backendSynced = hasToken && token == registered
-                when {
-                    backendDisabled -> backendStatus.setStatus(true, "Backend sync bypassed (Firebase only)")
-                    backendSynced -> backendStatus.setStatus(true, "Synced with backend")
-                    else -> backendStatus.setStatus(false, "Tap Sync Token")
+                
+                if (backendDisabled) {
+                    backendStatus?.visibility = View.GONE
+                } else {
+                    backendStatus?.visibility = View.VISIBLE
+                    if (backendSynced) {
+                        backendStatus.setStatus(true, "Synced with backend")
+                    } else {
+                        backendStatus.setStatus(false, "Tap Sync Token")
+                    }
                 }
             }
         }
         
         panelView.findViewById<View>(com.prog7314.IdleLoadsheddingMobile.R.id.btn_test_event_started)?.setOnClickListener {
-            logResult(false, "⏳ Sending to Firebase...")
+            logResult(false, "Sending to Firebase...")
             FirebaseCloudMessenger.sendCloudNotification(NotificationType.EVENT_STARTED) { success, message ->
                 logResult(success, message)
             }
         }
         
         panelView.findViewById<View>(com.prog7314.IdleLoadsheddingMobile.R.id.btn_test_event_ending_soon)?.setOnClickListener {
-            logResult(false, "⏳ Sending to Firebase...")
+            logResult(false, "Sending to Firebase...")
             FirebaseCloudMessenger.sendCloudNotification(NotificationType.EVENT_ENDING_SOON) { success, message ->
                 logResult(success, message)
             }
         }
         
         panelView.findViewById<View>(com.prog7314.IdleLoadsheddingMobile.R.id.btn_test_friend_request)?.setOnClickListener {
-            logResult(false, "⏳ Sending to Firebase...")
+            logResult(false, "Sending to Firebase...")
             FirebaseCloudMessenger.sendCloudNotification(NotificationType.FRIEND_REQUEST) { success, message ->
                 logResult(success, message)
             }
         }
         
         panelView.findViewById<View>(com.prog7314.IdleLoadsheddingMobile.R.id.btn_test_friend_accepted)?.setOnClickListener {
-            logResult(false, "⏳ Sending to Firebase...")
+            logResult(false, "Sending to Firebase...")
             FirebaseCloudMessenger.sendCloudNotification(NotificationType.FRIEND_ACCEPTED) { success, message ->
                 logResult(success, message)
             }
         }
         
         panelView.findViewById<View>(com.prog7314.IdleLoadsheddingMobile.R.id.btn_test_system_announcement)?.setOnClickListener {
-            logResult(false, "⏳ Sending to Firebase...")
+            logResult(false, "Sending to Firebase...")
             FirebaseCloudMessenger.sendCloudNotification(NotificationType.SYSTEM_ANNOUNCEMENT) { success, message ->
                 logResult(success, message)
             }
         }
         
         panelView.findViewById<View>(com.prog7314.IdleLoadsheddingMobile.R.id.btn_test_maintenance)?.setOnClickListener {
-            logResult(false, "⏳ Sending to Firebase...")
+            logResult(false, "Sending to Firebase...")
             FirebaseCloudMessenger.sendCloudNotification(NotificationType.MAINTENANCE_REQUIRED) { success, message ->
                 logResult(success, message)
             }
         }
         
         panelView.findViewById<View>(com.prog7314.IdleLoadsheddingMobile.R.id.btn_test_general)?.setOnClickListener {
-            logResult(false, "⏳ Sending to Firebase...")
+            logResult(false, "Sending to Firebase...")
             FirebaseCloudMessenger.sendCloudNotification(NotificationType.GENERAL) { success, message ->
                 logResult(success, message)
             }
@@ -323,13 +325,12 @@ class PanelCoordinator(
         }
 
         panelView.findViewById<View>(R.id.btn_send_cloud_notification)?.setOnClickListener {
-            cloudStatus?.text = "⏳ Sending request to Firebase..."
+            cloudStatus?.text = "Sending request to Firebase..."
             cloudStatus?.setTextColor(ContextCompat.getColor(context, R.color.modal_text_on_light))
             FirebaseCloudMessenger.sendDemoNotification(NotificationType.EVENT_STARTED) { success, message ->
                 logResult(success, "Firebase cloud: $message")
-                val prefix = if (success) "✅" else "⚠️"
                 val colorRes = if (success) R.color.modal_button_primary else R.color.modal_button_danger
-                cloudStatus?.text = "$prefix $message"
+                cloudStatus?.text = message
                 cloudStatus?.setTextColor(ContextCompat.getColor(context, colorRes))
             }
         }

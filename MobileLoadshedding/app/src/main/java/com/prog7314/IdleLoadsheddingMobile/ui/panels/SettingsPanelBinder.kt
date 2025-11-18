@@ -12,7 +12,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
-import com.prog7314.IdleLoadsheddingMobile.MainActivity
 import com.prog7314.IdleLoadsheddingMobile.R
 import com.prog7314.IdleLoadsheddingMobile.data.models.UnityEventPayload
 import com.prog7314.IdleLoadsheddingMobile.data.models.UnityLeaderboardPayload
@@ -41,14 +40,12 @@ class SettingsPanelBinder(
         private const val DEFAULT_LANGUAGE_INDEX = 0
     }
     
-
     /**
      * Configures settings panel UI elements and event handlers.
      */
     fun configure(
         panel: View,
-        save: UnitySavePayload?,
-        onShowPanel: (Int) -> Unit
+        save: UnitySavePayload?
     ) {
         // Upload save button
         panel.findViewById<Button?>(R.id.btn_upload_save)?.setOnClickListener {
@@ -63,7 +60,6 @@ class SettingsPanelBinder(
             Toast.makeText(activity, activity.getString(R.string.toast_save_synced), Toast.LENGTH_SHORT).show()
         }
 
-        // Display last sync time
         bindData(panel, save)
         
         // Language spinner setup
@@ -78,19 +74,9 @@ class SettingsPanelBinder(
             showLogoutConfirmationDialog()
         }
 
-        // Back arrow in header - navigate back to profile panel
+        // Back arrow in header - behaves like tapping the close button on the modal
         panel.findViewById<View?>(R.id.btn_back_settings)?.setOnClickListener {
-            onShowPanel(R.layout.panel_profile)
-        }
-    }
-
-    /**
-     * Updates UI elements that depend on the latest save payload.
-     */
-    fun bindData(panel: View, save: UnitySavePayload?) {
-        val lastSyncText = panel.findViewById<TextView?>(R.id.text_last_save_sync)
-        save?.let {
-            lastSyncText?.text = "Last synced: ${formatUtils.formatTimestamp(it.timestampUtc)}"
+            panel.rootView.findViewById<View?>(R.id.close_button)?.performClick()
         }
     }
     
@@ -138,7 +124,8 @@ class SettingsPanelBinder(
                         Toast.LENGTH_LONG
                     ).show()
                     
-
+                    // Recreate activity to apply locale change to all views
+                    activity.recreate()
                 }
             }
             
@@ -190,5 +177,16 @@ class SettingsPanelBinder(
 
         // Finish this activity so user can't navigate back with back button
         activity.finish()
+    }
+    
+    /**
+     * Updates the settings panel with the latest save data.
+     */
+    fun bindData(panel: View, save: UnitySavePayload?) {
+        // Display last sync time
+        val lastSyncText = panel.findViewById<TextView?>(R.id.text_last_save_sync)
+        save?.let {
+            lastSyncText?.text = "Last synced: ${formatUtils.formatTimestamp(it.timestampUtc)}"
+        }
     }
 }
