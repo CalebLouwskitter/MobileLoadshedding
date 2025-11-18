@@ -212,8 +212,4 @@
 
     </LinearLayout>
 
-    <!-- Close Button overlaying top-right of card -->
-    <include
-        layout="@layout/include_modal_close_button" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

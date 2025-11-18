@@ -92,12 +92,14 @@ class LeaderboardPanelBinder(
         val empty = panel.findViewById<TextView?>(R.id.text_leaderboard_empty)
         val listContainer = panel.findViewById<LinearLayout?>(R.id.leaderboard_list_container)
         val lastUpdated = panel.findViewById<TextView?>(R.id.text_leaderboard_last_updated)
+        val topThreeContainer = panel.findViewById<View?>(R.id.top_three_container)
 
         if (payload == null) {
             // Show loading state
             loading?.isVisible = true
             empty?.isVisible = false
             listContainer?.isVisible = false
+            topThreeContainer?.isVisible = false
             return
         }
 
@@ -109,10 +111,37 @@ class LeaderboardPanelBinder(
             // Show empty state
             empty?.isVisible = true
             listContainer?.isVisible = false
+            topThreeContainer?.isVisible = false
         } else {
             empty?.isVisible = false
-            listContainer?.isVisible = true
-            listContainer?.let { renderEntries(it, entries) }
+            topThreeContainer?.isVisible = true
+
+            // Populate top 3 slots
+            val top1 = entries.getOrNull(0)
+            val top2 = entries.getOrNull(1)
+            val top3 = entries.getOrNull(2)
+
+            panel.findViewById<TextView?>(R.id.text_top1_name)?.text = top1?.displayName ?: "--"
+            panel.findViewById<TextView?>(R.id.text_top1_score)?.text = top1?.let { formatUtils.formatEnergy(it.score) } ?: "--"
+
+            panel.findViewById<TextView?>(R.id.text_top2_name)?.text = top2?.displayName ?: "--"
+            panel.findViewById<TextView?>(R.id.text_top2_score)?.text = top2?.let { formatUtils.formatEnergy(it.score) } ?: "--"
+
+            panel.findViewById<TextView?>(R.id.text_top3_name)?.text = top3?.displayName ?: "--"
+            panel.findViewById<TextView?>(R.id.text_top3_score)?.text = top3?.let { formatUtils.formatEnergy(it.score) } ?: "--"
+
+            // Hide second/third slots if not enough entries
+            panel.findViewById<View?>(R.id.top_two_container)?.isVisible = top2 != null
+            panel.findViewById<View?>(R.id.top_three_container_slot)?.isVisible = top3 != null
+
+            // Render remaining entries (4th and beyond)
+            val remaining = if (entries.size > 3) entries.drop(3) else emptyList()
+            if (remaining.isEmpty()) {
+                listContainer?.isVisible = false
+            } else {
+                listContainer?.isVisible = true
+                listContainer?.let { renderEntries(it, remaining, startRank = 4) }
+            }
         }
     }
     
@@ -121,12 +150,13 @@ class LeaderboardPanelBinder(
      */
     private fun renderEntries(
         container: LinearLayout,
-        entries: List<UnityLeaderboardPayload.Entry>
+        entries: List<UnityLeaderboardPayload.Entry>,
+        startRank: Int = 1
     ) {
         container.removeAllViews()
         entries.forEachIndexed { index, entry ->
             val row = LayoutInflater.from(activity).inflate(R.layout.view_leaderboard_row, container, false)
-            row.findViewById<TextView?>(R.id.text_rank)?.text = "#${index + 1}"
+            row.findViewById<TextView?>(R.id.text_rank)?.text = "#${startRank + index}"
             
             // Add cosmetic tags based on score
             val displayNameWithTag = buildString {
