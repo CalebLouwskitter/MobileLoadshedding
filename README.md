@@ -11,10 +11,11 @@ Idle Loadshedding is an interactive mobile game designed to simulate responses t
 ## Notification
 ![noti](https://github.com/user-attachments/assets/c4396170-0b78-4641-a312-6c409a541122)
 
+## Biometrics
+<img width="378" height="414" alt="image" src="https://github.com/user-attachments/assets/7bda71e8-b42a-45db-b52d-39d2fa180efc" />
+
 ## Circle CI
 <img width="1446" height="891" alt="image" src="https://github.com/user-attachments/assets/68b33f02-add9-4012-b196-5333dcff0166" />
-
-## Biometrics
 
 ## Contributors
 
