@@ -17,7 +17,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/tab_electricity"
-            android:drawableStart="@drawable/ic_lightning_white"
+            app:drawableStart="@drawable/ic_lightning_white"
             android:drawablePadding="@dimen/modal_tab_drawable_padding"
             android:elevation="2dp"
             android:gravity="center"
@@ -45,7 +45,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/tab_building_selected"
-            android:drawableStart="@drawable/ic_building_white"
+            app:drawableStart="@drawable/ic_building_white"
             android:drawablePadding="@dimen/modal_tab_drawable_padding"
             android:elevation="4dp"
             android:gravity="center"
@@ -130,6 +130,4 @@
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <include layout="@layout/include_modal_close_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

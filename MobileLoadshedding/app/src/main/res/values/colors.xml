@@ -25,6 +25,7 @@
     <color name="modal_overlay_background">#80000000</color>
 
     <!-- Modal Backgrounds -->
+    <color name="modal_background_white">#FFFFFF</color>
     <color name="modal_background_pink">#E91E63</color>
     <color name="modal_background_blue">#2196F3</color>
     <color name="modal_background_red">#D32F2F</color>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Shadow layer -->
+    <item android:left="0dp" android:top="@dimen/modal_panel_shadow_offset" android:right="0dp" android:bottom="0dp">
+        <shape>
+            <solid android:color="@color/modal_shadow_panel" />
+            <corners android:radius="@dimen/modal_panel_corner_radius" />
+        </shape>
+    </item>
+    <!-- Main panel with deep gradient -->
+    <item android:left="0dp" android:top="0dp" android:right="0dp" android:bottom="@dimen/modal_panel_shadow_offset">
+        <shape>
+            <gradient
+                android:startColor="@color/modal_background_utility"
+                android:centerColor="@color/modal_panel_surface"
+                android:endColor="@color/modal_background_utility"
+                android:angle="135" />
+            <corners android:radius="@dimen/modal_panel_corner_radius" />
+        </shape>
+    </item>
+</layer-list>

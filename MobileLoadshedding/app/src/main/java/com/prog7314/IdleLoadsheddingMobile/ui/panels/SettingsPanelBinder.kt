@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
+import com.prog7314.IdleLoadsheddingMobile.MainActivity
 import com.prog7314.IdleLoadsheddingMobile.R
 import com.prog7314.IdleLoadsheddingMobile.data.models.UnityEventPayload
 import com.prog7314.IdleLoadsheddingMobile.data.models.UnityLeaderboardPayload
@@ -45,7 +46,8 @@ class SettingsPanelBinder(
      */
     fun configure(
         panel: View,
-        save: UnitySavePayload?
+        save: UnitySavePayload?,
+        onShowPanel: (Int) -> Unit = {}
     ) {
         // Upload save button
         panel.findViewById<Button?>(R.id.btn_upload_save)?.setOnClickListener {
@@ -78,9 +80,10 @@ class SettingsPanelBinder(
             showLogoutConfirmationDialog()
         }
 
-        // Back arrow in header - behaves like tapping the close button on the modal
+        // Header back arrow: behave like profile edit back button
+        // Always navigate back to the profile panel for now
         panel.findViewById<View?>(R.id.btn_back_settings)?.setOnClickListener {
-            panel.rootView.findViewById<View?>(R.id.close_button)?.performClick()
+            onShowPanel(R.layout.panel_profile)
         }
     }
     
