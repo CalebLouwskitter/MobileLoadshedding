@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.prog7314.IdleLoadsheddingMobile.R
 import com.prog7314.IdleLoadsheddingMobile.databinding.FragmentBiometricSettingsBinding
 import com.prog7314.IdleLoadsheddingMobile.ui.auth.Biometrics.BiometricAuthManager
 import com.prog7314.IdleLoadsheddingMobile.ui.auth.Biometrics.BiometricCryptoManager
@@ -70,6 +71,11 @@ class BiometricSettingsFragment : Fragment() {
 
         binding.buttonReenroll.setOnClickListener {
             reenrollBiometric()
+        }
+
+        // In-UI back arrow to close the biometric settings screen
+        binding.root.findViewById<View?>(R.id.btn_back_biometric)?.setOnClickListener {
+            requireActivity().onBackPressed()
         }
     }
 

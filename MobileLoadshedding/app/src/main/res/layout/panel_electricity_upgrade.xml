@@ -210,13 +210,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/tab_electricity_selected"
-            android:drawableStart="@drawable/ic_lightning_white"
+            app:drawableStart="@drawable/ic_lightning_white"
             android:drawablePadding="@dimen/modal_tab_drawable_padding"
             android:elevation="4dp"
             android:gravity="center"
             android:paddingTop="@dimen/modal_tab_padding_vertical"
             android:paddingBottom="@dimen/modal_tab_padding_vertical"
-            android:text="Electricity"
+            app:text="Electricity"
             android:textColor="@color/modal_text_primary"
             android:textSize="@dimen/modal_tab_text_size"
             android:textStyle="bold"
@@ -238,20 +238,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/tab_building"
-            android:drawableStart="@drawable/ic_building_white"
+            app:drawableStart="@drawable/ic_building_white"
             android:drawablePadding="@dimen/modal_tab_drawable_padding"
             android:elevation="2dp"
             android:gravity="center"
             android:paddingTop="@dimen/modal_tab_padding_vertical"
             android:paddingBottom="@dimen/modal_tab_padding_vertical"
-            android:text="Building"
+            app:text="Building"
             android:textColor="@color/modal_text_primary"
             android:textSize="@dimen/modal_tab_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tab_spacer"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!-- Close Button overlaying tabs -->
-    <include layout="@layout/include_modal_close_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

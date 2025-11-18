@@ -215,7 +215,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Close Button overlaying tabs -->
-    <include layout="@layout/include_modal_close_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>
