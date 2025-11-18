@@ -38,7 +38,7 @@
                 android:minHeight="48dp"
                 android:paddingTop="@dimen/spacing_medium"
                 android:paddingBottom="@dimen/spacing_medium"
-                android:text="Friends"
+                android:text="@string/tab_friends"
                 android:textColor="@color/modal_toggle_inactive_text"
                 android:textSize="15sp"
                 android:textStyle="bold"
@@ -59,7 +59,7 @@
                 android:minHeight="48dp"
                 android:paddingTop="@dimen/spacing_medium"
                 android:paddingBottom="@dimen/spacing_medium"
-                android:text="Global"
+                android:text="@string/tab_global"
                 android:textColor="@color/modal_toggle_active_text"
                 android:textSize="15sp"
                 android:textStyle="bold"
@@ -72,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_small"
-                android:text="Updated --"
+                android:text="@string/leaderboard_updated_default"
                 android:textColor="@color/modal_text_dark_gray"
                 android:textSize="13sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -222,7 +222,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_xlarge"
-                android:text="No leaderboard entries yet"
+                android:text="@string/leaderboard_empty"
                 android:textColor="@color/modal_text_on_light_secondary"
                 android:textSize="14sp"
                 android:visibility="gone"
@@ -241,6 +241,59 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/top_three_container" />
+
+            <!-- Header Row for Leaderboard -->
+            <LinearLayout
+                android:id="@+id/leaderboard_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/text_rank_header"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/placeholder_dash"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_name_header"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_medium"
+                    android:text="@string/placeholder_dash"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/text_score_header"
+                    app:layout_constraintStart_toEndOf="@id/text_rank_header"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_score_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/spacing_medium"
+                    android:text="@string/placeholder_dash"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
@@ -266,7 +319,7 @@
             android:gravity="center"
             android:paddingTop="@dimen/modal_tab_padding_vertical"
             android:paddingBottom="@dimen/modal_tab_padding_vertical"
-            android:text="Profile"
+            android:text="@string/tab_profile"
             android:textColor="@color/modal_text_primary"
             android:textSize="@dimen/modal_tab_text_size"
             app:layout_constraintEnd_toStartOf="@id/tab_spacer"
@@ -293,7 +346,7 @@
             android:gravity="center"
             android:paddingTop="@dimen/modal_tab_padding_vertical"
             android:paddingBottom="@dimen/modal_tab_padding_vertical"
-            android:text="Leader board"
+            android:text="@string/tab_leaderboard"
             android:textColor="@color/black"
             android:textSize="@dimen/modal_tab_text_size"
             android:textStyle="bold"

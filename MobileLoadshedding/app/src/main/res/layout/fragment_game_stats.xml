@@ -28,7 +28,7 @@
                 android:id="@+id/tvStatsTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Game Stats"
+                android:text="@string/stats_title"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
@@ -51,7 +51,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Current Energy:"
+                    android:text="@string/stats_current_energy"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
 
@@ -59,7 +59,7 @@
                     android:id="@+id/tvCurrentEnergy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0.00"
+                    android:text="@string/stats_value_placeholder"
                     android:textColor="@android:color/holo_blue_dark"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -76,7 +76,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Total Generated:"
+                    android:text="@string/stats_total_generated"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
 
@@ -84,7 +84,7 @@
                     android:id="@+id/tvTotalEnergy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0.00"
+                    android:text="@string/stats_value_placeholder"
                     android:textColor="@android:color/holo_green_dark"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -101,7 +101,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Energy/Second:"
+                    android:text="@string/stats_energy_per_second"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
 
@@ -109,7 +109,7 @@
                     android:id="@+id/tvEnergyPerSecond"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0.00"
+                    android:text="@string/stats_value_placeholder"
                     android:textColor="@android:color/holo_orange_dark"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -126,7 +126,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Active Generators:"
+                    android:text="@string/stats_active_generators"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
 
@@ -134,7 +134,7 @@
                     android:id="@+id/tvActiveGenerators"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
+                    android:text="@string/stats_count_placeholder"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -151,7 +151,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Total Levels:"
+                    android:text="@string/stats_total_levels"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
 
@@ -159,7 +159,7 @@
                     android:id="@+id/tvGeneratorLevelSum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
+                    android:text="@string/stats_count_placeholder"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -176,7 +176,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Tap Count:"
+                    android:text="@string/stats_tap_count"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
 
@@ -184,7 +184,7 @@
                     android:id="@+id/tvTapCounter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Taps: 0"
+                    android:text="@string/stats_taps_placeholder"
                     android:textColor="@android:color/holo_purple"
                     android:textSize="16sp"
                     android:textStyle="bold" />

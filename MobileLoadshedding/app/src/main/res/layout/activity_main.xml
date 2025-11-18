@@ -44,7 +44,7 @@
                     android:id="@+id/text_currency_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1,978.12"
+                    android:text="@string/hud_currency_placeholder"
                     android:textColor="#052E45"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -61,7 +61,7 @@
                     android:id="@+id/text_energy_per_second"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+0.00 /s"
+                    android:text="@string/hud_production_placeholder"
                     android:textColor="#052E45"
                     android:textSize="12sp" />
 
@@ -69,7 +69,7 @@
                     android:id="@+id/text_active_generators"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0 generators"
+                    android:text="@string/hud_generators_placeholder"
                     android:textColor="#052E45"
                     android:textSize="12sp" />
 
@@ -77,7 +77,7 @@
                     android:id="@+id/text_safe_idle_hours"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Safe idle: --"
+                    android:text="@string/hud_safe_idle_placeholder"
                     android:textColor="#052E45"
                     android:textSize="12sp" />
             </LinearLayout>

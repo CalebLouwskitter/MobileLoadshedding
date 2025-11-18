@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    android:text="Biometric settings"
+                    android:text="@string/biometric_settings_title"
                     android:textColor="@android:color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -82,7 +82,7 @@
                         android:id="@+id/textTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Stay secure with biometrics"
+                        android:text="@string/biometric_promo_title"
                         android:textColor="@color/auth_header_text"
                         android:textSize="22sp"
                         android:textStyle="bold"
@@ -92,7 +92,7 @@
                         android:id="@+id/textSubtitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Skip typing your password on trusted devices by using fingerprint or face unlock."
+                        android:text="@string/biometric_promo_subtitle"
                         android:textColor="@color/auth_subtitle_text"
                         android:textSize="14sp"
                         android:layout_marginBottom="12dp" />
@@ -100,7 +100,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Your biometric data never leaves the device. You can switch it off any time if you misplace your phone."
+                        android:text="@string/biometric_promo_privacy"
                         android:textColor="@color/modal_text_on_accent"
                         android:textSize="12sp"
                         android:lineSpacingMultiplier="1.2" />
@@ -135,7 +135,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Enable biometric login"
+                            android:text="@string/biometric_enable_label"
                             android:textColor="@color/auth_header_text"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -149,7 +149,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Keep this on for devices you trust. We’ll remind you to re-verify if your device changes."
+                        android:text="@string/biometric_enable_description"
                         android:textColor="@color/auth_subtitle_text"
                         android:textSize="12sp"
                         android:layout_marginTop="6dp"
@@ -167,7 +167,7 @@
                         android:id="@+id/textStatus"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Biometric authentication is disabled"
+                        android:text="@string/biometric_status_disabled"
                         android:textColor="@color/auth_header_text"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -194,7 +194,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Account status"
+                        android:text="@string/biometric_account_status_title"
                         android:textColor="@color/auth_header_text"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -211,7 +211,7 @@
                         <TextView
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
-                            android:text="Signed in as"
+                            android:text="@string/biometric_signed_in_as"
                             android:textColor="@color/auth_subtitle_text"
                             android:textSize="14sp" />
 
@@ -220,7 +220,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="No user configured"
+                            android:text="@string/biometric_no_user"
                             android:textColor="@color/auth_header_text"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -237,7 +237,7 @@
                         <TextView
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
-                            android:text="Device support"
+                            android:text="@string/biometric_device_support"
                             android:textColor="@color/auth_subtitle_text"
                             android:textSize="14sp" />
 
@@ -246,7 +246,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Checking..."
+                            android:text="@string/biometric_checking"
                             android:textColor="@color/auth_header_text"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -255,7 +255,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="We validate your biometrics using the secure hardware on this device."
+                        android:text="@string/biometric_hardware_description"
                         android:textColor="@color/auth_subtitle_text"
                         android:textSize="12sp"
                         android:lineSpacingMultiplier="1.1" />
@@ -282,7 +282,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Quick actions"
+                        android:text="@string/biometric_actions_title"
                         android:textColor="@color/auth_header_text"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -294,7 +294,7 @@
                         style="@style/Widget.MaterialComponents.Button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Test biometric unlock"
+                        android:text="@string/biometric_btn_test"
                         android:textAllCaps="false"
                         android:layout_marginBottom="8dp" />
 
@@ -304,14 +304,14 @@
                         style="@style/Widget.MaterialComponents.Button.TextButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Re-enroll biometrics"
+                        android:text="@string/biometric_btn_reenroll"
                         android:textAllCaps="false"
                         android:textColor="@color/auth_header_text" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Use these tools to confirm everything works before relying on biometrics for daily sign-ins."
+                        android:text="@string/biometric_actions_description"
                         android:textColor="@color/auth_subtitle_text"
                         android:textSize="12sp"
                         android:layout_marginTop="12dp" />
@@ -337,7 +337,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Helpful tips"
+                        android:text="@string/biometric_tips_title"
                         android:textColor="@color/auth_header_text"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -346,7 +346,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="• Turn biometrics off before lending or servicing your phone."
+                        android:text="@string/biometric_tip_1"
                         android:textColor="@color/auth_subtitle_text"
                         android:textSize="12sp"
                         android:layout_marginBottom="4dp" />
@@ -354,7 +354,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="• Re-enroll if you add new fingerprints or face profiles."
+                        android:text="@string/biometric_tip_2"
                         android:textColor="@color/auth_subtitle_text"
                         android:textSize="12sp"
                         android:layout_marginBottom="4dp" />
@@ -362,7 +362,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="• Biometrics complement your password—they don’t replace it."
+                        android:text="@string/biometric_tip_3"
                         android:textColor="@color/auth_subtitle_text"
                         android:textSize="12sp" />
                 </LinearLayout>
