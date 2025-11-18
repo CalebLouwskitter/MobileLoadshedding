@@ -64,10 +64,7 @@ class SettingsPanelBinder(
         }
 
         // Display last sync time
-        val lastSyncText = panel.findViewById<TextView?>(R.id.text_last_save_sync)
-        save?.let {
-            lastSyncText?.text = "Last synced: ${formatUtils.formatTimestamp(it.timestampUtc)}"
-        }
+        bindData(panel, save)
         
         // Language spinner setup
         configureLanguageSpinner(panel)
@@ -84,6 +81,16 @@ class SettingsPanelBinder(
         // Back arrow in header - navigate back to profile panel
         panel.findViewById<View?>(R.id.btn_back_settings)?.setOnClickListener {
             onShowPanel(R.layout.panel_profile)
+        }
+    }
+
+    /**
+     * Updates UI elements that depend on the latest save payload.
+     */
+    fun bindData(panel: View, save: UnitySavePayload?) {
+        val lastSyncText = panel.findViewById<TextView?>(R.id.text_last_save_sync)
+        save?.let {
+            lastSyncText?.text = "Last synced: ${formatUtils.formatTimestamp(it.timestampUtc)}"
         }
     }
     

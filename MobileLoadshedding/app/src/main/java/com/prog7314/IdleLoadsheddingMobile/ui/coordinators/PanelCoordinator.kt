@@ -153,16 +153,18 @@ class PanelCoordinator(
                 )
             }
             
-			R.layout.panel_leaderboard -> {
-				val payload = stateManager.latestLeaderboard
-				Log.d("PanelCoordinator", "📊 Updating leaderboard panel (payload: ${payload != null}, entries: ${payload?.entries?.size ?: 0})")
-				leaderboardPanelBinder.bindData(panelView, payload)
-			}            R.layout.panel_friends_leaderboard -> {
+            R.layout.panel_leaderboard -> {
+                val payload = stateManager.latestLeaderboard
+                Log.d("PanelCoordinator", "📊 Updating leaderboard panel (payload: ${payload != null}, entries: ${payload?.entries?.size ?: 0})")
+                leaderboardPanelBinder.bindData(panelView, payload)
+            }
+
+            R.layout.panel_friends_leaderboard -> {
                 friendsPanelBinder.bindData(panelView, stateManager.latestFriends)
             }
             
             R.layout.panel_settings -> {
-                settingsPanelBinder.configure(panelView, stateManager.latestSave)
+                settingsPanelBinder.bindData(panelView, stateManager.latestSave)
             }
             
             R.layout.panel_tasks_board -> {
