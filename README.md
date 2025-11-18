@@ -125,6 +125,12 @@ Android (2025) Android Developers - Log. [online] Available at: https://develope
 Android (2025) Credential Manager. [online] Available at: https://developer.android.com/jetpack/androidx/releases/credentials
  [Accessed 1 Oct. 2025].
 
+Android Developers (2025) Show a biometric authentication dialog. Available at: https://developer.android.com/training/sign-in/biometric-auth
+ [Accessed 18 Nov. 2025].
+
+Android Developers (2025) Save data in a local database using Room. Available at: https://developer.android.com/training/data-storage/room
+ [Accessed 13 Nov. 2025].
+
 AndroidX (2025) AndroidX AppCompat Library. [online] Available at: https://developer.android.com/jetpack/androidx/releases/appcompat
  [Accessed 30 Sept. 2025].
 
@@ -134,8 +140,11 @@ AndroidX (2025) AndroidX Core Library. [online] Available at: https://developer.
 AndroidX (2025) AndroidX Navigation Component. [online] Available at: https://developer.android.com/guide/navigation
  [Accessed 2 Oct. 2025].
 
-Coding-Meet (2023). Google-Admob-Integration-App. [online] GitHub. Available at: https://github.com/Coding-Meet/Google-Admob-Integration-App.git 
+Coding-Meet (2023) Google-Admob-Integration-App. [online] GitHub. Available at: https://github.com/Coding-Meet/Google-Admob-Integration-App.git
  [Accessed 15 Nov. 2025].
+
+Docker Inc. (2025) Docker Documentation - Get Started. [online] Available at: https://docs.docker.com/get-started/
+ [Accessed 5 Oct. 2025].
 
 Firebase (2025) Authenticate with Google on Android. [online] Available at: https://firebase.google.com/docs/auth/android/google-signin
  [Accessed 29 Sept. 2025].
@@ -143,25 +152,31 @@ Firebase (2025) Authenticate with Google on Android. [online] Available at: http
 Firebase (2025) Firebase Authentication for Android. [online] Available at: https://firebase.google.com/docs/auth/android/start
  [Accessed 3 Oct. 2025].
 
+Firebase (2025) Receive messages in an Android app. Available at: https://firebase.google.com/docs/cloud-messaging/android/receive
+ [Accessed 13 Nov. 2025].
+
 Google (2025) Authenticate with Firebase using ID tokens. [online] Available at: https://developers.google.com/identity/gsi/web/guides/firebase-auth
  [Accessed 25 Sept. 2025].
 
-Google (2025). Get Started | Android - AdMob. [online] Available at: https://developers.google.com/admob/android/quick-start
-[Accessed 15 Nov. 2025].
+Google (2025) Get Started | Android - AdMob. [online] Available at: https://developers.google.com/admob/android/quick-start
+ [Accessed 15 Nov. 2025].
 
-Google (2025). googleads-mobile-android-examples. [online] GitHub. Available at: https://github.com/googleads/googleads-mobile-android-examples.kt
-[Accessed 15 Nov. 2025].
+Google (2025) googleads-mobile-android-examples. [online] GitHub. Available at: https://github.com/googleads/googleads-mobile-android-examples.kt
+ [Accessed 15 Nov. 2025].
 
 Google (2025) Gson - A Java serialization library. [online] Available at: https://github.com/google/gson
  [Accessed 30 Sept. 2025].
 
-Google (2025). Rewarded Ads | Android - AdMob. [online] Available at: https://developers.google.com/admob/android/rewarded#kotlin_1
-[Accessed 15 Nov. 2025].
+Google (2025) Rewarded Ads | Android - AdMob. [online] Available at: https://developers.google.com/admob/android/rewarded#kotlin_1
+ [Accessed 15 Nov. 2025].
 
 Google (2025) Sign in with Google for Android - Credential Manager. [online] Available at: https://developers.google.com/identity/android-credential-manager
  [Accessed 1 Oct. 2025].
 
-hall9zeha (2022). AdvertisementsApp. [online] GitHub. Available at: https://github.com/hall9zeha/AdvertisementsApp.git 
+Google (2025) Firebase Authentication Documentation. [online] Available at: https://firebase.google.com/docs/auth
+ [Accessed 5 Oct. 2025].
+
+hall9zeha (2022) AdvertisementsApp. [online] GitHub. Available at: https://github.com/hall9zeha/AdvertisementsApp.git
  [Accessed 15 Nov. 2025].
 
 Kotlin (2025) Kotlin Coroutines Guide. [online] Available at: https://kotlinlang.org/docs/coroutines-guide.html
@@ -182,31 +197,25 @@ Kotlin (2025) Kotlin Standard Library. [online] Available at: https://kotlinlang
 Material Design (2025) Material Components for Android. [online] Available at: https://material.io/develop/android
  [Accessed 30 Sept. 2025].
 
-Microsoft, 2025. ASP.NET Core Documentation. [online] Microsoft Learn. Available at: https://learn.microsoft.com/en-us/aspnet/core/
+Microsoft (2025) .NET 9 Documentation. [online] Available at: https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-9/overview
  [Accessed 5 Oct. 2025].
 
-Microsoft, 2025. C# Language Documentation. [online] Microsoft Learn. Available at: https://learn.microsoft.com/en-us/dotnet/csharp/
+Microsoft (2025) .NET Documentation. [online] Available at: https://learn.microsoft.com/en-us/dotnet/
  [Accessed 5 Oct. 2025].
 
-Docker Inc., 2025. Docker Documentation - Get Started. [online] Available at: https://docs.docker.com/get-started/
+Microsoft (2025) ASP.NET Core Authentication - JWT Bearer. [online] Available at: https://learn.microsoft.com/en-us/aspnet/core/security/authentication/
  [Accessed 5 Oct. 2025].
 
-Microsoft, 2025. Entity Framework Core Documentation. [online] Microsoft Learn. Available at: https://learn.microsoft.com/en-us/ef/core/
+Microsoft (2025) ASP.NET Core Documentation. [online] Available at: https://learn.microsoft.com/en-us/aspnet/core/
  [Accessed 5 Oct. 2025].
 
-Google, 2025. Firebase Authentication Documentation. [online] Google Firebase. Available at: https://firebase.google.com/docs/auth
+Microsoft (2025) C# Language Documentation. [online] Available at: https://learn.microsoft.com/en-us/dotnet/csharp/
  [Accessed 5 Oct. 2025].
 
-Microsoft, 2025. ASP.NET Core Authentication - JWT Bearer. [online] Microsoft Learn. Available at: https://learn.microsoft.com/en-us/aspnet/core/security/authentication/
+Microsoft (2025) Entity Framework Core Documentation. [online] Available at: https://learn.microsoft.com/en-us/ef/core/
  [Accessed 5 Oct. 2025].
 
-Microsoft, 2025. .NET 9 Documentation. [online] Microsoft Learn. Available at: https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-9/overview
- [Accessed 5 Oct. 2025].
-
-Microsoft, 2025. .NET Documentation. [online] Microsoft Learn. Available at: https://learn.microsoft.com/en-us/dotnet/
- [Accessed 5 Oct. 2025].
-
-Microsoft, 2025. JSON Serialization in .NET. [online] Microsoft Learn. Available at: https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/
+Microsoft (2025) JSON Serialization in .NET. [online] Available at: https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/
  [Accessed 5 Oct. 2025].
 
 Oracle (2025) Java Platform Standard Edition Documentation. [online] Available at: https://docs.oracle.com/en/java/javase/
@@ -218,26 +227,26 @@ Square (2025) OkHttp - An HTTP client for Android and Java. [online] Available a
 Square (2025) Retrofit - Type-safe HTTP client for Android and Java. [online] Available at: https://square.github.io/retrofit/
  [Accessed 29 Sept. 2025].
 
-Unity Technologies (2025) Best Practice - Understanding Performance in Unity. [online] Unity Manual. Available at: https://docs.unity3d.com/Manual/BestPracticeUnderstandingPerformanceInUnity.html
+Unity Technologies (2025) Best Practice - Understanding Performance in Unity. [online] Available at: https://docs.unity3d.com/Manual/BestPracticeUnderstandingPerformanceInUnity.html
  [Accessed 7 Oct. 2025].
 
-Unity Technologies (2025) JsonUtility. [online] Unity Script Reference. Available at: https://docs.unity3d.com/ScriptReference/JsonUtility.html
+Unity Technologies (2025) JsonUtility. [online] Available at: https://docs.unity3d.com/ScriptReference/JsonUtility.html
  [Accessed 7 Oct. 2025].
 
-Unity Technologies (2025) Mobile Optimization - Practical Guide. [online] Unity Manual. Available at: https://docs.unity3d.com/Manual/MobileOptimizationPracticalGuide.html
+Unity Technologies (2025) Mobile Optimization - Practical Guide. [online] Available at: https://docs.unity3d.com/Manual/MobileOptimizationPracticalGuide.html
  [Accessed 7 Oct. 2025].
 
-Unity Technologies (2025) PlayerPrefs. [online] Unity Script Reference. Available at: https://docs.unity3d.com/ScriptReference/PlayerPrefs.html
+Unity Technologies (2025) PlayerPrefs. [online] Available at: https://docs.unity3d.com/ScriptReference/PlayerPrefs.html
  [Accessed 7 Oct. 2025].
 
-Unity Technologies (2025) TextMesh Pro. [online] Unity Manual. Available at: https://docs.unity3d.com/Manual/com.unity.textmeshpro.html
+Unity Technologies (2025) TextMesh Pro. [online] Available at: https://docs.unity3d.com/Manual/com.unity.textmeshpro.html
  [Accessed 7 Oct. 2025].
 
-Unity Technologies (2025) Unity for Android. [online] Unity Manual. Available at: https://docs.unity3d.com/Manual/android.html
+Unity Technologies (2025) Unity for Android. [online] Available at: https://docs.unity3d.com/Manual/android.html
  [Accessed 30 Sept. 2025].
 
-Unity Technologies (2025) Unity for Android - Native Plugin Integration. [online] Unity Manual. Available at: https://docs.unity3d.com/Manual/android-plugins.html
+Unity Technologies (2025) Unity for Android - Native Plugin Integration. [online] Available at: https://docs.unity3d.com/Manual/android-plugins.html
  [Accessed 3 Oct. 2025].
 
-Unity Technologies (2025) Unity Input System. [online] Unity Package Documentation. Available at: https://docs.unity3d.com/Packages/com.unity.inputsystem@1.5
+Unity Technologies (2025) Unity Input System. [online] Available at: https://docs.unity3d.com/Packages/com.unity.inputsystem@1.5
  [Accessed 7 Oct. 2025].
