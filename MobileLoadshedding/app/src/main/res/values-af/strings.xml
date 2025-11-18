@@ -113,4 +113,5 @@
     <string name="nav_tasks">Take</string>
     <string name="hud_upgrades_content_description">Opgraderings</string>
     <string name="hud_profile_content_description">Profiel</string>
+    <string name="advert_upgrade_text">Gratis Opgradering (AD)</string>
 </resources>

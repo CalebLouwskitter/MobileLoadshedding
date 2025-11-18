@@ -67,6 +67,8 @@ class MainActivity : UnityPlayerGameActivity() {
     private val auth = FirebaseAuth.getInstance()
     private var gameSyncService: GameSyncService? = null
 
+    private val adLoader: ADLoad by lazy {ADLoad(this)}
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("MainActivity", "onCreate() started")
@@ -153,8 +155,11 @@ class MainActivity : UnityPlayerGameActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             // Initialize the Google Mobile Ads SDK on a background thread.
             MobileAds.initialize(this@MainActivity) {}
-            ADLoad(this@MainActivity)
         }
+        adLoader.loadRewardedAds()
+        //it takes about 3-6 seconds for the loader to get the advert.
+
+
 
         window.decorView.post {
             // Hide Unity's internal HUD (we use native Android overlay)
@@ -187,6 +192,19 @@ class MainActivity : UnityPlayerGameActivity() {
      * This is the only place MainActivity handles UI events directly.
      */
     private fun setupHudButtons(overlay: View) {
+        // AD upgrade button that's sitting inj the middle just above the power button
+        overlay.findViewById<Button>(R.id.btn_advert_upgrade).setOnClickListener {
+        adLoader.showRewardAd()
+        //WHEN YOU WISH TO IMPLEMENT THE REWARD FOR THE ADS COMMENT OUT THE LINE ABOVE THIS AND UNCOMMENT THE LINES BELOW
+        // THEN GO TO ADLoad.kt and follow instruction there
+            //if it doesnt work just undo what was done and revert it to the state it is currently in (ie reward commented out state)
+        //    adLoader.showRewardAd{
+                //so the below code should only execute on a successful adwatch, otherwise it does not execute (leave this line commented regardless)
+        //      PowerManager.upgradeGenerator("generator_1")
+        //      Stats.requestUnitySnapshot()
+        //    }
+        }
+
         // Modal scrim closes any open panel
         modalScrim.setOnClickListener {
             components.panelManager.hidePanel()

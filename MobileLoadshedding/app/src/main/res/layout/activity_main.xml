@@ -115,6 +115,14 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
+            <Button
+                android:id="@+id/btn_advert_upgrade"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="248dp"
+                android:layout_height="41dp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/advert_upgrade_text" />
+
             <LinearLayout
                 android:id="@+id/bottom_nav"
                 android:layout_width="match_parent"
@@ -142,9 +150,7 @@
                     android:backgroundTint="#FFEB3B"
                     android:text="@string/nav_power"
                     android:textColor="#052E45"
-                    android:textStyle="bold"
-                    android:visibility="invisible"
-                    tools:visibility="invisible" />
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/btn_nav_tasks"
@@ -155,6 +161,7 @@
                     android:layout_weight="1"
                     android:text="@string/nav_tasks" />
             </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 
