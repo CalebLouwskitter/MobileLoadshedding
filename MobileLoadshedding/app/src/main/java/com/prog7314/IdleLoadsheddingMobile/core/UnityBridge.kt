@@ -6,7 +6,12 @@ import android.os.Looper //Android, 2025.
 import android.util.Log //Android, 2025.
 import android.widget.Toast //Android, 2025.
 import com.unity3d.player.UnityPlayer //Unity Technologies, 2025.
+import org.json.JSONObject //Android, 2025.
+import java.util.UUID //Java, 2025.
+import java.util.concurrent.ConcurrentHashMap //Java, 2025.
+import java.util.concurrent.ConcurrentLinkedQueue //Java, 2025.
 import java.util.concurrent.CopyOnWriteArraySet //Java, 2025.
+import java.util.concurrent.atomic.AtomicBoolean //Java, 2025.
 
 /**
  * UnityBridge provides communication between Unity engine and Android native code.
@@ -14,6 +19,10 @@ import java.util.concurrent.CopyOnWriteArraySet //Java, 2025.
 object UnityBridge {
 
     private const val TAG = "UnityBridge"
+    private const val UNITY_BRIDGE_OBJECT = "AndroidBridge"
+    private const val UNITY_METHOD_UPGRADE = "RequestUpgrade"
+    private const val UNITY_METHOD_PING = "PingFromAndroid"
+    private const val PING_TIMEOUT_MS = 2_000L
 
     // Listener for events coming from Unity (C# -> Android UI)
     interface Listener {
@@ -21,14 +30,20 @@ object UnityBridge {
         fun onGameEvent(event: String) {}
         fun onStatsUpdated(json: String) {}
         fun onSaveSynced(json: String) {}
+        fun onCheckpointReached(json: String) {}
         fun onLeaderboardUpdated(json: String) {}
         fun onFriendsUpdated(json: String) {}
         fun onEnergyTapped(amount: Double) {}
         fun onEnergyBurst(amount: Double) {}
+        fun onUpgradeApplied(payloadJson: String) {}
+        fun onPingResult(success: Boolean) {}
     }
 
     private val listeners = CopyOnWriteArraySet<Listener>() //Java, 2025.
     private val mainHandler = Handler(Looper.getMainLooper()) //Android, 2025.
+    private val unityReady = AtomicBoolean(false)
+    private val pendingUnityCalls = ConcurrentLinkedQueue<() -> Unit>()
+    private val pingCallbacks = ConcurrentHashMap<String, (Boolean) -> Unit>()
     @Volatile private var unityHudVisible = true
 
     fun registerListener(l: Listener) {
@@ -75,6 +90,15 @@ object UnityBridge {
         markUnityReady()
         mainHandler.post { //Android, 2025.
             listeners.forEach { it.onSaveSynced(saveJson) }
+        }
+    }
+
+    @JvmStatic //Kotlin, 2025.
+    fun syncCheckpoint(checkpointJson: String) {
+        Log.d(TAG, "syncCheckpoint called with: $checkpointJson")
+        markUnityReady()
+        mainHandler.post { //Android, 2025.
+            listeners.forEach { it.onCheckpointReached(checkpointJson) }
         }
     }
 
@@ -152,8 +176,35 @@ object UnityBridge {
         }
     }
 
+    fun sendUpgradeRequest(upgradeId: String, newLevel: Int, cost: Int) {
+        val payload = JSONObject().apply {
+            put("upgradeId", upgradeId)
+            put("level", newLevel)
+            put("cost", cost)
+            put("timestamp", System.currentTimeMillis())
+        }.toString()
+        dispatchUnityMessage(UNITY_BRIDGE_OBJECT, UNITY_METHOD_UPGRADE, payload)
+    }
+
+    fun pingUnity(onResult: ((Boolean) -> Unit)? = null) {
+        val nonce = UUID.randomUUID().toString()
+        pingCallbacks[nonce] = { success ->
+            onResult?.invoke(success)
+            notifyPingResult(success)
+        }
+        dispatchUnityMessage(UNITY_BRIDGE_OBJECT, UNITY_METHOD_PING, nonce)
+        mainHandler.postDelayed({
+            pingCallbacks.remove(nonce)?.invoke(false)
+        }, PING_TIMEOUT_MS)
+    }
+
     private fun dispatchUnityMessage(gameObject: String, methodName: String, payload: String) {
-        val runnable = Runnable {
+        enqueueWhenReady {
+            val activity = UnityPlayer.currentActivity
+            if (activity == null) {
+                Log.w(TAG, "Unity activity null while sending $gameObject.$methodName; proceeding on main thread")
+            }
+
             val targets = buildTargetList(gameObject)
             var delivered = false
             var lastError: Throwable? = null
@@ -175,8 +226,6 @@ object UnityBridge {
                 Log.w(TAG, "Failed to send message to Unity object '$gameObject.$methodName'", lastError)
             }
         }
-
-        mainHandler.post(runnable)
     }
 
     private fun buildTargetList(primary: String): List<String> {
@@ -188,10 +237,55 @@ object UnityBridge {
         }
     }
 
+    @JvmStatic //Kotlin, 2025.
+    fun onUnityReady(unused: String = "") {
+        Log.d(TAG, "Unity signaled ready")
+        markUnityReady()
+    }
+
+    @JvmStatic //Kotlin, 2025.
+    fun onPingResponse(nonce: String) {
+        Log.d(TAG, "Ping response for $nonce")
+        markUnityReady()
+        pingCallbacks.remove(nonce)?.invoke(true) ?: notifyPingResult(true)
+    }
+
+    @JvmStatic //Kotlin, 2025.
+    fun onUpgradeApplied(payloadJson: String) {
+        Log.d(TAG, "Upgrade applied: $payloadJson")
+        markUnityReady()
+        mainHandler.post {
+            listeners.forEach { it.onUpgradeApplied(payloadJson) }
+        }
+    }
+
+    private fun notifyPingResult(success: Boolean) {
+        mainHandler.post {
+            listeners.forEach { it.onPingResult(success) }
+        }
+    }
+
+    private fun enqueueWhenReady(action: () -> Unit) {
+        if (unityReady.get()) {
+            mainHandler.post { action() }
+        } else {
+            pendingUnityCalls.add(action)
+        }
+    }
+
     @Synchronized
     private fun markUnityReady() {
-        // Receiving a callback from Unity confirms the player is live. Future enhancements
-        // can hook into this if we need to defer Android->Unity messages until ready.
+        if (unityReady.compareAndSet(false, true)) {
+            Log.d(TAG, "Unity bridge marked ready, flushing ${pendingUnityCalls.size} queued calls")
+        }
+        drainPendingCalls()
+    }
+
+    private fun drainPendingCalls() {
+        while (true) {
+            val action = pendingUnityCalls.poll() ?: break
+            mainHandler.post { action() }
+        }
     }
 }
 

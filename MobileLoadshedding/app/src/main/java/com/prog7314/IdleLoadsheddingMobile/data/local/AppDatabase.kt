@@ -9,9 +9,11 @@ import com.prog7314.IdleLoadsheddingMobile.data.local.converters.DateConverter
 import com.prog7314.IdleLoadsheddingMobile.data.local.dao.DistrictDao
 import com.prog7314.IdleLoadsheddingMobile.data.local.dao.GameStateDao
 import com.prog7314.IdleLoadsheddingMobile.data.local.dao.GeneratorDao
+import com.prog7314.IdleLoadsheddingMobile.data.local.dao.PlayerUpgradeStatsDao
 import com.prog7314.IdleLoadsheddingMobile.data.local.entities.DistrictEntity
 import com.prog7314.IdleLoadsheddingMobile.data.local.entities.GameStateEntity
 import com.prog7314.IdleLoadsheddingMobile.data.local.entities.GeneratorEntity
+import com.prog7314.IdleLoadsheddingMobile.data.local.entities.PlayerUpgradeStatsEntity
 
 /**
  * Room database for local game state persistence.
@@ -29,9 +31,10 @@ import com.prog7314.IdleLoadsheddingMobile.data.local.entities.GeneratorEntity
     entities = [
         GameStateEntity::class,
         DistrictEntity::class,
-        GeneratorEntity::class
+        GeneratorEntity::class,
+        PlayerUpgradeStatsEntity::class
     ],
-    version = 3,
+    version = 5,
     exportSchema = true
 )
 @TypeConverters(DateConverter::class)
@@ -40,6 +43,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun gameStateDao(): GameStateDao
     abstract fun districtDao(): DistrictDao
     abstract fun generatorDao(): GeneratorDao
+    abstract fun playerUpgradeStatsDao(): PlayerUpgradeStatsDao
     
     companion object {
         @Volatile

@@ -38,6 +38,9 @@
     <string name="district_idle_time_format">Safe for %1$s</string>
     <string name="district_upgrade_cost_format">Upgrade (%1$s)</string>
     <string name="district_upgrade_maxed">Max level</string>
+    <string name="damage_level_label">Damage level: %1$d</string>
+    <string name="currency_label">Currency: %1$d</string>
+    <string name="upgrade_damage_button_text">Upgrade damage (-%1$d)</string>
     <string name="toast_friend_invite_sent">Friend invite sent</string>
     <string name="toast_friend_code_empty">Enter a friend code</string>
     <string name="toast_logout_placeholder">Logging out (placeholder)</string>

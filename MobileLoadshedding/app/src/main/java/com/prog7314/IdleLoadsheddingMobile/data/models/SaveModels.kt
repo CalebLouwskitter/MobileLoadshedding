@@ -72,3 +72,16 @@ data class BackendDistrictState(
 data class BackendCentralState(
     val charge: Double
 )
+
+data class UnityCheckpointPayload(
+    val checkpointId: String,
+    val playerId: String? = null,
+    val reason: String? = null,
+    val reachedAtUtc: Long? = null,
+    val snapshot: UnityStatsSnapshot? = null,
+    val rawStatsJson: String? = null,
+    val currency: UnityCurrencySnapshot? = null,
+    val happiness: UnityHappinessSnapshot? = null,
+    val sections: UnitySectionSnapshot? = null,
+    val generators: List<UnitySavePayload.GeneratorState>? = null
+)

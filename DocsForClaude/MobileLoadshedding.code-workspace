@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../../../source/repos/MobileLoadsheddingFirebase"
+		}
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "automatic",
+		"dotrush.roslyn.projectOrSolutionFiles": []
+	}
+}

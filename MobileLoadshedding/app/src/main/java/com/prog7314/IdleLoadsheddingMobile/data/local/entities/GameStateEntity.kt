@@ -22,7 +22,7 @@ data class GameStateEntity(
     val energyPerSecond: Double,
     val currentMoney: Double,
     val totalMoneyEarned: Double,
-        val statsJson: String?,
+    val statsJson: String?,
     val currentHappiness: Double,
     val totalHappinessPenalty: Double,
     
@@ -38,6 +38,9 @@ data class GameStateEntity(
     // Events and timing
     val lastEventId: String?,
     val offlineSeconds: Double,
+    val checkpointId: String? = null,
+    val checkpointReason: String? = null,
+    val checkpointReachedAt: Date? = null,
     
     // Timestamps
     val timestampUtc: Date,

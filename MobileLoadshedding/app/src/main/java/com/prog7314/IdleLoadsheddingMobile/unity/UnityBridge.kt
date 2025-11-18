@@ -23,6 +23,9 @@ class UnityBridge private constructor() {
         fun syncSaveData(json: String) = CoreUnityBridge.syncSaveData(json)
 
         @JvmStatic
+        fun syncCheckpoint(json: String) = CoreUnityBridge.syncCheckpoint(json)
+
+        @JvmStatic
         fun updateLeaderboard(json: String) = CoreUnityBridge.updateLeaderboard(json)
 
         @JvmStatic

@@ -59,16 +59,14 @@ class GameStateRepository(private val database: AppDatabase) {
         currency: UnityCurrencySnapshot? = null,
         happiness: UnityHappinessSnapshot? = null,
         sections: List<UnitySectionSnapshot.SectionState>? = null,
-        statsJson: String? = null
+        statsJson: String? = null,
+        checkpointId: String? = null,
+        checkpointReason: String? = null,
+        checkpointReachedAt: Long? = null
     ) {
         try {
             val now = Date()
-            val needExistingState = currency == null || happiness == null
-            val existingState = if (needExistingState) {
-                gameStateDao.getGameState(playerId)?.gameState
-            } else {
-                null
-            }
+            val existingState = gameStateDao.getGameState(playerId)?.gameState
 
             val (currentMoney, totalMoneyEarned) = when {
                 currency != null -> currency.currentMoney to currency.totalMoneyEarned
@@ -83,6 +81,13 @@ class GameStateRepository(private val database: AppDatabase) {
             }
 
             val resolvedStatsJson = statsJson ?: existingState?.statsJson ?: gson.toJson(unityStats)
+
+            val resolvedCheckpointId = checkpointId ?: existingState?.checkpointId
+            val resolvedCheckpointReason = checkpointReason ?: existingState?.checkpointReason
+            val resolvedCheckpointReachedAt = when {
+                checkpointReachedAt != null -> Date(checkpointReachedAt)
+                else -> existingState?.checkpointReachedAt
+            }
             
             // Create game state entity
             val gameState = GameStateEntity(
@@ -102,6 +107,9 @@ class GameStateRepository(private val database: AppDatabase) {
                 hoursUntilMaintenance = unityStats.hoursUntilMaintenance,
                 lastEventId = unityStats.lastEventId,
                 offlineSeconds = unityStats.offlineSeconds,
+                checkpointId = resolvedCheckpointId,
+                checkpointReason = resolvedCheckpointReason,
+                checkpointReachedAt = resolvedCheckpointReachedAt,
                 timestampUtc = parseTimestamp(unityStats.timestampUtc),
                 lastModified = now,
                 lastSyncTime = null,

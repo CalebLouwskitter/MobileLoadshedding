@@ -1,19 +1,9 @@
- package com.prog7314.IdleLoadsheddingMobile.stub
+@file:Suppress("unused")
 
-import android.util.Log
+package com.prog7314.IdleLoadsheddingMobile.stub
 
 /**
- * TEMPORARY STUB for Unity Player - used during refactoring
- * Replace with real com.unity3d.player.UnityPlayer when Unity integration is restored
+ * Legacy placeholder retained for reference only. Production builds now use the real
+ * `com.unity3d.player.UnityPlayer` provided by the Unity export, so this file intentionally
+ * contains no implementation and should not be referenced.
  */
-object UnityPlayer {
-    /**
-     * Stub method - does nothing
-     * Real Unity implementation would send JNI message to Unity C# side
-     */
-    @JvmStatic
-    fun UnitySendMessage(gameObjectName: String, methodName: String, message: String) {
-        Log.w("UnityPlayer", "STUB: UnitySendMessage called but not implemented - Unity integration disabled")
-        Log.d("UnityPlayer", "Would send: GameObject=$gameObjectName, Method=$methodName, Message=$message")
-    }
-}

@@ -7,12 +7,20 @@ import android.view.View //Android, 2025.
 import android.view.ViewGroup //Android, 2025.
 import android.widget.TextView //Android, 2025.
 import androidx.fragment.app.Fragment //AndroidX, 2025.
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import com.google.android.material.button.MaterialButton
 import com.prog7314.IdleLoadsheddingMobile.R
+import com.prog7314.IdleLoadsheddingMobile.GameUI.UpgradeStatsViewModel
 import com.prog7314.IdleLoadsheddingMobile.data.models.UnityStatsSnapshot
+import com.prog7314.IdleLoadsheddingMobile.data.models.UpgradeStats
 import com.prog7314.IdleLoadsheddingMobile.unity.Stats
 import java.text.SimpleDateFormat //Java, 2025.
 import java.util.Date //Java, 2025.
 import java.util.Locale //Java, 2025.
+import kotlinx.coroutines.launch
 
 /**
  * GameStatsFragment displays real-time game statistics received from Unity.
@@ -22,6 +30,7 @@ class GameStatsFragment : Fragment(), Stats.Observer { //AndroidX, 2025.
 
     companion object {
         private const val TAG = "GameStatsFragment"
+        private const val DAMAGE_UPGRADE_COST = 100L
         
         /**
          * Factory method to create a new instance of this fragment.
@@ -40,8 +49,13 @@ class GameStatsFragment : Fragment(), Stats.Observer { //AndroidX, 2025.
     private var tvLastUpdated: TextView? = null
     private var tvTapCounter: TextView? = null
     private var tvLastTapAmount: TextView? = null
+    private var tvDamageLevel: TextView? = null
+    private var tvCurrency: TextView? = null
+    private var btnUpgradeDamage: MaterialButton? = null
 
     private val dateFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault()) //Java, 2025.
+
+    private val upgradeViewModel: UpgradeStatsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, //Android, 2025.
@@ -63,12 +77,22 @@ class GameStatsFragment : Fragment(), Stats.Observer { //AndroidX, 2025.
         tvLastUpdated = view.findViewById(R.id.tvLastUpdated)
         tvTapCounter = view.findViewById(R.id.tvTapCounter)
         tvLastTapAmount = view.findViewById(R.id.tvLastTapAmount)
+        tvDamageLevel = view.findViewById(R.id.tvDamageLevel)
+        tvCurrency = view.findViewById(R.id.tvCurrency)
+        btnUpgradeDamage = view.findViewById(R.id.btnUpgradeDamage)
 
         // Register as observer for stats updates
         Stats.addObserver(this)
         
         // Request immediate stats update from Unity
         Stats.requestUnitySnapshot()
+
+        btnUpgradeDamage?.apply {
+            text = getString(R.string.upgrade_damage_button_text, DAMAGE_UPGRADE_COST)
+            setOnClickListener { upgradeViewModel.buyDamageUpgrade(DAMAGE_UPGRADE_COST) }
+        }
+
+        observeUpgradeStats()
     }
 
     override fun onDestroyView() { //AndroidX, 2025.
@@ -84,6 +108,9 @@ class GameStatsFragment : Fragment(), Stats.Observer { //AndroidX, 2025.
         tvLastUpdated = null
         tvTapCounter = null
         tvLastTapAmount = null
+        tvDamageLevel = null
+        tvCurrency = null
+        btnUpgradeDamage = null
     }
 
     override fun onStatsUpdated(snapshot: UnityStatsSnapshot) {
@@ -100,6 +127,25 @@ class GameStatsFragment : Fragment(), Stats.Observer { //AndroidX, 2025.
             tvLastUpdated?.text = "Last updated: ${dateFormat.format(Date())}" //Java, 2025.
             
             Log.d(TAG, "UI TextViews updated successfully")
+        }
+    }
+
+    private fun observeUpgradeStats() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                upgradeViewModel.stats.collect { stats ->
+                    renderUpgradeStats(stats)
+                }
+            }
+        }
+    }
+
+    private fun renderUpgradeStats(stats: UpgradeStats) {
+        view?.post {
+            tvDamageLevel?.text = getString(R.string.damage_level_label, stats.damageLevel)
+            tvCurrency?.text = getString(R.string.currency_label, stats.currency)
+            btnUpgradeDamage?.isEnabled = stats.currency >= DAMAGE_UPGRADE_COST
+            btnUpgradeDamage?.text = getString(R.string.upgrade_damage_button_text, DAMAGE_UPGRADE_COST)
         }
     }
 

@@ -6,6 +6,7 @@ import com.google.gson.Gson
 import com.prog7314.IdleLoadsheddingMobile.core.UnityBridge
 import com.prog7314.IdleLoadsheddingMobile.data.local.AppDatabase
 import com.prog7314.IdleLoadsheddingMobile.data.local.entities.GameStateFull
+import com.prog7314.IdleLoadsheddingMobile.data.models.UnityCheckpointPayload
 import com.prog7314.IdleLoadsheddingMobile.data.models.UnityCurrencySnapshot
 import com.prog7314.IdleLoadsheddingMobile.data.models.UnityHappinessSnapshot
 import com.prog7314.IdleLoadsheddingMobile.data.models.UnitySavePayload
@@ -40,6 +41,7 @@ internal class GameSyncService(
     
     private var currentPlayerId: String? = null
     @Volatile private var lastUnityBroadcastVersion: Long? = null
+    @Volatile private var lastCheckpointToken: String? = null
     
     companion object {
         private const val TAG = "GameSyncService"
@@ -197,6 +199,48 @@ internal class GameSyncService(
             }
         }
     }
+
+    override fun onCheckpointReached(json: String) {
+        serviceScope.launch {
+            try {
+                val playerId = currentPlayerId ?: return@launch
+                val payload = gson.fromJson(json, UnityCheckpointPayload::class.java)
+
+                val stats = when {
+                    payload.snapshot != null -> payload.snapshot
+                    !payload.rawStatsJson.isNullOrBlank() -> gson.fromJson(payload.rawStatsJson, UnityStatsSnapshot::class.java)
+                    else -> loadFallbackStats(playerId)
+                }
+
+                val token = buildCheckpointToken(payload.checkpointId, stats.timestampUtc)
+                if (token == lastCheckpointToken) {
+                    Log.d(TAG, "Skipping duplicate checkpoint ${payload.checkpointId}")
+                    return@launch
+                }
+
+                val sections = payload.sections?.sections
+
+                repository.saveGameState(
+                    playerId = playerId,
+                    unityStats = stats,
+                    generators = payload.generators,
+                    prestigeLevel = 0,
+                    currency = payload.currency,
+                    happiness = payload.happiness,
+                    sections = sections,
+                    statsJson = payload.rawStatsJson,
+                    checkpointId = payload.checkpointId,
+                    checkpointReason = payload.reason,
+                    checkpointReachedAt = payload.reachedAtUtc
+                )
+
+                lastCheckpointToken = token
+                Log.d(TAG, "Checkpoint ${payload.checkpointId} saved")
+            } catch (e: Exception) {
+                Log.e(TAG, "Error processing checkpoint payload", e)
+            }
+        }
+    }
     
     /**
      * Sync game state with backend server.
@@ -326,5 +370,10 @@ internal class GameSyncService(
                 )
             }
         )
+    }
+
+    private fun buildCheckpointToken(checkpointId: String, timestampUtc: String?): String {
+        val ts = timestampUtc ?: ""
+        return "$checkpointId@$ts"
     }
 }
