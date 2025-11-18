@@ -1,20 +1,36 @@
 package com.prog7314.IdleLoadsheddingMobile
 
+import android.content.ClipData //Android, 2025.
+import android.content.ClipboardManager //Android, 2025.
+import android.content.Context //Android, 2025.
+import android.content.Intent //Android, 2025.
+import android.content.SharedPreferences //Android, 2025.
+import android.content.res.Configuration //Android, 2025.
 import android.os.Bundle //Android, 2025.
 import android.util.Log //Android, 2025.
 import android.view.LayoutInflater //Android, 2025.
 import android.view.View //Android, 2025.
+import android.widget.AdapterView //Android, 2025.
 import android.widget.Button //Android, 2025.
+import android.widget.EditText //Android, 2025.
 import android.widget.FrameLayout //Android, 2025.
+import android.widget.Spinner //Android, 2025.
 import android.widget.ImageButton //Android, 2025.
+import android.widget.ImageView //Android, 2025.
+import android.widget.LinearLayout //Android, 2025.
+import android.widget.ProgressBar //Android, 2025.
 import android.widget.TextView //Android, 2025.
 import android.widget.Toast //Android, 2025.
 import androidx.core.view.isVisible //AndroidX, 2025.
 import com.google.android.gms.ads.MobileAds //Google, 2025
 import com.google.firebase.auth.FirebaseAuth //Firebase, 2025.
+import com.google.gson.Gson //Google, 2025.
 import com.prog7314.IdleLoadsheddingMobile.core.UnityBridge
 import com.prog7314.IdleLoadsheddingMobile.data.models.*
 import com.prog7314.IdleLoadsheddingMobile.advertisement.*
+import com.prog7314.IdleLoadsheddingMobile.unity.Events
+import com.prog7314.IdleLoadsheddingMobile.unity.FriendsList
+import com.prog7314.IdleLoadsheddingMobile.unity.Leaderboard
 import com.prog7314.IdleLoadsheddingMobile.unity.PowerManager
 import com.prog7314.IdleLoadsheddingMobile.unity.SaveSync
 import com.prog7314.IdleLoadsheddingMobile.unity.Stats
@@ -22,12 +38,22 @@ import com.prog7314.IdleLoadsheddingMobile.unity.Stats
 // import com.unity3d.player.UnityPlayerGameActivity //Unity Technologies, 2025.
 import com.prog7314.IdleLoadsheddingMobile.stub.UnityPlayerGameActivity
 import com.prog7314.IdleLoadsheddingMobile.networking.FirebasePush.FcmIntegrationHelper
+import com.prog7314.IdleLoadsheddingMobile.ui.HudManager
+import com.prog7314.IdleLoadsheddingMobile.ui.PanelManager
 import com.prog7314.IdleLoadsheddingMobile.ui.coordinators.UIComponentFactory
 import com.prog7314.IdleLoadsheddingMobile.ui.panels.*
+import com.prog7314.IdleLoadsheddingMobile.utils.FormatUtils
 import com.prog7314.IdleLoadsheddingMobile.utils.LocaleManager
 import kotlinx.coroutines.CoroutineScope //Google, 2025
 import kotlinx.coroutines.Dispatchers //Google, 2025
 import kotlinx.coroutines.launch //Google, 2025
+import java.text.DecimalFormat //Oracle, 2025.
+import java.time.Instant //Oracle, 2025.
+import java.time.ZoneId //Oracle, 2025.
+import java.util.Locale //Oracle, 2025.
+import java.time.format.DateTimeFormatter //Oracle, 2025.
+import java.time.format.DateTimeParseException //Oracle, 2025.
+import kotlin.math.roundToInt //Kotlin, 2025.
 
 class MainActivity : UnityPlayerGameActivity() {
 
