@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="timestamp_unknown" translatable="false">--</string>
     <string name="app_name" translatable="false">MobileLoadshedding</string>
     <string name="default_web_client_id" translatable="false">41587024325-gt1n0vaejub9dme7cvidievg5kcktbmp.apps.googleusercontent.com</string>
+    <string name="admob_app_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
+    
     <string name="hud_energy_per_second_format" translatable="false">%1$s /s</string>
     <string name="hud_generators_format">%1$d dijeneretara (Lv %2$d)</string>
     <string name="hud_safe_idle_format">Tshireletseho: %1$s</string>
@@ -20,6 +21,7 @@
     <string name="tasks_event_inactive">%1$s • E phethilwe</string>
     <string name="tasks_event_multiplier">Seatadi x%1$.2f</string>
     <string name="tasks_event_duration">Nako %1$s</string>
+    <string name="timestamp_unknown" translatable="false">--</string>
     <string name="friend_placeholder_name">Motswalle %1$s</string>
     <string name="electricity_current_energy">Matla a hona joale: %1$s</string>
     <string name="electricity_production">Tlhahiso: %1$s /s</string>
@@ -49,17 +51,10 @@
     <string name="profile_tag_newbie">🌟 MOTJHA</string>
     <string name="friends_empty_message">Ha hona metswalle e kentseng hajoale.\nAbelana ka khoutu ya hao ya motswalle ho hokahana!</string>
     <string name="friends_error_message">Ha e kgone ho laisa lenane la metswalle.\nHlahloba kgokahano ya hao mme o leke hape.</string>
-    <string name="auth_biometric_login">Kena ka Biometrics</string>
-    <string name="notification_channel_default_name">Ditsebiso Tsa Kakaretso</string>
-    <string name="notification_channel_events_name">Ditsebiso Tsa Diketsahalo</string>
-    <string name="notification_channel_friends_name">Ditsebiso Tsa Metswalle</string>
-    <string name="notification_channel_system_name">Ditsebiso Tsa Tsamaiso</string>
-    <string name="accessibility_close">Koala modal</string>
-    <string name="accessibility_back">Kgutlela morao</string>
-    <string name="accessibility_tab">Thebhu, %1$s</string>
-    <string name="accessibility_toggle">Fetola, %1$s</string>
-    <string name="accessibility_profile_avatar">Setshwantsho sa porofaele</string>
-    <string name="accessibility_rank_badge">Letshwao la boemo</string>
+    <string name="settings_language_changed">Puo e fetohile. Qala hape app ho sebedisa.</string>
+    <string name="settings_language_label">Puo</string>
+    <string name="settings_theme_label">Mokhoa</string>
+    <string name="settings_save_management_label">Taolo ya Poloko</string>
 
     <!-- Auth -->
     <string name="auth_header_title">Idle Loadshedding</string>
@@ -78,6 +73,7 @@
     <string name="auth_primary_cta_login">Kena</string>
     <string name="auth_primary_cta_signup">Ingodise</string>
     <string name="auth_google_cta">Tswela pele ka Google</string>
+    <string name="auth_biometric_login">Kena ka Biometrics</string>
     <string name="auth_or_label">Kapa</string>
     <string name="auth_already_signed">O Se O Ingodisitse ?</string>
     
@@ -85,16 +81,14 @@
     <string name="profile_edit_title">Hlophisa Profaele</string>
     <string name="profile_edit_nickname">Lebitso la Tlwaelo</string>
     <string name="profile_edit_nickname_hint">Lebitso La Hao La Tlwaelo</string>
+
     <string name="profile_edit_email">Imeile</string>
     <string name="profile_edit_save">BOLOKA DIPHETOHO</string>
     <string name="profile_edit_cancel">KHANSELA</string>
     <string name="toast_profile_updated">Profaele e ntjafaditswe ka katleho</string>
     <string name="toast_profile_update_failed">E hlolehile ho ntjafatsa profaele</string>
     <string name="toast_nickname_empty">Ka kopo kenya lebitso la tlwaelo</string>
-    <string name="settings_language_changed">Puo e fetohile. Qala hape app ho sebedisa.</string>
-    <string name="settings_language_label">Puo</string>
-    <string name="settings_theme_label">Mokhoa</string>
-    <string name="settings_save_management_label">Taolo ya Poloko</string>
+
     <string name="settings_panel_title">Litlhophiso</string>
     <string name="btn_upload_save">KENYA POLOKO HO LERU</string>
     <string name="btn_sync_save">LUMELLANA POLOKO LE LERU</string>
@@ -105,6 +99,21 @@
     <string name="logout_confirmation_message">O netefatsa hore o batla ho tswa? Tsoelo-pele ya hao e bolokilwe lerung.</string>
     <string name="logout_confirm_yes">Tswa</string>
     <string name="logout_confirm_no">Khansela</string>
+    
+    <!-- Push Notifications -->
+    <string name="default_notification_channel_id" translatable="false">idle_loadshedding_default</string>
+    <string name="notification_channel_default_name">Ditsebiso Tsa Kakaretso</string>
+    <string name="notification_channel_events_name">Ditsebiso Tsa Diketsahalo</string>
+    <string name="notification_channel_friends_name">Ditsebiso Tsa Metswalle</string>
+    <string name="notification_channel_system_name">Ditsebiso Tsa Tsamaiso</string>
+    
+    <!-- Accessibility -->
+    <string name="accessibility_close">Koala modal</string>
+    <string name="accessibility_back">Kgutlela morao</string>
+    <string name="accessibility_tab">Thebhu, %1$s</string>
+    <string name="accessibility_toggle">Fetola, %1$s</string>
+    <string name="accessibility_profile_avatar">Setshwantsho sa porofaele</string>
+    <string name="accessibility_rank_badge">Letshwao la boemo</string>
 
     <!-- HUD / Navigation labels -->
     <string name="hud_energy_label">Dikhredite Tsa Matla</string>
@@ -114,4 +123,164 @@
     <string name="hud_upgrades_content_description">Matswela Pele</string>
     <string name="hud_profile_content_description">Profaele</string>
     <string name="advert_upgrade_text">Nts\'etsopele ya mahala (AD)</string>
+
+    <!-- Biometric Settings -->
+    <string name="biometric_settings_title">Litlhophiso tsa Biometric</string>
+    <string name="biometric_promo_title">Lula o bolokehile ka biometrics</string>
+    <string name="biometric_promo_subtitle">Tlola ho thaepa phasewete ya hao disebedisweng tse tshepahalang ka ho sebedisa menoana kapa ho notlolla ka sefahleho.</string>
+    <string name="biometric_promo_privacy">Lintlha tsa hao tsa biometric ha di tlohe sesebedisweng. O ka e tima neng kapa neng haeba o lahlehelwa ke fono ya hao.</string>
+    <string name="biometric_enable_label">Dumella ho kena ka biometric</string>
+    <string name="biometric_enable_description">Boloka sena se butswe bakeng sa disebediswa tseo o di tshepang. Re tla o hopotsa ho netefatsa hape haeba sesebediswa sa hao se fetoha.</string>
+    <string name="biometric_status_disabled">Netefatso ya biometric e timilwe</string>
+    <string name="biometric_status_active">✓ Netefatso ya biometric e a sebetsa mme e lokile</string>
+    <string name="biometric_status_not_configured">⚠ Biometric e dumelletswe empa ha e a hlophiswa ka botlalo</string>
+    <string name="biometric_account_status_title">Boemo ba akhaonto</string>
+    <string name="biometric_signed_in_as">O kene jwalo ka</string>
+    <string name="biometric_no_user">Ha ho mosebedisi ya hlophisitsweng</string>
+    <string name="biometric_device_support">Tshehetso ya sesebediswa</string>
+    <string name="biometric_checking">E ntse e hlahloba...</string>
+    <string name="biometric_hardware_available">✓ Hardware ya biometric e teng</string>
+    <string name="biometric_hardware_unavailable">✗ %1$s</string>
+    <string name="biometric_hardware_description">Re netefatsa biometrics ya hao re sebedisa hardware e bolokehileng sesebedisweng sena.</string>
+    <string name="biometric_actions_title">Diketso tse potlakileng</string>
+    <string name="biometric_btn_test">Leka ho notlolla ka biometric</string>
+    <string name="biometric_btn_reenroll">Ingodise hape bakeng sa biometrics</string>
+    <string name="biometric_actions_description">Sebedisa disebediswa tsena ho netefatsa hore tsohle di sebetsa pele o itshetleha ka biometrics bakeng sa ho kena letsatsi le letsatsi.</string>
+    <string name="biometric_tips_title">Dikeletso tse thusang</string>
+    <string name="biometric_tip_1">• Tima biometrics pele o alima kapa o isa fono ya hao ho lokiswa.</string>
+    <string name="biometric_tip_2">• Ingodise hape haeba o kenya menoana e metjha kapa diprofaele tsa sefahleho.</string>
+    <string name="biometric_tip_3">• Biometrics e tlatselletsa phasewete ya hao—ha e e nkele sebaka.</string>
+    
+    <!-- Biometric Messages -->
+    <string name="biometric_error_loading">E hlolehile ho laisa boemo ba biometric</string>
+    <string name="biometric_msg_enabled">Netefatso ya biometric e dumelletswe</string>
+    <string name="biometric_msg_disabled">Netefatso ya biometric e timilwe</string>
+    <string name="biometric_msg_cleared">Lintlha tsa biometric di hlakotswe. Ka kopo dumella hape ho ingodisa hape.</string>
+    <string name="biometric_error_no_user">Ha ho mosebedisi ya hlophisitsweng bakeng sa netefatso ya biometric</string>
+    <string name="biometric_error_enrollment_failed">E hlolehile ho phethela ngodiso ya biometric</string>
+    <string name="biometric_error_setup_failed">E hlolehile ho qeta ho hlophisa biometric</string>
+    <string name="biometric_error_disable_failed">E hlolehile ho tima netefatso ya biometric</string>
+    <string name="biometric_error_reenroll_failed">E hlolehile ho ingodisa hape bakeng sa netefatso ya biometric</string>
+    <string name="biometric_prompt_enable_title">Dumella Netefatso ya Biometric</string>
+    <string name="biometric_prompt_enable_subtitle">Tiisa boitsebiso ba hao</string>
+    <string name="biometric_prompt_enable_desc">Sebedisa bopaki ba hao ba biometric ho boloka sesebediswa sena.</string>
+    <string name="biometric_prompt_test_title">Leka Netefatso ya Biometric</string>
+    <string name="biometric_prompt_test_subtitle">Netefatsa bopaki ba hao ba biometric</string>
+    <string name="biometric_prompt_test_desc">Sena ke teko ho netefatsa hore netefatso ya biometric e sebetsa ka nepo</string>
+    <string name="biometric_test_success">✓ Netefatso ya biometric e atlehile!</string>
+    <string name="biometric_error_prefix">Phoso: %1$s</string>
+    <string name="biometric_cancelled">Netefatso e hlakotswe</string>
+    <string name="biometric_login_required">Ka kopo kena pele ho dumella netefatso ya biometric</string>
+    <string name="biometric_error_start">Ha e kgone ho qala ngodiso ya biometric: %1$s</string>
+    <string name="biometric_error_crypto">Ha e kgone ho nka lintlha tsa cryptographic. Ka kopo leka hape.</string>
+    <string name="biometric_reenroll_instruction">Ka kopo fetola netefatso ya biometric ho ingodisa hape</string>
+
+    <!-- Profile Panel -->
+    <string name="tab_profile">Profaele</string>
+    <string name="tab_leaderboard">Boto ya Baetapele</string>
+    <string name="profile_default_name">Lebitso la Hao</string>
+    <string name="profile_default_email">lebitsoLaka@gmail.com</string>
+    <string name="profile_email_placeholder">imeile@mohlala.com</string>
+    <string name="profile_friend_code_placeholder">----·----</string>
+    <string name="btn_copy">KOPI</string>
+    <string name="label_player_statistics">Dipalopalo tsa Sebapadi</string>
+    <string name="profile_energy_total_default">Kakaretso e hlahisitsweng: --</string>
+    <string name="profile_energy_per_second_default">Tlhahiso: --</string>
+    <string name="profile_generators_default">Dijeneretara: --</string>
+    <string name="profile_offline_default">E sa sebetseng: --</string>
+    <string name="profile_last_sync_default">E qetelletswe ho kopantshuwa: --</string>
+    <string name="btn_edit_profile">HLOPHISA PROFAELE</string>
+    <string name="btn_settings">LITLHOPHISISO</string>
+    <string name="btn_biometric_settings">LITLHOPHISISO TSA BIOMETRIC</string>
+    <string name="btn_debug_notifications">LITSEBISO TSA DEBUG</string>
+    
+    <!-- Leaderboard Panel -->
+    <string name="tab_friends">Metswalle</string>
+    <string name="tab_global">Lefatshe</string>
+    <string name="leaderboard_updated_default">E ntjafaditswe --</string>
+    <string name="placeholder_dash">--</string>
+    <string name="leaderboard_empty">Ha ho na dipehelo tsa boto ya baetapele hajoale</string>
+    <string name="leaderboard_rank_placeholder">#1</string>
+    <string name="leaderboard_name_placeholder">Lebitso la Sebapadi</string>
+    <string name="leaderboard_score_placeholder">R 120 343</string>
+
+    <!-- Friends Leaderboard Panel -->
+    <string name="label_add_friend">Kenya Motswalle ka Khoutu</string>
+    <string name="hint_friend_code">K7M9-P2WX</string>
+    <string name="btn_add">KENYA</string>
+
+    <!-- Electricity Upgrade Panel -->
+    <string name="title_grid_production">Tlhahiso ya Grid</string>
+    <string name="label_current_energy">Matla a hona joale: --</string>
+    <string name="label_production">Tlhahiso: --</string>
+    <string name="label_generators">Dijeneretara: --</string>
+    <string name="label_energy_credits">Dikhredite tsa matla: --</string>
+    <string name="label_offline_progress">Tsoelo-pele ha ho le inthaneteng: --</string>
+    <string name="label_safe_idle">Tshireletseho: --</string>
+    <string name="label_core_charge">Tjhaja ya motheo: --</string>
+    <string name="label_last_event">Ketsahalo ya ho qetela: --</string>
+    <string name="label_last_save_sync">Kopanyo ya ho qetela: --</string>
+    <string name="title_district_overview">Kakaretso ya Setereke</string>
+    <string name="btn_refresh">KHATHOLLA</string>
+
+    <!-- Building Upgrade Panel -->
+    <string name="tab_electricity">Motlakase</string>
+    <string name="tab_building">Moaho</string>
+
+    <!-- Debug Notifications Panel -->
+    <string name="title_debug_notifications">Litsebiso tsa Debug</string>
+    <string name="title_notification_studio"> Studio sa Tsebiso</string>
+    <string name="desc_notification_studio_preview">Sheba hantle seo libapali li se bonang pele u romella eng kapa eng e phelang.</string>
+    <string name="desc_notification_studio_cards">Sebedisa likarete tse ka tlase ho fana ka tumello, ho nchafatsa li-token, le ho etsisa boemo bo bong le bo bong boo sesebelisoa se bo tšehetsang.</string>
+    <string name="title_readiness_checklist"> Lethathamo la ho itokisa</string>
+    <string name="status_notification_permission_checking">Tumello ea tsebiso: e ntse e hlahloba...</string>
+    <string name="status_fcm_token_checking">Token ea FCM: e ntse e hlahloba...</string>
+    <string name="status_backend_sync_checking">Khokahano ea morao: e ntse e hlahloba...</string>
+    <string name="btn_grant_permission">Fana ka tumello</string>
+    <string name="btn_sync_token">Khokahanya token</string>
+    <string name="btn_open_android_settings">Bula litlhophiso tsa tsebiso tsa Android</string>
+    <string name="status_last_simulation">Ketsiso ea ho qetela: --</string>
+
+    <!-- Upgrade Item View -->
+    <string name="upgrade_default_name">Jenereithara 1</string>
+    <string name="upgrade_default_level">Boemo: 1</string>
+    <string name="upgrade_level_delta">+1</string>
+    <string name="btn_tap_to_upgrade">Tlanya ho Ntlafatsa</string>
+
+    <!-- Game Activity -->
+    <string name="welcome_message">Rea u amohela Papaling!</string>
+
+    <!-- HUD -->
+    <string name="hud_currency_placeholder">1,978.12</string>
+    <string name="hud_production_placeholder">+0.00 /s</string>
+    <string name="hud_generators_placeholder">0 dijeneretara</string>
+    <string name="hud_safe_idle_placeholder">Tshireletseho: --</string>
+
+    <!-- Game Stats Fragment -->
+    <string name="stats_title">Dipalopalo tsa Papadi</string>
+    <string name="stats_current_energy">Matla a Hona Joale:</string>
+    <string name="stats_value_placeholder">0.00</string>
+    <string name="stats_total_generated">Kakaretso e Hlahisitsweng:</string>
+    <string name="stats_energy_per_second">Matla/Motsotsoana:</string>
+    <string name="stats_active_generators">Dijeneretara tse Sebetsang:</string>
+    <string name="stats_count_placeholder">0</string>
+    <string name="stats_total_levels">Kakaretso ea Maemo:</string>
+    <string name="stats_tap_count">Palo ea ho Tlanya:</string>
+    <string name="stats_taps_placeholder">Ho Tlanya: 0</string>
+
+    <!-- District Status Item -->
+    <string name="district_default_name">Setereke</string>
+    <string name="district_default_level">Boemo 1</string>
+    <string name="district_default_output">0 /s</string>
+    <string name="district_default_efficiency">100% bokgoni</string>
+    <string name="district_default_idle">Tshireletseho: --</string>
+    <string name="btn_service">TSHEBELETSO</string>
+    <string name="btn_upgrade">NTLAFATSA</string>
+
+    <!-- Tasks Panel -->
+    <string name="tasks_title">Mesebetsi</string>
+
+    <!-- Task Item View -->
+    <string name="task_description_placeholder">Ntlafatsa Polokelo ho ea boemong ba 6</string>
+    <string name="task_reward_placeholder">R 20,000</string>
 </resources>

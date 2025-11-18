@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Shadow layer for depth -->
+    <!-- Shadow layer for depth, flat bottom -->
     <item android:left="0dp" android:top="@dimen/modal_tab_shadow_offset" android:right="0dp" android:bottom="@dimen/modal_tab_shadow_overlap">
         <shape>
             <solid android:color="@color/modal_shadow_tab" />
@@ -8,21 +8,19 @@
                 android:topLeftRadius="@dimen/modal_tab_corner_radius"
                 android:topRightRadius="@dimen/modal_tab_corner_radius"
                 android:bottomLeftRadius="0dp"
-                android:bottomRightRadius="@dimen/modal_tab_corner_radius" />
+                android:bottomRightRadius="0dp" />
         </shape>
     </item>
-    <!-- Main tab with gradient -->
+    <!-- Main tab with flat color, flat bottom -->
     <item android:left="0dp" android:top="0dp" android:right="0dp" android:bottom="@dimen/modal_tab_shadow_overlap">
         <shape>
-            <gradient
-                android:startColor="@color/modal_panel_red_start"
-                android:endColor="@color/modal_panel_red_center"
-                android:angle="90" />
+            <solid android:color="@color/modal_panel_red_center" />
             <corners
                 android:topLeftRadius="@dimen/modal_tab_corner_radius"
                 android:topRightRadius="@dimen/modal_tab_corner_radius"
                 android:bottomLeftRadius="0dp"
-                android:bottomRightRadius="@dimen/modal_tab_corner_radius" />
+                android:bottomRightRadius="0dp" />
         </shape>
     </item>
+
 </layer-list>

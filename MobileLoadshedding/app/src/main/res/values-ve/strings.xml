@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <resources>
-    <string name="timestamp_unknown" translatable="false">--</string>
     <string name="app_name" translatable="false">MobileLoadshedding</string>
     <string name="default_web_client_id" translatable="false">41587024325-gt1n0vaejub9dme7cvidievg5kcktbmp.apps.googleusercontent.com</string>
+    <string name="admob_app_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
+    
     <string name="hud_energy_per_second_format" translatable="false">%1$s /s</string>
     <string name="hud_generators_format">%1$d dzigandzisi (Lv %2$d)</string>
     <string name="hud_safe_idle_format">Nako ya u awela: %1$s</string>
@@ -21,6 +21,7 @@
     <string name="tasks_event_inactive">%1$s • Tsho Fhedzwa</string>
     <string name="tasks_event_multiplier">Mubebi x%1$.2f</string>
     <string name="tasks_event_duration">Nako %1$s</string>
+    <string name="timestamp_unknown" translatable="false">--</string>
     <string name="friend_placeholder_name">Muthannga %1$s</string>
     <string name="electricity_current_energy">Muroho wa zwino: %1$s</string>
     <string name="electricity_production">Bveledzo: %1$s /s</string>
@@ -75,7 +76,7 @@
     <string name="auth_biometric_login">Ingedzani nga Biometrics</string>
     <string name="auth_or_label">Kana</string>
     <string name="auth_already_signed">No no Vhumbani Akhaunti?</string>
-
+    
     <!-- Profile Edit -->
     <string name="profile_edit_title">Khwinifhadzani Profaili</string>
     <string name="profile_edit_nickname">Dzina ḽa u Vhidzwa</string>
@@ -86,6 +87,7 @@
     <string name="toast_profile_updated">Profaili yo khwinifhadzwa zwavhuḓi</string>
     <string name="toast_profile_update_failed">Profaili a yo ngo khwinifhadzwa</string>
     <string name="toast_nickname_empty">Thayani dzina ḽa u vhidzwa</string>
+
     <string name="settings_panel_title">Nzudzanyo</string>
     <string name="btn_upload_save">RUMELANI VHULUNGO CLOUDANI</string>
     <string name="btn_sync_save">SINIKISANI VHULUNGO NA CLOUD</string>
@@ -96,27 +98,188 @@
     <string name="logout_confirmation_message">Ni na vhuṱanzi ha u da u bva? Vhupfi haṋu vhu vhulungiwa kha cloud.</string>
     <string name="logout_confirm_yes">Bva</string>
     <string name="logout_confirm_no">Fhelisani</string>
-
+    
     <!-- Push Notifications -->
-    <string name="notification_channel_default_name">Zwithu zwa Tshikirini</string>
-    <string name="notification_channel_events_name">Tshikirini tsha Tshiga</string>
-    <string name="notification_channel_friends_name">Tshikirini tsha Muthannga</string>
-    <string name="notification_channel_system_name">Tshikirini tsha Sisitemu</string>
-
+    <string name="default_notification_channel_id" translatable="false">idle_loadshedding_default</string>
+    <string name="notification_channel_default_name">Ndivhadzo dza Vhathu</string>
+    <string name="notification_channel_events_name">Ndivhadzo dza Zwiitea</string>
+    <string name="notification_channel_friends_name">Ndivhadzo dza Vhathu</string>
+    <string name="notification_channel_system_name">Ndivhadzo dza Sisiteme</string>
+    
     <!-- Accessibility -->
     <string name="accessibility_close">Valani modal</string>
-    <string name="accessibility_back">Dzhiani murahu</string>
+    <string name="accessibility_back">Iyani murahu</string>
     <string name="accessibility_tab">Tab, %1$s</string>
-    <string name="accessibility_toggle">Shandukisani, %1$s</string>
-    <string name="accessibility_profile_avatar">Avatar ya profaili</string>
-    <string name="accessibility_rank_badge">Bheji ḽa muthetho</string>
+    <string name="accessibility_toggle">Toggle, %1$s</string>
+    <string name="accessibility_profile_avatar">Tshifanyiso tsha profaili</string>
+    <string name="accessibility_rank_badge">Badge ya vhuimo</string>
 
     <!-- HUD / Navigation labels -->
-    <string name="hud_energy_label">Dzikhredithi dza Muthu</string>
-    <string name="nav_level_up">U Kona u Kwama NNḓa</string>
-    <string name="nav_power">Maaṱo</string>
+    <string name="hud_energy_label">Dikhredithi dza Matla</string>
+    <string name="nav_level_up">Khwinifhadzani</string>
+    <string name="nav_power">Matla</string>
     <string name="nav_tasks">Mishumo</string>
-    <string name="hud_upgrades_content_description">U U fusha / U Nwalela</string>
-    <string name="hud_profile_content_description">Mbuno ya Muthu</string>
-    <string name="advert_upgrade_text">U vhudzisa ha u fhasi (AD)</string>
+    <string name="hud_upgrades_content_description">Khwinifhadzo</string>
+    <string name="hud_profile_content_description">Profaili</string>
+    <string name="advert_upgrade_text">Khwinifhadzo ya mahala (AD)</string>
+
+    <!-- Biometric Settings -->
+    <string name="biometric_settings_title">Nzudzanyo dza Biometric</string>
+    <string name="biometric_promo_title">Dzulani no tsireledzea nga biometrics</string>
+    <string name="biometric_promo_subtitle">Pfulani u thayapa phasiwede kha zwishumiswa zwo tendelwaho nga u shumisa munwe kana u vula nga tshifhatuwo.</string>
+    <string name="biometric_promo_privacy">Data ya biometrics a i bvi kha tshishumiswa. Ni nga i dzima tshifhinga tshoṱhe arali na xelelwa nga founu.</string>
+    <string name="biometric_enable_label">Tendelani u dzhena nga biometric</string>
+    <string name="biometric_enable_description">Dzulani no vula hezwi kha zwishumiswa zwine na zwi fulufhela. Ri do ni humbela u khwaṱhisedza hafhu arali tshishumiswa tsha shanduka.</string>
+    <string name="biometric_status_disabled">U khwaṱhisedza nga biometric zwo dzimiwa</string>
+    <string name="biometric_status_active">✓ U khwaṱhisedza nga biometric zwi a shuma nahone zwo lulama</string>
+    <string name="biometric_status_not_configured">⚠ Biometric yo tendelwa fhedzi a yo ngo dzudzanywa tshoṱhe</string>
+    <string name="biometric_account_status_title">Vhuimo ha akhaunti</string>
+    <string name="biometric_signed_in_as">No dzhena sa</string>
+    <string name="biometric_no_user">A huna mushumisi wo dzudzanywaho</string>
+    <string name="biometric_device_support">Thikhedzo ya tshishumiswa</string>
+    <string name="biometric_checking">U khou ṱola...</string>
+    <string name="biometric_hardware_available">✓ Hardware ya biometric i hone</string>
+    <string name="biometric_hardware_unavailable">✗ %1$s</string>
+    <string name="biometric_hardware_description">Ri khwaṱhisedza biometrics yaṋu ri tshi shumisa hardware yo tsireledzeaho kha tshishumiswa hetshi.</string>
+    <string name="biometric_actions_title">Mishumo ya u ṱavhanya</string>
+    <string name="biometric_btn_test">Lingedzani u vula nga biometric</string>
+    <string name="biometric_btn_reenroll">Ṅwalisani hafhu kha biometrics</string>
+    <string name="biometric_actions_description">Shumisani hezwi u khwaṱhisedza uri zwoṱhe zwi a shuma phanda ha u ḓitika nga biometrics u dzhena ḓuvha ḽiṅwe na ḽiṅwe.</string>
+    <string name="biometric_tips_title">Zweleḓo zwa u thusa</string>
+    <string name="biometric_tip_1">• Dzimani biometrics phanda ha u hadzima kana u isa founu u lugiswa.</string>
+    <string name="biometric_tip_2">• Ṅwalisani hafhu arali na engedza minwe miswa kana profaili dza tshifhatuwo.</string>
+    <string name="biometric_tip_3">• Biometrics i engedza phasiwede yaṋu—a i i imeli.</string>
+    
+    <!-- Biometric Messages -->
+    <string name="biometric_error_loading">Ho kundelwa u laisa vhuimo ha biometric</string>
+    <string name="biometric_msg_enabled">U khwaṱhisedza nga biometric zwo tendelwa</string>
+    <string name="biometric_msg_disabled">U khwaṱhisedza nga biometric zwo dzimiwa</string>
+    <string name="biometric_msg_cleared">Data ya biometric yo phulwa. Nga khumbulelo tendelani hafhu u ṅwalisa hafhu.</string>
+    <string name="biometric_error_no_user">A huna mushumisi wo dzudzanywaho u khwaṱhisedza nga biometric</string>
+    <string name="biometric_error_enrollment_failed">Ho kundelwa u fhedza u ṅwalisa biometric</string>
+    <string name="biometric_error_setup_failed">Ho kundelwa u fhedza u dzudzanya biometric</string>
+    <string name="biometric_error_disable_failed">Ho kundelwa u dzima u khwaṱhisedza nga biometric</string>
+    <string name="biometric_error_reenroll_failed">Ho kundelwa u ṅwalisa hafhu u khwaṱhisedza nga biometric</string>
+    <string name="biometric_prompt_enable_title">Tendelani U Khwaṱhisedza nga Biometric</string>
+    <string name="biometric_prompt_enable_subtitle">Khwaṱhisedzani vhuṋe haṋu</string>
+    <string name="biometric_prompt_enable_desc">Shumisani vhuṱanzi ha biometric u tsireledza tshishumiswa hetshi.</string>
+    <string name="biometric_prompt_test_title">Lingedzani U Khwaṱhisedza nga Biometric</string>
+    <string name="biometric_prompt_test_subtitle">Khwaṱhisedzani vhuṱanzi ha biometric</string>
+    <string name="biometric_prompt_test_desc">Hetshi ndi tshiedzo u khwaṱhisedza uri u khwaṱhisedza nga biometric zwi shuma zwavhuḓi</string>
+    <string name="biometric_test_success">✓ U khwaṱhisedza nga biometric zwo bvelela!</string>
+    <string name="biometric_error_prefix">Phoso: %1$s</string>
+    <string name="biometric_cancelled">U khwaṱhisedza zwo khanselwa</string>
+    <string name="biometric_login_required">Nga khumbulelo dzhenani phanda ha u tendela u khwaṱhisedza nga biometric</string>
+    <string name="biometric_error_start">A zwi koni u thoma u ṅwalisa biometric: %1$s</string>
+    <string name="biometric_error_crypto">A zwi koni u wana data ya cryptographic. Nga khumbulelo lingedzani hafhu.</string>
+    <string name="biometric_reenroll_instruction">Nga khumbulelo shandukisani u khwaṱhisedza nga biometric u ṅwalisa hafhu</string>
+
+    <!-- Profile Panel -->
+    <string name="tab_profile">Profaili</string>
+    <string name="tab_leaderboard">Bodo ya Vharangaphanda</string>
+    <string name="profile_default_name">Dzina ḽaṋu</string>
+    <string name="profile_default_email">dzinaḽanga@gmail.com</string>
+    <string name="profile_email_placeholder">email@tshikao.com</string>
+    <string name="profile_friend_code_placeholder">----·----</string>
+    <string name="btn_copy">KOPI</string>
+    <string name="label_player_statistics">Dipalopalo dza Mutambi</string>
+    <string name="profile_energy_total_default">Muthihi wo bveledzwaho: --</string>
+    <string name="profile_energy_per_second_default">Bveledzo: --</string>
+    <string name="profile_generators_default">Dzigandzisi: --</string>
+    <string name="profile_offline_default">U sa shuma: --</string>
+    <string name="profile_last_sync_default">Ho khwinifhadzwa u fhedza: --</string>
+    <string name="btn_edit_profile">KHWINIFHADZANI PROFAILI</string>
+    <string name="btn_settings">NZUDZANYO</string>
+    <string name="btn_biometric_settings">NZUDZANYO DZA BIOMETRIC</string>
+    <string name="btn_debug_notifications">NDIVHADZO DZA DEBUG</string>
+    
+    <!-- Leaderboard Panel -->
+    <string name="tab_friends">Vhakonani</string>
+    <string name="tab_global">Ḽifhasi</string>
+    <string name="leaderboard_updated_default">Ho khwinifhadzwa --</string>
+    <string name="placeholder_dash">--</string>
+    <string name="leaderboard_empty">A huna vhupfi ha bodo ya vharangaphanda zwino</string>
+    <string name="leaderboard_rank_placeholder">#1</string>
+    <string name="leaderboard_name_placeholder">Dzina ḽa Mutambi</string>
+    <string name="leaderboard_score_placeholder">R 120 343</string>
+
+    <!-- Friends Leaderboard Panel -->
+    <string name="label_add_friend">Ingedzani Muthannga nga Khodi</string>
+    <string name="hint_friend_code">K7M9-P2WX</string>
+    <string name="btn_add">INGEDZANI</string>
+
+    <!-- Electricity Upgrade Panel -->
+    <string name="title_grid_production">Bveledzo ya Grid</string>
+    <string name="label_current_energy">Matla a hona joale: --</string>
+    <string name="label_production">Bveledzo: --</string>
+    <string name="label_generators">Dzigandzisi: --</string>
+    <string name="label_energy_credits">Dikhredithi dza Matla: --</string>
+    <string name="label_offline_progress">U bveledza musi ni si kha Inthanethe: --</string>
+    <string name="label_safe_idle">Nako ya u awela: --</string>
+    <string name="label_core_charge">Core charge: --</string>
+    <string name="label_last_event">Tshiga tsha u fhedza: --</string>
+    <string name="label_last_save_sync">U vhulunga ho fhedza: --</string>
+    <string name="title_district_overview">Khaedu ya Vhuvhinduni</string>
+    <string name="btn_refresh">KHWINIFHADZANI</string>
+
+    <!-- Building Upgrade Panel -->
+    <string name="tab_electricity">Matla</string>
+    <string name="tab_building">Tshiako</string>
+
+    <!-- Debug Notifications Panel -->
+    <string name="title_debug_notifications">Ndivhadzo dza Debug</string>
+    <string name="title_notification_studio">Studio ya Ndivhadzo</string>
+    <string name="desc_notification_studio_preview">Vhonani zwine vhatambi vha zwi vhona phanda ha u rumela tshiṅwe na tshiṅwe tshi tshilaho.</string>
+    <string name="desc_notification_studio_cards">Shumisani makarata a re fhasi u fana na thendelo, u khwinifhadza token, na u edzisa vhuimo vhuṅwe na vhuṅwe vhune tshishumiswa tsha tshi tikedza.</string>
+    <string name="title_readiness_checklist">Mutevhe wa u ḓilugisela</string>
+    <string name="status_notification_permission_checking">Thendelo ya ndivhadzo: u khou ṱola...</string>
+    <string name="status_fcm_token_checking">Token ya FCM: u khou ṱola...</string>
+    <string name="status_backend_sync_checking">Khokahano ya murahu: u khou ṱola...</string>
+    <string name="btn_grant_permission">Fana na thendelo</string>
+    <string name="btn_sync_token">Khokahanya token</string>
+    <string name="btn_open_android_settings">Vula nzudzanyo dza ndivhadzo dza Android</string>
+    <string name="status_last_simulation">Ketsiso ya u fhedza: --</string>
+
+    <!-- Upgrade Item View -->
+    <string name="upgrade_default_name">Jenereithara 1</string>
+    <string name="upgrade_default_level">Boemo: 1</string>
+    <string name="upgrade_level_delta">+1</string>
+    <string name="btn_tap_to_upgrade">Tlanya ho Ntlafatsa</string>
+
+    <!-- Game Activity -->
+    <string name="welcome_message">Rea u amohela Papaling!</string>
+
+    <!-- HUD -->
+    <string name="hud_currency_placeholder">1,978.12</string>
+    <string name="hud_production_placeholder">+0.00 /s</string>
+    <string name="hud_generators_placeholder">0 dijeneretara</string>
+    <string name="hud_safe_idle_placeholder">Tshireletseho: --</string>
+
+    <!-- Game Stats Fragment -->
+    <string name="stats_title">Dipalopalo tsa Papadi</string>
+    <string name="stats_current_energy">Matla a Hona Joale:</string>
+    <string name="stats_value_placeholder">0.00</string>
+    <string name="stats_total_generated">Kakaretso e Hlahisitsweng:</string>
+    <string name="stats_energy_per_second">Matla/Motsotsoana:</string>
+    <string name="stats_active_generators">Dijeneretara tse Sebetsang:</string>
+    <string name="stats_count_placeholder">0</string>
+    <string name="stats_total_levels">Kakaretso ea Maemo:</string>
+    <string name="stats_tap_count">Palo ea ho Tlanya:</string>
+    <string name="stats_taps_placeholder">Ho Tlanya: 0</string>
+
+    <!-- District Status Item -->
+    <string name="district_default_name">Setereke</string>
+    <string name="district_default_level">Boemo 1</string>
+    <string name="district_default_output">0 /s</string>
+    <string name="district_default_efficiency">100% bokgoni</string>
+    <string name="district_default_idle">Tshireletseho: --</string>
+    <string name="btn_service">TSHEBELETSO</string>
+    <string name="btn_upgrade">NTLAFATSA</string>
+
+    <!-- Tasks Panel -->
+    <string name="tasks_title">Mesebetsi</string>
+
+    <!-- Task Item View -->
+    <string name="task_description_placeholder">Ntlafatsa Polokelo ho ea boemong ba 6</string>
+    <string name="task_reward_placeholder">R 20,000</string>
 </resources>

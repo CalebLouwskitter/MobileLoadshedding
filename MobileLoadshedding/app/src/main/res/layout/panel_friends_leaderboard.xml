@@ -3,219 +3,377 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_panel_rounded"
     android:animateLayoutChanges="true">
 
-    <LinearLayout
-        android:id="@+id/header_tabs_container"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/content_scroll"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_panel_rounded"
+            android:paddingStart="@dimen/panel_padding_horizontal"
+            android:paddingTop="@dimen/panel_padding_top"
+            android:paddingEnd="@dimen/panel_padding_horizontal"
+            android:paddingBottom="@dimen/panel_padding_vertical">
+
+            <TextView
+                android:id="@+id/label_add_friend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginStart="@dimen/panel_padding_horizontal"
+                android:text="@string/label_add_friend"
+                android:textColor="@color/modal_text_dark_blue"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <EditText
+                android:id="@+id/input_friend_code"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginStart="@dimen/panel_padding_horizontal"
+                android:layout_marginEnd="8dp"
+                android:background="@android:drawable/edit_text"
+                android:hint="@string/hint_friend_code"
+                android:inputType="textCapCharacters"
+                android:fontFamily="monospace"
+                android:minHeight="44dp"
+                android:paddingStart="@dimen/spacing_medium"
+                android:paddingTop="@dimen/spacing_small"
+                android:paddingEnd="@dimen/spacing_medium"
+                android:paddingBottom="@dimen/spacing_small"
+                android:textSize="15sp"
+                android:maxLength="9"
+                app:layout_constraintTop_toBottomOf="@id/label_add_friend"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btn_add_friend" />
+
+            <Button
+                android:id="@+id/btn_add_friend"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/panel_padding_horizontal"
+                android:backgroundTint="@color/modal_button_primary"
+                android:minWidth="0dp"
+                android:paddingStart="16dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="10dp"
+                android:text="@string/btn_add"
+                android:textColor="@color/modal_text_primary"
+                android:textSize="13sp"
+                app:layout_constraintTop_toTopOf="@id/input_friend_code"
+                app:layout_constraintBottom_toBottomOf="@id/input_friend_code"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/text_add_friend_status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:layout_marginStart="@dimen/panel_padding_horizontal"
+                android:layout_marginEnd="@dimen/panel_padding_horizontal"
+                android:text=""
+                android:textColor="@color/modal_text_on_light_secondary"
+                android:textSize="12sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/input_friend_code"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- Friends/Global Toggle Buttons -->
+            <TextView
+                android:id="@+id/btn_show_friends"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_marginStart="@dimen/panel_padding_horizontal"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:background="@drawable/bg_toggle_friends"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:minHeight="48dp"
+                android:paddingTop="@dimen/spacing_medium"
+                android:paddingBottom="@dimen/spacing_medium"
+                android:text="@string/tab_friends"
+                android:textColor="@color/modal_toggle_inactive_text"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/text_add_friend_status"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btn_show_global" />
+
+            <TextView
+                android:id="@+id/btn_show_global"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:layout_marginEnd="@dimen/panel_padding_horizontal"
+                android:background="@drawable/bg_toggle_global"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:minHeight="48dp"
+                android:paddingTop="@dimen/spacing_medium"
+                android:paddingBottom="@dimen/spacing_medium"
+                android:text="@string/tab_global"
+                android:textColor="@color/modal_toggle_active_text"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="@id/btn_show_friends"
+                app:layout_constraintStart_toEndOf="@id/btn_show_friends"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/text_friends_last_updated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginStart="@dimen/panel_padding_horizontal"
+                android:text="@string/leaderboard_updated_default"
+                android:textColor="@color/modal_text_dark_gray"
+                android:textSize="13sp"
+                app:layout_constraintTop_toBottomOf="@id/btn_show_friends"
+                app:layout_constraintStart_toStartOf="parent" />
+            <!-- Copied leaderboard layout from panel_leaderboard.xml -->
+
+            <LinearLayout
+                android:id="@+id/top_three_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_friends_last_updated">
+
+                <!-- Second place -->
+                <LinearLayout
+                    android:id="@+id/top_two_container"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/image_top2_avatar"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_profile_large"
+                        android:tint="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/text_top2_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@string/placeholder_dash"
+                        android:textColor="@color/modal_text_dark_blue"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/text_top2_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/placeholder_dash"
+                        android:textColor="@color/modal_text_dark_blue"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- First place -->
+                <LinearLayout
+                    android:id="@+id/top_one_container"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.2"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/image_top1_avatar"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_profile_large"
+                        android:tint="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/text_top1_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@string/placeholder_dash"
+                        android:textColor="@color/modal_text_dark_blue"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/text_top1_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/placeholder_dash"
+                        android:textColor="@color/modal_text_dark_blue"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- Third place -->
+                <LinearLayout
+                    android:id="@+id/top_three_container_slot"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/image_top3_avatar"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_profile_large"
+                        android:tint="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/text_top3_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@string/placeholder_dash"
+                        android:textColor="@color/modal_text_dark_blue"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/text_top3_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/placeholder_dash"
+                        android:textColor="@color/modal_text_dark_blue"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/leaderboard_loading"
+                style="@android:style/Widget.ProgressBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/top_three_container" />
+
+            <TextView
+                android:id="@+id/text_leaderboard_empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_xlarge"
+                android:text="@string/leaderboard_empty"
+                android:textColor="@color/modal_text_on_light_secondary"
+                android:textSize="14sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/top_three_container" />
+
+            <LinearLayout
+                android:id="@+id/leaderboard_list_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/top_three_container" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Tabs Section (Overlapping at top) -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/tabs_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_xxlarge"
+        app:layout_constraintBottom_toTopOf="@+id/content_scroll"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tab_profile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/modal_header_primary"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?attr/selectableItemBackground"
+            android:background="@drawable/tab_profile"
+            android:drawableStart="@drawable/ic_profile_white"
+            android:drawablePadding="@dimen/modal_tab_drawable_padding"
             android:gravity="center"
-            android:minHeight="48dp"
-            android:padding="@dimen/spacing_medium"
-            android:text="Profile"
+            android:paddingTop="@dimen/modal_tab_padding_vertical"
+            android:paddingBottom="@dimen/modal_tab_padding_vertical"
+            android:text="@string/tab_profile"
             android:textColor="@color/modal_text_primary"
-            android:textSize="14sp" />
+            android:textSize="@dimen/modal_tab_text_size"
+            app:layout_constraintEnd_toStartOf="@id/tab_spacer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Space
+            android:id="@+id/tab_spacer"
+            android:layout_width="@dimen/modal_tab_spacer_width"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tab_leaderboard"
+            app:layout_constraintStart_toEndOf="@id/tab_profile"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tab_leaderboard"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/modal_text_on_light"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?attr/selectableItemBackground"
+            android:background="@drawable/tab_leaderboard"
+            android:drawableStart="@drawable/ic_leaderboard_white"
+            android:drawablePadding="@dimen/modal_tab_drawable_padding"
+            android:elevation="2dp"
             android:gravity="center"
-            android:minHeight="48dp"
-            android:padding="@dimen/spacing_medium"
-            android:text="Leader board"
-            android:textColor="@color/modal_text_primary"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+            android:paddingTop="@dimen/modal_tab_padding_vertical"
+            android:paddingBottom="@dimen/modal_tab_padding_vertical"
+            android:text="@string/tab_leaderboard"
+            android:textColor="@color/black"
+            android:textSize="@dimen/modal_tab_text_size"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tab_spacer"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/label_add_friend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_normal"
-        android:layout_marginStart="@dimen/panel_padding_horizontal"
-        android:text="Add Friend by Code"
-        android:textColor="@color/modal_text_dark_blue"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/header_tabs_container"
-        app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <EditText
-        android:id="@+id/input_friend_code"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_small"
-        android:layout_marginStart="@dimen/panel_padding_horizontal"
-        android:layout_marginEnd="8dp"
-        android:background="@android:drawable/edit_text"
-        android:hint="K7M9-P2WX"
-        android:inputType="textCapCharacters"
-        android:fontFamily="monospace"
-        android:minHeight="44dp"
-        android:paddingStart="@dimen/spacing_medium"
-        android:paddingTop="@dimen/spacing_small"
-        android:paddingEnd="@dimen/spacing_medium"
-        android:paddingBottom="@dimen/spacing_small"
-        android:textSize="15sp"
-        android:maxLength="9"
-        app:layout_constraintTop_toBottomOf="@id/label_add_friend"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btn_add_friend" />
-
-    <Button
-        android:id="@+id/btn_add_friend"
-        style="@style/Widget.MaterialComponents.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/panel_padding_horizontal"
-        android:backgroundTint="@color/modal_button_primary"
-        android:minWidth="0dp"
-        android:paddingStart="16dp"
-        android:paddingTop="10dp"
-        android:paddingEnd="16dp"
-        android:paddingBottom="10dp"
-        android:text="ADD"
-        android:textColor="@color/modal_text_primary"
-        android:textSize="13sp"
-        app:layout_constraintTop_toTopOf="@id/input_friend_code"
-        app:layout_constraintBottom_toBottomOf="@id/input_friend_code"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/text_add_friend_status"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_tiny"
-        android:layout_marginStart="@dimen/panel_padding_horizontal"
-        android:layout_marginEnd="@dimen/panel_padding_horizontal"
-        android:text=""
-        android:textColor="@color/modal_text_on_light_secondary"
-        android:textSize="12sp"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/input_friend_code"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Friends/Global Toggle Buttons -->
-    <TextView
-        android:id="@+id/btn_show_friends"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_medium"
-        android:layout_marginStart="@dimen/panel_padding_horizontal"
-        android:layout_marginEnd="@dimen/spacing_small"
-        android:background="@drawable/bg_toggle_friends"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?attr/selectableItemBackground"
-        android:gravity="center"
-        android:minHeight="48dp"
-        android:paddingTop="@dimen/spacing_medium"
-        android:paddingBottom="@dimen/spacing_medium"
-        android:text="Friends"
-        android:textColor="@color/modal_toggle_inactive_text"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/text_add_friend_status"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btn_show_global" />
-
-    <TextView
-        android:id="@+id/btn_show_global"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_small"
-        android:layout_marginEnd="@dimen/panel_padding_horizontal"
-        android:background="@drawable/bg_toggle_global"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?attr/selectableItemBackground"
-        android:gravity="center"
-        android:minHeight="48dp"
-        android:paddingTop="@dimen/spacing_medium"
-        android:paddingBottom="@dimen/spacing_medium"
-        android:text="Global"
-        android:textColor="@color/modal_toggle_active_text"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="@id/btn_show_friends"
-        app:layout_constraintStart_toEndOf="@id/btn_show_friends"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/text_friends_last_updated"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_small"
-        android:layout_marginStart="@dimen/panel_padding_horizontal"
-        android:text="Updated --"
-        android:textColor="@color/modal_text_dark_gray"
-        android:textSize="13sp"
-        app:layout_constraintTop_toBottomOf="@id/btn_show_friends"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ProgressBar
-        android:id="@+id/friends_loading"
-        style="@android:style/Widget.ProgressBar.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_large"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/text_friends_last_updated"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/text_friends_empty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_xlarge"
-        android:text="No friends yet"
-        android:textColor="@color/modal_text_on_light_secondary"
-        android:textSize="14sp"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/text_friends_last_updated"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/friends_list_container"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_medium"
-        android:layout_marginStart="@dimen/panel_padding_horizontal"
-        android:layout_marginEnd="@dimen/panel_padding_horizontal"
-        android:layout_marginBottom="@dimen/panel_padding_vertical"
-        android:animateLayoutChanges="true"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/text_friends_last_updated"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Close Button overlaying tabs -->
-    <include layout="@layout/include_modal_close_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

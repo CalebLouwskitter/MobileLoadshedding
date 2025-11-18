@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.prog7314.IdleLoadsheddingMobile.R
 import com.prog7314.IdleLoadsheddingMobile.databinding.FragmentBiometricSettingsBinding
 import com.prog7314.IdleLoadsheddingMobile.ui.auth.Biometrics.BiometricAuthManager
 import com.prog7314.IdleLoadsheddingMobile.ui.auth.Biometrics.BiometricCryptoManager
@@ -71,6 +72,11 @@ class BiometricSettingsFragment : Fragment() {
         binding.buttonReenroll.setOnClickListener {
             reenrollBiometric()
         }
+
+        // In-UI back arrow to close the biometric settings screen
+        binding.root.findViewById<View?>(R.id.btn_back_biometric)?.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
     }
 
     private fun observeViewModel() {
@@ -83,10 +89,25 @@ class BiometricSettingsFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.message.collect { message ->
                 message?.let {
-                    Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getLocalizedMessage(it), Toast.LENGTH_SHORT).show()
                     viewModel.clearMessage()
                 }
             }
+        }
+    }
+
+    private fun getLocalizedMessage(message: String): String {
+        return when (message) {
+            "Biometric authentication enabled" -> getString(R.string.biometric_msg_enabled)
+            "Biometric authentication disabled" -> getString(R.string.biometric_msg_disabled)
+            "Biometric data cleared. Please enable again to re-enroll." -> getString(R.string.biometric_msg_cleared)
+            "No user configured for biometric authentication" -> getString(R.string.biometric_error_no_user)
+            "Failed to complete biometric enrollment" -> getString(R.string.biometric_error_enrollment_failed)
+            "Failed to finish biometric setup" -> getString(R.string.biometric_error_setup_failed)
+            "Failed to disable biometric authentication" -> getString(R.string.biometric_error_disable_failed)
+            "Failed to re-enroll biometric authentication" -> getString(R.string.biometric_error_reenroll_failed)
+            "Failed to load biometric status" -> getString(R.string.biometric_error_loading)
+            else -> message
         }
     }
 
@@ -117,20 +138,20 @@ class BiometricSettingsFragment : Fragment() {
 
                 // Update status text
                 binding.textStatus.text = when {
-                    status.isFullyConfigured -> "✓ Biometric authentication is active and ready"
-                    status.isEnabled -> "⚠ Biometric enabled but not fully configured"
-                    else -> "Biometric authentication is disabled"
+                    status.isFullyConfigured -> getString(R.string.biometric_status_active)
+                    status.isEnabled -> getString(R.string.biometric_status_not_configured)
+                    else -> getString(R.string.biometric_status_disabled)
                 }
 
                 // Update user email
-                binding.textEmail.text = status.userEmail ?: "No user configured"
+                binding.textEmail.text = status.userEmail ?: getString(R.string.biometric_no_user)
 
                 // Update hardware status
                 val availability = biometricAuthManager.isBiometricAvailable()
                 binding.textHardwareStatus.text = if (availability.isAvailable()) {
-                    "✓ Biometric hardware available"
+                    getString(R.string.biometric_hardware_available)
                 } else {
-                    "✗ ${availability.getErrorMessage()}"
+                    getString(R.string.biometric_hardware_unavailable, availability.getErrorMessage())
                 }
 
                 // Enable/disable buttons based on status
@@ -141,7 +162,7 @@ class BiometricSettingsFragment : Fragment() {
             is BiometricSettingsUiState.Error -> {
                 binding.progressBar.visibility = View.GONE
                 binding.contentLayout.visibility = View.VISIBLE
-                Toast.makeText(requireContext(), status.message, Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), getLocalizedMessage(status.message), Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -152,7 +173,7 @@ class BiometricSettingsFragment : Fragment() {
         if (!availability.isAvailable()) {
             Toast.makeText(
                 requireContext(),
-                availability.getErrorMessage() ?: "Biometric not available",
+                availability.getErrorMessage() ?: getString(R.string.biometric_hardware_unavailable, "Unknown"),
                 Toast.LENGTH_LONG
             ).show()
             binding.switchBiometric.isChecked = false
@@ -165,7 +186,7 @@ class BiometricSettingsFragment : Fragment() {
         if (userEmail.isNullOrBlank()) {
             Toast.makeText(
                 requireContext(),
-                "Please log in first to enable biometric authentication",
+                getString(R.string.biometric_login_required),
                 Toast.LENGTH_LONG
             ).show()
             binding.switchBiometric.isChecked = false
@@ -177,7 +198,7 @@ class BiometricSettingsFragment : Fragment() {
         } catch (e: Exception) {
             Toast.makeText(
                 requireContext(),
-                "Unable to start biometric enrollment: ${e.localizedMessage}",
+                getString(R.string.biometric_error_start, e.localizedMessage),
                 Toast.LENGTH_LONG
             ).show()
             binding.switchBiometric.isChecked = false
@@ -185,15 +206,15 @@ class BiometricSettingsFragment : Fragment() {
         }
         biometricPromptHelper.authenticateWithCrypto(
             cryptoObject = cryptoObject,
-            title = "Enable Biometric Authentication",
-            subtitle = "Confirm your identity",
-            description = "Use your biometric credential to secure this device.",
+            title = getString(R.string.biometric_prompt_enable_title),
+            subtitle = getString(R.string.biometric_prompt_enable_subtitle),
+            description = getString(R.string.biometric_prompt_enable_desc),
             onSuccess = { result ->
                 val cipher = result.cryptoObject?.cipher
                 if (cipher == null) {
                     Toast.makeText(
                         requireContext(),
-                        "Unable to capture cryptographic data. Please try again.",
+                        getString(R.string.biometric_error_crypto),
                         Toast.LENGTH_LONG
                     ).show()
                     binding.switchBiometric.isChecked = false
@@ -208,7 +229,7 @@ class BiometricSettingsFragment : Fragment() {
                 binding.switchBiometric.isChecked = false
             },
             onCancelled = {
-                Toast.makeText(requireContext(), "Authentication cancelled", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.biometric_cancelled), Toast.LENGTH_SHORT).show()
                 binding.switchBiometric.isChecked = false
             }
         )
@@ -220,27 +241,27 @@ class BiometricSettingsFragment : Fragment() {
 
     private fun testBiometricAuthentication() {
         biometricPromptHelper.authenticate(
-            title = "Test Biometric Authentication",
-            subtitle = "Verify your biometric credential",
-            description = "This is a test to ensure biometric authentication is working correctly",
+            title = getString(R.string.biometric_prompt_test_title),
+            subtitle = getString(R.string.biometric_prompt_test_subtitle),
+            description = getString(R.string.biometric_prompt_test_desc),
             onSuccess = {
                 Toast.makeText(
                     requireContext(),
-                    "✓ Biometric authentication successful!",
+                    getString(R.string.biometric_test_success),
                     Toast.LENGTH_SHORT
                 ).show()
             },
             onError = { errorMessage ->
                 Toast.makeText(
                     requireContext(),
-                    "Error: $errorMessage",
+                    getString(R.string.biometric_error_prefix, errorMessage),
                     Toast.LENGTH_LONG
                 ).show()
             },
             onCancelled = {
                 Toast.makeText(
                     requireContext(),
-                    "Authentication cancelled",
+                    getString(R.string.biometric_cancelled),
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -252,7 +273,7 @@ class BiometricSettingsFragment : Fragment() {
         viewModel.reenrollBiometric()
         Toast.makeText(
             requireContext(),
-            "Please toggle biometric authentication to re-enroll",
+            getString(R.string.biometric_reenroll_instruction),
             Toast.LENGTH_LONG
         ).show()
     }

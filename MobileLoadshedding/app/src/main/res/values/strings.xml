@@ -126,4 +126,163 @@
     <string name="hud_profile_content_description">Profile</string>
     <string name="advert_upgrade_text">Free Upgrade (AD)</string>
 
+    <!-- Biometric Settings -->
+    <string name="biometric_settings_title">Biometric settings</string>
+    <string name="biometric_promo_title">Stay secure with biometrics</string>
+    <string name="biometric_promo_subtitle">Skip typing your password on trusted devices by using fingerprint or face unlock.</string>
+    <string name="biometric_promo_privacy">Your biometric data never leaves the device. You can switch it off any time if you misplace your phone.</string>
+    <string name="biometric_enable_label">Enable biometric login</string>
+    <string name="biometric_enable_description">Keep this on for devices you trust. We’ll remind you to re-verify if your device changes.</string>
+    <string name="biometric_status_disabled">Biometric authentication is disabled</string>
+    <string name="biometric_status_active">✓ Biometric authentication is active and ready</string>
+    <string name="biometric_status_not_configured">⚠ Biometric enabled but not fully configured</string>
+    <string name="biometric_account_status_title">Account status</string>
+    <string name="biometric_signed_in_as">Signed in as</string>
+    <string name="biometric_no_user">No user configured</string>
+    <string name="biometric_device_support">Device support</string>
+    <string name="biometric_checking">Checking...</string>
+    <string name="biometric_hardware_available">✓ Biometric hardware available</string>
+    <string name="biometric_hardware_unavailable">✗ %1$s</string>
+    <string name="biometric_hardware_description">We validate your biometrics using the secure hardware on this device.</string>
+    <string name="biometric_actions_title">Quick actions</string>
+    <string name="biometric_btn_test">Test biometric unlock</string>
+    <string name="biometric_btn_reenroll">Re-enroll biometrics</string>
+    <string name="biometric_actions_description">Use these tools to confirm everything works before relying on biometrics for daily sign-ins.</string>
+    <string name="biometric_tips_title">Helpful tips</string>
+    <string name="biometric_tip_1">• Turn biometrics off before lending or servicing your phone.</string>
+    <string name="biometric_tip_2">• Re-enroll if you add new fingerprints or face profiles.</string>
+    <string name="biometric_tip_3">• Biometrics complement your password—they don’t replace it.</string>
+    
+    <!-- Biometric Messages -->
+    <string name="biometric_error_loading">Failed to load biometric status</string>
+    <string name="biometric_msg_enabled">Biometric authentication enabled</string>
+    <string name="biometric_msg_disabled">Biometric authentication disabled</string>
+    <string name="biometric_msg_cleared">Biometric data cleared. Please enable again to re-enroll.</string>
+    <string name="biometric_error_no_user">No user configured for biometric authentication</string>
+    <string name="biometric_error_enrollment_failed">Failed to complete biometric enrollment</string>
+    <string name="biometric_error_setup_failed">Failed to finish biometric setup</string>
+    <string name="biometric_error_disable_failed">Failed to disable biometric authentication</string>
+    <string name="biometric_error_reenroll_failed">Failed to re-enroll biometric authentication</string>
+    <string name="biometric_prompt_enable_title">Enable Biometric Authentication</string>
+    <string name="biometric_prompt_enable_subtitle">Confirm your identity</string>
+    <string name="biometric_prompt_enable_desc">Use your biometric credential to secure this device.</string>
+    <string name="biometric_prompt_test_title">Test Biometric Authentication</string>
+    <string name="biometric_prompt_test_subtitle">Verify your biometric credential</string>
+    <string name="biometric_prompt_test_desc">This is a test to ensure biometric authentication is working correctly</string>
+    <string name="biometric_test_success">✓ Biometric authentication successful!</string>
+    <string name="biometric_error_prefix">Error: %1$s</string>
+    <string name="biometric_cancelled">Authentication cancelled</string>
+    <string name="biometric_login_required">Please log in first to enable biometric authentication</string>
+    <string name="biometric_error_start">Unable to start biometric enrollment: %1$s</string>
+    <string name="biometric_error_crypto">Unable to capture cryptographic data. Please try again.</string>
+    <string name="biometric_reenroll_instruction">Please toggle biometric authentication to re-enroll</string>
+
+    <!-- Profile Panel -->
+    <string name="tab_profile">Profile</string>
+    <string name="tab_leaderboard">Leader board</string>
+    <string name="profile_default_name">Your Name</string>
+    <string name="profile_default_email">myName@gmail.com</string>
+    <string name="profile_email_placeholder">email@example.com</string>
+    <string name="profile_friend_code_placeholder">----·----</string>
+    <string name="btn_copy">COPY</string>
+    <string name="label_player_statistics">Player Statistics</string>
+    <string name="profile_energy_total_default">Total generated: --</string>
+    <string name="profile_energy_per_second_default">Production: --</string>
+    <string name="profile_generators_default">Generators: --</string>
+    <string name="profile_offline_default">Offline: --</string>
+    <string name="profile_last_sync_default">Last sync: --</string>
+    <string name="btn_edit_profile">EDIT PROFILE</string>
+    <string name="btn_settings">SETTINGS</string>
+    <string name="btn_biometric_settings">BIOMETRIC SETTINGS</string>
+    <string name="btn_debug_notifications">DEBUG NOTIFICATIONS</string>
+    
+    <!-- Leaderboard Panel -->
+    <string name="tab_friends">Friends</string>
+    <string name="tab_global">Global</string>
+    <string name="leaderboard_updated_default">Updated --</string>
+    <string name="placeholder_dash">--</string>
+    <string name="leaderboard_empty">No leaderboard entries yet</string>
+    <string name="leaderboard_rank_placeholder">#1</string>
+    <string name="leaderboard_name_placeholder">Player Name</string>
+    <string name="leaderboard_score_placeholder">R 120 343</string>
+
+    <!-- Friends Leaderboard Panel -->
+    <string name="label_add_friend">Add Friend by Code</string>
+    <string name="hint_friend_code">K7M9-P2WX</string>
+    <string name="btn_add">ADD</string>
+
+    <!-- Electricity Upgrade Panel -->
+    <string name="title_grid_production">Grid Production</string>
+    <string name="label_current_energy">Current energy: --</string>
+    <string name="label_production">Production: --</string>
+    <string name="label_generators">Generators: --</string>
+    <string name="label_energy_credits">Energy credits: --</string>
+    <string name="label_offline_progress">Offline progress: --</string>
+    <string name="label_safe_idle">Safe idle: --</string>
+    <string name="label_core_charge">Core charge: --</string>
+    <string name="label_last_event">Last event: --</string>
+    <string name="label_last_save_sync">Last save sync: --</string>
+    <string name="title_district_overview">District Overview</string>
+    <string name="btn_refresh">REFRESH</string>
+
+    <!-- Building Upgrade Panel -->
+    <string name="tab_electricity">Electricity</string>
+    <string name="tab_building">Building</string>
+
+    <!-- Debug Notifications Panel -->
+    <string name="title_debug_notifications">Debug notifications</string>
+    <string name="title_notification_studio"> Notification Studio</string>
+    <string name="desc_notification_studio_preview">Preview exactly what players see before sending anything live.</string>
+    <string name="desc_notification_studio_cards">Use the cards below to grant permissions, refresh tokens, and simulate every state the app supports.</string>
+    <string name="title_readiness_checklist"> Readiness checklist</string>
+    <string name="status_notification_permission_checking">Notification permission: checking...</string>
+    <string name="status_fcm_token_checking">FCM token: checking...</string>
+    <string name="status_backend_sync_checking">Backend sync: checking...</string>
+    <string name="btn_grant_permission">Grant permission</string>
+    <string name="btn_sync_token">Sync token</string>
+    <string name="btn_open_android_settings">Open Android notification settings</string>
+    <string name="status_last_simulation">Last simulation: --</string>
+
+    <!-- Upgrade Item View -->
+    <string name="upgrade_default_name">Generator 1</string>
+    <string name="upgrade_default_level">Level: 1</string>
+    <string name="upgrade_level_delta">+1</string>
+    <string name="btn_tap_to_upgrade">Tap to Upgrade</string>
+
+    <!-- Game Activity -->
+    <string name="welcome_message">Welcome to the Game!</string>
+
+    <!-- HUD -->
+    <string name="hud_currency_placeholder">1,978.12</string>
+    <string name="hud_production_placeholder">+0.00 /s</string>
+    <string name="hud_generators_placeholder">0 generators</string>
+    <string name="hud_safe_idle_placeholder">Safe idle: --</string>
+
+    <!-- Game Stats Fragment -->
+    <string name="stats_title">Game Stats</string>
+    <string name="stats_current_energy">Current Energy:</string>
+    <string name="stats_value_placeholder">0.00</string>
+    <string name="stats_total_generated">Total Generated:</string>
+    <string name="stats_energy_per_second">Energy/Second:</string>
+    <string name="stats_active_generators">Active Generators:</string>
+    <string name="stats_count_placeholder">0</string>
+    <string name="stats_total_levels">Total Levels:</string>
+    <string name="stats_tap_count">Tap Count:</string>
+    <string name="stats_taps_placeholder">Taps: 0</string>
+
+    <!-- District Status Item -->
+    <string name="district_default_name">District</string>
+    <string name="district_default_level">Level 1</string>
+    <string name="district_default_output">0 /s</string>
+    <string name="district_default_efficiency">100% efficiency</string>
+    <string name="district_default_idle">Safe idle: --</string>
+    <string name="btn_service">SERVICE</string>
+    <string name="btn_upgrade">UPGRADE</string>
+
+    <!-- Tasks Panel -->
+    <string name="tasks_title">Tasks</string>
+
+    <!-- Task Item View -->
+    <string name="task_description_placeholder">Upgrade Storage to level 6</string>
+    <string name="task_reward_placeholder">R 20,000</string>
 </resources>
