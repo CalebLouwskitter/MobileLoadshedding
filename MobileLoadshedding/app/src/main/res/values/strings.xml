@@ -81,14 +81,16 @@
     
     <!-- Profile Edit -->
     <string name="profile_edit_title">Edit Profile</string>
-    <string name="profile_edit_nickname">Nickname</string>
-    <string name="profile_edit_nickname_hint">Your Nickname</string>
+    <string name="profile_edit_nickname">Name</string>
+    <string name="profile_edit_nickname_hint">Your Name</string>
+
     <string name="profile_edit_email">Email</string>
     <string name="profile_edit_save">SAVE CHANGES</string>
     <string name="profile_edit_cancel">CANCEL</string>
     <string name="toast_profile_updated">Profile updated successfully</string>
     <string name="toast_profile_update_failed">Failed to update profile</string>
-    <string name="toast_nickname_empty">Please enter a nickname</string>
+    <string name="toast_nickname_empty">Please enter a name</string>
+
     <string name="settings_panel_title">Settings</string>
     <string name="btn_upload_save">UPLOAD SAVE TO CLOUD</string>
     <string name="btn_sync_save">SYNC SAVE WITH CLOUD</string>
@@ -122,4 +124,6 @@
     <string name="nav_tasks">Tasks</string>
     <string name="hud_upgrades_content_description">Upgrades</string>
     <string name="hud_profile_content_description">Profile</string>
+    <string name="advert_upgrade_text">Free Upgrade (AD)</string>
+
 </resources>
