@@ -67,7 +67,6 @@ class PanelCoordinator(
                     onNavigate
                 )
             }
-            
             R.layout.panel_building_upgrade -> {
                 buildingPanelBinder.configure(
                     panelView,

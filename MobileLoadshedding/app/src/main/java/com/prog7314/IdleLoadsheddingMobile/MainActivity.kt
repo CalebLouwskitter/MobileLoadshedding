@@ -249,6 +249,14 @@ class MainActivity : UnityPlayerGameActivity() {
     }
 
     /**
+     * Allow other UI components (e.g. panel binders) to close the current modal panel.
+     * Used by custom back buttons inside panels.
+     */
+    fun closeCurrentPanel() {
+        components.panelManager.hidePanel()
+    }
+
+    /**
      * Called when game state changes (via ObserverCoordinator).
      * Updates HUD and refreshes any visible panels.
      */

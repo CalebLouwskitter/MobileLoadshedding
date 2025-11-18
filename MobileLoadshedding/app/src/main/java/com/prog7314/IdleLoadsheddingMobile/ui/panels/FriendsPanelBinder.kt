@@ -42,6 +42,15 @@ class FriendsPanelBinder(
     ) {
         Log.d("FriendsPanelBinder", "Configuring friends leaderboard panel")
         
+        // Header tabs: navigate between profile, leaderboard, and friends panels
+        panel.findViewById<View?>(R.id.tab_profile)?.setOnClickListener {
+            onShowPanel(R.layout.panel_profile)
+        }
+
+        panel.findViewById<View?>(R.id.tab_leaderboard)?.setOnClickListener {
+            onShowPanel(R.layout.panel_leaderboard)
+        }
+
         // Back to global leaderboard
         panel.findViewById<TextView?>(R.id.btn_show_global)?.setOnClickListener {
             onShowPanel(R.layout.panel_leaderboard)

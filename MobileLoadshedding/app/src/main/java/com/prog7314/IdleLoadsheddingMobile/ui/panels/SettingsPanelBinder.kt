@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
+import com.prog7314.IdleLoadsheddingMobile.MainActivity
 import com.prog7314.IdleLoadsheddingMobile.R
 import com.prog7314.IdleLoadsheddingMobile.data.models.UnityEventPayload
 import com.prog7314.IdleLoadsheddingMobile.data.models.UnityLeaderboardPayload
@@ -45,7 +46,8 @@ class SettingsPanelBinder(
      */
     fun configure(
         panel: View,
-        save: UnitySavePayload?
+        save: UnitySavePayload?,
+        onShowPanel: (Int) -> Unit = {}
     ) {
         configure(panel, save) { _ -> }
     }
@@ -139,8 +141,7 @@ class SettingsPanelBinder(
                         Toast.LENGTH_LONG
                     ).show()
                     
-                    // Recreate activity to apply locale change to all views
-                    activity.recreate()
+
                 }
             }
             
