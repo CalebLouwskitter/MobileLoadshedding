@@ -22,33 +22,86 @@ Idle Loadshedding is an interactive mobile game designed to simulate responses t
 - Michael (ST10085212)
 
 ## Pages
-- Login Page
-<img width="1080" height="2400" alt="image" src="https://github.com/user-attachments/assets/38f7235c-3dd5-4a88-8580-85aa2e442d90" />
 
-- Home Page
-<img width="1440" height="3120" alt="image" src="https://github.com/user-attachments/assets/67b5fa34-01d2-4d8e-b536-0b34b3519f6e" />
+---
 
-- Upgrade Page
-<img width="1440" height="3120" alt="image" src="https://github.com/user-attachments/assets/74942348-18e3-427a-a7a1-773d4ca2fae2" />
-<img width="1440" height="3120" alt="image" src="https://github.com/user-attachments/assets/1255e49f-47f7-4f8e-80af-eb70af135f8e" />
+### **Login Page**
+<p>
+  <img src="https://github.com/user-attachments/assets/e58b6ef8-cd10-413b-85a2-295c43382d67" width="45%" />
+  <img src="https://github.com/user-attachments/assets/434ebe7e-c6fc-47dd-91e3-10438260e64f" width="45%" />
+</p>
 
-- Task Page
-<img width="1440" height="3120" alt="image" src="https://github.com/user-attachments/assets/a3b94226-a133-4620-95de-3874d1a2fb32" />
+<p>
+  <img src="https://github.com/user-attachments/assets/4bf37fa2-ee61-42c9-8c5d-c874ae2e9e86" width="45%" />
+  <img src="https://github.com/user-attachments/assets/81aeeef5-141d-4702-894c-6ee90e0606f8" width="45%" />
+</p>
 
-- Profile Page
-<img width="1440" height="3120" alt="image" src="https://github.com/user-attachments/assets/39479782-1767-4414-846c-558940f10426" />
+---
 
-- Settings Page
-<img width="1440" height="3120" alt="image" src="https://github.com/user-attachments/assets/eff7737d-29c9-4897-95ad-46c6a1f947fe" />
+### **Home Page**
+<p>
+  <img src="https://github.com/user-attachments/assets/01563907-663f-49fd-a0b8-300531d3064e" width="45%" />
+</p>
 
-- Leaderboard Page
-<img width="1440" height="3120" alt="image" src="https://github.com/user-attachments/assets/a6ed0b2f-4ea5-446c-84b2-9a7b983d7541" />
+---
 
-- Notifiaction Page
-<img width="1440" height="3120" alt="image" src="https://github.com/user-attachments/assets/7e13b225-ddb3-41b6-b0c9-41b95d6beca6" />
+### **Upgrade Page**
+<p>
+  <img src="https://github.com/user-attachments/assets/319761a8-27a1-4263-a820-e69950d4a249" width="45%" />
+  <img src="https://github.com/user-attachments/assets/23927292-f727-4ede-8ee9-3bb90a6cd3b4" width="45%" />
+</p>
 
-- Biometric Page
-<img width="1440" height="3120" alt="image" src="https://github.com/user-attachments/assets/9836fb91-20f4-40d8-a02f-431bd6045173" />
+---
+
+### **Task Page**
+<p>
+  <img src="https://github.com/user-attachments/assets/a269f5a2-8e90-46ff-b7fe-3b303be735a8" width="45%" />
+</p>
+
+---
+
+### **Profile Page**
+<p>
+  <img src="https://github.com/user-attachments/assets/e4492ac8-7dff-4d68-b9d2-dd8216f5327a" width="45%" />
+</p>
+
+---
+
+### **Settings Page**
+<p>
+  <img src="https://github.com/user-attachments/assets/1879615d-68f1-4954-941c-ec39dff482fc" width="45%" />
+</p>
+
+---
+
+### **Leaderboard Page**
+<p>
+  <img src="https://github.com/user-attachments/assets/913eabb6-8ebf-470b-a845-e68bf7a41754" width="45%" />
+</p>
+
+---
+
+### **Friend Page**
+<p>
+  <img src="https://github.com/user-attachments/assets/ff5db06e-bafa-471d-beaa-34db85ba3525" width="45%" />
+</p>
+
+---
+
+### **Notification Page**
+<p>
+  <img src="https://github.com/user-attachments/assets/d4561ce9-e6af-444b-9b70-d62247639b2a" width="45%" />
+</p>
+
+---
+
+### **Biometric Page**
+<p>
+  <img src="https://github.com/user-attachments/assets/a3ee6bd6-2036-482c-a2d3-af76e2f837fb" width="45%" />
+</p>
+
+---
+
 
 
 ## Reference list:
