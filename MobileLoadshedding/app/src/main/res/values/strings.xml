@@ -48,6 +48,13 @@
     <string name="profile_tag_active">⚡ ACTIVE</string>
     <string name="profile_tag_veteran">🏆 VETERAN</string>
     <string name="profile_tag_newbie">🌟 NEWBIE</string>
+    <string name="profile_statistics_label">Player Statistics</string>
+    <string name="tab_profile">Profile</string>
+    <string name="tab_leaderboard">Leader board</string>
+    <string name="profile_edit_button">EDIT PROFILE</string>
+    <string name="profile_settings_button">SETTINGS</string>
+    <string name="profile_biometric_button">🔐 BIOMETRIC SETTINGS</string>
+    <string name="profile_debug_notifications_button">🔔 DEBUG NOTIFICATIONS</string>
     <string name="friends_empty_message">No friends added yet.\nShare your Friend Code to connect!</string>
     <string name="friends_error_message">Unable to load friends list.\nCheck your connection and try again.</string>
     <string name="settings_language_changed">Language changed. Restart the app to apply.</string>

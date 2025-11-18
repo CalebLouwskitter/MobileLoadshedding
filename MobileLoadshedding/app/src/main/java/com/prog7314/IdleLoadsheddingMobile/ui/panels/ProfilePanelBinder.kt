@@ -91,15 +91,15 @@ class ProfilePanelBinder(
         stats?.let { s ->
             when {
                 s.totalEnergyGenerated > 1000000.0 -> {
-                    tag?.text = "🏆 VETERAN"
+                    tag?.text = context.getString(R.string.profile_tag_veteran)
                     tag?.setBackgroundColor(0xFFFFD700.toInt())
                 }
                 s.totalEnergyGenerated > 10000.0 -> {
-                    tag?.text = "⚡ ACTIVE"
+                    tag?.text = context.getString(R.string.profile_tag_active)
                     tag?.setBackgroundColor(0xFFFFC107.toInt())
                 }
                 else -> {
-                    tag?.text = "🌟 NEWBIE"
+                    tag?.text = context.getString(R.string.profile_tag_newbie)
                     tag?.setBackgroundColor(0xFF4CAF50.toInt())
                 }
             }

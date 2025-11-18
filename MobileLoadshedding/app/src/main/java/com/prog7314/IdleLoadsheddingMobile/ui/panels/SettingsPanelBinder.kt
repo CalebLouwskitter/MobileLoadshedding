@@ -138,7 +138,9 @@ class SettingsPanelBinder(
                         Toast.LENGTH_LONG
                     ).show()
                     
-
+                    // Recreate activity so all UI (including MainActivity overlay)
+                    // is re-inflated with the new locale resources
+                    activity.recreate()
                 }
             }
             

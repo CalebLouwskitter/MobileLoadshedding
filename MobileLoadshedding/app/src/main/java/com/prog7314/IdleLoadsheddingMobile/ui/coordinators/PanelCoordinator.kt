@@ -67,6 +67,7 @@ class PanelCoordinator(
                     onNavigate
                 )
             }
+
             R.layout.panel_building_upgrade -> {
                 buildingPanelBinder.configure(
                     panelView,
@@ -117,7 +118,7 @@ class PanelCoordinator(
             }
             
             R.layout.panel_debug_notifications -> {
-                configureDebugNotificationsPanel(panelView)
+                configureDebugNotificationsPanel(panelView, onNavigate)
             }
         }
     }
@@ -185,7 +186,10 @@ class PanelCoordinator(
      * Configure the debug notifications panel.
      * This panel allows testing push notifications without needing Firebase Console.
      */
-    private fun configureDebugNotificationsPanel(panelView: View) {
+    private fun configureDebugNotificationsPanel(
+        panelView: View,
+        onNavigate: (Int) -> Unit
+    ) {
         val context = panelView.context
         val activity = context as? AppCompatActivity
         val lifecycleOwner = activity
