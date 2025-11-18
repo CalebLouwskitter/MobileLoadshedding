@@ -23,25 +23,32 @@ Idle Loadshedding is an interactive mobile game designed to simulate responses t
 
 ## Pages
 - Login Page
-(add pic)
+<img width="1080" height="2400" alt="image" src="https://github.com/user-attachments/assets/38f7235c-3dd5-4a88-8580-85aa2e442d90" />
+
 - Home Page
 (add pic)
 - Upgrade Page
-(add pic)
+<img width="1440" height="3120" alt="image" src="https://github.com/user-attachments/assets/74942348-18e3-427a-a7a1-773d4ca2fae2" />
+<img width="1440" height="3120" alt="image" src="https://github.com/user-attachments/assets/1255e49f-47f7-4f8e-80af-eb70af135f8e" />
+
 - Task Page
-(add pic)
+<img width="1440" height="3120" alt="image" src="https://github.com/user-attachments/assets/a3b94226-a133-4620-95de-3874d1a2fb32" />
+
 - Profile Page
-(add pic)
+<img width="1440" height="3120" alt="image" src="https://github.com/user-attachments/assets/39479782-1767-4414-846c-558940f10426" />
+
 - Settings Page
-(add pic)
+<img width="1440" height="3120" alt="image" src="https://github.com/user-attachments/assets/eff7737d-29c9-4897-95ad-46c6a1f947fe" />
+
 - Leaderboard Page
-(add pic)
-- Friend Page
-(add pic)
+<img width="1440" height="3120" alt="image" src="https://github.com/user-attachments/assets/a6ed0b2f-4ea5-446c-84b2-9a7b983d7541" />
+
 - Notifiaction Page
-(add pic)
+<img width="1440" height="3120" alt="image" src="https://github.com/user-attachments/assets/7e13b225-ddb3-41b6-b0c9-41b95d6beca6" />
+
 - Biometric Page
-(add pic)
+<img width="1440" height="3120" alt="image" src="https://github.com/user-attachments/assets/9836fb91-20f4-40d8-a02f-431bd6045173" />
+
 
 ## Reference list:
 
