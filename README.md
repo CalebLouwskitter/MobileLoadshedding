@@ -11,24 +11,25 @@ Idle Loadshedding is an interactive mobile game designed to simulate responses t
 
 ## Pages
 - Login Page
-  
+(add pic)
 - Home Page
-
+(add pic)
 - Upgrade Page
-
+(add pic)
 - Task Page
-
+(add pic)
 - Profile Page
-
+(add pic)
 - Settings Page
-
+(add pic)
 - Leaderboard Page
-
+(add pic)
 - Friend Page
-
+(add pic)
 - Notifiaction Page
-
+(add pic)
 - Biometric Page
+(add pic)
 
 ## Reference list:
 
