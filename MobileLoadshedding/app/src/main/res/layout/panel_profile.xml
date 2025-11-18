@@ -338,21 +338,6 @@
                 app:strokeColor="@color/modal_text_primary" />
 
             <Button
-                android:id="@+id/btn_profile_friends"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_small"
-                android:paddingTop="@dimen/button_padding_vertical"
-                android:paddingBottom="@dimen/button_padding_vertical"
-                android:text="FRIENDS"
-                android:textColor="@color/modal_text_primary"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_profile_biometric"
-                app:strokeColor="@color/modal_text_primary" />
-
-            <Button
                 android:id="@+id/btn_profile_debug_notifications"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
@@ -364,7 +349,7 @@
                 android:textColor="@color/modal_button_accent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_profile_friends"
+                app:layout_constraintTop_toBottomOf="@id/btn_profile_biometric"
                 app:strokeColor="@color/modal_button_accent" />
 
             <Button

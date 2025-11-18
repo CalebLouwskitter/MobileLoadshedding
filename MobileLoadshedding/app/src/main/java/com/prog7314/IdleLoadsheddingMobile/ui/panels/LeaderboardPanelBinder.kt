@@ -33,7 +33,22 @@ class LeaderboardPanelBinder(
     ) {
         Log.d("LeaderboardPanelBinder", "Configuring leaderboard panel")
         
-        // Tab navigation to friends
+        // Top tabs: switch between Profile and Leader board panels
+        panel.findViewById<View?>(R.id.tab_profile)?.setOnClickListener {
+            onShowPanel(R.layout.panel_profile)
+        }
+
+        panel.findViewById<View?>(R.id.tab_leaderboard)?.setOnClickListener {
+            // Stay on leaderboard; treat as a manual refresh
+            Log.d("LeaderboardPanelBinder", "Leaderboard tab clicked - refreshing from API")
+            Leaderboard.fetchBackendLeaderboard { result ->
+                result.onFailure { error ->
+                    Log.e("LeaderboardPanelBinder", "Failed to refresh leaderboard from tab: ${error.message}", error)
+                }
+            }
+        }
+
+        // Friends/global toggle tabs within leaderboard content
         panel.findViewById<View?>(R.id.btn_tab_friends)?.setOnClickListener {
             onShowPanel(R.layout.panel_friends_leaderboard)
         }
