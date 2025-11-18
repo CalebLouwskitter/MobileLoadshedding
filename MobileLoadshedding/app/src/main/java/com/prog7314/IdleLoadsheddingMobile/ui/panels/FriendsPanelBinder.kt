@@ -143,9 +143,10 @@ class FriendsPanelBinder(
      * Binds friends data to UI elements.
      */
     fun bindData(panel: View, payload: FriendsPayload?) {
-        val loading = panel.findViewById<ProgressBar?>(R.id.friends_loading)
-        val empty = panel.findViewById<View?>(R.id.text_friends_empty)
-        val listContainer = panel.findViewById<LinearLayout?>(R.id.friends_list_container)
+        // Reuse the shared leaderboard layout components for the friends panel
+        val loading = panel.findViewById<ProgressBar?>(R.id.leaderboard_loading)
+        val empty = panel.findViewById<View?>(R.id.text_leaderboard_empty)
+        val listContainer = panel.findViewById<LinearLayout?>(R.id.leaderboard_list_container)
         val lastUpdated = panel.findViewById<TextView?>(R.id.text_friends_last_updated)
 
         if (payload == null) {
