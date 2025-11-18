@@ -52,8 +52,8 @@
     <string name="tab_leaderboard">Ranglys</string>
     <string name="profile_edit_button">WYSIG PROFIEL</string>
     <string name="profile_settings_button">INSTELLINGS</string>
-    <string name="profile_biometric_button">🔐 BIOMETRIESE INSTELLINGS</string>
-    <string name="profile_debug_notifications_button">🔔 ONTWERP-KENNISGEWINGS</string>
+    <string name="profile_biometric_button">BIOMETRIESE INSTELLINGS</string>
+    <string name="profile_debug_notifications_button">ONTWERP-KENNISGEWINGS</string>
     <string name="friends_empty_message">Geen vriende bygevoeg nie.\nDeel jou Vriend Kode om te koppel!</string>
     <string name="friends_error_message">Kan nie vriendelys laai nie.\nGaan jou verbinding na en probeer weer.</string>
     <string name="auth_biometric_login">Teken in met Biometrie</string>
