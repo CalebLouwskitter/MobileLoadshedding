@@ -148,9 +148,7 @@
                     android:backgroundTint="#FFEB3B"
                     android:text="@string/nav_power"
                     android:textColor="#052E45"
-                    android:textStyle="bold"
-                    android:visibility="invisible"
-                    tools:visibility="invisible" />
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/btn_nav_tasks"
