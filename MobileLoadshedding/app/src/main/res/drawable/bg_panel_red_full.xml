@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Drop shadow underneath the full-height panel -->
+    <item android:left="0dp" android:top="@dimen/modal_panel_shadow_offset" android:right="0dp" android:bottom="0dp">
+        <shape>
+            <solid android:color="@color/modal_shadow_panel" />
+            <corners android:radius="@dimen/modal_panel_corner_radius" />
+        </shape>
+    </item>
+
+    <!-- Main red card with rounded corners on all sides -->
+    <item android:left="0dp" android:top="0dp" android:right="0dp" android:bottom="@dimen/modal_panel_shadow_offset">
+        <shape>
+            <solid android:color="@color/modal_panel_red_center" />
+            <corners android:radius="@dimen/modal_panel_corner_radius" />
+        </shape>
+    </item>
+</layer-list>
