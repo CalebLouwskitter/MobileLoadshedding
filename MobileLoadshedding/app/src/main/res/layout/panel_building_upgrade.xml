@@ -8,6 +8,8 @@
         android:id="@+id/tabs_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_xxlarge"
+        app:layout_constraintBottom_toTopOf="@+id/content_scroll"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -68,7 +70,6 @@
         android:id="@+id/content_scroll"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:layout_marginBottom="16dp"
         android:elevation="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
