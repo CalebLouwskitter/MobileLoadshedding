@@ -130,6 +130,4 @@
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <include layout="@layout/include_modal_close_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

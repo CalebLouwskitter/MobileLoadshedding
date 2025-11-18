@@ -372,7 +372,4 @@
     </androidx.core.widget.NestedScrollView>
 
     <!-- Tabs Section (Overlapping at top) -->
-
-    <!-- Close Button overlaying tabs -->
-    <include layout="@layout/include_modal_close_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

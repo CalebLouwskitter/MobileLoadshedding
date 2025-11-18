@@ -301,7 +301,4 @@
             app:layout_constraintStart_toEndOf="@id/tab_spacer"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!-- Close Button overlaying tabs -->
-    <include layout="@layout/include_modal_close_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>
