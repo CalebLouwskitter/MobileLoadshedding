@@ -7,7 +7,8 @@ Idle Loadshedding is an interactive mobile game designed to simulate responses t
 ## Feature 5
 
 ## Notification
-![Uploading image.png…]()
+![noti](https://github.com/user-attachments/assets/c4396170-0b78-4641-a312-6c409a541122)
+
 
 ## Biometrics
 
