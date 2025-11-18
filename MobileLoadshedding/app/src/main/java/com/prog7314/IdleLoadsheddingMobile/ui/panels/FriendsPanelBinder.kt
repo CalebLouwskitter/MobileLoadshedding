@@ -150,12 +150,10 @@ class FriendsPanelBinder(
         val topThreeContainer = panel.findViewById<View?>(R.id.top_three_container)
 
         if (payload == null) {
-            // Show loading state
-            loading?.isVisible = true
+            // No data yet – show placeholder friends leaderboard matching the global style
+            loading?.isVisible = false
             empty?.isVisible = false
-            listContainer?.isVisible = false
-            topThreeContainer?.isVisible = false
-            lastUpdated?.text = "Loading friends..."
+            renderPlaceholderFriends(panel)
             return
         }
 
@@ -164,11 +162,10 @@ class FriendsPanelBinder(
 
         val entries = payload.friends
         if (entries.isEmpty()) {
-            // Show empty state
-            empty?.isVisible = true
-            listContainer?.isVisible = false
-            topThreeContainer?.isVisible = false
-            Log.d("FriendsPanelBinder", "Friends list is empty - showing empty state")
+            // No entries from backend – fall back to placeholder UI
+            loading?.isVisible = false
+            empty?.isVisible = false
+            renderPlaceholderFriends(panel)
         } else {
             empty?.isVisible = false
             topThreeContainer?.isVisible = true
@@ -238,6 +235,55 @@ class FriendsPanelBinder(
                 if (friend.isOnline) android.R.drawable.presence_online else android.R.drawable.presence_invisible
             )
             container.addView(row)
+        }
+    }
+
+    /**
+     * Renders a static placeholder friends leaderboard when no real data is available.
+     * This is purely for visual fidelity on the friends side.
+     */
+    private fun renderPlaceholderFriends(panel: View) {
+        val topThreeContainer = panel.findViewById<View?>(R.id.top_three_container)
+        val listContainer = panel.findViewById<LinearLayout?>(R.id.friends_list_container)
+        val empty = panel.findViewById<View?>(R.id.text_friends_empty)
+
+        empty?.isVisible = false
+        topThreeContainer?.isVisible = true
+
+        // Sample top 3 friends
+        panel.findViewById<TextView?>(R.id.text_top1_name)?.text = "Kyle Weissman"
+        panel.findViewById<TextView?>(R.id.text_top1_score)?.text = "R 120 343"
+
+        panel.findViewById<TextView?>(R.id.text_top2_name)?.text = "Kyle Weis..."
+        panel.findViewById<TextView?>(R.id.text_top2_score)?.text = "R 120 343"
+
+        panel.findViewById<TextView?>(R.id.text_top3_name)?.text = "Caleb Lou..."
+        panel.findViewById<TextView?>(R.id.text_top3_score)?.text = "R 120 343"
+
+        // Ensure all three slots are visible in placeholder
+        panel.findViewById<View?>(R.id.top_two_container)?.isVisible = true
+        panel.findViewById<View?>(R.id.top_three_container_slot)?.isVisible = true
+
+        // Sample rows 4–7
+        listContainer?.let { container ->
+            container.isVisible = true
+            container.removeAllViews()
+
+            val names = listOf(
+                "Caleb Lou..." to "R 204 242",
+                "Jess Rola..." to "R 204 242",
+                "Mike Til..." to "R 204 242",
+                "Steven Sm..." to "R 204 242"
+            )
+
+            names.forEachIndexed { index, (name, score) ->
+                val row = LayoutInflater.from(activity).inflate(R.layout.view_leaderboard_row, container, false)
+                row.findViewById<TextView?>(R.id.text_rank)?.text = "#${4 + index}"
+                row.findViewById<TextView?>(R.id.text_entry_title)?.text = name
+                row.findViewById<TextView?>(R.id.text_entry_detail)?.text = score
+                row.findViewById<ImageView?>(R.id.image_entry_status)?.setImageResource(android.R.drawable.btn_star_big_off)
+                container.addView(row)
+            }
         }
     }
 }
