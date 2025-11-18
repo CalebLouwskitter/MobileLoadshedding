@@ -9,6 +9,7 @@
         <item>isiZulu</item>
         <item>isiXhosa</item>
         <item>Sesotho</item>
+        <item>Tshivenḓa</item>
     </string-array>
     
     <!-- Locale codes map 1:1 to settings_languages by index.

@@ -115,6 +115,12 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
+            <Button
+                android:id="@+id/ad_test_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="AD TEST BUTTON (DELETE WHEN DONE)" />
+
             <LinearLayout
                 android:id="@+id/bottom_nav"
                 android:layout_width="match_parent"
@@ -153,6 +159,7 @@
                     android:layout_weight="1"
                     android:text="@string/nav_tasks" />
             </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 

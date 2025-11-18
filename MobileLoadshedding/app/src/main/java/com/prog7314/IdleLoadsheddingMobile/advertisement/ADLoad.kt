@@ -16,11 +16,14 @@ import com.google.android.gms.ads.RequestConfiguration //Google, 2025
 private val adUnitIdl = "ca-app-pub-3940256099942544/5224354917"
 
 class ADLoad(private val activity: Activity) {
-
+    var log = Log.d("ADVERTLOADER", "ADLoad Class called")
     private var rewardedAd : RewardedAd? = null
     //replace adUnitId with the actual ad unit id, currently sey up for the test API
 
     fun loadRewardedAds(){
+        if (rewardedAd != null) {
+            return
+        } //so we dont perma overload
         val adReq = AdRequest.Builder().build()
         RewardedAd.load(
             activity,
@@ -39,20 +42,30 @@ class ADLoad(private val activity: Activity) {
         )
     }
 
-    fun showRewardAd(afterCodeRewardCoin: (RewardItem) -> Unit){
+    fun showRewardAd(/*afterCodeRewardCoin: (RewardItem) -> Unit*/){
+        loadRewardedAds()
         if(rewardedAd != null){
             rewardedAd!!.fullScreenContentCallback = object : FullScreenContentCallback(){
                 override fun onAdDismissedFullScreenContent() {
                     rewardedAd = null
                     loadRewardedAds()
+
+                    Log.d("ADVERTLOADER", "Ad dismissed")
                 }
 
                 override fun onAdFailedToShowFullScreenContent(p0: AdError) {
                     rewardedAd = null
+
+                    Log.d("ADVERTLOADER", "Ad Failed  ${p0.message}")
                 }
             }
             rewardedAd!!.show(activity){
-                afterCodeRewardCoin(it)
+                //afterCodeRewardCoin(it)
+
+                Log.d("ADVERTLOADER", "Ad shown")
+
+                val rewardAmount = Log.d("ADVERTLOADER", "it's working")
+                val rewardType = Log.d("ADVERTLOADER", "it's working")
             }
         } else{
             //do nothing

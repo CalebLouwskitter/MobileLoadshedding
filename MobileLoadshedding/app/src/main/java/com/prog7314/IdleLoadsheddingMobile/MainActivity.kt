@@ -67,6 +67,8 @@ class MainActivity : UnityPlayerGameActivity() {
 
     private val auth = FirebaseAuth.getInstance()
 
+    private val adLoader: ADLoad by lazy {ADLoad(this)}
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("MainActivity", "onCreate() started")
@@ -144,8 +146,11 @@ class MainActivity : UnityPlayerGameActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             // Initialize the Google Mobile Ads SDK on a background thread.
             MobileAds.initialize(this@MainActivity) {}
-            ADLoad(this@MainActivity)
         }
+        adLoader.loadRewardedAds()
+        //it takes about 3-6 seconds for the loader to get the advert.
+
+
 
         window.decorView.post {
             // Hide Unity's internal HUD (we use native Android overlay)
@@ -177,6 +182,11 @@ class MainActivity : UnityPlayerGameActivity() {
      * This is the only place MainActivity handles UI events directly.
      */
     private fun setupHudButtons(overlay: View) {
+        // AD TEST BUTTON DELETE WHEN DONE WITH TESTING
+        overlay.findViewById<Button>(R.id.ad_test_button).setOnClickListener {
+            adLoader.showRewardAd()
+        }
+
         // Modal scrim closes any open panel
         modalScrim.setOnClickListener {
             components.panelManager.hidePanel()
