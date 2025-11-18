@@ -45,6 +45,7 @@
     <string name="toast_save_uploaded">Save uploaded successfully</string>
     <string name="toast_save_synced">Save synced successfully</string>
     <string name="profile_friend_code_label">Your Friend Code</string>
+    <string name="profile_copy_button">COPY</string>
     <string name="profile_tag_active">⚡ ACTIVE</string>
     <string name="profile_tag_veteran">🏆 VETERAN</string>
     <string name="profile_tag_newbie">🌟 NEWBIE</string>

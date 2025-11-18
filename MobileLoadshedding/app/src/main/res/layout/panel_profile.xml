@@ -200,7 +200,7 @@
                     android:paddingTop="6dp"
                     android:paddingEnd="10dp"
                     android:paddingBottom="6dp"
-                    android:text="📋 COPY"
+                    android:text="@string/profile_copy_button"
                     android:textColor="@color/modal_text_primary"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@id/text_profile_friend_code"

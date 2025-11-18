@@ -44,9 +44,10 @@
     <string name="toast_save_uploaded">Stoor suksesvol opgelaai</string>
     <string name="toast_save_synced">Stoor suksesvol gesinkroniseer</string>
     <string name="profile_friend_code_label">Jou Vriend Kode</string>
-    <string name="profile_tag_active">⚡ AKTIEF</string>
-    <string name="profile_tag_veteran">🏆 VETERAAN</string>
-    <string name="profile_tag_newbie">🌟 NUWELING</string>
+    <string name="profile_copy_button">KOPIEER</string>
+    <string name="profile_tag_active">AKTIEF</string>
+    <string name="profile_tag_veteran">VETERAAN</string>
+    <string name="profile_tag_newbie">NUWELING</string>
     <string name="profile_statistics_label">Speler Statistiek</string>
     <string name="tab_profile">Profiel</string>
     <string name="tab_leaderboard">Ranglys</string>
