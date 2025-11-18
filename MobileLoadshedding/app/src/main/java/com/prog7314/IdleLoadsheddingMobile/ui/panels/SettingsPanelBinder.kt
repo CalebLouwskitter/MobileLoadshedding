@@ -41,16 +41,6 @@ class SettingsPanelBinder(
         private const val DEFAULT_LANGUAGE_INDEX = 0
     }
     
-    /**
-     * Backwards-compatible entry point used when navigation callback is not needed.
-     */
-    fun configure(
-        panel: View,
-        save: UnitySavePayload?,
-        onShowPanel: (Int) -> Unit = {}
-    ) {
-        configure(panel, save) { _ -> }
-    }
 
     /**
      * Configures settings panel UI elements and event handlers.
