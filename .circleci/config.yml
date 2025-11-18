@@ -285,11 +285,6 @@ workflows:
             branches:
               only:
                 - master
-      - dotnet-dependency-check:
-          filters:
-            branches:
-              only:
-                - master
                 
       # Docker jobs
       - docker-build-and-test:
