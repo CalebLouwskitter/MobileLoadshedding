@@ -3,6 +3,7 @@
 Idle Loadshedding is an interactive mobile game designed to simulate responses to power outages in a fun and engaging way. The project integrates a Unity-based frontend with a robust .NET backend, utilizing Azure SQL for cloud data storage. This README outlines the key features, architecture, and setup of the application.
 
 ## Feature 4
+<img width="593" height="1026" alt="image" src="https://github.com/user-attachments/assets/5d5e365d-3f81-405c-bdbb-774988e9a0ac" />
 
 ## Feature 5
 
