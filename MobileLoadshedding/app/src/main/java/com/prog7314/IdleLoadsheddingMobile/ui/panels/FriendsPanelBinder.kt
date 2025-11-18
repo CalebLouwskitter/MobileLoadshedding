@@ -148,25 +148,25 @@ class FriendsPanelBinder(
         val empty = panel.findViewById<View?>(R.id.text_leaderboard_empty)
         val listContainer = panel.findViewById<LinearLayout?>(R.id.leaderboard_list_container)
         val lastUpdated = panel.findViewById<TextView?>(R.id.text_friends_last_updated)
+        loading?.isVisible = false
 
         if (payload == null) {
-            // Show loading state
-            loading?.isVisible = true
-            empty?.isVisible = false
-            listContainer?.isVisible = false
-            lastUpdated?.text = "Loading friends..."
+            // No backend data yet – show the same mock leaderboard data used on the global side
+            lastUpdated?.text = "Updated --"
+            renderPlaceholderLeaderboardFriends(panel)
             return
         }
 
-        loading?.isVisible = false
-        lastUpdated?.text = activity.getString(R.string.friends_last_updated, formatUtils.formatTimestamp(payload.timestampUtc))
+        lastUpdated?.text = activity.getString(
+            R.string.friends_last_updated,
+            formatUtils.formatTimestamp(payload.timestampUtc)
+        )
 
         val entries = payload.friends
         if (entries.isEmpty()) {
-            // Show empty state
-            empty?.isVisible = true
-            listContainer?.isVisible = false
-            Log.d("FriendsPanelBinder", "Friends list is empty - showing empty state")
+            // If there are no friends yet, still show the mock leaderboard visuals
+            renderPlaceholderLeaderboardFriends(panel)
+            Log.d("FriendsPanelBinder", "Friends list is empty - showing mock leaderboard placeholder")
         } else {
             empty?.isVisible = false
             listContainer?.isVisible = true
@@ -208,6 +208,55 @@ class FriendsPanelBinder(
                 if (friend.isOnline) android.R.drawable.presence_online else android.R.drawable.presence_invisible
             )
             container.addView(row)
+        }
+    }
+
+    /**
+     * Renders a static placeholder leaderboard for the friends panel, matching the
+     * mock data shown on the global leaderboard screen.
+     */
+    private fun renderPlaceholderLeaderboardFriends(panel: View) {
+        val topThreeContainer = panel.findViewById<View?>(R.id.top_three_container)
+        val listContainer = panel.findViewById<LinearLayout?>(R.id.leaderboard_list_container)
+        val empty = panel.findViewById<TextView?>(R.id.text_leaderboard_empty)
+
+        empty?.isVisible = false
+        topThreeContainer?.isVisible = true
+
+        // Sample top 3 (same as global mock)
+        panel.findViewById<TextView?>(R.id.text_top1_name)?.text = "Kyle Weissman"
+        panel.findViewById<TextView?>(R.id.text_top1_score)?.text = "R 120 343"
+
+        panel.findViewById<TextView?>(R.id.text_top2_name)?.text = "Kyle Weiss..."
+        panel.findViewById<TextView?>(R.id.text_top2_score)?.text = "R 120 343"
+
+        panel.findViewById<TextView?>(R.id.text_top3_name)?.text = "Caleb Louw..."
+        panel.findViewById<TextView?>(R.id.text_top3_score)?.text = "R 120 343"
+
+        // Ensure all three slots are visible in placeholder
+        panel.findViewById<View?>(R.id.top_two_container)?.isVisible = true
+        panel.findViewById<View?>(R.id.top_three_container_slot)?.isVisible = true
+
+        // Sample rows 4–7
+        listContainer?.let { container ->
+            container.isVisible = true
+            container.removeAllViews()
+
+            val names = listOf(
+                "Caleb Lou..." to "R 204 242",
+                "Jess Rola..." to "R 204 242",
+                "Mike Til..." to "R 204 242",
+                "Steven Sm..." to "R 204 242"
+            )
+
+            names.forEachIndexed { index, (name, score) ->
+                val row = LayoutInflater.from(activity).inflate(R.layout.view_leaderboard_row, container, false)
+                row.findViewById<TextView?>(R.id.text_rank)?.text = "#${4 + index}"
+                row.findViewById<TextView?>(R.id.text_entry_title)?.text = name
+                row.findViewById<TextView?>(R.id.text_entry_detail)?.text = score
+                row.findViewById<ImageView?>(R.id.image_entry_status)?.setImageResource(android.R.drawable.btn_star_big_off)
+                container.addView(row)
+            }
         }
     }
 }
