@@ -1,0 +1,152 @@
+{
+  "contentVersion": 1,
+  "town": {
+    "id": "town.kwanele-bay",
+    "name": "Kwanele Bay",
+    "region": "A fictional town on the Eastern Cape coast"
+  },
+  "startingCashCents": 80000,
+  "timing": {
+    "simSecondsPerTick": 60,
+    "startMinuteOfDay": 1020,
+    "runTicksPerSecond": 10,
+    "skipTicksPerSecond": 60,
+    "idleRealMsPerTick": 60000,
+    "offlineCapMs": 14400000,
+    "checkpointIntervalMs": 10000,
+    "maxTicksPerFrame": 30,
+    "maxFrameDeltaMs": 250
+  },
+  "districts": [
+    {
+      "id": "homes",
+      "name": "Homes",
+      "feederLabel": "F1 Ridge Road",
+      "kind": "homes",
+      "demandW": 40000,
+      "revenuePerTickCents": 200,
+      "protectedByDefault": false,
+      "consequence": "Street and house lights go dark and household downtime adds up."
+    },
+    {
+      "id": "market",
+      "name": "Market",
+      "feederLabel": "F2 Harbour Market",
+      "kind": "market",
+      "demandW": 35000,
+      "revenuePerTickCents": 500,
+      "protectedByDefault": false,
+      "consequence": "Stalls close and market income stops while unpowered."
+    },
+    {
+      "id": "clinic",
+      "name": "Clinic",
+      "feederLabel": "F3 Clinic (essential)",
+      "kind": "clinic",
+      "demandW": 15000,
+      "revenuePerTickCents": 0,
+      "protectedByDefault": true,
+      "consequence": "The clinic's service target is to stay powered through every cut."
+    }
+  ],
+  "defaultPriority": ["clinic", "homes", "market"],
+  "battery": {
+    "id": "battery.community",
+    "name": "Community battery",
+    "maxDischargeW": 30000,
+    "capacityWs": 108000000,
+    "startChargeWs": 108000000,
+    "rechargeW": 10000
+  },
+  "generator": {
+    "id": "generator.diesel",
+    "name": "Standby diesel",
+    "maxOutputW": 30000,
+    "fuelMlPerKWh": 300,
+    "tankCapacityMl": 40000,
+    "startFuelMl": 20000,
+    "fuelPriceCentsPerLitre": 2400
+  },
+  "scenarios": [
+    {
+      "id": "cut.stage2-evening",
+      "title": "Stage 2 tonight",
+      "stageLabel": "Stage 2",
+      "briefing": "A two-hour cut starts at 17:00. The grid will only supply 60 kW and the town needs 90 kW. Choose how to cover the gap.",
+      "requiresPlayer": true,
+      "leadTicks": 0,
+      "allowSkipLead": false,
+      "blocks": [
+        { "ticks": 60, "importCapW": 60000 },
+        { "ticks": 60, "importCapW": 60000 }
+      ]
+    },
+    {
+      "id": "cut.night-market",
+      "title": "Night market wind-down",
+      "stageLabel": "Stage 2",
+      "briefing": "Another two-hour cut at 22:00. The night market is busy for the first hour, then most stalls pack up and its demand falls to 10 kW.",
+      "requiresPlayer": true,
+      "leadTicks": 180,
+      "allowSkipLead": true,
+      "blocks": [
+        { "ticks": 60, "importCapW": 60000 },
+        {
+          "ticks": 60,
+          "importCapW": 60000,
+          "demand": [
+            { "district": "market", "demandW": 10000, "revenuePerTickCents": 150 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cut.routine",
+      "title": "Routine Stage 2",
+      "stageLabel": "Stage 2",
+      "briefing": "A scheduled two-hour cut. Your standing policy runs it unless you step in.",
+      "requiresPlayer": false,
+      "leadTicks": 360,
+      "allowSkipLead": false,
+      "blocks": [
+        { "ticks": 60, "importCapW": 60000 },
+        { "ticks": 60, "importCapW": 60000 }
+      ]
+    }
+  ],
+  "campaign": ["cut.stage2-evening", "cut.night-market"],
+  "routine": { "scenario": "cut.routine" },
+  "upgrades": [
+    {
+      "id": "upgrade.battery-module",
+      "name": "Battery module",
+      "description": "Adds 30 kWh of storage. Arrives fully charged.",
+      "costCents": 120000,
+      "repeatable": false,
+      "effects": [
+        { "type": "batteryCapacityWs", "value": 108000000 },
+        { "type": "batteryChargeWs", "value": 108000000 }
+      ]
+    },
+    {
+      "id": "upgrade.generator-tuneup",
+      "name": "Generator tune-up",
+      "description": "Cuts diesel use from 0.3 L to 0.2 L per kWh.",
+      "costCents": 90000,
+      "repeatable": false,
+      "effects": [
+        { "type": "generatorFuelMlPerKWh", "value": 200 }
+      ]
+    },
+    {
+      "id": "supply.fuel-delivery",
+      "name": "Fuel delivery (20 L)",
+      "description": "Tops up the diesel tank by 20 L. The tank holds 40 L.",
+      "costCents": 48000,
+      "repeatable": true,
+      "effects": [
+        { "type": "fuelMl", "value": 20000 }
+      ]
+    }
+  ]
+}

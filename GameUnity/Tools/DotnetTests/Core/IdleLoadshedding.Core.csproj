@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Compiles the pure Simulation and Session sources exactly as Unity 6 would see them:
+    .NET Standard 2.1 API surface and C# 9. Any API or syntax Unity cannot compile fails here.
+  -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <AssemblyName>IdleLoadshedding.Core</AssemblyName>
+    <RootNamespace>IdleLoadshedding</RootNamespace>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../../Assets/Scripts/Simulation/**/*.cs" />
+    <Compile Include="../../../Assets/Scripts/Session/**/*.cs" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,86 @@
+name: GameUnity
+
+on:
+  push:
+    paths:
+      - "GameUnity/**"
+      - ".github/workflows/gameunity.yml"
+  pull_request:
+    paths:
+      - "GameUnity/**"
+      - ".github/workflows/gameunity.yml"
+  workflow_dispatch:
+    inputs:
+      unity:
+        description: "Also run Unity Edit/Play Mode tests and build the Android development APK (needs Unity licence secrets)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  sim-tests:
+    name: Simulation and save tests (.NET, no Unity needed)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+      - name: Run the Edit Mode test sources under NUnit
+        run: >
+          dotnet test GameUnity/Tools/DotnetTests/Tests/IdleLoadshedding.Tests.csproj
+          --logger "trx;LogFileName=sim-tests.trx"
+          --results-directory GameUnity/TestResults
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sim-test-results
+          path: GameUnity/TestResults
+
+  unity:
+    name: Unity tests and ARM64 IL2CPP development APK
+    if: github.event_name == 'workflow_dispatch' && inputs.unity
+    needs: sim-tests
+    runs-on: ubuntu-latest
+    env:
+      UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+      UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+      UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Check Unity licence secrets
+        run: |
+          if [ -z "$UNITY_LICENSE" ] && [ -z "$UNITY_EMAIL" ]; then
+            echo "::error::Add the UNITY_LICENSE secret (or UNITY_EMAIL and UNITY_PASSWORD) to run the Unity lane."
+            exit 1
+          fi
+      - uses: actions/cache@v4
+        with:
+          path: GameUnity/Library
+          key: unity-library-android-${{ hashFiles('GameUnity/Packages/manifest.json', 'GameUnity/ProjectSettings/ProjectVersion.txt') }}
+      - name: Edit Mode and Play Mode tests
+        uses: game-ci/unity-test-runner@v4
+        with:
+          projectPath: GameUnity
+          testMode: all
+          artifactsPath: unity-test-results
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: unity-test-results
+          path: unity-test-results
+      - name: Build the development APK
+        uses: game-ci/unity-builder@v4
+        with:
+          projectPath: GameUnity
+          targetPlatform: Android
+          buildMethod: IdleLoadshedding.EditorTools.BuildScript.BuildAndroidDevelopment
+      - uses: actions/upload-artifact@v4
+        with:
+          name: IdleLoadshedding-dev-apk
+          path: GameUnity/Builds/Android/IdleLoadshedding-dev.apk
+          if-no-files-found: error
