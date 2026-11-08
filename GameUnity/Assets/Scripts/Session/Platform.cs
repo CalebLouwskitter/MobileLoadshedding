@@ -9,7 +9,7 @@ namespace IdleLoadshedding.Session
         long UtcNowMs { get; }
     }
 
-    public sealed class SystemClock : IClock
+    public sealed class WallClock : IClock
     {
         public long UtcNowMs => DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
     }

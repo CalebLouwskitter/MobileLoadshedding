@@ -122,6 +122,7 @@ namespace IdleLoadshedding.Session
                 _lastCheckpointUtcMs = now;
                 _runAccumulator = 0;
                 _notice = SuccessNotice(command);
+                if (Log != null) Write("commit rev=" + _store.Revision + " cmd=" + command.Type + " " + Describe(_state));
                 Publish();
                 return result;
             }
