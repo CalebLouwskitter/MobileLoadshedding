@@ -1,0 +1,16 @@
+{
+    "name": "IdleLoadshedding.Session",
+    "rootNamespace": "IdleLoadshedding.Session",
+    "references": [
+        "IdleLoadshedding.Simulation"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
+}

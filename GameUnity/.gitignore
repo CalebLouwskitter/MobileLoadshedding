@@ -1,0 +1,35 @@
+# Unity generated
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+/[Bb]uild/
+/[Bb]uilds/
+/Assets/Plugins/Editor/JetBrains*
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+sysinfo.txt
+crashlytics-build.properties
+
+# IDE project files Unity regenerates
+*.csproj
+!/Tools/**/*.csproj
+*.sln
+*.slnx
+
+# Build outputs
+*.apk
+*.aab
+*.unitypackage
+*.app
+/Assets/StreamingAssets/aa*
+
+# Test results and dotnet tool output
+/TestResults/
+/Tools/**/bin/
+/Tools/**/obj/
+/Tools/**/TestResults/
